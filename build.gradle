@@ -39,7 +39,9 @@ dependencies {
 
     compile("uk.ac.ebi.subs:subs-processing-model:0.1.0-SNAPSHOT")
     compile("uk.ac.ebi.subs:subs-data-model:0.1.0-SNAPSHOT")
-    compile("uk.ac.ebi.subs:subs-messaging:1.0.3-SNAPSHOT")
+    compile("uk.ac.ebi.subs:subs-messaging:0.1.1-SNAPSHOT")
+    compile("com.fasterxml.jackson.core:jackson-databind")
+    compileOnly('org.projectlombok:lombok:1.16.18')
 
     optional("org.springframework.boot:spring-boot-configuration-processor")
 
@@ -52,6 +54,8 @@ dependencies {
         changing = true
         exclude group: 'org.springframework.boot'
     }
+
+    compile group: 'commons-io', name: 'commons-io', version: '2.0.1'
 
     testCompile("junit:junit")
     testCompile("org.springframework.boot:spring-boot-starter-test")
