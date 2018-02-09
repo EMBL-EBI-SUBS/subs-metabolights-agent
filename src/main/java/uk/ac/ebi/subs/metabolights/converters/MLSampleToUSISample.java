@@ -48,6 +48,8 @@ public class MLSampleToUSISample implements Converter<uk.ac.ebi.subs.metabolight
     }
 
     private SampleSourceModel extractTaxonObject(uk.ac.ebi.subs.metabolights.model.Sample source) {
+        //todo the order of return might not always be the same
+        //todo resolve adding organism_part
         if (source.getDerives_from().size() > 0) {
             SampleSourceModel mlTaxonObject = source.getDerives_from().get(0);
             return mlTaxonObject;

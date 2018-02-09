@@ -30,6 +30,6 @@ import java.util.List;
 @Data
 public class StudyMaterials {
     private List<Material> otherMaterials;
-    private List<Sample> samples;
+    private List<StudySample> samples;
     private List<Source> sources;
 }

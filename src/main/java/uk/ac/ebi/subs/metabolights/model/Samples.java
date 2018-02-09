@@ -21,6 +21,7 @@
 package uk.ac.ebi.subs.metabolights.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import lombok.Data;
 
 import java.util.List;
@@ -36,5 +37,5 @@ public class Samples {
 //    private List<String> factorValues;
 //    private String name;
     @JsonProperty("Study-samples")
-    private List<Sample> samples;
+    private List<SampleName> sampleNames;
 }
