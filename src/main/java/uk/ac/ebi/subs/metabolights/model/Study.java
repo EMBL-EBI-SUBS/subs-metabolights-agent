@@ -31,7 +31,7 @@ import java.util.List;
 public class Study {
     private List<Assay> assays;
     private List<CharacteristicCategory> characteristicCategories;
-    private List<String> comments;
+    private List<Comment> comments;
     private String description;
     private List<StudyFactor> factors;
     private String filename;

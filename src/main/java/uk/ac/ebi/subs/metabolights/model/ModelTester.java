@@ -86,8 +86,8 @@ public class ModelTester {
     private void processSamples(){
         String response = sendGetRequest("samples");
         Samples samples = parseJson(response,Samples.class);
-        for (int i = 0; i < samples.getSamples().size(); i++) {
-            System.out.println(samples.getSamples().get(i));
+        for (int i = 0; i < samples.getSampleNames().size(); i++) {
+            System.out.println(samples.getSampleNames().get(i));
         }
 
     }
@@ -139,7 +139,7 @@ public class ModelTester {
 
         //samples
         System.out.println("Samples");
-        for(Sample sample : study.getMaterials().getSamples()){
+        for(StudySample sample : study.getMaterials().getSamples()){
             System.out.println(sample.getName());
         }
     }

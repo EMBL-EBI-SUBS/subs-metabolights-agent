@@ -38,7 +38,7 @@ repositories {
 dependencies {
 
     compile("uk.ac.ebi.subs:subs-processing-model:0.1.0-SNAPSHOT")
-    compile("uk.ac.ebi.subs:subs-data-model:1.0.1-SNAPSHOT")
+    compile("uk.ac.ebi.subs:subs-data-model:2.0.1-SNAPSHOT")
     compile("uk.ac.ebi.subs:subs-messaging:0.1.1-SNAPSHOT")
     compile("com.fasterxml.jackson.core:jackson-databind")
     compileOnly('org.projectlombok:lombok:1.16.18')

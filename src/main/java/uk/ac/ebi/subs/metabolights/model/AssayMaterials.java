@@ -30,5 +30,5 @@ import java.util.List;
 @Data
 public class AssayMaterials {
     private List<Material> otherMaterials;
-    private List<Sample> samples;
+    private List<StudySample> samples;
 }

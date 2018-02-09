@@ -47,12 +47,12 @@ public class MetaboLightsStudyProcessor{
         List<ProcessingCertificate> certificates = new ArrayList<>();
 
         // Set updateDate
-        for (Sample sample : envelope.getSamples()) {
-            Attribute attribute = new Attribute();
-            attribute.setName("update");
-            attribute.setValue(LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME));
-            sample.getAttributes().add(attribute);
-        }
+//        for (Sample sample : envelope.getSamples()) {
+//            Attribute attribute = new Attribute();
+//            attribute.setName("update");
+//            attribute.setValue(LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME));
+//            sample.getAttributes().add(attribute);
+//        }
 
         // Update
         List<Sample> samplesToUpdate = envelope.getSamples().stream()
