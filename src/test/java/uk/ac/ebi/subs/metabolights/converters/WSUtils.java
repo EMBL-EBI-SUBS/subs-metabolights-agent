@@ -11,6 +11,8 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by kalai on 31/01/2018.
@@ -18,6 +20,7 @@ import java.net.URL;
 public class WSUtils {
 
     private static final String metabolightsWsUrl = "http://ves-ebi-90:5000/mtbls/ws/study/";
+    public static final ObjectMapper mapper = new ObjectMapper();
 
     public static String makeGetRequest(String path, Object dataToSend, String method) {
 
@@ -83,7 +86,6 @@ public class WSUtils {
 
     public static String serializeObject(Object objectToSerialize) {
         // Get the mapper
-        ObjectMapper mapper = new ObjectMapper();
         try {
 
             return mapper.writeValueAsString(objectToSerialize);
@@ -110,22 +112,48 @@ public class WSUtils {
     public static Sample getTestMLSample() {
         String response = makeGetRequest("MTBLS2/samples/Ex1-Col0-48h-Ag-1", null, "GET");
         System.out.println(response);
-        ObjectMapper mapper = new ObjectMapper();
+        return processSampleResponse(response);
+    }
+
+    public static Sample processSampleResponse(String response){
         Sample sample = new Sample();
         try {
             JSONObject myObject = new JSONObject(response);
             String mlSample = myObject.getString("Study_sample");
             sample = mapper.readValue( mlSample
-                   , Sample.class);
+                    , Sample.class);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return sample;
     }
 
+    public static List<StudyProtocol> getMLStudyProtocols(String mtblsID) {
+        Study study = getMLStudy(mtblsID);
+        List<StudyProtocol> protocols = study.getProtocols();
+        return protocols;
+    }
+
+    public static List<Sample> getMLStudySamples(String mtblsID) {
+        String response = makeGetRequest(mtblsID + "/samples", null, "GET");
+        List<Sample> mlSamples = new ArrayList<>();
+        try {
+
+            Samples samples = mapper.readValue(response,Samples.class);
+            if(samples.getSampleNames()!=null && samples.getSampleNames().size() > 0){
+                for(SampleName sampleName : samples.getSampleNames()){
+                   String sampleResponse =  makeGetRequest(mtblsID + "/samples/" + sampleName.getName() , null, "GET");
+                   mlSamples.add(processSampleResponse(sampleResponse));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return mlSamples;
+    }
+
     public static Study getMLStudy(String mtblsID) {
         String response = makeGetRequest(mtblsID + "/isa_json", null, "GET");
-        ObjectMapper mapper = new ObjectMapper();
         Study study = new Study();
         Project project = new Project();
         try {

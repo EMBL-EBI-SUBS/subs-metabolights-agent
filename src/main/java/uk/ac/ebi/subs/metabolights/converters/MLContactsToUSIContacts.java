@@ -6,6 +6,7 @@ import uk.ac.ebi.subs.data.component.Contacts;
 import uk.ac.ebi.subs.metabolights.model.StudyContact;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -26,7 +27,10 @@ public class MLContactsToUSIContacts implements Converter<StudyContact, Contact>
         usiContact.setEmail(source.getEmail());
         usiContact.setFax(source.getFax());
         usiContact.setOrcid(source.getOrcid());
-        //todo conversion of roles
+        //todo conversion of roles - USI role to be ontology model?
+        if(source.getRoles() != null && source.getRoles().size()>0){
+            usiContact.setRoles(Arrays.asList(source.getRoles().get(0).getAnnotationValue()));
+        }
         return usiContact;
     }
 }
