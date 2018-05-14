@@ -29,15 +29,16 @@ import java.util.List;
  */
 @Data
 public class Assay {
-    private List<CharacteristicCategory> characteristicCategories;
-    private List<String> comments;
-    private List<File> dataFiles;
-    private String filename;
-    private AssayMaterials materials;
-    //todo check measurement type later
-    private CharacteristicType measurementType;
-    private List<AssayProcessSequence> processSequence;
+    private List<Comment> comments;
+    private OntologyModel measurementType;
+    private OntologyModel technologyType;
     private String technologyPlatform;
-    private CharacteristicType technologyType;
-    private List<CharacteristicType> unitCategories;
+    private String filename;
+    private List<MLFile> dataFiles;
+    private List<AssayProcessSequence> processSequence;
+    private List<Source> sources;
+    private List<Sample> samples;
+    private List<AssayOtherMaterial> otherMaterials;
+    private List<OntologyModel> characteristicCategories;
+    private List<Object> units;
 }
