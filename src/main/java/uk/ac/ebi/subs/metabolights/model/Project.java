@@ -20,6 +20,8 @@
 
 package uk.ac.ebi.subs.metabolights.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import lombok.Data;
 
 import java.util.List;
@@ -28,6 +30,8 @@ import java.util.List;
  * Created by kalai on 13/12/2017.
  */
 @Data
+@JsonRootName("investigation")
+
 public class Project {
     private List<Comment> comments;
     private String description;
@@ -39,4 +43,5 @@ public class Project {
     private List<Study> studies;
     private String submissionDate;
     private String title;
+    private String filename;
 }
