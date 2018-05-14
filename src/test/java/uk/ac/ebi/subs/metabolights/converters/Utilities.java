@@ -1,14 +1,7 @@
 package uk.ac.ebi.subs.metabolights.converters;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import uk.ac.ebi.subs.data.Submission;
 import uk.ac.ebi.subs.data.component.*;
 import uk.ac.ebi.subs.data.submittable.*;
-import uk.ac.ebi.subs.metabolights.model.Contact;
-import uk.ac.ebi.subs.metabolights.model.StudyContact;
-import uk.ac.ebi.subs.metabolights.model.StudyPublication;
-import uk.ac.ebi.subs.processing.SubmissionEnvelope;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -21,8 +14,8 @@ import java.util.Map;
  * Created by kalai on 19/12/2017.
  */
 public class Utilities {
-    public static StudyContact generateMLContacts(){
-        StudyContact contact = new StudyContact();
+    public static Contact generateMLContacts(){
+        Contact contact = new Contact();
        contact.setAddress("Hinxton");
        contact.setAffiliation("EMBL-EBI");
        contact.setFax("+11123");
@@ -32,8 +25,8 @@ public class Utilities {
        return contact;
     }
 
-    public static StudyPublication generateMLPublication(){
-        StudyPublication mlPublication = new StudyPublication();
+    public static uk.ac.ebi.subs.metabolights.model.Publication generateMLPublication(){
+        uk.ac.ebi.subs.metabolights.model.Publication mlPublication = new uk.ac.ebi.subs.metabolights.model.Publication();
         mlPublication.setPubMedID("1000");
         mlPublication.setAuthorList("Bob, Alice, Tom");
         mlPublication.setTitle("New publication");

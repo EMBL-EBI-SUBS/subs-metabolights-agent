@@ -1,8 +1,13 @@
 package uk.ac.ebi.subs.metabolights.converters;
 
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import org.apache.commons.io.IOUtils;
 import org.json.JSONObject;
 import uk.ac.ebi.subs.metabolights.model.*;
+import uk.ac.ebi.subs.processing.SubmissionEnvelope;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -19,7 +24,7 @@ import java.util.List;
  */
 public class WSUtils {
 
-    private static final String metabolightsWsUrl = "http://ves-ebi-90:5000/mtbls/ws/study/";
+    private static final String metabolightsWsUrl = "http://ves-ebi-8d:5000/mtbls/ws/studies/";
     public static final ObjectMapper mapper = new ObjectMapper();
 
     public static String makeGetRequest(String path, Object dataToSend, String method) {
@@ -97,15 +102,9 @@ public class WSUtils {
         return null;
     }
 
-    public static Contacts getMLContacts(String mtblsID) {
-        String response = makeGetRequest(mtblsID + "/contacts", null, "GET");
-        ObjectMapper mapper = new ObjectMapper();
-        Contacts contacts = new Contacts();
-        try {
-            contacts = mapper.readValue(response, Contacts.class);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public static List<Contact> getMLContacts(String mtblsID) {
+        Study study = getMLStudy(mtblsID);
+        List<Contact> contacts = study.getPeople();
         return contacts;
     }
 
@@ -128,40 +127,66 @@ public class WSUtils {
         return sample;
     }
 
-    public static List<StudyProtocol> getMLStudyProtocols(String mtblsID) {
+    public static List<Protocol> getMLStudyProtocols(String mtblsID) {
         Study study = getMLStudy(mtblsID);
-        List<StudyProtocol> protocols = study.getProtocols();
+        List<Protocol> protocols = study.getProtocols();
         return protocols;
     }
 
     public static List<Sample> getMLStudySamples(String mtblsID) {
-        String response = makeGetRequest(mtblsID + "/samples", null, "GET");
-        List<Sample> mlSamples = new ArrayList<>();
-        try {
-
-            Samples samples = mapper.readValue(response,Samples.class);
-            if(samples.getSampleNames()!=null && samples.getSampleNames().size() > 0){
-                for(SampleName sampleName : samples.getSampleNames()){
-                   String sampleResponse =  makeGetRequest(mtblsID + "/samples/" + sampleName.getName() , null, "GET");
-                   mlSamples.add(processSampleResponse(sampleResponse));
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Study study = getMLStudy(mtblsID);
+        List<Sample> mlSamples = study.getSamples();
         return mlSamples;
     }
 
     public static Study getMLStudy(String mtblsID) {
-        String response = makeGetRequest(mtblsID + "/isa_json", null, "GET");
+        String response = makeGetRequest(mtblsID, null, "GET");
         Study study = new Study();
         Project project = new Project();
         try {
+            mapper.configure(DeserializationFeature.UNWRAP_ROOT_VALUE,true);
             project = mapper.readValue(response, Project.class);
             study = project.getStudies().get(0);
         } catch (IOException e) {
             e.printStackTrace();
         }
         return study;
+    }
+
+    public static Study getMLStudyFromDisc() {
+        Study study = new Study();
+        try {
+            String result = IOUtils.toString(WSUtils.class.getClassLoader().getResourceAsStream("Test_json/MTBLS2_isa.json"));
+            Project project = new Project();
+            try {
+                mapper.configure(DeserializationFeature.UNWRAP_ROOT_VALUE,true);
+                project = mapper.readValue(result, Project.class);
+                study = project.getStudies().get(0);
+                return study;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return study;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static SubmissionEnvelope getUSISubmisisonFromDisc() {
+        SubmissionEnvelope submissionEnvelope = new SubmissionEnvelope();
+        try {
+            String result = IOUtils.toString(WSUtils.class.getClassLoader().getResourceAsStream("Test_json/MTBLS2_usi.json"));
+            try {
+                mapper.registerModule(new JavaTimeModule());
+                submissionEnvelope = mapper.readValue(result, SubmissionEnvelope.class);
+                return submissionEnvelope;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
