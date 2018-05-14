@@ -30,28 +30,14 @@ import java.util.List;
  */
 @Data
 public class StudyProcessSequence {
-    @JsonProperty("@id")
-    private String id;
-    private List<String> comments;
-    private String date;
-    private GenericId executesProtocol;
-    private List<GenericId> inputs;
+    private List<Comment> comments;
     private String name;
-    private List<GenericId> outputs;
-    private List<String> parameterValues;
-    private String performer;
-
-
-//    private List<CharacteristicCategory> characteristicCategories;
-//    private String description;
-//    private List<Factor> factors;
-//    private String filename;
-//    private String identifier;
-//    private List<Contact> people;
-//    private List<Protocol> protocols;
-//    private String publicReleaseDate;
-//    private List<Publication> publications;
-//    private List<CharacteristicType> studyDesignDescriptors;
-//    private String submissionDate;
-//    private String title;
+    private Protocol executesProtocol;
+    private String date;
+    private String  performer;
+    private List<AssayProtocolParameterValue> parameterValues;
+    private List<AssayProcessSequenceInput> inputs;
+    private List<Object> outputs;
+    private Object previousProcess;
+    private Object nextProcess;
 }
