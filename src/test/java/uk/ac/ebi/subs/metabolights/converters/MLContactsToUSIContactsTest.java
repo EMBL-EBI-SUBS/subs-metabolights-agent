@@ -3,9 +3,8 @@ package uk.ac.ebi.subs.metabolights.converters;
 import org.junit.Test;
 import uk.ac.ebi.subs.data.component.Contact;
 import uk.ac.ebi.subs.metabolights.model.Study;
-import uk.ac.ebi.subs.metabolights.model.StudyContact;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by kalai on 19/12/2017.
@@ -22,10 +21,10 @@ public class MLContactsToUSIContactsTest {
 
       // test WS object
         Study study = WSUtils.getMLStudy("MTBLS2");
-        for(StudyContact studyContact : study.getPeople()){
+        for(uk.ac.ebi.subs.metabolights.model.Contact studyContact : study.getPeople()){
             System.out.println("Testing ... ");
             Contact usiContact = toUsiContacts.convert(studyContact);
-            StudyContact mlContacts2 = toMLContacts.convert(usiContact);
+            uk.ac.ebi.subs.metabolights.model.Contact mlContacts2 = toMLContacts.convert(usiContact);
             // todo fix Roles.
             assertEquals(mlContacts2.getAddress(),studyContact.getAddress());
         }
