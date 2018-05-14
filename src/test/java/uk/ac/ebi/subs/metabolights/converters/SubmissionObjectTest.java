@@ -14,7 +14,7 @@ import uk.ac.ebi.subs.data.submittable.Protocol;
 import uk.ac.ebi.subs.data.submittable.Sample;
 import uk.ac.ebi.subs.data.submittable.Study;
 import uk.ac.ebi.subs.metabolights.model.*;
-import uk.ac.ebi.subs.metabolights.model.File;
+import uk.ac.ebi.subs.metabolights.model.MLFile;
 import uk.ac.ebi.subs.processing.SubmissionEnvelope;
 
 import java.time.LocalDate;
@@ -29,33 +29,39 @@ public class SubmissionObjectTest {
 
     @Test
     public void generateJson() {
+        MLStudyToUSISubmission mlStudyToUSISubmission = new MLStudyToUSISubmission();
         SubmissionEnvelope submissionEnvelope = null;
         try {
-            submissionEnvelope = createUSIStudySubmission();
+//            submissionEnvelope = createUSIStudySubmission();
+            uk.ac.ebi.subs.metabolights.model.Study mlStudy = WSUtils.getMLStudyFromDisc();
+            submissionEnvelope = mlStudyToUSISubmission.convert(mlStudy);
             ObjectMapper mapper = new ObjectMapper();
             String submissionJSON = mapper.writeValueAsString(submissionEnvelope);
             System.out.println(submissionJSON);
 
             assertEquals(submissionEnvelope.getSamples().size(), 16);
             assertEquals(submissionEnvelope.getProtocols().size(), 6);
-            assertEquals(submissionEnvelope.getSubmission().getTeam().getName(), "ML test team");
+            assertEquals(submissionEnvelope.getSubmission().getTeam().getName(), "ML_test_team");
             assertEquals(submissionEnvelope.getProjects().iterator().next().getContacts().size(), 2);
-        } catch (JsonProcessingException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public SubmissionEnvelope createUSIStudySubmission() throws JsonProcessingException {
 
-        uk.ac.ebi.subs.metabolights.model.Study mlStudy = WSUtils.getMLStudy("MTBLS2");
+       // uk.ac.ebi.subs.metabolights.model.Study mlStudy = WSUtils.getMLStudy("MTBLS2");
+        uk.ac.ebi.subs.metabolights.model.Study mlStudy = WSUtils.getMLStudyFromDisc();
         MLContactsToUSIContacts toUsiContacts = new MLContactsToUSIContacts();
         MLPublicationToUSIPublication toUSIPublication = new MLPublicationToUSIPublication();
         MLSampleToUSISample mlSampleToUSISample = new MLSampleToUSISample();
         MLProtocolToUSIProtocol protocolToUSIProtocol = new MLProtocolToUSIProtocol();
+        MLFactorToUSIFactor mlFactorToUSIFactor = new MLFactorToUSIFactor();
+        MLDescriptorToUSIDescriptor mlDescriptorToUSIDescriptor = new MLDescriptorToUSIDescriptor();
 
 
         Team team = new Team();
-        team.setName("ML test team");
+        team.setName("ML_test_team");
 
         //project
         Project usiProject = new Project();
@@ -64,7 +70,7 @@ public class SubmissionObjectTest {
 
         //contacts
         List<Contact> usiContacts = new ArrayList<>();
-        for (StudyContact studyContact : mlStudy.getPeople()) {
+        for (uk.ac.ebi.subs.metabolights.model.Contact studyContact : mlStudy.getPeople()) {
             uk.ac.ebi.subs.data.component.Contact usiContact = toUsiContacts.convert(studyContact);
             usiContacts.add(usiContact);
         }
@@ -72,7 +78,7 @@ public class SubmissionObjectTest {
 
         //publications
         List<Publication> usiPublications = new ArrayList<>();
-        for (StudyPublication publication : mlStudy.getPublications()) {
+        for (uk.ac.ebi.subs.metabolights.model.Publication publication : mlStudy.getPublications()) {
             Publication usiPublication = toUSIPublication.convert(publication);
             usiPublications.add(usiPublication);
         }
@@ -100,9 +106,9 @@ public class SubmissionObjectTest {
 
         //protocols
 
-        List<StudyProtocol> mlStudyProtocols = WSUtils.getMLStudyProtocols("MTBLS2");
+        List<uk.ac.ebi.subs.metabolights.model.Protocol> mlStudyProtocols = WSUtils.getMLStudyProtocols("MTBLS2");
         List<Protocol> usiProtocols = new ArrayList<>();
-        for (StudyProtocol studyProtocol : mlStudyProtocols) {
+        for (uk.ac.ebi.subs.metabolights.model.Protocol studyProtocol : mlStudyProtocols) {
             Protocol usiProtocol = protocolToUSIProtocol.convert(studyProtocol);
             usiProtocol.setTeam(team);
             usiProtocols.add(usiProtocol);
@@ -111,10 +117,8 @@ public class SubmissionObjectTest {
         //study descriptors
         List<Attribute> studyDescriptorAttributes = new ArrayList<>();
         if (mlStudy.getStudyDesignDescriptors() != null && mlStudy.getStudyDesignDescriptors().size() > 0) {
-            for (CharacteristicType designDescriptor : mlStudy.getStudyDesignDescriptors()) {
-                Attribute attribute = new Attribute();
-                attribute.setValue(designDescriptor.getAnnotationValue());
-                studyDescriptorAttributes.add(attribute);
+            for(OntologyModel descriptor : mlStudy.getStudyDesignDescriptors()){
+                studyDescriptorAttributes.add(mlDescriptorToUSIDescriptor.convert(descriptor));
             }
         }
         usiStudy.getAttributes().put("studyDesignDescriptors", studyDescriptorAttributes);
@@ -122,15 +126,8 @@ public class SubmissionObjectTest {
         //factors
         List<Attribute> studyFactorAttributes = new ArrayList<>();
         if (mlStudy.getFactors() != null && mlStudy.getFactors().size() > 0) {
-            for (StudyFactor studyFactor : mlStudy.getFactors()) {
-                Attribute attribute = new Attribute();
-                attribute.setValue(studyFactor.getFactorName());
-                if (studyFactor.getFactorType() != null) {
-                    Term term = new Term();
-                    term.setUrl(studyFactor.getFactorType().getTermAccession());
-                    attribute.getTerms().add(term);
-                }
-                studyFactorAttributes.add(attribute);
+           for(Factor factor : mlStudy.getFactors()){
+                studyFactorAttributes.add(mlFactorToUSIFactor.convert(factor));
             }
         }
         usiStudy.getAttributes().put("factors", studyFactorAttributes);
@@ -144,34 +141,11 @@ public class SubmissionObjectTest {
 //        as.setTeam(team);
 
         //todo handle multiple assays
-        Assay assay = new Assay();
+
+        MLAssayToUSIAssay toUSIAssay = new MLAssayToUSIAssay();
+        Assay assay = toUSIAssay.convert(mlStudy.getAssays().get(0));
         assay.setStudyRef((StudyRef) usiStudy.asRef());
         assay.setTeam(team);
-        uk.ac.ebi.subs.metabolights.model.Assay mlAssay = mlStudy.getAssays().get(0);
-        assay.setAlias(mlAssay.getFilename());
-
-        Map<String, Collection<Attribute>> assayAttributes = assay.getAttributes();
-        if (mlAssay.getTechnologyType() != null) {
-            Attribute technologyType = new Attribute();
-            technologyType.setValue(mlAssay.getTechnologyType().getAnnotationValue());
-            Term term = new Term();
-            term.setUrl(mlAssay.getTechnologyType().getTermAccession());
-            technologyType.setTerms(Arrays.asList(term));
-            assayAttributes.put("technologyType", Arrays.asList(technologyType));
-        }
-
-        if (mlAssay.getMeasurementType() != null) {
-            Attribute measurementType = new Attribute();
-            measurementType.setValue(mlAssay.getMeasurementType().getAnnotationValue());
-            Term term = new Term();
-            term.setUrl(mlAssay.getMeasurementType().getTermAccession());
-            measurementType.setTerms(Arrays.asList(term));
-            assayAttributes.put("measurementType", Arrays.asList(measurementType));
-        }
-        Attribute technologyPlatformAttribute = new Attribute();
-        technologyPlatformAttribute.setValue(mlAssay.getTechnologyPlatform());
-        assayAttributes.put("technologyPlatform",Arrays.asList(technologyPlatformAttribute));
-        assay.setAttributes(assayAttributes);
 
         // protocol and sample use
         for (Protocol usiProtocol : usiProtocols) {
@@ -192,14 +166,14 @@ public class SubmissionObjectTest {
         if (mlStudy.getAssays().size() > 0) {
             uk.ac.ebi.subs.metabolights.model.Assay metaboliteAssay = mlStudy.getAssays().get(0);
             if (metaboliteAssay.getDataFiles() != null && metaboliteAssay.getDataFiles().size() > 0) {
-                for (File mlfile : metaboliteAssay.getDataFiles()) {
+                for (MLFile mlfile : metaboliteAssay.getDataFiles()) {
                     AssayData assayData = new AssayData();
                     assayData.setTeam(team);
                     assayData.setAssayRefs(assayRefs);
                     if (mlfile != null) {
                         uk.ac.ebi.subs.data.component.File usiFile = new uk.ac.ebi.subs.data.component.File();
-                        usiFile.setType(mlfile.getType());
-                        usiFile.setName(mlfile.getName());
+                        usiFile.setType(mlfile.getLabel());
+                        usiFile.setName(mlfile.getFilename());
                         assayData.setFiles(Arrays.asList(usiFile));
                         assayDataList.add(assayData);
                     }
