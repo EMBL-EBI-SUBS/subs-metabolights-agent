@@ -29,7 +29,7 @@ import java.util.List;
  * Created by kalai on 12/12/2017.
  */
 @Data
-public class DesignDescriptors {
-    @JsonProperty("StudyDescriptors")
+public class StudyDesignDescriptors {
+    @JsonProperty("studyDesignDescriptors")
     private List<OntologyModel> descriptors;
 }

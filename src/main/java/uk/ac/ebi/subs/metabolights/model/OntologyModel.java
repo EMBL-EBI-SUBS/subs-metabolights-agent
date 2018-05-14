@@ -30,8 +30,8 @@ import java.util.List;
  */
 @Data
 public class OntologyModel {
-    private TermSource term_source;
-    private String term_accession;
-    private List<String> comments;
-    private String term;
+    private TermSource termSource;
+    private String termAccession;
+    private List<Comment> comments;
+    private String annotationValue;
 }
