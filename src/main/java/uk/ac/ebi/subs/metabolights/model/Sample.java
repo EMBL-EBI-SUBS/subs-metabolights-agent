@@ -20,7 +20,6 @@
 
 package uk.ac.ebi.subs.metabolights.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import lombok.Data;
 
@@ -30,14 +29,14 @@ import java.util.List;
  * Created by kalai on 13/12/2017.
  */
 @Data
-@JsonRootName(value = "Study_sample")
+//@JsonRootName(value = "Study_sample")
 public class Sample {
 
       private List<Comment> comments;
-      private List<SampleSourceModel> derives_from;
+      private List<Source> devivesFrom;
       private List<Object> characteristics;
       private String name;
-      private List<SampleAttribute> factor_values;
+      private List<SampleFactorValue> factorValues;
 
 }
 
