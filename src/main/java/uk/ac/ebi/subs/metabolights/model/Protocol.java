@@ -30,14 +30,12 @@ import java.util.List;
  */
 @Data
 public class Protocol {
-    @JsonProperty("@id")
-    private String id;
-    private List<String> comments;
+    private List<Comment> comments;
     private List<String> components;
     private String description;
     private String name;
     private List<ProtocolParameter> parameters;
-    private OntologyModel protocol_type;
+    private OntologyModel protocolType;
     private String uri;
     private String version;
 }
