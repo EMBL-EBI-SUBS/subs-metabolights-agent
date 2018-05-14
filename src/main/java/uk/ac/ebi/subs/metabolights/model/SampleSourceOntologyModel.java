@@ -9,8 +9,8 @@ import java.util.List;
  */
 @Data
 public class SampleSourceOntologyModel {
+    private List<Comment> comments;
     private OntologyModel category;
     private OntologyModel unit;
-    private List<Comment> comments;
     private OntologyModel value;
 }
