@@ -17,62 +17,71 @@ public class MLSampleToUSISample implements Converter<uk.ac.ebi.subs.metabolight
 
     @Override
     public Sample convert(uk.ac.ebi.subs.metabolights.model.Sample source) {
-        //  uk.ac.ebi.subs.metabolights.model.Sample sample = new uk.ac.ebi.subs.metabolights.model.Sample();
         Sample sample = new Sample();
         //todo set accession
         //todo set team
-        //set name
+        // todo set release date
+        // todo set description - from comments?
+
+
         sample.setAlias(source.getName());
-        SampleSourceModel mlTaxonObject = extractTaxonObject(source);
+        Source mlTaxonObject = extractTaxonObject(source);
         if (mlTaxonObject != null) {
             sample.setTitle(mlTaxonObject.getName());
             if (mlTaxonObject.getCharacteristics().size() > 0) {
                 if (mlTaxonObject.getCharacteristics().get(0).getValue() != null) {
-                    String ncbi_taxon_url = mlTaxonObject.getCharacteristics().get(0).getValue().getTerm_accession();
+                    String ncbi_taxon_url = mlTaxonObject.getCharacteristics().get(0).getValue().getTermAccession();
                     if (ncbi_taxon_url != null && ncbi_taxon_url.contains("NCBITaxon_")) {
                         String[] values = ncbi_taxon_url.split("NCBITaxon_");
                         if (values.length == 2) {
                             sample.setTaxonId(Long.parseLong(values[1]));
                         }
                     }
-                    sample.setTaxon(mlTaxonObject.getCharacteristics().get(0).getValue().getTerm());
+                    sample.setTaxon(mlTaxonObject.getCharacteristics().get(0).getValue().getAnnotationValue());
                 }
             }
         }
-        // todo set description - from comments?
-        // todo set release date
 
-        //set attributes (Factor values)
-        sample.setAttributes(convertToUSISampleAttributes(source.getFactor_values()));
+        //set factor values and source information into attributes
+        Map<String, Collection<Attribute>> usiSampleFactor = convertToUSISampleAttributes(source.getFactorValues());
+        Map<String, Collection<Attribute>> usiSampleSource = convertToUSIAttributes(source.getDevivesFrom());
+        usiSampleFactor.putAll(usiSampleSource);
+        sample.setAttributes(usiSampleFactor);
         return sample;
     }
 
-    private SampleSourceModel extractTaxonObject(uk.ac.ebi.subs.metabolights.model.Sample source) {
-        //todo the order of return might not always be the same
-        //todo resolve adding organism_part
-        if (source.getDerives_from().size() > 0) {
-            SampleSourceModel mlTaxonObject = source.getDerives_from().get(0);
-            return mlTaxonObject;
+    private Source extractTaxonObject(uk.ac.ebi.subs.metabolights.model.Sample sample) {
+        if(sample.getDevivesFrom() == null){
+               return null;
+        }
+        if (sample.getDevivesFrom().size() > 0) {
+            List<Source> derivesFrom = sample.getDevivesFrom();
+            for (int i = 0; i < derivesFrom.size(); i++) {
+                for (int j = 0; j < derivesFrom.get(i).getCharacteristics().size(); j++) {
+                      if(derivesFrom.get(i).getCharacteristics().get(j).getCategory().getAnnotationValue().toLowerCase().equals("organism")){
+                           return derivesFrom.get(i);
+                      }
+                }
+            }
         }
         return null;
     }
 
-    private Map<String, Collection<Attribute>> convertToUSISampleAttributes(List<SampleAttribute> mlSampleAttributes) {
+    private Map<String, Collection<Attribute>> convertToUSISampleAttributes(List<SampleFactorValue> mlSampleFactorValues) {
         Map<String, Collection<Attribute>> usiSampleAttributes = new HashMap<>();
-        for (SampleAttribute mlSampleAttribute : mlSampleAttributes) {
-            String key = mlSampleAttribute.getFactor_name().getName();
-            String url = mlSampleAttribute.getFactor_name().getFactor_type().getTerm_accession();
-            String description = mlSampleAttribute.getValue();
-
-
+        for (SampleFactorValue factorValue : mlSampleFactorValues) {
+            String key = factorValue.getCategory().getFactorName();
+            String url = factorValue.getCategory().getFactorType().getTermAccession();
+//            String description; todo description is ignored for samples
+            String value = factorValue.getValue().getAnnotationValue();
 
             Attribute attribute = new Attribute();
-            attribute.setValue(description);
+            attribute.setValue(value);
             Term term = new Term();
             term.setUrl(url);
 
-            if(mlSampleAttribute.getUnit() != null){
-               attribute.setUnits(mlSampleAttribute.getUnit().getTerm());
+            if (factorValue.getUnit() != null) {
+                attribute.setUnits(factorValue.getUnit().getAnnotationValue());
             }
 
             attribute.setTerms(Arrays.asList(term));
@@ -80,4 +89,29 @@ public class MLSampleToUSISample implements Converter<uk.ac.ebi.subs.metabolight
         }
         return usiSampleAttributes;
     }
+
+
+    private Map<String, Collection<Attribute>> convertToUSIAttributes(List<Source> devivesFrom) {
+        Map<String, Collection<Attribute>> usiSampleAttributes = new HashMap<>();
+        for (Source source : devivesFrom) {
+            List<SampleSourceOntologyModel> sourceCharacteristics = source.getCharacteristics();
+            for (SampleSourceOntologyModel sourceCharacteristic : sourceCharacteristics) {
+                Attribute attribute = new Attribute();
+                String key = sourceCharacteristic.getCategory().getAnnotationValue();
+                String url = sourceCharacteristic.getValue().getTermAccession();
+                String value = sourceCharacteristic.getValue().getAnnotationValue();
+                attribute.setValue(value);
+                Term term = new Term();
+                term.setUrl(url);
+                attribute.setTerms(Arrays.asList(term));
+                if (sourceCharacteristic.getUnit() != null) {
+                   attribute.setUnits(sourceCharacteristic.getUnit().getAnnotationValue());
+                }
+                usiSampleAttributes.put(key,Arrays.asList(attribute));
+            }
+
+        }
+        return usiSampleAttributes;
+    }
+
 }
