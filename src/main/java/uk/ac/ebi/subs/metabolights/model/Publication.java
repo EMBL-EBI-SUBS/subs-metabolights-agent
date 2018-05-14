@@ -34,6 +34,6 @@ public class Publication {
     private String pubMedID;
     private OntologyModel status;
     private String title;
-    private List<String> comments;
+    private List<Comment> comments;
 
 }
