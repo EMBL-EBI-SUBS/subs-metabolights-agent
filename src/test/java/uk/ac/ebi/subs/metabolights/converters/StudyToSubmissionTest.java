@@ -25,7 +25,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by kalai on 09/02/2018.
  */
-public class SubmissionObjectTest {
+public class StudyToSubmissionTest {
 
     @Test
     public void generateJson() {

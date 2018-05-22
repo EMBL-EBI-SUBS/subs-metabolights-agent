@@ -32,6 +32,7 @@ public class USISubmissionToMLStudy implements Converter<uk.ac.ebi.subs.processi
 
     @Override
     public Study convert(uk.ac.ebi.subs.processing.SubmissionEnvelope source) {
+        //todo handle multiple studies
         Study mlStudy = new Study();
         mlStudy.setIdentifier(source.getStudies().get(0).getAccession());
         mlStudy.setTitle(source.getStudies().get(0).getTitle());
