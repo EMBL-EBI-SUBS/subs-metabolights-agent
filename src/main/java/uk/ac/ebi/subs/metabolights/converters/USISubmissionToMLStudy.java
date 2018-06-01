@@ -19,7 +19,7 @@ import java.util.Map;
 /**
  * Created by kalai on 18/12/2017.
  */
-public class USISubmissionToMLStudy implements Converter<uk.ac.ebi.subs.processing.SubmissionEnvelope, Study> {
+public class USISubmissionToMLStudy implements Converter<uk.ac.ebi.subs.processing.SubmissionEnvelope, List<Study>> {
 
     USIContactsToMLContacts usiContactsToMLContacts = new USIContactsToMLContacts();
     USIPublicationToMLPublication usiPublicationToMLPublication = new USIPublicationToMLPublication();
@@ -29,58 +29,32 @@ public class USISubmissionToMLStudy implements Converter<uk.ac.ebi.subs.processi
     USIDescriptorToMLDescriptor usiDescriptorToMLDescriptor = new USIDescriptorToMLDescriptor();
     USIAssayToMLAssay usiAssayToMLAssay = new USIAssayToMLAssay();
     USIFileToMLFile usiFileToMLFile = new USIFileToMLFile();
+    USIStudyToMLStudy usiStudyToMLStudy = new USIStudyToMLStudy();
 
     @Override
-    public Study convert(uk.ac.ebi.subs.processing.SubmissionEnvelope source) {
-        //todo handle multiple studies
-        Study mlStudy = new Study();
-        mlStudy.setIdentifier(source.getStudies().get(0).getAccession());
-        mlStudy.setTitle(source.getStudies().get(0).getTitle());
-        mlStudy.setDescription(source.getStudies().get(0).getDescription());                                                    
+    public List<Study> convert(uk.ac.ebi.subs.processing.SubmissionEnvelope source) {
+        List<Study> mlStudies = new ArrayList<Study>();
+        for(uk.ac.ebi.subs.data.submittable.Study usiStudy : source.getStudies()){
+            Study mlStudy = usiStudyToMLStudy.convert(usiStudy);
+            //todo handle multiple project scenarios
+            //todo assign objects based on accession reference
+            mlStudy.setSubmissionDate(source.getSubmission().getSubmissionDate().toString());
+            mlStudy.setPublicReleaseDate(source.getProjects().get(0).getReleaseDate().toString());
+            mlStudy.setPublications(convertPublications(source.getProjects().get(0).getPublications()));
+            mlStudy.setPeople(convertContacts(source.getProjects().get(0).getContacts()));
 
+            mlStudy.setSamples(convertSamples(source.getSamples()));
+            mlStudy.setAssays(convertAssays(source.getAssays()));
+            mlStudy.setProtocols(convertProtocols(source.getProtocols()));
 
-        mlStudy.setSubmissionDate(source.getSubmission().getSubmissionDate().toString());
-        mlStudy.setPublicReleaseDate(source.getProjects().get(0).getReleaseDate().toString());
-        mlStudy.setPublications(convertPublications(source.getProjects().get(0).getPublications()));
-        mlStudy.setPeople(convertContacts(source.getProjects().get(0).getContacts()));
+            assignDataFiles(mlStudy.getAssays(), source.getAssayData());
+            mlStudies.add(mlStudy);
 
-        mlStudy.setSamples(convertSamples(source.getSamples()));
-        mlStudy.setAssays(convertAssays(source.getAssays()));
-        mlStudy.setProtocols(convertProtocols(source.getProtocols()));
-        mlStudy.setFactors(convertFactors(source.getStudies().get(0).getAttributes()));
-        mlStudy.setStudyDesignDescriptors(convertDescriptors(source.getStudies().get(0).getAttributes()));
-
-        assignDataFiles(mlStudy.getAssays(), source.getAssayData());
-
-        return mlStudy;
-    }
-
-
-    private List<OntologyModel> convertDescriptors(Map<String, Collection<Attribute>> attributes) {
-        List<OntologyModel> studyDesignDescriptors = new ArrayList<>();
-        for (Map.Entry<String, Collection<Attribute>> entry : attributes.entrySet()) {
-            if (entry.getKey().equals("studyDesignDescriptors")) {
-                for (Attribute attribute : entry.getValue()) {
-                    studyDesignDescriptors.add(usiDescriptorToMLDescriptor.convert(attribute));
-                }
-                return studyDesignDescriptors;
-            }
         }
-        return studyDesignDescriptors;
+        return mlStudies;
     }
 
-    private List<Factor> convertFactors(Map<String, Collection<Attribute>> attributes) {
-        List<Factor> factors = new ArrayList<>();
-        for (Map.Entry<String, Collection<Attribute>> entry : attributes.entrySet()) {
-            if (entry.getKey().equals("factors")) {
-                for (Attribute attribute : entry.getValue()) {
-                    factors.add(usiFactorToMLFactor.convert(attribute));
-                }
-                return factors;
-            }
-        }
-        return factors;
-    }
+
 
     private List<uk.ac.ebi.subs.metabolights.model.Protocol> convertProtocols(List<Protocol> protocols) {
         List<uk.ac.ebi.subs.metabolights.model.Protocol> mlProtocols = new ArrayList<>();

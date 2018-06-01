@@ -18,20 +18,18 @@ public class SubmissionToStudyTest {
         SubmissionEnvelope submissionEnvelope = null;
         try {
             submissionEnvelope = WSUtils.getUSISubmisisonFromDisc();
-            Study study = usiSubmissionToMLStudy.convert(submissionEnvelope);
+            List<Study> mlStudies = usiSubmissionToMLStudy.convert(submissionEnvelope);
             Project project = new Project();
-            List<Study> studies = new ArrayList();
-            studies.add(study);
-            project.setStudies(studies);
+            project.setStudies(mlStudies);
             project.setTitle("Investigation");
             ObjectMapper mapper = new ObjectMapper();
             String mlStudy = mapper.writeValueAsString(project);
             System.out.println(mlStudy);
 
-            assertEquals(study.getSamples().size(), 16);
-            assertEquals(study.getProtocols().size(), 6);
-            assertEquals(study.getIdentifier(), "MTBLS2");
-            assertEquals(study.getPeople().size(), 2);
+            assertEquals(mlStudies.get(0).getSamples().size(), 16);
+            assertEquals(mlStudies.get(0).getProtocols().size(), 6);
+            assertEquals(mlStudies.get(0).getIdentifier(), "MTBLS2");
+            assertEquals(mlStudies.get(0).getPeople().size(), 2);
         } catch (Exception e) {
             e.printStackTrace();
         }
