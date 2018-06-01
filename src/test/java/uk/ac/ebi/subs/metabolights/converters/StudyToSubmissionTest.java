@@ -38,6 +38,8 @@ public class StudyToSubmissionTest {
             ObjectMapper mapper = new ObjectMapper();
             String submissionJSON = mapper.writeValueAsString(submissionEnvelope);
             System.out.println(submissionJSON);
+            String submissionSample = mapper.writeValueAsString(submissionEnvelope.getSamples());
+            //System.out.println(submissionSample);
 
             assertEquals(submissionEnvelope.getSamples().size(), 16);
             assertEquals(submissionEnvelope.getProtocols().size(), 6);

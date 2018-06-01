@@ -37,6 +37,7 @@ public class MLSampleToUSISample implements Converter<uk.ac.ebi.subs.metabolight
                             sample.setTaxonId(Long.parseLong(values[1]));
                         }
                     }
+                    //todo set taxon object by checking the organism name attribute
                     sample.setTaxon(mlTaxonObject.getCharacteristics().get(0).getValue().getAnnotationValue());
                 }
             }

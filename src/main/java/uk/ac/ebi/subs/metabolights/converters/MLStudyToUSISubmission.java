@@ -10,6 +10,7 @@ import uk.ac.ebi.subs.data.submittable.Assay;
 import uk.ac.ebi.subs.data.submittable.Project;
 import uk.ac.ebi.subs.data.submittable.Protocol;
 import uk.ac.ebi.subs.data.submittable.Sample;
+import uk.ac.ebi.subs.data.submittable.Study;
 import uk.ac.ebi.subs.metabolights.model.*;
 import uk.ac.ebi.subs.processing.SubmissionEnvelope;
 
@@ -28,10 +29,9 @@ public class MLStudyToUSISubmission implements Converter<uk.ac.ebi.subs.metaboli
     MLPublicationToUSIPublication toUSIPublication = new MLPublicationToUSIPublication();
     MLSampleToUSISample mlSampleToUSISample = new MLSampleToUSISample();
     MLProtocolToUSIProtocol protocolToUSIProtocol = new MLProtocolToUSIProtocol();
-    MLFactorToUSIFactor mlFactorToUSIFactor = new MLFactorToUSIFactor();
-    MLDescriptorToUSIDescriptor mlDescriptorToUSIDescriptor = new MLDescriptorToUSIDescriptor();
     MLAssayToUSIAssay mlAssayToUSIAssay = new MLAssayToUSIAssay();
     MLFileToUSIFile mlFileToUSIFile = new MLFileToUSIFile();
+    MLStudyToUSIStudy mlStudyToUSIStudy = new MLStudyToUSIStudy();
 
     @Override
     public uk.ac.ebi.subs.processing.SubmissionEnvelope convert(uk.ac.ebi.subs.metabolights.model.Study source) {
@@ -48,10 +48,9 @@ public class MLStudyToUSISubmission implements Converter<uk.ac.ebi.subs.metaboli
         project.setContacts(convertContacts(source.getPeople()));
         project.setPublications(convertPublications(source.getPublications()));
 
-        uk.ac.ebi.subs.data.submittable.Study usiStudy = getStudy(source, team, project);
-        usiStudy.getAttributes().put("studyDesignDescriptors", convertStudyDescriptors(source.getStudyDesignDescriptors()));
-        usiStudy.getAttributes().put("factors", convertSampleFactors(source.getFactors()));
-        
+        Study usiStudy =  mlStudyToUSIStudy.convert(source);
+        addStudyMetadata(usiStudy, team, project);
+
         List<Protocol> protocols = convertProtocols(source.getProtocols(), team);
         List<Sample> samples = convertSamples(source.getSamples(), team);
 
@@ -85,14 +84,10 @@ public class MLStudyToUSISubmission implements Converter<uk.ac.ebi.subs.metaboli
     }
 
 
-    private uk.ac.ebi.subs.data.submittable.Study getStudy(uk.ac.ebi.subs.metabolights.model.Study mlStudy, Team team, Project project) {
-        uk.ac.ebi.subs.data.submittable.Study usiStudy = new uk.ac.ebi.subs.data.submittable.Study();
+    private uk.ac.ebi.subs.data.submittable.Study addStudyMetadata(uk.ac.ebi.subs.data.submittable.Study usiStudy, Team team, Project project) {
         usiStudy.setStudyType(StudyDataType.Metabolomics);
         usiStudy.setAlias("");
         usiStudy.setTeam(team);
-        usiStudy.setTitle(mlStudy.getTitle());
-        usiStudy.setAccession(mlStudy.getIdentifier());
-        usiStudy.setDescription(mlStudy.getDescription());
         usiStudy.setProjectRef((ProjectRef) project.asRef());
         return usiStudy;
     }
@@ -137,24 +132,6 @@ public class MLStudyToUSISubmission implements Converter<uk.ac.ebi.subs.metaboli
             usiSamples.add(usiSample);
         }
         return usiSamples;
-    }
-
-
-    private List<Attribute> convertSampleFactors(List<Factor> factors) {
-        List<Attribute> sampleFactors = new ArrayList<>();
-        for (Factor factor : factors) {
-            sampleFactors.add(mlFactorToUSIFactor.convert(factor));
-        }
-        return sampleFactors;
-    }
-
-
-    private List<Attribute> convertStudyDescriptors(List<OntologyModel> studyDesignDescriptors) {
-        List<Attribute> descriptors = new ArrayList<>();
-        for (OntologyModel descriptor : studyDesignDescriptors) {
-            descriptors.add(mlDescriptorToUSIDescriptor.convert(descriptor));
-        }
-        return descriptors;
     }
 
 
