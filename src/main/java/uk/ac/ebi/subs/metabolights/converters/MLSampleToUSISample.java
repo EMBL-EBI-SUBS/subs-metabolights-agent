@@ -45,18 +45,18 @@ public class MLSampleToUSISample implements Converter<uk.ac.ebi.subs.metabolight
 
         //set factor values and source information into attributes
         Map<String, Collection<Attribute>> usiSampleFactor = convertToUSISampleAttributes(source.getFactorValues());
-        Map<String, Collection<Attribute>> usiSampleSource = convertToUSIAttributes(source.getDevivesFrom());
+        Map<String, Collection<Attribute>> usiSampleSource = convertToUSIAttributes(source.getDerivesFrom());
         usiSampleFactor.putAll(usiSampleSource);
         sample.setAttributes(usiSampleFactor);
         return sample;
     }
 
     private Source extractTaxonObject(uk.ac.ebi.subs.metabolights.model.Sample sample) {
-        if(sample.getDevivesFrom() == null){
+        if(sample.getDerivesFrom() == null){
                return null;
         }
-        if (sample.getDevivesFrom().size() > 0) {
-            List<Source> derivesFrom = sample.getDevivesFrom();
+        if (sample.getDerivesFrom().size() > 0) {
+            List<Source> derivesFrom = sample.getDerivesFrom();
             for (int i = 0; i < derivesFrom.size(); i++) {
                 for (int j = 0; j < derivesFrom.get(i).getCharacteristics().size(); j++) {
                       if(derivesFrom.get(i).getCharacteristics().get(j).getCategory().getAnnotationValue().toLowerCase().equals("organism")){
@@ -92,9 +92,9 @@ public class MLSampleToUSISample implements Converter<uk.ac.ebi.subs.metabolight
     }
 
 
-    private Map<String, Collection<Attribute>> convertToUSIAttributes(List<Source> devivesFrom) {
+    private Map<String, Collection<Attribute>> convertToUSIAttributes(List<Source> derivesFrom) {
         Map<String, Collection<Attribute>> usiSampleAttributes = new HashMap<>();
-        for (Source source : devivesFrom) {
+        for (Source source : derivesFrom) {
             List<SampleSourceOntologyModel> sourceCharacteristics = source.getCharacteristics();
             for (SampleSourceOntologyModel sourceCharacteristic : sourceCharacteristics) {
                 Attribute attribute = new Attribute();

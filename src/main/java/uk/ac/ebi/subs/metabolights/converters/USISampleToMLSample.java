@@ -41,7 +41,7 @@ public class USISampleToMLSample implements Converter<uk.ac.ebi.subs.data.submit
         //set attributes (Factor values)
         sample.setFactorValues(convertToMLSampleAttributes(source.getAttributes()));
         // set derives from source information
-        sample.setDevivesFrom(convertToMLSampleSource(source.getAttributes(), source.getTitle()));
+        sample.setDerivesFrom(convertToMLSampleSource(source.getAttributes(), source.getTitle()));
         return sample;
     }
 

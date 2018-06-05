@@ -33,7 +33,7 @@ import java.util.List;
 public class Sample {
 
       private List<Comment> comments;
-      private List<Source> devivesFrom;
+      private List<Source> derivesFrom;
       private List<Object> characteristics;
       private String name;
       private List<SampleFactorValue> factorValues;

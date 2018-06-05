@@ -10,5 +10,5 @@ public class AssayProcessSequenceInput {
     private List<SampleSourceOntologyModel> factorValues;
     private String name;
     private List<Comment> comments;
-    private List<Source> devivesFrom;
+    private List<Source> derivesFrom;
 }

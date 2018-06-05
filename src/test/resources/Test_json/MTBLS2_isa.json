@@ -609,7 +609,7 @@
                         "unit": null
                       }
                     ],
-                    "devivesFrom": [
+                    "derivesFrom": [
                       {
                         "comments": [],
                         "name": "IPB Halle.Group-1.Subject-1",
@@ -714,7 +714,7 @@
                         "unit": null
                       }
                     ],
-                    "devivesFrom": [
+                    "derivesFrom": [
                       {
                         "comments": [],
                         "name": "IPB Halle.Group-1.Subject-2",
@@ -819,7 +819,7 @@
                         "unit": null
                       }
                     ],
-                    "devivesFrom": [
+                    "derivesFrom": [
                       {
                         "comments": [],
                         "name": "IPB Halle.Group-1.Subject-3",
@@ -924,7 +924,7 @@
                         "unit": null
                       }
                     ],
-                    "devivesFrom": [
+                    "derivesFrom": [
                       {
                         "comments": [],
                         "name": "IPB Halle.Group-1.Subject-4",
@@ -1029,7 +1029,7 @@
                         "unit": null
                       }
                     ],
-                    "devivesFrom": [
+                    "derivesFrom": [
                       {
                         "comments": [],
                         "name": "IPB Halle.Group-2.Subject-1",
@@ -1134,7 +1134,7 @@
                         "unit": null
                       }
                     ],
-                    "devivesFrom": [
+                    "derivesFrom": [
                       {
                         "comments": [],
                         "name": "IPB Halle.Group-2.Subject-2",
@@ -1239,7 +1239,7 @@
                         "unit": null
                       }
                     ],
-                    "devivesFrom": [
+                    "derivesFrom": [
                       {
                         "comments": [],
                         "name": "IPB Halle.Group-2.Subject-3",
@@ -1344,7 +1344,7 @@
                         "unit": null
                       }
                     ],
-                    "devivesFrom": [
+                    "derivesFrom": [
                       {
                         "comments": [],
                         "name": "IPB Halle.Group-2.Subject-4",
@@ -1449,7 +1449,7 @@
                         "unit": null
                       }
                     ],
-                    "devivesFrom": [
+                    "derivesFrom": [
                       {
                         "comments": [],
                         "name": "IPB Halle.Group-3.Subject-1",
@@ -1554,7 +1554,7 @@
                         "unit": null
                       }
                     ],
-                    "devivesFrom": [
+                    "derivesFrom": [
                       {
                         "comments": [],
                         "name": "IPB Halle.Group-3.Subject-2",
@@ -1659,7 +1659,7 @@
                         "unit": null
                       }
                     ],
-                    "devivesFrom": [
+                    "derivesFrom": [
                       {
                         "comments": [],
                         "name": "IPB Halle.Group-3.Subject-3",
@@ -1764,7 +1764,7 @@
                         "unit": null
                       }
                     ],
-                    "devivesFrom": [
+                    "derivesFrom": [
                       {
                         "comments": [],
                         "name": "IPB Halle.Group-3.Subject-4",
@@ -1869,7 +1869,7 @@
                         "unit": null
                       }
                     ],
-                    "devivesFrom": [
+                    "derivesFrom": [
                       {
                         "comments": [],
                         "name": "IPB Halle.Group-4.Subject-1",
@@ -1974,7 +1974,7 @@
                         "unit": null
                       }
                     ],
-                    "devivesFrom": [
+                    "derivesFrom": [
                       {
                         "comments": [],
                         "name": "IPB Halle.Group-4.Subject-2",
@@ -2079,7 +2079,7 @@
                         "unit": null
                       }
                     ],
-                    "devivesFrom": [
+                    "derivesFrom": [
                       {
                         "comments": [],
                         "name": "IPB Halle.Group-4.Subject-3",
@@ -2184,7 +2184,7 @@
                         "unit": null
                       }
                     ],
-                    "devivesFrom": [
+                    "derivesFrom": [
                       {
                         "comments": [],
                         "name": "IPB Halle.Group-4.Subject-4",
@@ -2493,7 +2493,7 @@
                         "unit": null
                       }
                     ],
-                    "devivesFrom": [
+                    "derivesFrom": [
                       {
                         "comments": [],
                         "name": "IPB Halle.Group-2.Subject-2",
@@ -2669,7 +2669,7 @@
                         "unit": null
                       }
                     ],
-                    "devivesFrom": [
+                    "derivesFrom": [
                       {
                         "comments": [],
                         "name": "IPB Halle.Group-3.Subject-3",
@@ -2949,7 +2949,7 @@
                         "unit": null
                       }
                     ],
-                    "devivesFrom": [
+                    "derivesFrom": [
                       {
                         "comments": [],
                         "name": "IPB Halle.Group-1.Subject-4",
@@ -3125,7 +3125,7 @@
                         "unit": null
                       }
                     ],
-                    "devivesFrom": [
+                    "derivesFrom": [
                       {
                         "comments": [],
                         "name": "IPB Halle.Group-1.Subject-2",
@@ -3458,7 +3458,7 @@
                         "unit": null
                       }
                     ],
-                    "devivesFrom": [
+                    "derivesFrom": [
                       {
                         "comments": [],
                         "name": "IPB Halle.Group-2.Subject-3",
@@ -3634,7 +3634,7 @@
                         "unit": null
                       }
                     ],
-                    "devivesFrom": [
+                    "derivesFrom": [
                       {
                         "comments": [],
                         "name": "IPB Halle.Group-4.Subject-2",
@@ -3914,7 +3914,7 @@
                         "unit": null
                       }
                     ],
-                    "devivesFrom": [
+                    "derivesFrom": [
                       {
                         "comments": [],
                         "name": "IPB Halle.Group-3.Subject-1",
@@ -4351,7 +4351,7 @@
                         "unit": null
                       }
                     ],
-                    "devivesFrom": [
+                    "derivesFrom": [
                       {
                         "comments": [],
                         "name": "IPB Halle.Group-2.Subject-4",
@@ -4945,7 +4945,7 @@
                         "unit": null
                       }
                     ],
-                    "devivesFrom": [
+                    "derivesFrom": [
                       {
                         "comments": [],
                         "name": "IPB Halle.Group-4.Subject-3",
@@ -5643,7 +5643,7 @@
                         "unit": null
                       }
                     ],
-                    "devivesFrom": [
+                    "derivesFrom": [
                       {
                         "comments": [],
                         "name": "IPB Halle.Group-3.Subject-4",
@@ -6133,7 +6133,7 @@
                         "unit": null
                       }
                     ],
-                    "devivesFrom": [
+                    "derivesFrom": [
                       {
                         "comments": [],
                         "name": "IPB Halle.Group-3.Subject-2",
@@ -6570,7 +6570,7 @@
                         "unit": null
                       }
                     ],
-                    "devivesFrom": [
+                    "derivesFrom": [
                       {
                         "comments": [],
                         "name": "IPB Halle.Group-4.Subject-4",
@@ -7268,7 +7268,7 @@
                         "unit": null
                       }
                     ],
-                    "devivesFrom": [
+                    "derivesFrom": [
                       {
                         "comments": [],
                         "name": "IPB Halle.Group-2.Subject-1",
@@ -7705,7 +7705,7 @@
                         "unit": null
                       }
                     ],
-                    "devivesFrom": [
+                    "derivesFrom": [
                       {
                         "comments": [],
                         "name": "IPB Halle.Group-1.Subject-3",
@@ -7881,7 +7881,7 @@
                         "unit": null
                       }
                     ],
-                    "devivesFrom": [
+                    "derivesFrom": [
                       {
                         "comments": [],
                         "name": "IPB Halle.Group-1.Subject-1",
@@ -8944,7 +8944,7 @@
                         "unit": null
                       }
                     ],
-                    "devivesFrom": [
+                    "derivesFrom": [
                       {
                         "comments": [],
                         "name": "IPB Halle.Group-4.Subject-1",
@@ -9316,7 +9316,7 @@
                     "unit": null
                   }
                 ],
-                "devivesFrom": [
+                "derivesFrom": [
                   {
                     "comments": [],
                     "name": "IPB Halle.Group-1.Subject-1",
@@ -9421,7 +9421,7 @@
                     "unit": null
                   }
                 ],
-                "devivesFrom": [
+                "derivesFrom": [
                   {
                     "comments": [],
                     "name": "IPB Halle.Group-1.Subject-2",
@@ -9526,7 +9526,7 @@
                     "unit": null
                   }
                 ],
-                "devivesFrom": [
+                "derivesFrom": [
                   {
                     "comments": [],
                     "name": "IPB Halle.Group-1.Subject-3",
@@ -9631,7 +9631,7 @@
                     "unit": null
                   }
                 ],
-                "devivesFrom": [
+                "derivesFrom": [
                   {
                     "comments": [],
                     "name": "IPB Halle.Group-1.Subject-4",
@@ -9736,7 +9736,7 @@
                     "unit": null
                   }
                 ],
-                "devivesFrom": [
+                "derivesFrom": [
                   {
                     "comments": [],
                     "name": "IPB Halle.Group-2.Subject-1",
@@ -9841,7 +9841,7 @@
                     "unit": null
                   }
                 ],
-                "devivesFrom": [
+                "derivesFrom": [
                   {
                     "comments": [],
                     "name": "IPB Halle.Group-2.Subject-2",
@@ -9946,7 +9946,7 @@
                     "unit": null
                   }
                 ],
-                "devivesFrom": [
+                "derivesFrom": [
                   {
                     "comments": [],
                     "name": "IPB Halle.Group-2.Subject-3",
@@ -10051,7 +10051,7 @@
                     "unit": null
                   }
                 ],
-                "devivesFrom": [
+                "derivesFrom": [
                   {
                     "comments": [],
                     "name": "IPB Halle.Group-2.Subject-4",
@@ -10156,7 +10156,7 @@
                     "unit": null
                   }
                 ],
-                "devivesFrom": [
+                "derivesFrom": [
                   {
                     "comments": [],
                     "name": "IPB Halle.Group-3.Subject-1",
@@ -10261,7 +10261,7 @@
                     "unit": null
                   }
                 ],
-                "devivesFrom": [
+                "derivesFrom": [
                   {
                     "comments": [],
                     "name": "IPB Halle.Group-3.Subject-2",
@@ -10366,7 +10366,7 @@
                     "unit": null
                   }
                 ],
-                "devivesFrom": [
+                "derivesFrom": [
                   {
                     "comments": [],
                     "name": "IPB Halle.Group-3.Subject-3",
@@ -10471,7 +10471,7 @@
                     "unit": null
                   }
                 ],
-                "devivesFrom": [
+                "derivesFrom": [
                   {
                     "comments": [],
                     "name": "IPB Halle.Group-3.Subject-4",
@@ -10576,7 +10576,7 @@
                     "unit": null
                   }
                 ],
-                "devivesFrom": [
+                "derivesFrom": [
                   {
                     "comments": [],
                     "name": "IPB Halle.Group-4.Subject-1",
@@ -10681,7 +10681,7 @@
                     "unit": null
                   }
                 ],
-                "devivesFrom": [
+                "derivesFrom": [
                   {
                     "comments": [],
                     "name": "IPB Halle.Group-4.Subject-2",
@@ -10786,7 +10786,7 @@
                     "unit": null
                   }
                 ],
-                "devivesFrom": [
+                "derivesFrom": [
                   {
                     "comments": [],
                     "name": "IPB Halle.Group-4.Subject-3",
@@ -10891,7 +10891,7 @@
                     "unit": null
                   }
                 ],
-                "devivesFrom": [
+                "derivesFrom": [
                   {
                     "comments": [],
                     "name": "IPB Halle.Group-4.Subject-4",
@@ -11909,7 +11909,7 @@
                 "unit": null
               }
             ],
-            "devivesFrom": [
+            "derivesFrom": [
               {
                 "comments": [],
                 "name": "IPB Halle.Group-1.Subject-1",
@@ -12014,7 +12014,7 @@
                 "unit": null
               }
             ],
-            "devivesFrom": [
+            "derivesFrom": [
               {
                 "comments": [],
                 "name": "IPB Halle.Group-1.Subject-2",
@@ -12119,7 +12119,7 @@
                 "unit": null
               }
             ],
-            "devivesFrom": [
+            "derivesFrom": [
               {
                 "comments": [],
                 "name": "IPB Halle.Group-1.Subject-3",
@@ -12224,7 +12224,7 @@
                 "unit": null
               }
             ],
-            "devivesFrom": [
+            "derivesFrom": [
               {
                 "comments": [],
                 "name": "IPB Halle.Group-1.Subject-4",
@@ -12329,7 +12329,7 @@
                 "unit": null
               }
             ],
-            "devivesFrom": [
+            "derivesFrom": [
               {
                 "comments": [],
                 "name": "IPB Halle.Group-2.Subject-1",
@@ -12434,7 +12434,7 @@
                 "unit": null
               }
             ],
-            "devivesFrom": [
+            "derivesFrom": [
               {
                 "comments": [],
                 "name": "IPB Halle.Group-2.Subject-2",
@@ -12539,7 +12539,7 @@
                 "unit": null
               }
             ],
-            "devivesFrom": [
+            "derivesFrom": [
               {
                 "comments": [],
                 "name": "IPB Halle.Group-2.Subject-3",
@@ -12644,7 +12644,7 @@
                 "unit": null
               }
             ],
-            "devivesFrom": [
+            "derivesFrom": [
               {
                 "comments": [],
                 "name": "IPB Halle.Group-2.Subject-4",
@@ -12749,7 +12749,7 @@
                 "unit": null
               }
             ],
-            "devivesFrom": [
+            "derivesFrom": [
               {
                 "comments": [],
                 "name": "IPB Halle.Group-3.Subject-1",
@@ -12854,7 +12854,7 @@
                 "unit": null
               }
             ],
-            "devivesFrom": [
+            "derivesFrom": [
               {
                 "comments": [],
                 "name": "IPB Halle.Group-3.Subject-2",
@@ -12959,7 +12959,7 @@
                 "unit": null
               }
             ],
-            "devivesFrom": [
+            "derivesFrom": [
               {
                 "comments": [],
                 "name": "IPB Halle.Group-3.Subject-3",
@@ -13064,7 +13064,7 @@
                 "unit": null
               }
             ],
-            "devivesFrom": [
+            "derivesFrom": [
               {
                 "comments": [],
                 "name": "IPB Halle.Group-3.Subject-4",
@@ -13169,7 +13169,7 @@
                 "unit": null
               }
             ],
-            "devivesFrom": [
+            "derivesFrom": [
               {
                 "comments": [],
                 "name": "IPB Halle.Group-4.Subject-1",
@@ -13274,7 +13274,7 @@
                 "unit": null
               }
             ],
-            "devivesFrom": [
+            "derivesFrom": [
               {
                 "comments": [],
                 "name": "IPB Halle.Group-4.Subject-2",
@@ -13379,7 +13379,7 @@
                 "unit": null
               }
             ],
-            "devivesFrom": [
+            "derivesFrom": [
               {
                 "comments": [],
                 "name": "IPB Halle.Group-4.Subject-3",
@@ -13484,7 +13484,7 @@
                 "unit": null
               }
             ],
-            "devivesFrom": [
+            "derivesFrom": [
               {
                 "comments": [],
                 "name": "IPB Halle.Group-4.Subject-4",
@@ -13667,7 +13667,7 @@
                     "unit": null
                   }
                 ],
-                "devivesFrom": [
+                "derivesFrom": [
                   {
                     "comments": [],
                     "name": "IPB Halle.Group-2.Subject-1",
@@ -13850,7 +13850,7 @@
                     "unit": null
                   }
                 ],
-                "devivesFrom": [
+                "derivesFrom": [
                   {
                     "comments": [],
                     "name": "IPB Halle.Group-3.Subject-2",
@@ -14033,7 +14033,7 @@
                     "unit": null
                   }
                 ],
-                "devivesFrom": [
+                "derivesFrom": [
                   {
                     "comments": [],
                     "name": "IPB Halle.Group-2.Subject-4",
@@ -14216,7 +14216,7 @@
                     "unit": null
                   }
                 ],
-                "devivesFrom": [
+                "derivesFrom": [
                   {
                     "comments": [],
                     "name": "IPB Halle.Group-4.Subject-1",
@@ -14399,7 +14399,7 @@
                     "unit": null
                   }
                 ],
-                "devivesFrom": [
+                "derivesFrom": [
                   {
                     "comments": [],
                     "name": "IPB Halle.Group-1.Subject-3",
@@ -14582,7 +14582,7 @@
                     "unit": null
                   }
                 ],
-                "devivesFrom": [
+                "derivesFrom": [
                   {
                     "comments": [],
                     "name": "IPB Halle.Group-4.Subject-3",
@@ -14765,7 +14765,7 @@
                     "unit": null
                   }
                 ],
-                "devivesFrom": [
+                "derivesFrom": [
                   {
                     "comments": [],
                     "name": "IPB Halle.Group-1.Subject-2",
@@ -14948,7 +14948,7 @@
                     "unit": null
                   }
                 ],
-                "devivesFrom": [
+                "derivesFrom": [
                   {
                     "comments": [],
                     "name": "IPB Halle.Group-4.Subject-4",
@@ -15131,7 +15131,7 @@
                     "unit": null
                   }
                 ],
-                "devivesFrom": [
+                "derivesFrom": [
                   {
                     "comments": [],
                     "name": "IPB Halle.Group-1.Subject-1",
@@ -15314,7 +15314,7 @@
                     "unit": null
                   }
                 ],
-                "devivesFrom": [
+                "derivesFrom": [
                   {
                     "comments": [],
                     "name": "IPB Halle.Group-4.Subject-2",
@@ -15497,7 +15497,7 @@
                     "unit": null
                   }
                 ],
-                "devivesFrom": [
+                "derivesFrom": [
                   {
                     "comments": [],
                     "name": "IPB Halle.Group-2.Subject-3",
@@ -15680,7 +15680,7 @@
                     "unit": null
                   }
                 ],
-                "devivesFrom": [
+                "derivesFrom": [
                   {
                     "comments": [],
                     "name": "IPB Halle.Group-1.Subject-4",
@@ -15863,7 +15863,7 @@
                     "unit": null
                   }
                 ],
-                "devivesFrom": [
+                "derivesFrom": [
                   {
                     "comments": [],
                     "name": "IPB Halle.Group-3.Subject-1",
@@ -16046,7 +16046,7 @@
                     "unit": null
                   }
                 ],
-                "devivesFrom": [
+                "derivesFrom": [
                   {
                     "comments": [],
                     "name": "IPB Halle.Group-3.Subject-3",
@@ -16229,7 +16229,7 @@
                     "unit": null
                   }
                 ],
-                "devivesFrom": [
+                "derivesFrom": [
                   {
                     "comments": [],
                     "name": "IPB Halle.Group-3.Subject-4",
@@ -16412,7 +16412,7 @@
                     "unit": null
                   }
                 ],
-                "devivesFrom": [
+                "derivesFrom": [
                   {
                     "comments": [],
                     "name": "IPB Halle.Group-2.Subject-2",
