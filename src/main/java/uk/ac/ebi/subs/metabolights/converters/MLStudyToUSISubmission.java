@@ -142,6 +142,7 @@ public class MLStudyToUSISubmission implements Converter<uk.ac.ebi.subs.metaboli
             assay.setStudyRef((StudyRef) usiStudy.asRef());
             assay.setTeam(team);
             assayDataList.addAll(convertDataFiles(assays.get(i).getDataFiles(), (AssayRef) assay.asRef(), team));
+            usiAssays.add(assay);
         }
         return usiAssays;
     }
@@ -153,6 +154,7 @@ public class MLStudyToUSISubmission implements Converter<uk.ac.ebi.subs.metaboli
         if (files != null && files.size() > 0) {
             for (MLFile mlfile : files) {
                 AssayData assayData = new AssayData();
+                assayData.setAlias(mlfile.getFilename());
                 assayData.setTeam(team);
                 assayData.setAssayRefs(assayRefs);
                 if (mlfile != null) {
