@@ -114,12 +114,12 @@ public class WSUtils {
         return processSampleResponse(response);
     }
 
-    public static Sample processSampleResponse(String response){
+    public static Sample processSampleResponse(String response) {
         Sample sample = new Sample();
         try {
             JSONObject myObject = new JSONObject(response);
             String mlSample = myObject.getString("Study_sample");
-            sample = mapper.readValue( mlSample
+            sample = mapper.readValue(mlSample
                     , Sample.class);
         } catch (Exception e) {
             e.printStackTrace();
@@ -144,7 +144,7 @@ public class WSUtils {
         Study study = new Study();
         Project project = new Project();
         try {
-            mapper.configure(DeserializationFeature.UNWRAP_ROOT_VALUE,true);
+            mapper.configure(DeserializationFeature.UNWRAP_ROOT_VALUE, true);
             project = mapper.readValue(response, Project.class);
             study = project.getStudies().get(0);
         } catch (IOException e) {
@@ -159,7 +159,7 @@ public class WSUtils {
             String result = IOUtils.toString(WSUtils.class.getClassLoader().getResourceAsStream("Test_json/MTBLS2_isa.json"));
             Project project = new Project();
             try {
-                mapper.configure(DeserializationFeature.UNWRAP_ROOT_VALUE,true);
+                mapper.configure(DeserializationFeature.UNWRAP_ROOT_VALUE, true);
                 project = mapper.readValue(result, Project.class);
                 study = project.getStudies().get(0);
                 return study;
@@ -173,10 +173,27 @@ public class WSUtils {
         return null;
     }
 
+    public static Project getMLProjectFromDisc() {
+        Project project = new Project();
+        try {
+            String result = IOUtils.toString(WSUtils.class.getClassLoader().getResourceAsStream("Test_json/MTBLS2_isa.json"));
+            try {
+                mapper.configure(DeserializationFeature.UNWRAP_ROOT_VALUE, true);
+                project = mapper.readValue(result, Project.class);
+                return project;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public static SubmissionEnvelope getUSISubmisisonFromDisc() {
         SubmissionEnvelope submissionEnvelope = new SubmissionEnvelope();
         try {
-            String result = IOUtils.toString(WSUtils.class.getClassLoader().getResourceAsStream("Test_json/MTBLS2_usi.json"));
+            String result = IOUtils.toString(WSUtils.class.getClassLoader().getResourceAsStream("Test_json/MTBLS2_usi_2.json"));
             try {
                 mapper.registerModule(new JavaTimeModule());
                 submissionEnvelope = mapper.readValue(result, SubmissionEnvelope.class);

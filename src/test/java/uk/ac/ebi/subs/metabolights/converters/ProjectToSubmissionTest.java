@@ -25,21 +25,19 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by kalai on 09/02/2018.
  */
-public class StudyToSubmissionTest {
+public class ProjectToSubmissionTest {
 
     @Test
     public void generateJson() {
-        MLStudyToUSISubmission mlStudyToUSISubmission = new MLStudyToUSISubmission();
+        MLProjectToUSISubmission mlProjectToUSISubmission = new MLProjectToUSISubmission();
         SubmissionEnvelope submissionEnvelope = null;
         try {
 //            submissionEnvelope = createUSIStudySubmission();
-            uk.ac.ebi.subs.metabolights.model.Study mlStudy = WSUtils.getMLStudyFromDisc();
-            submissionEnvelope = mlStudyToUSISubmission.convert(mlStudy);
+            uk.ac.ebi.subs.metabolights.model.Project mlProject = WSUtils.getMLProjectFromDisc();
+            submissionEnvelope = mlProjectToUSISubmission.convert(mlProject);
             ObjectMapper mapper = new ObjectMapper();
             String submissionJSON = mapper.writeValueAsString(submissionEnvelope);
             System.out.println(submissionJSON);
-            String submissionSample = mapper.writeValueAsString(submissionEnvelope.getSamples());
-            //System.out.println(submissionSample);
 
             assertEquals(submissionEnvelope.getSamples().size(), 16);
             assertEquals(submissionEnvelope.getProtocols().size(), 6);
