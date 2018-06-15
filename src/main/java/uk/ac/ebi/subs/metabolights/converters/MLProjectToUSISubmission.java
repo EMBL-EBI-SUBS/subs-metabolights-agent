@@ -4,7 +4,6 @@ import lombok.Data;
 import org.springframework.core.convert.converter.Converter;
 import uk.ac.ebi.subs.data.Submission;
 import uk.ac.ebi.subs.data.component.*;
-import uk.ac.ebi.subs.data.component.Contact;
 import uk.ac.ebi.subs.data.submittable.*;
 import uk.ac.ebi.subs.data.submittable.Assay;
 import uk.ac.ebi.subs.data.submittable.Project;
@@ -18,100 +17,94 @@ import uk.ac.ebi.subs.processing.SubmissionEnvelope;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 @Data
-public class MLStudyToUSISubmission implements Converter<uk.ac.ebi.subs.metabolights.model.Study, uk.ac.ebi.subs.processing.SubmissionEnvelope> {
+public class MLProjectToUSISubmission implements Converter<uk.ac.ebi.subs.metabolights.model.Project, uk.ac.ebi.subs.processing.SubmissionEnvelope> {
 
-    //todo consider changing to ML Project -> submission. OntologySourceReferences are currently excluded
-    MLContactsToUSIContacts toUsiContacts = new MLContactsToUSIContacts();
-    MLPublicationToUSIPublication toUSIPublication = new MLPublicationToUSIPublication();
     MLSampleToUSISample mlSampleToUSISample = new MLSampleToUSISample();
     MLProtocolToUSIProtocol protocolToUSIProtocol = new MLProtocolToUSIProtocol();
     MLAssayToUSIAssay mlAssayToUSIAssay = new MLAssayToUSIAssay();
     MLFileToUSIFile mlFileToUSIFile = new MLFileToUSIFile();
     MLStudyToUSIStudy mlStudyToUSIStudy = new MLStudyToUSIStudy();
+    MLProjectToUSIProject mlProjectToUSIProject = new MLProjectToUSIProject();
 
     @Override
-    public uk.ac.ebi.subs.processing.SubmissionEnvelope convert(uk.ac.ebi.subs.metabolights.model.Study source) {
+    public uk.ac.ebi.subs.processing.SubmissionEnvelope convert(uk.ac.ebi.subs.metabolights.model.Project source) {
 
 
-        Project project = new Project();
+        Project project = mlProjectToUSIProject.convert(source);
+
         //todo Store team in ML model
         Team team = new Team();
         team.setName("ML_test_team");
         project.setTeam(team);
-        project.setReleaseDate(LocalDate.parse(source.getPublicReleaseDate()));
+        
+        List<Study> usiStudies = new ArrayList<>();
+        List<Protocol> usiProtocols = new ArrayList<>();
+        List<Sample> usiSamples = new ArrayList<>();
+        List<Assay> usiAssays = new ArrayList<>();
+        List<AssayData> usiAssayDataList = new ArrayList<>();
+        List<Analysis> usiAnalysis = new ArrayList<>();
 
 
-        project.setContacts(convertContacts(source.getPeople()));
-        project.setPublications(convertPublications(source.getPublications()));
+        for(uk.ac.ebi.subs.metabolights.model.Study mlStudy : source.getStudies()){
+            List<Protocol> protocols = convertProtocols(mlStudy.getProtocols(), team);
+            List<Sample> samples = convertSamples(mlStudy.getSamples(), team);
 
-        Study usiStudy =  mlStudyToUSIStudy.convert(source);
-        addStudyMetadata(usiStudy, team, project);
+            Study usiStudy =  mlStudyToUSIStudy.convert(mlStudy);
+            addStudyMetadata(usiStudy, team, project, protocols);
+            usiStudies.add(usiStudy);
+           
+           List<Assay> assays = convertAssays(mlStudy.getAssays(), team, usiStudy, usiAssayDataList);
+            setProtocolUse(assays, protocols);
+            setSampleUse(assays, samples);
+            
+            Analysis analysis = new Analysis();
+            analysis.setTeam(team);
+            analysis.getStudyRefs().add((StudyRef) usiStudy.asRef());
+            analysis.setProtocolUses(getProtocolUse(protocols));
+            analysis.setAssayRefs(getAssayReferences(assays));
+            analysis.setAssayDataRefs(getAssayDataReferences(usiAssayDataList));
+            analysis.setSampleRefs(getSampleReferences(samples));
 
-        List<Protocol> protocols = convertProtocols(source.getProtocols(), team);
-        List<Sample> samples = convertSamples(source.getSamples(), team);
-
-        List<AssayData> assayDataList = new ArrayList<>();
-        List<Assay> usiAssays = convertAssays(source.getAssays(), team, usiStudy, assayDataList);
-        setProtocolUse(usiAssays, protocols);
-        setSampleUse(usiAssays, samples);
-
-        Analysis usiAnalysis = new Analysis();
-        usiAnalysis.setTeam(team);
-        usiAnalysis.getStudyRefs().add((StudyRef) usiStudy.asRef());
-        usiAnalysis.setProtocolUses(getProtocolUse(protocols));
-        usiAnalysis.setAssayRefs(getAssayReferences(usiAssays));
-        usiAnalysis.setAssayDataRefs(getAssayDataReferences(assayDataList));
-        usiAnalysis.setSampleRefs(getSampleReferences(samples));
+            usiProtocols.addAll(protocols);
+            usiSamples.addAll(samples);
+            usiAssays.addAll(assays);
+            usiAnalysis.add(analysis);
+        }
+        
 
         Submission submission = new Submission();
-        //submission.setSubmissionDate(java.sql.Date.valueOf(LocalDate.parse(source.getSubmissionDate())));
+        if(source.getSubmissionDate()!=null && !source.getSubmissionDate().isEmpty()){
+            submission.setSubmissionDate(java.sql.Date.valueOf(LocalDate.parse(source.getSubmissionDate())));
+        }
         SubmissionEnvelope submissionEnvelope = new SubmissionEnvelope(submission);
         submissionEnvelope.getSubmission().setTeam(team);
         submissionEnvelope.getProjects().add(project);
-        submissionEnvelope.getStudies().add(usiStudy);
-        submissionEnvelope.setProtocols(protocols);
-        submissionEnvelope.setSamples(samples);
+        submissionEnvelope.setStudies(usiStudies);
+        submissionEnvelope.setProtocols(usiProtocols);
+        submissionEnvelope.setSamples(usiSamples);
         submissionEnvelope.setAssays(usiAssays);
-        submissionEnvelope.setAssayData(assayDataList);
-        submissionEnvelope.getAnalyses().add(usiAnalysis);
+        submissionEnvelope.setAssayData(usiAssayDataList);
+        submissionEnvelope.setAnalyses(usiAnalysis);
 
 
         return submissionEnvelope;
     }
 
 
-    private uk.ac.ebi.subs.data.submittable.Study addStudyMetadata(uk.ac.ebi.subs.data.submittable.Study usiStudy, Team team, Project project) {
+    private uk.ac.ebi.subs.data.submittable.Study addStudyMetadata(Study usiStudy, Team team, Project project, List<Protocol> protocols) {
         usiStudy.setStudyType(StudyDataType.Metabolomics);
-        usiStudy.setAlias("");
         usiStudy.setTeam(team);
         usiStudy.setProjectRef((ProjectRef) project.asRef());
+        List<ProtocolRef> protocolRefs = new ArrayList<>();
+        for(Protocol protocol : protocols){
+           protocolRefs.add((ProtocolRef)protocol.asRef());
+        }
+        usiStudy.setProtocolRefs(protocolRefs);
         return usiStudy;
     }
-
-
-    private List<Contact> convertContacts(List<uk.ac.ebi.subs.metabolights.model.Contact> studyContacts) {
-        List<Contact> usiContacts = new ArrayList<>();
-        for (uk.ac.ebi.subs.metabolights.model.Contact studyContact : studyContacts) {
-            uk.ac.ebi.subs.data.component.Contact usiContact = toUsiContacts.convert(studyContact);
-            usiContacts.add(usiContact);
-        }
-        return usiContacts;
-    }
-
-
-    private List<uk.ac.ebi.subs.data.component.Publication> convertPublications(List<uk.ac.ebi.subs.metabolights.model.Publication> publications) {
-        List<uk.ac.ebi.subs.data.component.Publication> usiPublications = new ArrayList<>();
-        for (uk.ac.ebi.subs.metabolights.model.Publication publication : publications) {
-            uk.ac.ebi.subs.data.component.Publication usiPublication = toUSIPublication.convert(publication);
-            usiPublications.add(usiPublication);
-        }
-        return usiPublications;
-    }
-
 
     private List<Protocol> convertProtocols(List<uk.ac.ebi.subs.metabolights.model.Protocol> mlStudyProtocols, Team team) {
         List<Protocol> usiProtocols = new ArrayList<>();
