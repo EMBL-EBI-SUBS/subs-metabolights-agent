@@ -7,6 +7,7 @@ import uk.ac.ebi.subs.metabolights.model.Project;
 import uk.ac.ebi.subs.metabolights.model.Study;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +18,7 @@ public class MLProjectToUSIProject implements Converter<Project, uk.ac.ebi.subs.
 
     MLContactsToUSIContacts toUsiContacts = new MLContactsToUSIContacts();
     MLPublicationToUSIPublication toUSIPublication = new MLPublicationToUSIPublication();
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     @Override
     public uk.ac.ebi.subs.data.submittable.Project convert(Project source) {
@@ -30,7 +32,7 @@ public class MLProjectToUSIProject implements Converter<Project, uk.ac.ebi.subs.
         project.setTitle(source.getTitle());
         project.setDescription(source.getDescription());
         if(source.getPublicReleaseDate()!=null && !source.getPublicReleaseDate().isEmpty()){
-            project.setReleaseDate(LocalDate.parse(source.getPublicReleaseDate()));
+            project.setReleaseDate(LocalDate.parse(source.getPublicReleaseDate(), formatter));
         }
 
         project.setContacts(convertProjectAndStudyContacts(source));
