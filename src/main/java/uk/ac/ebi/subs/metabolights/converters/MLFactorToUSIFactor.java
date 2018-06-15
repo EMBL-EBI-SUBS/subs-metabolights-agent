@@ -10,9 +10,11 @@ public class MLFactorToUSIFactor implements Converter<Factor, Attribute> {
     public Attribute convert(Factor source) {
         Attribute attribute = new Attribute();
         if (source.getFactorType() != null) {
-            Term term = new Term();
-            term.setUrl(source.getFactorType().getTermAccession());
-            attribute.getTerms().add(term);
+            if(source.getFactorType().getTermAccession()!=null && !source.getFactorType().getTermAccession().isEmpty()) {
+                Term term = new Term();
+                term.setUrl(source.getFactorType().getTermAccession());
+                attribute.getTerms().add(term);
+            }
             attribute.setValue(source.getFactorType().getAnnotationValue());
         }
         return attribute;

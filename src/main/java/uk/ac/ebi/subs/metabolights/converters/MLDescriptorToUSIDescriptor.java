@@ -12,9 +12,11 @@ public class MLDescriptorToUSIDescriptor implements Converter<OntologyModel, Att
     public Attribute convert(OntologyModel source) {
         Attribute attribute = new Attribute();
         attribute.setValue(source.getAnnotationValue());
-        Term term = new Term();
-        term.setUrl(source.getTermAccession());
-        attribute.setTerms(Arrays.asList(term));
+        if(source.getTermAccession()!=null && !source.getTermAccession().isEmpty()){
+            Term term = new Term();
+            term.setUrl(source.getTermAccession());
+            attribute.setTerms(Arrays.asList(term));
+        }
         return attribute;
     }
 }
