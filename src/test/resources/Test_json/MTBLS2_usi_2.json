@@ -1,0 +1,2313 @@
+{
+  "submission": {
+    "id": null,
+    "submitter": {
+      "email": null
+    },
+    "team": {
+      "name": "ML_test_team"
+    },
+    "submissionDate": null
+  },
+  "supportingSamplesRequired": [],
+  "supportingSamples": [],
+  "analyses": [
+    {
+      "id": null,
+      "accession": null,
+      "alias": null,
+      "team": {
+        "name": "ML_test_team"
+      },
+      "title": null,
+      "description": null,
+      "attributes": {},
+      "analysisRefs": [],
+      "assayDataRefs": [
+        {
+          "alias": "MSpos-Ex1-Col0-48h-Ag-1_1-A,1_01_9818.mzData",
+          "accession": null,
+          "team": "ML_test_team"
+        },
+        {
+          "alias": "MSpos-Ex1-Col0-48h-Ag-2_1-A,1_01_9820.mzData",
+          "accession": null,
+          "team": "ML_test_team"
+        },
+        {
+          "alias": "MSpos-Ex1-Col0-48h-Ag-3_1-A,1_01_9822.mzData",
+          "accession": null,
+          "team": "ML_test_team"
+        },
+        {
+          "alias": "MSpos-Ex1-Col0-48h-Ag-4_1-A,1_01_9824.mzData",
+          "accession": null,
+          "team": "ML_test_team"
+        },
+        {
+          "alias": "MSpos-Ex1-cyp79-48h-Ag-1_1-B,1_01_9819.mzData",
+          "accession": null,
+          "team": "ML_test_team"
+        },
+        {
+          "alias": "MSpos-Ex1-cyp79-48h-Ag-2_1-B,2_01_9821.mzData",
+          "accession": null,
+          "team": "ML_test_team"
+        },
+        {
+          "alias": "MSpos-Ex1-cyp79-48h-Ag-3_1-B,1_01_9823.mzData",
+          "accession": null,
+          "team": "ML_test_team"
+        },
+        {
+          "alias": "MSpos-Ex1-cyp79-48h-Ag-4_1-B,2_01_9825.mzData",
+          "accession": null,
+          "team": "ML_test_team"
+        },
+        {
+          "alias": "MSpos-Ex2-Col0-48h-Ag-1_1-A,2_01_9827.mzData",
+          "accession": null,
+          "team": "ML_test_team"
+        },
+        {
+          "alias": "MSpos-Ex2-Col0-48h-Ag-2_1-A,3_01_9829.mzData",
+          "accession": null,
+          "team": "ML_test_team"
+        },
+        {
+          "alias": "MSpos-Ex2-Col0-48h-Ag-3_1-A,4_01_9831.mzData",
+          "accession": null,
+          "team": "ML_test_team"
+        },
+        {
+          "alias": "MSpos-Ex2-Col0-48h-Ag-4_1-A,2_01_9833.mzData",
+          "accession": null,
+          "team": "ML_test_team"
+        },
+        {
+          "alias": "MSpos-Ex2-cyp79-48h-Ag-1_1-B,3_01_9828.mzData",
+          "accession": null,
+          "team": "ML_test_team"
+        },
+        {
+          "alias": "MSpos-Ex2-cyp79-48h-Ag-2_1-B,4_01_9830.mzData",
+          "accession": null,
+          "team": "ML_test_team"
+        },
+        {
+          "alias": "MSpos-Ex2-cyp79-48h-Ag-3_1-B,3_01_9832.mzData",
+          "accession": null,
+          "team": "ML_test_team"
+        },
+        {
+          "alias": "MSpos-Ex2-cyp79-48h-Ag-4_1-B,4_01_9834.mzData",
+          "accession": null,
+          "team": "ML_test_team"
+        },
+        {
+          "alias": "m_mtbl2_metabolite profiling_mass spectrometry_v2_maf.tsv",
+          "accession": null,
+          "team": "ML_test_team"
+        }
+      ],
+      "studyRefs": [
+        {
+          "alias": "MTBLS2",
+          "accession": "MTBLS2",
+          "team": "ML_test_team"
+        }
+      ],
+      "sampleRefs": [
+        {
+          "alias": "Ex1-Col0-48h-Ag-1",
+          "accession": null,
+          "team": "ML_test_team"
+        },
+        {
+          "alias": "Ex1-Col0-48h-Ag-2",
+          "accession": null,
+          "team": "ML_test_team"
+        },
+        {
+          "alias": "Ex1-Col0-48h-Ag-3",
+          "accession": null,
+          "team": "ML_test_team"
+        },
+        {
+          "alias": "Ex1-Col0-48h-Ag-4",
+          "accession": null,
+          "team": "ML_test_team"
+        },
+        {
+          "alias": "Ex1-cyp79-48h-Ag-1",
+          "accession": null,
+          "team": "ML_test_team"
+        },
+        {
+          "alias": "Ex1-cyp79-48h-Ag-2",
+          "accession": null,
+          "team": "ML_test_team"
+        },
+        {
+          "alias": "Ex1-cyp79-48h-Ag-3",
+          "accession": null,
+          "team": "ML_test_team"
+        },
+        {
+          "alias": "Ex1-cyp79-48h-Ag-4",
+          "accession": null,
+          "team": "ML_test_team"
+        },
+        {
+          "alias": "Ex2-Col0-48h-Ag-1",
+          "accession": null,
+          "team": "ML_test_team"
+        },
+        {
+          "alias": "Ex2-Col0-48h-Ag-2",
+          "accession": null,
+          "team": "ML_test_team"
+        },
+        {
+          "alias": "Ex2-Col0-48h-Ag-3",
+          "accession": null,
+          "team": "ML_test_team"
+        },
+        {
+          "alias": "Ex2-Col0-48h-Ag-4",
+          "accession": null,
+          "team": "ML_test_team"
+        },
+        {
+          "alias": "Ex2-cyp79-48h-Ag-1",
+          "accession": null,
+          "team": "ML_test_team"
+        },
+        {
+          "alias": "Ex2-cyp79-48h-Ag-2",
+          "accession": null,
+          "team": "ML_test_team"
+        },
+        {
+          "alias": "Ex2-cyp79-48h-Ag-3",
+          "accession": null,
+          "team": "ML_test_team"
+        },
+        {
+          "alias": "Ex2-cyp79-48h-Ag-4",
+          "accession": null,
+          "team": "ML_test_team"
+        }
+      ],
+      "assayRefs": [
+        {
+          "alias": "a_mtbl2_metabolite profiling_mass spectrometry.txt",
+          "accession": null,
+          "team": "ML_test_team"
+        }
+      ],
+      "protocolUses": [
+        {
+          "protocolRef": {
+            "alias": "Sample collection",
+            "accession": null,
+            "team": "ML_test_team"
+          },
+          "attributes": {}
+        },
+        {
+          "protocolRef": {
+            "alias": "Metabolite identification",
+            "accession": null,
+            "team": "ML_test_team"
+          },
+          "attributes": {}
+        },
+        {
+          "protocolRef": {
+            "alias": "Extraction",
+            "accession": null,
+            "team": "ML_test_team"
+          },
+          "attributes": {}
+        },
+        {
+          "protocolRef": {
+            "alias": "Mass spectrometry",
+            "accession": null,
+            "team": "ML_test_team"
+          },
+          "attributes": {}
+        },
+        {
+          "protocolRef": {
+            "alias": "Chromatography",
+            "accession": null,
+            "team": "ML_test_team"
+          },
+          "attributes": {}
+        },
+        {
+          "protocolRef": {
+            "alias": "Data transformation",
+            "accession": null,
+            "team": "ML_test_team"
+          },
+          "attributes": {}
+        }
+      ],
+      "files": []
+    }
+  ],
+  "assays": [
+    {
+      "id": null,
+      "accession": null,
+      "alias": "a_mtbl2_metabolite profiling_mass spectrometry.txt",
+      "team": {
+        "name": "ML_test_team"
+      },
+      "title": null,
+      "description": null,
+      "attributes": {
+        "technologyType": [
+          {
+            "value": "mass spectrometry",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://purl.obolibrary.org/obo/OBI_0001478"
+              }
+            ]
+          }
+        ],
+        "measurementType": [
+          {
+            "value": "metabolite profiling",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://purl.obolibrary.org/obo/OBI_0000366"
+              }
+            ]
+          }
+        ],
+        "technologyPlatform": [
+          {
+            "value": "micrOTOF-Q II ESI TOF (Bruker)",
+            "units": null,
+            "terms": []
+          }
+        ]
+      },
+      "studyRef": {
+        "alias": "MTBLS2",
+        "accession": "MTBLS2",
+        "team": "ML_test_team"
+      },
+      "sampleUses": [
+        {
+          "sampleRef": {
+            "alias": "Ex1-Col0-48h-Ag-1",
+            "accession": null,
+            "team": "ML_test_team"
+          },
+          "attributes": {}
+        },
+        {
+          "sampleRef": {
+            "alias": "Ex1-Col0-48h-Ag-2",
+            "accession": null,
+            "team": "ML_test_team"
+          },
+          "attributes": {}
+        },
+        {
+          "sampleRef": {
+            "alias": "Ex1-Col0-48h-Ag-3",
+            "accession": null,
+            "team": "ML_test_team"
+          },
+          "attributes": {}
+        },
+        {
+          "sampleRef": {
+            "alias": "Ex1-Col0-48h-Ag-4",
+            "accession": null,
+            "team": "ML_test_team"
+          },
+          "attributes": {}
+        },
+        {
+          "sampleRef": {
+            "alias": "Ex1-cyp79-48h-Ag-1",
+            "accession": null,
+            "team": "ML_test_team"
+          },
+          "attributes": {}
+        },
+        {
+          "sampleRef": {
+            "alias": "Ex1-cyp79-48h-Ag-2",
+            "accession": null,
+            "team": "ML_test_team"
+          },
+          "attributes": {}
+        },
+        {
+          "sampleRef": {
+            "alias": "Ex1-cyp79-48h-Ag-3",
+            "accession": null,
+            "team": "ML_test_team"
+          },
+          "attributes": {}
+        },
+        {
+          "sampleRef": {
+            "alias": "Ex1-cyp79-48h-Ag-4",
+            "accession": null,
+            "team": "ML_test_team"
+          },
+          "attributes": {}
+        },
+        {
+          "sampleRef": {
+            "alias": "Ex2-Col0-48h-Ag-1",
+            "accession": null,
+            "team": "ML_test_team"
+          },
+          "attributes": {}
+        },
+        {
+          "sampleRef": {
+            "alias": "Ex2-Col0-48h-Ag-2",
+            "accession": null,
+            "team": "ML_test_team"
+          },
+          "attributes": {}
+        },
+        {
+          "sampleRef": {
+            "alias": "Ex2-Col0-48h-Ag-3",
+            "accession": null,
+            "team": "ML_test_team"
+          },
+          "attributes": {}
+        },
+        {
+          "sampleRef": {
+            "alias": "Ex2-Col0-48h-Ag-4",
+            "accession": null,
+            "team": "ML_test_team"
+          },
+          "attributes": {}
+        },
+        {
+          "sampleRef": {
+            "alias": "Ex2-cyp79-48h-Ag-1",
+            "accession": null,
+            "team": "ML_test_team"
+          },
+          "attributes": {}
+        },
+        {
+          "sampleRef": {
+            "alias": "Ex2-cyp79-48h-Ag-2",
+            "accession": null,
+            "team": "ML_test_team"
+          },
+          "attributes": {}
+        },
+        {
+          "sampleRef": {
+            "alias": "Ex2-cyp79-48h-Ag-3",
+            "accession": null,
+            "team": "ML_test_team"
+          },
+          "attributes": {}
+        },
+        {
+          "sampleRef": {
+            "alias": "Ex2-cyp79-48h-Ag-4",
+            "accession": null,
+            "team": "ML_test_team"
+          },
+          "attributes": {}
+        }
+      ],
+      "protocolUses": [
+        {
+          "protocolRef": {
+            "alias": "Sample collection",
+            "accession": null,
+            "team": "ML_test_team"
+          },
+          "attributes": {}
+        },
+        {
+          "protocolRef": {
+            "alias": "Metabolite identification",
+            "accession": null,
+            "team": "ML_test_team"
+          },
+          "attributes": {}
+        },
+        {
+          "protocolRef": {
+            "alias": "Extraction",
+            "accession": null,
+            "team": "ML_test_team"
+          },
+          "attributes": {}
+        },
+        {
+          "protocolRef": {
+            "alias": "Mass spectrometry",
+            "accession": null,
+            "team": "ML_test_team"
+          },
+          "attributes": {}
+        },
+        {
+          "protocolRef": {
+            "alias": "Chromatography",
+            "accession": null,
+            "team": "ML_test_team"
+          },
+          "attributes": {}
+        },
+        {
+          "protocolRef": {
+            "alias": "Data transformation",
+            "accession": null,
+            "team": "ML_test_team"
+          },
+          "attributes": {}
+        }
+      ]
+    }
+  ],
+  "assayData": [
+    {
+      "id": null,
+      "accession": null,
+      "alias": "MSpos-Ex1-Col0-48h-Ag-1_1-A,1_01_9818.mzData",
+      "team": {
+        "name": "ML_test_team"
+      },
+      "title": null,
+      "description": null,
+      "attributes": {},
+      "assayRefs": [
+        {
+          "alias": "a_mtbl2_metabolite profiling_mass spectrometry.txt",
+          "accession": null,
+          "team": "ML_test_team"
+        }
+      ],
+      "files": [
+        {
+          "name": "MSpos-Ex1-Col0-48h-Ag-1_1-A,1_01_9818.mzData",
+          "checksum": null,
+          "checksumMethod": null,
+          "type": "Raw Spectral Data File",
+          "unencryptedChecksum": null,
+          "label": null
+        }
+      ]
+    },
+    {
+      "id": null,
+      "accession": null,
+      "alias": "MSpos-Ex1-Col0-48h-Ag-2_1-A,1_01_9820.mzData",
+      "team": {
+        "name": "ML_test_team"
+      },
+      "title": null,
+      "description": null,
+      "attributes": {},
+      "assayRefs": [
+        {
+          "alias": "a_mtbl2_metabolite profiling_mass spectrometry.txt",
+          "accession": null,
+          "team": "ML_test_team"
+        }
+      ],
+      "files": [
+        {
+          "name": "MSpos-Ex1-Col0-48h-Ag-2_1-A,1_01_9820.mzData",
+          "checksum": null,
+          "checksumMethod": null,
+          "type": "Raw Spectral Data File",
+          "unencryptedChecksum": null,
+          "label": null
+        }
+      ]
+    },
+    {
+      "id": null,
+      "accession": null,
+      "alias": "MSpos-Ex1-Col0-48h-Ag-3_1-A,1_01_9822.mzData",
+      "team": {
+        "name": "ML_test_team"
+      },
+      "title": null,
+      "description": null,
+      "attributes": {},
+      "assayRefs": [
+        {
+          "alias": "a_mtbl2_metabolite profiling_mass spectrometry.txt",
+          "accession": null,
+          "team": "ML_test_team"
+        }
+      ],
+      "files": [
+        {
+          "name": "MSpos-Ex1-Col0-48h-Ag-3_1-A,1_01_9822.mzData",
+          "checksum": null,
+          "checksumMethod": null,
+          "type": "Raw Spectral Data File",
+          "unencryptedChecksum": null,
+          "label": null
+        }
+      ]
+    },
+    {
+      "id": null,
+      "accession": null,
+      "alias": "MSpos-Ex1-Col0-48h-Ag-4_1-A,1_01_9824.mzData",
+      "team": {
+        "name": "ML_test_team"
+      },
+      "title": null,
+      "description": null,
+      "attributes": {},
+      "assayRefs": [
+        {
+          "alias": "a_mtbl2_metabolite profiling_mass spectrometry.txt",
+          "accession": null,
+          "team": "ML_test_team"
+        }
+      ],
+      "files": [
+        {
+          "name": "MSpos-Ex1-Col0-48h-Ag-4_1-A,1_01_9824.mzData",
+          "checksum": null,
+          "checksumMethod": null,
+          "type": "Raw Spectral Data File",
+          "unencryptedChecksum": null,
+          "label": null
+        }
+      ]
+    },
+    {
+      "id": null,
+      "accession": null,
+      "alias": "MSpos-Ex1-cyp79-48h-Ag-1_1-B,1_01_9819.mzData",
+      "team": {
+        "name": "ML_test_team"
+      },
+      "title": null,
+      "description": null,
+      "attributes": {},
+      "assayRefs": [
+        {
+          "alias": "a_mtbl2_metabolite profiling_mass spectrometry.txt",
+          "accession": null,
+          "team": "ML_test_team"
+        }
+      ],
+      "files": [
+        {
+          "name": "MSpos-Ex1-cyp79-48h-Ag-1_1-B,1_01_9819.mzData",
+          "checksum": null,
+          "checksumMethod": null,
+          "type": "Raw Spectral Data File",
+          "unencryptedChecksum": null,
+          "label": null
+        }
+      ]
+    },
+    {
+      "id": null,
+      "accession": null,
+      "alias": "MSpos-Ex1-cyp79-48h-Ag-2_1-B,2_01_9821.mzData",
+      "team": {
+        "name": "ML_test_team"
+      },
+      "title": null,
+      "description": null,
+      "attributes": {},
+      "assayRefs": [
+        {
+          "alias": "a_mtbl2_metabolite profiling_mass spectrometry.txt",
+          "accession": null,
+          "team": "ML_test_team"
+        }
+      ],
+      "files": [
+        {
+          "name": "MSpos-Ex1-cyp79-48h-Ag-2_1-B,2_01_9821.mzData",
+          "checksum": null,
+          "checksumMethod": null,
+          "type": "Raw Spectral Data File",
+          "unencryptedChecksum": null,
+          "label": null
+        }
+      ]
+    },
+    {
+      "id": null,
+      "accession": null,
+      "alias": "MSpos-Ex1-cyp79-48h-Ag-3_1-B,1_01_9823.mzData",
+      "team": {
+        "name": "ML_test_team"
+      },
+      "title": null,
+      "description": null,
+      "attributes": {},
+      "assayRefs": [
+        {
+          "alias": "a_mtbl2_metabolite profiling_mass spectrometry.txt",
+          "accession": null,
+          "team": "ML_test_team"
+        }
+      ],
+      "files": [
+        {
+          "name": "MSpos-Ex1-cyp79-48h-Ag-3_1-B,1_01_9823.mzData",
+          "checksum": null,
+          "checksumMethod": null,
+          "type": "Raw Spectral Data File",
+          "unencryptedChecksum": null,
+          "label": null
+        }
+      ]
+    },
+    {
+      "id": null,
+      "accession": null,
+      "alias": "MSpos-Ex1-cyp79-48h-Ag-4_1-B,2_01_9825.mzData",
+      "team": {
+        "name": "ML_test_team"
+      },
+      "title": null,
+      "description": null,
+      "attributes": {},
+      "assayRefs": [
+        {
+          "alias": "a_mtbl2_metabolite profiling_mass spectrometry.txt",
+          "accession": null,
+          "team": "ML_test_team"
+        }
+      ],
+      "files": [
+        {
+          "name": "MSpos-Ex1-cyp79-48h-Ag-4_1-B,2_01_9825.mzData",
+          "checksum": null,
+          "checksumMethod": null,
+          "type": "Raw Spectral Data File",
+          "unencryptedChecksum": null,
+          "label": null
+        }
+      ]
+    },
+    {
+      "id": null,
+      "accession": null,
+      "alias": "MSpos-Ex2-Col0-48h-Ag-1_1-A,2_01_9827.mzData",
+      "team": {
+        "name": "ML_test_team"
+      },
+      "title": null,
+      "description": null,
+      "attributes": {},
+      "assayRefs": [
+        {
+          "alias": "a_mtbl2_metabolite profiling_mass spectrometry.txt",
+          "accession": null,
+          "team": "ML_test_team"
+        }
+      ],
+      "files": [
+        {
+          "name": "MSpos-Ex2-Col0-48h-Ag-1_1-A,2_01_9827.mzData",
+          "checksum": null,
+          "checksumMethod": null,
+          "type": "Raw Spectral Data File",
+          "unencryptedChecksum": null,
+          "label": null
+        }
+      ]
+    },
+    {
+      "id": null,
+      "accession": null,
+      "alias": "MSpos-Ex2-Col0-48h-Ag-2_1-A,3_01_9829.mzData",
+      "team": {
+        "name": "ML_test_team"
+      },
+      "title": null,
+      "description": null,
+      "attributes": {},
+      "assayRefs": [
+        {
+          "alias": "a_mtbl2_metabolite profiling_mass spectrometry.txt",
+          "accession": null,
+          "team": "ML_test_team"
+        }
+      ],
+      "files": [
+        {
+          "name": "MSpos-Ex2-Col0-48h-Ag-2_1-A,3_01_9829.mzData",
+          "checksum": null,
+          "checksumMethod": null,
+          "type": "Raw Spectral Data File",
+          "unencryptedChecksum": null,
+          "label": null
+        }
+      ]
+    },
+    {
+      "id": null,
+      "accession": null,
+      "alias": "MSpos-Ex2-Col0-48h-Ag-3_1-A,4_01_9831.mzData",
+      "team": {
+        "name": "ML_test_team"
+      },
+      "title": null,
+      "description": null,
+      "attributes": {},
+      "assayRefs": [
+        {
+          "alias": "a_mtbl2_metabolite profiling_mass spectrometry.txt",
+          "accession": null,
+          "team": "ML_test_team"
+        }
+      ],
+      "files": [
+        {
+          "name": "MSpos-Ex2-Col0-48h-Ag-3_1-A,4_01_9831.mzData",
+          "checksum": null,
+          "checksumMethod": null,
+          "type": "Raw Spectral Data File",
+          "unencryptedChecksum": null,
+          "label": null
+        }
+      ]
+    },
+    {
+      "id": null,
+      "accession": null,
+      "alias": "MSpos-Ex2-Col0-48h-Ag-4_1-A,2_01_9833.mzData",
+      "team": {
+        "name": "ML_test_team"
+      },
+      "title": null,
+      "description": null,
+      "attributes": {},
+      "assayRefs": [
+        {
+          "alias": "a_mtbl2_metabolite profiling_mass spectrometry.txt",
+          "accession": null,
+          "team": "ML_test_team"
+        }
+      ],
+      "files": [
+        {
+          "name": "MSpos-Ex2-Col0-48h-Ag-4_1-A,2_01_9833.mzData",
+          "checksum": null,
+          "checksumMethod": null,
+          "type": "Raw Spectral Data File",
+          "unencryptedChecksum": null,
+          "label": null
+        }
+      ]
+    },
+    {
+      "id": null,
+      "accession": null,
+      "alias": "MSpos-Ex2-cyp79-48h-Ag-1_1-B,3_01_9828.mzData",
+      "team": {
+        "name": "ML_test_team"
+      },
+      "title": null,
+      "description": null,
+      "attributes": {},
+      "assayRefs": [
+        {
+          "alias": "a_mtbl2_metabolite profiling_mass spectrometry.txt",
+          "accession": null,
+          "team": "ML_test_team"
+        }
+      ],
+      "files": [
+        {
+          "name": "MSpos-Ex2-cyp79-48h-Ag-1_1-B,3_01_9828.mzData",
+          "checksum": null,
+          "checksumMethod": null,
+          "type": "Raw Spectral Data File",
+          "unencryptedChecksum": null,
+          "label": null
+        }
+      ]
+    },
+    {
+      "id": null,
+      "accession": null,
+      "alias": "MSpos-Ex2-cyp79-48h-Ag-2_1-B,4_01_9830.mzData",
+      "team": {
+        "name": "ML_test_team"
+      },
+      "title": null,
+      "description": null,
+      "attributes": {},
+      "assayRefs": [
+        {
+          "alias": "a_mtbl2_metabolite profiling_mass spectrometry.txt",
+          "accession": null,
+          "team": "ML_test_team"
+        }
+      ],
+      "files": [
+        {
+          "name": "MSpos-Ex2-cyp79-48h-Ag-2_1-B,4_01_9830.mzData",
+          "checksum": null,
+          "checksumMethod": null,
+          "type": "Raw Spectral Data File",
+          "unencryptedChecksum": null,
+          "label": null
+        }
+      ]
+    },
+    {
+      "id": null,
+      "accession": null,
+      "alias": "MSpos-Ex2-cyp79-48h-Ag-3_1-B,3_01_9832.mzData",
+      "team": {
+        "name": "ML_test_team"
+      },
+      "title": null,
+      "description": null,
+      "attributes": {},
+      "assayRefs": [
+        {
+          "alias": "a_mtbl2_metabolite profiling_mass spectrometry.txt",
+          "accession": null,
+          "team": "ML_test_team"
+        }
+      ],
+      "files": [
+        {
+          "name": "MSpos-Ex2-cyp79-48h-Ag-3_1-B,3_01_9832.mzData",
+          "checksum": null,
+          "checksumMethod": null,
+          "type": "Raw Spectral Data File",
+          "unencryptedChecksum": null,
+          "label": null
+        }
+      ]
+    },
+    {
+      "id": null,
+      "accession": null,
+      "alias": "MSpos-Ex2-cyp79-48h-Ag-4_1-B,4_01_9834.mzData",
+      "team": {
+        "name": "ML_test_team"
+      },
+      "title": null,
+      "description": null,
+      "attributes": {},
+      "assayRefs": [
+        {
+          "alias": "a_mtbl2_metabolite profiling_mass spectrometry.txt",
+          "accession": null,
+          "team": "ML_test_team"
+        }
+      ],
+      "files": [
+        {
+          "name": "MSpos-Ex2-cyp79-48h-Ag-4_1-B,4_01_9834.mzData",
+          "checksum": null,
+          "checksumMethod": null,
+          "type": "Raw Spectral Data File",
+          "unencryptedChecksum": null,
+          "label": null
+        }
+      ]
+    },
+    {
+      "id": null,
+      "accession": null,
+      "alias": "m_mtbl2_metabolite profiling_mass spectrometry_v2_maf.tsv",
+      "team": {
+        "name": "ML_test_team"
+      },
+      "title": null,
+      "description": null,
+      "attributes": {},
+      "assayRefs": [
+        {
+          "alias": "a_mtbl2_metabolite profiling_mass spectrometry.txt",
+          "accession": null,
+          "team": "ML_test_team"
+        }
+      ],
+      "files": [
+        {
+          "name": "m_mtbl2_metabolite profiling_mass spectrometry_v2_maf.tsv",
+          "checksum": null,
+          "checksumMethod": null,
+          "type": "Metabolite Assignment File",
+          "unencryptedChecksum": null,
+          "label": null
+        }
+      ]
+    }
+  ],
+  "egaDacs": [],
+  "egaDacPolicies": [],
+  "egaDatasets": [],
+  "projects": [
+    {
+      "id": null,
+      "accession": "MTBLS2",
+      "alias": null,
+      "team": {
+        "name": "ML_test_team"
+      },
+      "title": "Investigation",
+      "description": "",
+      "attributes": {},
+      "contacts": [
+        {
+          "orcid": null,
+          "firstName": "Christoph",
+          "middleInitials": "",
+          "lastName": "Böttcher",
+          "email": "boettch@ipb-halle.de",
+          "roles": [
+            "investigator"
+          ],
+          "address": "Weinberg 3 06120 Halle Germany",
+          "affiliation": "IPB Halle",
+          "phone": null,
+          "fax": "+49 345 5582 1409"
+        },
+        {
+          "orcid": null,
+          "firstName": "Steffen",
+          "middleInitials": "R",
+          "lastName": "Neumann",
+          "email": "sneumann@ipb-halle.de",
+          "roles": [
+            "Bioinformatician"
+          ],
+          "address": "Weinberg 3 06120 Halle Germany",
+          "affiliation": "IPB Halle",
+          "phone": null,
+          "fax": "+49 345 5582 1409"
+        }
+      ],
+      "publications": [
+        {
+          "pubmedId": "19567706",
+          "doi": "http://dx.doi.org/10.1105/tpc.109.066670",
+          "articleTitle": "The multifunctional enzyme CYP71B15 (PHYTOALEXIN DEFICIENT3) converts cysteine-indole-3-acetonitrile to camalexin in the indole-3-acetonitrile metabolic network of Arabidopsis thaliana.",
+          "journalTitle": null,
+          "authors": "Bottcher C,Westphal L,Schmotz C,Prade E,Scheel D,Glawischnig E",
+          "journalIssn": null,
+          "issue": null,
+          "year": null,
+          "volume": null,
+          "pageInfo": null,
+          "status": "Published"
+        },
+        {
+          "pubmedId": "",
+          "doi": "http://dx.doi.org/10.1007/s11306-012-0401-0",
+          "articleTitle": "Nearline acquisition and processing of liquid chromatography-tandem mass spectrometry data",
+          "journalTitle": null,
+          "authors": "Steffen Neumann, Andrea Thum and Christoph Böttcher",
+          "journalIssn": null,
+          "issue": null,
+          "year": null,
+          "volume": null,
+          "pageInfo": null,
+          "status": "Published"
+        }
+      ],
+      "releaseDate": null
+    }
+  ],
+  "samples": [
+    {
+      "id": null,
+      "accession": null,
+      "alias": "Ex1-Col0-48h-Ag-1",
+      "team": {
+        "name": "ML_test_team"
+      },
+      "title": "IPB Halle.Group-1.Subject-1",
+      "description": null,
+      "attributes": {
+        "replicate": [
+          {
+            "value": "Exp1",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://www.ebi.ac.uk/efo/EFO_0002090"
+              }
+            ]
+          }
+        ],
+        "Organism": [
+          {
+            "value": "Arabidopsis thaliana",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://purl.obolibrary.org/obo/NCBITaxon_3702"
+              }
+            ]
+          }
+        ],
+        "Organism part": [
+          {
+            "value": "rosette leaf",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://purl.obolibrary.org/obo/BTO_0003086"
+              }
+            ]
+          }
+        ],
+        "genotype": [
+          {
+            "value": "Col-0",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://www.ebi.ac.uk/efo/EFO_0000513"
+              }
+            ]
+          }
+        ]
+      },
+      "sampleRelationships": [],
+      "taxonId": 3702,
+      "taxon": "Arabidopsis thaliana",
+      "releaseDate": null
+    },
+    {
+      "id": null,
+      "accession": null,
+      "alias": "Ex1-Col0-48h-Ag-2",
+      "team": {
+        "name": "ML_test_team"
+      },
+      "title": "IPB Halle.Group-1.Subject-2",
+      "description": null,
+      "attributes": {
+        "replicate": [
+          {
+            "value": "Exp1",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://www.ebi.ac.uk/efo/EFO_0002090"
+              }
+            ]
+          }
+        ],
+        "Organism": [
+          {
+            "value": "Arabidopsis thaliana",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://purl.obolibrary.org/obo/NCBITaxon_3702"
+              }
+            ]
+          }
+        ],
+        "Organism part": [
+          {
+            "value": "rosette leaf",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://purl.obolibrary.org/obo/BTO_0003086"
+              }
+            ]
+          }
+        ],
+        "genotype": [
+          {
+            "value": "Col-0",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://www.ebi.ac.uk/efo/EFO_0000513"
+              }
+            ]
+          }
+        ]
+      },
+      "sampleRelationships": [],
+      "taxonId": 3702,
+      "taxon": "Arabidopsis thaliana",
+      "releaseDate": null
+    },
+    {
+      "id": null,
+      "accession": null,
+      "alias": "Ex1-Col0-48h-Ag-3",
+      "team": {
+        "name": "ML_test_team"
+      },
+      "title": "IPB Halle.Group-1.Subject-3",
+      "description": null,
+      "attributes": {
+        "replicate": [
+          {
+            "value": "Exp1",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://www.ebi.ac.uk/efo/EFO_0002090"
+              }
+            ]
+          }
+        ],
+        "Organism": [
+          {
+            "value": "Arabidopsis thaliana",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://purl.obolibrary.org/obo/NCBITaxon_3702"
+              }
+            ]
+          }
+        ],
+        "Organism part": [
+          {
+            "value": "rosette leaf",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://purl.obolibrary.org/obo/BTO_0003086"
+              }
+            ]
+          }
+        ],
+        "genotype": [
+          {
+            "value": "Col-0",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://www.ebi.ac.uk/efo/EFO_0000513"
+              }
+            ]
+          }
+        ]
+      },
+      "sampleRelationships": [],
+      "taxonId": 3702,
+      "taxon": "Arabidopsis thaliana",
+      "releaseDate": null
+    },
+    {
+      "id": null,
+      "accession": null,
+      "alias": "Ex1-Col0-48h-Ag-4",
+      "team": {
+        "name": "ML_test_team"
+      },
+      "title": "IPB Halle.Group-1.Subject-4",
+      "description": null,
+      "attributes": {
+        "replicate": [
+          {
+            "value": "Exp1",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://www.ebi.ac.uk/efo/EFO_0002090"
+              }
+            ]
+          }
+        ],
+        "Organism": [
+          {
+            "value": "Arabidopsis thaliana",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://purl.obolibrary.org/obo/NCBITaxon_3702"
+              }
+            ]
+          }
+        ],
+        "Organism part": [
+          {
+            "value": "rosette leaf",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://purl.obolibrary.org/obo/BTO_0003086"
+              }
+            ]
+          }
+        ],
+        "genotype": [
+          {
+            "value": "Col-0",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://www.ebi.ac.uk/efo/EFO_0000513"
+              }
+            ]
+          }
+        ]
+      },
+      "sampleRelationships": [],
+      "taxonId": 3702,
+      "taxon": "Arabidopsis thaliana",
+      "releaseDate": null
+    },
+    {
+      "id": null,
+      "accession": null,
+      "alias": "Ex1-cyp79-48h-Ag-1",
+      "team": {
+        "name": "ML_test_team"
+      },
+      "title": "IPB Halle.Group-2.Subject-1",
+      "description": null,
+      "attributes": {
+        "replicate": [
+          {
+            "value": "Exp1",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://www.ebi.ac.uk/efo/EFO_0002090"
+              }
+            ]
+          }
+        ],
+        "Organism": [
+          {
+            "value": "Arabidopsis thaliana",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://purl.obolibrary.org/obo/NCBITaxon_3702"
+              }
+            ]
+          }
+        ],
+        "Organism part": [
+          {
+            "value": "rosette leaf",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://purl.obolibrary.org/obo/BTO_0003086"
+              }
+            ]
+          }
+        ],
+        "genotype": [
+          {
+            "value": "cyp79",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://www.ebi.ac.uk/efo/EFO_0000513"
+              }
+            ]
+          }
+        ]
+      },
+      "sampleRelationships": [],
+      "taxonId": 3702,
+      "taxon": "Arabidopsis thaliana",
+      "releaseDate": null
+    },
+    {
+      "id": null,
+      "accession": null,
+      "alias": "Ex1-cyp79-48h-Ag-2",
+      "team": {
+        "name": "ML_test_team"
+      },
+      "title": "IPB Halle.Group-2.Subject-2",
+      "description": null,
+      "attributes": {
+        "replicate": [
+          {
+            "value": "Exp1",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://www.ebi.ac.uk/efo/EFO_0002090"
+              }
+            ]
+          }
+        ],
+        "Organism": [
+          {
+            "value": "Arabidopsis thaliana",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://purl.obolibrary.org/obo/NCBITaxon_3702"
+              }
+            ]
+          }
+        ],
+        "Organism part": [
+          {
+            "value": "rosette leaf",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://purl.obolibrary.org/obo/BTO_0003086"
+              }
+            ]
+          }
+        ],
+        "genotype": [
+          {
+            "value": "cyp79",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://www.ebi.ac.uk/efo/EFO_0000513"
+              }
+            ]
+          }
+        ]
+      },
+      "sampleRelationships": [],
+      "taxonId": 3702,
+      "taxon": "Arabidopsis thaliana",
+      "releaseDate": null
+    },
+    {
+      "id": null,
+      "accession": null,
+      "alias": "Ex1-cyp79-48h-Ag-3",
+      "team": {
+        "name": "ML_test_team"
+      },
+      "title": "IPB Halle.Group-2.Subject-3",
+      "description": null,
+      "attributes": {
+        "replicate": [
+          {
+            "value": "Exp1",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://www.ebi.ac.uk/efo/EFO_0002090"
+              }
+            ]
+          }
+        ],
+        "Organism": [
+          {
+            "value": "Arabidopsis thaliana",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://purl.obolibrary.org/obo/NCBITaxon_3702"
+              }
+            ]
+          }
+        ],
+        "Organism part": [
+          {
+            "value": "rosette leaf",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://purl.obolibrary.org/obo/BTO_0003086"
+              }
+            ]
+          }
+        ],
+        "genotype": [
+          {
+            "value": "cyp79",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://www.ebi.ac.uk/efo/EFO_0000513"
+              }
+            ]
+          }
+        ]
+      },
+      "sampleRelationships": [],
+      "taxonId": 3702,
+      "taxon": "Arabidopsis thaliana",
+      "releaseDate": null
+    },
+    {
+      "id": null,
+      "accession": null,
+      "alias": "Ex1-cyp79-48h-Ag-4",
+      "team": {
+        "name": "ML_test_team"
+      },
+      "title": "IPB Halle.Group-2.Subject-4",
+      "description": null,
+      "attributes": {
+        "replicate": [
+          {
+            "value": "Exp1",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://www.ebi.ac.uk/efo/EFO_0002090"
+              }
+            ]
+          }
+        ],
+        "Organism": [
+          {
+            "value": "Arabidopsis thaliana",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://purl.obolibrary.org/obo/NCBITaxon_3702"
+              }
+            ]
+          }
+        ],
+        "Organism part": [
+          {
+            "value": "rosette leaf",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://purl.obolibrary.org/obo/BTO_0003086"
+              }
+            ]
+          }
+        ],
+        "genotype": [
+          {
+            "value": "cyp79",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://www.ebi.ac.uk/efo/EFO_0000513"
+              }
+            ]
+          }
+        ]
+      },
+      "sampleRelationships": [],
+      "taxonId": 3702,
+      "taxon": "Arabidopsis thaliana",
+      "releaseDate": null
+    },
+    {
+      "id": null,
+      "accession": null,
+      "alias": "Ex2-Col0-48h-Ag-1",
+      "team": {
+        "name": "ML_test_team"
+      },
+      "title": "IPB Halle.Group-3.Subject-1",
+      "description": null,
+      "attributes": {
+        "replicate": [
+          {
+            "value": "Exp2",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://www.ebi.ac.uk/efo/EFO_0002090"
+              }
+            ]
+          }
+        ],
+        "Organism": [
+          {
+            "value": "Arabidopsis thaliana",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://purl.obolibrary.org/obo/NCBITaxon_3702"
+              }
+            ]
+          }
+        ],
+        "Organism part": [
+          {
+            "value": "rosette leaf",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://purl.obolibrary.org/obo/BTO_0003086"
+              }
+            ]
+          }
+        ],
+        "genotype": [
+          {
+            "value": "Col-0",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://www.ebi.ac.uk/efo/EFO_0000513"
+              }
+            ]
+          }
+        ]
+      },
+      "sampleRelationships": [],
+      "taxonId": 3702,
+      "taxon": "Arabidopsis thaliana",
+      "releaseDate": null
+    },
+    {
+      "id": null,
+      "accession": null,
+      "alias": "Ex2-Col0-48h-Ag-2",
+      "team": {
+        "name": "ML_test_team"
+      },
+      "title": "IPB Halle.Group-3.Subject-2",
+      "description": null,
+      "attributes": {
+        "replicate": [
+          {
+            "value": "Exp2",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://www.ebi.ac.uk/efo/EFO_0002090"
+              }
+            ]
+          }
+        ],
+        "Organism": [
+          {
+            "value": "Arabidopsis thaliana",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://purl.obolibrary.org/obo/NCBITaxon_3702"
+              }
+            ]
+          }
+        ],
+        "Organism part": [
+          {
+            "value": "rosette leaf",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://purl.obolibrary.org/obo/BTO_0003086"
+              }
+            ]
+          }
+        ],
+        "genotype": [
+          {
+            "value": "Col-0",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://www.ebi.ac.uk/efo/EFO_0000513"
+              }
+            ]
+          }
+        ]
+      },
+      "sampleRelationships": [],
+      "taxonId": 3702,
+      "taxon": "Arabidopsis thaliana",
+      "releaseDate": null
+    },
+    {
+      "id": null,
+      "accession": null,
+      "alias": "Ex2-Col0-48h-Ag-3",
+      "team": {
+        "name": "ML_test_team"
+      },
+      "title": "IPB Halle.Group-3.Subject-3",
+      "description": null,
+      "attributes": {
+        "replicate": [
+          {
+            "value": "Exp2",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://www.ebi.ac.uk/efo/EFO_0002090"
+              }
+            ]
+          }
+        ],
+        "Organism": [
+          {
+            "value": "Arabidopsis thaliana",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://purl.obolibrary.org/obo/NCBITaxon_3702"
+              }
+            ]
+          }
+        ],
+        "Organism part": [
+          {
+            "value": "rosette leaf",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://purl.obolibrary.org/obo/BTO_0003086"
+              }
+            ]
+          }
+        ],
+        "genotype": [
+          {
+            "value": "Col-0",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://www.ebi.ac.uk/efo/EFO_0000513"
+              }
+            ]
+          }
+        ]
+      },
+      "sampleRelationships": [],
+      "taxonId": 3702,
+      "taxon": "Arabidopsis thaliana",
+      "releaseDate": null
+    },
+    {
+      "id": null,
+      "accession": null,
+      "alias": "Ex2-Col0-48h-Ag-4",
+      "team": {
+        "name": "ML_test_team"
+      },
+      "title": "IPB Halle.Group-3.Subject-4",
+      "description": null,
+      "attributes": {
+        "replicate": [
+          {
+            "value": "Exp2",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://www.ebi.ac.uk/efo/EFO_0002090"
+              }
+            ]
+          }
+        ],
+        "Organism": [
+          {
+            "value": "Arabidopsis thaliana",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://purl.obolibrary.org/obo/NCBITaxon_3702"
+              }
+            ]
+          }
+        ],
+        "Organism part": [
+          {
+            "value": "rosette leaf",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://purl.obolibrary.org/obo/BTO_0003086"
+              }
+            ]
+          }
+        ],
+        "genotype": [
+          {
+            "value": "Col-0",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://www.ebi.ac.uk/efo/EFO_0000513"
+              }
+            ]
+          }
+        ]
+      },
+      "sampleRelationships": [],
+      "taxonId": 3702,
+      "taxon": "Arabidopsis thaliana",
+      "releaseDate": null
+    },
+    {
+      "id": null,
+      "accession": null,
+      "alias": "Ex2-cyp79-48h-Ag-1",
+      "team": {
+        "name": "ML_test_team"
+      },
+      "title": "IPB Halle.Group-4.Subject-1",
+      "description": null,
+      "attributes": {
+        "replicate": [
+          {
+            "value": "Exp2",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://www.ebi.ac.uk/efo/EFO_0002090"
+              }
+            ]
+          }
+        ],
+        "Organism": [
+          {
+            "value": "Arabidopsis thaliana",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://purl.obolibrary.org/obo/NCBITaxon_3702"
+              }
+            ]
+          }
+        ],
+        "Organism part": [
+          {
+            "value": "rosette leaf",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://purl.obolibrary.org/obo/BTO_0003086"
+              }
+            ]
+          }
+        ],
+        "genotype": [
+          {
+            "value": "cyp79",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://www.ebi.ac.uk/efo/EFO_0000513"
+              }
+            ]
+          }
+        ]
+      },
+      "sampleRelationships": [],
+      "taxonId": 3702,
+      "taxon": "Arabidopsis thaliana",
+      "releaseDate": null
+    },
+    {
+      "id": null,
+      "accession": null,
+      "alias": "Ex2-cyp79-48h-Ag-2",
+      "team": {
+        "name": "ML_test_team"
+      },
+      "title": "IPB Halle.Group-4.Subject-2",
+      "description": null,
+      "attributes": {
+        "replicate": [
+          {
+            "value": "Exp2",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://www.ebi.ac.uk/efo/EFO_0002090"
+              }
+            ]
+          }
+        ],
+        "Organism": [
+          {
+            "value": "Arabidopsis thaliana",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://purl.obolibrary.org/obo/NCBITaxon_3702"
+              }
+            ]
+          }
+        ],
+        "Organism part": [
+          {
+            "value": "rosette leaf",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://purl.obolibrary.org/obo/BTO_0003086"
+              }
+            ]
+          }
+        ],
+        "genotype": [
+          {
+            "value": "cyp79",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://www.ebi.ac.uk/efo/EFO_0000513"
+              }
+            ]
+          }
+        ]
+      },
+      "sampleRelationships": [],
+      "taxonId": 3702,
+      "taxon": "Arabidopsis thaliana",
+      "releaseDate": null
+    },
+    {
+      "id": null,
+      "accession": null,
+      "alias": "Ex2-cyp79-48h-Ag-3",
+      "team": {
+        "name": "ML_test_team"
+      },
+      "title": "IPB Halle.Group-4.Subject-3",
+      "description": null,
+      "attributes": {
+        "replicate": [
+          {
+            "value": "Exp2",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://www.ebi.ac.uk/efo/EFO_0002090"
+              }
+            ]
+          }
+        ],
+        "Organism": [
+          {
+            "value": "Arabidopsis thaliana",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://purl.obolibrary.org/obo/NCBITaxon_3702"
+              }
+            ]
+          }
+        ],
+        "Organism part": [
+          {
+            "value": "rosette leaf",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://purl.obolibrary.org/obo/BTO_0003086"
+              }
+            ]
+          }
+        ],
+        "genotype": [
+          {
+            "value": "cyp79",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://www.ebi.ac.uk/efo/EFO_0000513"
+              }
+            ]
+          }
+        ]
+      },
+      "sampleRelationships": [],
+      "taxonId": 3702,
+      "taxon": "Arabidopsis thaliana",
+      "releaseDate": null
+    },
+    {
+      "id": null,
+      "accession": null,
+      "alias": "Ex2-cyp79-48h-Ag-4",
+      "team": {
+        "name": "ML_test_team"
+      },
+      "title": "IPB Halle.Group-4.Subject-4",
+      "description": null,
+      "attributes": {
+        "replicate": [
+          {
+            "value": "Exp2",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://www.ebi.ac.uk/efo/EFO_0002090"
+              }
+            ]
+          }
+        ],
+        "Organism": [
+          {
+            "value": "Arabidopsis thaliana",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://purl.obolibrary.org/obo/NCBITaxon_3702"
+              }
+            ]
+          }
+        ],
+        "Organism part": [
+          {
+            "value": "rosette leaf",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://purl.obolibrary.org/obo/BTO_0003086"
+              }
+            ]
+          }
+        ],
+        "genotype": [
+          {
+            "value": "cyp79",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://www.ebi.ac.uk/efo/EFO_0000513"
+              }
+            ]
+          }
+        ]
+      },
+      "sampleRelationships": [],
+      "taxonId": 3702,
+      "taxon": "Arabidopsis thaliana",
+      "releaseDate": null
+    }
+  ],
+  "sampleGroups": [],
+  "studies": [
+    {
+      "id": null,
+      "accession": "MTBLS2",
+      "alias": "MTBLS2",
+      "team": {
+        "name": "ML_test_team"
+      },
+      "title": "Comparative LC/MS-based profiling of silver nitrate-treated Arabidopsis thaliana leaves of wild-type and cyp79B2 cyp79B3 double knockout plants",
+      "description": "Indole-3-acetaldoxime (IAOx) represents an early intermediate of the biosynthesis of a variety of indolic secondary metabolites including the phytoanticipin indol-3-ylmethyl glucosinolate and the phytoalexin camalexin (3-thiazol-2′-yl-indole). Arabidopsis thaliana cyp79B2 cyp79B3 double knockout plants are completely impaired in the conversion of tryptophan to indole-3-acetaldoxime and do not accumulate IAOx-derived metabolites any longer. Consequently, comparative analysis of wild-type and cyp79B2 cyp79B3 plant lines has the potential to explore the complete range of IAOx-derived indolic secondary metabolites.",
+      "attributes": {
+        "studyDesignDescriptors": [
+          {
+            "value": "Plant Metabolomics",
+            "units": null,
+            "terms": []
+          },
+          {
+            "value": "Comparative LC/MS-based profiling",
+            "units": null,
+            "terms": []
+          },
+          {
+            "value": "Pathway Elucidation",
+            "units": null,
+            "terms": []
+          },
+          {
+            "value": "ultra-performance liquid chromatography-mass spectrometry",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://purl.obolibrary.org/obo/CHMO_0000715"
+              }
+            ]
+          },
+          {
+            "value": "untargeted metabolites",
+            "units": null,
+            "terms": []
+          },
+          {
+            "value": "Plant genomics",
+            "units": null,
+            "terms": []
+          }
+        ],
+        "factors": [
+          {
+            "value": "genotype",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://www.ebi.ac.uk/efo/EFO_0000513"
+              }
+            ]
+          },
+          {
+            "value": "age",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://www.ebi.ac.uk/efo/EFO_0000513"
+              }
+            ]
+          },
+          {
+            "value": "technical replicate",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://www.ebi.ac.uk/efo/EFO_0002090"
+              }
+            ]
+          },
+          {
+            "value": "bird",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://purl.obolibrary.org/obo/IDOMAL_0000980"
+              }
+            ]
+          },
+          {
+            "value": "flower",
+            "units": null,
+            "terms": [
+              {
+                "url": "http://purl.obolibrary.org/obo/PO_0009046"
+              }
+            ]
+          }
+        ]
+      },
+      "protocolRefs": [
+        {
+          "alias": "Sample collection",
+          "accession": null,
+          "team": "ML_test_team"
+        },
+        {
+          "alias": "Metabolite identification",
+          "accession": null,
+          "team": "ML_test_team"
+        },
+        {
+          "alias": "Extraction",
+          "accession": null,
+          "team": "ML_test_team"
+        },
+        {
+          "alias": "Mass spectrometry",
+          "accession": null,
+          "team": "ML_test_team"
+        },
+        {
+          "alias": "Chromatography",
+          "accession": null,
+          "team": "ML_test_team"
+        },
+        {
+          "alias": "Data transformation",
+          "accession": null,
+          "team": "ML_test_team"
+        }
+      ],
+      "projectRef": {
+        "alias": null,
+        "accession": "MTBLS2",
+        "team": "ML_test_team"
+      },
+      "studyType": "Metabolomics"
+    }
+  ],
+  "protocols": [
+    {
+      "id": "",
+      "accession": null,
+      "alias": "Sample collection",
+      "team": {
+        "name": "ML_test_team"
+      },
+      "title": null,
+      "description": "Arabidopsis thaliana Col-0 and cyp79B2 cyp79B3 lines were grown for about six weeks after cold stratification (3 days, 4 °C) in parallel on a soil/vermiculite mixture (3/2) in a growth cabinet with 8 h light (~150 µE/m2/s) at 22 °C and 16 h dark at 20 °C to developmental stage 3.5. Plants were sprayed with an aqueous solution of silver nitrate (5 mM) in order to stimulate accumulation of indolic secondary metabolites and incubated for 48 h in a growth cabinet under the same conditions as described above. Rosette leaves of six individual plants per genotype were harvested, immediately frozen in liquid nitrogen, pooled and stored at –80 °C until analysis. Two independent experiments (biological replicates) were performed on independent sets of plants grown at different times.",
+      "attributes": {
+        "protocolType": [
+          {
+            "value": "Sample collection",
+            "units": null,
+            "terms": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "",
+      "accession": null,
+      "alias": "Metabolite identification",
+      "team": {
+        "name": "ML_test_team"
+      },
+      "title": null,
+      "description": "Differential features detected in narrow retention time windows displaying a high chromatogram correlation were grouped. In combination with the raw data, individual compound mass spectra were reconstructed and features annotated as cluster ion, quasimolecular ion, or in-source fragment ion. Annotated lists of all differential feature sets are provided in Supplemental DataSet S5 of DOI: 10.1007/s11306-012-0401-0 online. Afterwards, targeted CID-MS/MS experiments of quasimolecular ions (MS2) were performed using QTOF-MS. Based on accurate mass measurements, putative elemental compositions were calculated, filtered by isotope abundance and the number of double bond equivalents and electron parity [1], and checked for consistency in relation to elemental compositions calculated for fragment ions and observed neutral losses [2]. Mass spectral characterization of CID mass spectra can be found in Supplemental Data Set S6 (DOI: 10.1007/s11306-012-0401-0) online. Identification was based on reference spectra in MassBank (MSI Level 2 and 3), and in some cases on authentic standards (MSI Level 1).\n</p>\nRef: </br>\n[1] Kind, T., & Fiehn, O. (2006). Metabolomic database annotations via query of elemental compositions: Mass accuracy is insufficient even at less than 1 ppm. BMC Bioinformatics, 7(1), 234. PMID: 16646969\n[2] Konishi Y1, Kiyota T, Draghici C, Gao JM, Yeboah F, Acoca S, Jarussophon S, Purisima E. Molecular formula analysis by an MS/MS/MS technique to expedite dereplication of natural products. Anal Chem. 2007 Feb 1;79(3):1187-97. PMID: 17263353",
+      "attributes": {
+        "protocolType": [
+          {
+            "value": "Metabolite identification",
+            "units": null,
+            "terms": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "",
+      "accession": null,
+      "alias": "Extraction",
+      "team": {
+        "name": "ML_test_team"
+      },
+      "title": null,
+      "description": "Plant material was homogenized in liquid nitrogen using a pestle and mortar and aliquots of 100 +/- 5 mg were weighed into pre-cooled 2 ml, round bottom tubes. After addition of 200 µl methanol/water, 80/20 (v/v) pre-cooled at –40 °C the samples were immediately vortexed for 15 s, sonicated for 15 min at 20 °C and centrifuged for 10 min at 19000 x g. The supernatants were transferred to new 2 ml tubes and the remaining pellets subjected to a second extraction using 200 µl methanol/water, 80/20 (v/v). The combined extracts were evaporated to dryness in a vacuum centrifuge at 30 °C, thoroughly reconstituted in 200 µl methanol/water, 30/70 (v/v) and filtered using 0.2 µm PTFE syringe filters. Four extracts (technical replicates) were prepared for each of the four leaf pools.",
+      "attributes": {
+        "protocolType": [
+          {
+            "value": "Extraction",
+            "units": null,
+            "terms": []
+          }
+        ],
+        "parameters": [
+          {
+            "value": "Post Extraction",
+            "units": null,
+            "terms": []
+          },
+          {
+            "value": "Derivatization",
+            "units": null,
+            "terms": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "",
+      "accession": null,
+      "alias": "Mass spectrometry",
+      "team": {
+        "name": "ML_test_team"
+      },
+      "title": null,
+      "description": "Eluting compounds were detected from m/z 100-1000 using a micrOTOF-Q II hybrid quadrupole time-of-flight mass spectrometer (Bruker Daltonics) equipped with an Apollo II electrospray ion source in positive and negative ion mode using following instrument settings: nebulizer gas, nitrogen, 1.4 bar; dry gas, nitrogen, 6 l/min, 190 °C; capillary, –5000 V; end plate offset, -500 V; funnel 1 RF, 200 V; funnel 2 RF, 200 V; in-source CID energy, 0 V; hexapole RF, 100 V; quadrupole ion energy, 5 eV; collision gas, nitrogen; collision energy, 7 eV; collision RF 150/350 V (timing 50/50); transfer time, 70 µs; pre pulse storage, 5 µs; pulser frequency, 10 kHz; spectra rate, 3 Hz. Mass spectra were acquired in centroid mode. Mass calibration of individual raw data files was performed on lithium formate cluster ions obtained by automatic infusion of 20 µl 10 mM lithium hydroxide in isopropanol/water/formic acid, 49.9/49.9/0.2 (v/v/v) at a gradient time of 18 min using a diverter valve.",
+      "attributes": {
+        "protocolType": [
+          {
+            "value": "Mass spectrometry",
+            "units": null,
+            "terms": []
+          }
+        ],
+        "parameters": [
+          {
+            "value": "Scan polarity",
+            "units": null,
+            "terms": []
+          },
+          {
+            "value": "Scan m/z range",
+            "units": null,
+            "terms": []
+          },
+          {
+            "value": "Instrument",
+            "units": null,
+            "terms": []
+          },
+          {
+            "value": "Mass analyzer",
+            "units": null,
+            "terms": []
+          },
+          {
+            "value": "Ion source",
+            "units": null,
+            "terms": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "",
+      "accession": null,
+      "alias": "Chromatography",
+      "team": {
+        "name": "ML_test_team"
+      },
+      "title": null,
+      "description": "Chromatographic separations were performed on an Acquity UPLC system (Waters) equipped with a HSS T3 column (100 x 1.0 mm, particle size 1.8 µm, Waters) applying the following binary gradient at a flow rate of 150 µl/min: 0-1 min, isocratic 95% A (water/formic acid, 99.9/0.1 (v/v)), 5% B (acetonitrile/formic acid, 99.9/0.1 (v/v)); 1-16 min, linear from 5 to 45% B; 16-18 min, isocratic 95% B; 18-20 min, isocratic 5% B. The injection volume was 3.0 µl (full loop injection).",
+      "attributes": {
+        "protocolType": [
+          {
+            "value": "Chromatography",
+            "units": null,
+            "terms": []
+          }
+        ],
+        "parameters": [
+          {
+            "value": "Chromatography Instrument",
+            "units": null,
+            "terms": []
+          },
+          {
+            "value": "Column model",
+            "units": null,
+            "terms": []
+          },
+          {
+            "value": "Column type",
+            "units": null,
+            "terms": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "",
+      "accession": null,
+      "alias": "Data transformation",
+      "team": {
+        "name": "ML_test_team"
+      },
+      "title": null,
+      "description": "Raw data files were converted to mzData format using the vendor-specific CompassXport (http://www.bdal.de/) and processed using the XCMS package (http://bioconductor.org/packages/release/bioc/html/xcms.html). XCMS settings for processing LC/MS data with findPeaks.centWave() were prefilter=(3,200); snthr=5; ppm=25; peakwidth=(5,12). For alignment group.density() function with parameters minfrac=0.75 and bw=2 was used.",
+      "attributes": {
+        "protocolType": [
+          {
+            "value": "Data transformation",
+            "units": null,
+            "terms": []
+          }
+        ]
+      }
+    }
+  ]
+}
