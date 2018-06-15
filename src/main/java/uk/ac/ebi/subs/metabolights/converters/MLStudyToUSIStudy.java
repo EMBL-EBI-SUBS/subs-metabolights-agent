@@ -24,6 +24,8 @@ public class MLStudyToUSIStudy  implements Converter<Study, uk.ac.ebi.subs.data.
         usiStudy.setTitle(source.getTitle());
         usiStudy.setAccession(source.getIdentifier());
         usiStudy.setDescription(source.getDescription());
+        usiStudy.setAlias(source.getIdentifier());
+        //todo mtbls id is set as alias.  
 
         usiStudy.getAttributes().put("studyDesignDescriptors", convertStudyDescriptors(source.getStudyDesignDescriptors()));
         usiStudy.getAttributes().put("factors", convertSampleFactors(source.getFactors()));
