@@ -43,11 +43,13 @@ public class USISubmissionToMLStudy implements Converter<uk.ac.ebi.subs.processi
             mlStudy.setPublications(convertPublications(source.getProjects().get(0).getPublications()));
             mlStudy.setPeople(convertContacts(source.getProjects().get(0).getContacts()));
 
-            mlStudy.setSamples(convertSamples(source.getSamples()));
+            List<uk.ac.ebi.subs.metabolights.model.Sample> samples = convertSamples(source.getSamples());
+            mlStudy.setSamples(samples);
             mlStudy.setAssays(convertAssays(source.getAssays()));
             mlStudy.setProtocols(convertProtocols(source.getProtocols()));
 
-            assignDataFiles(mlStudy.getAssays(), source.getAssayData());
+            //assignDataFiles(mlStudy.getAssays(), source.getAssayData());
+            assignDataFiles(mlStudy.getAssays(), source.getAssayData(), samples);
             mlStudies.add(mlStudy);
 
         }
@@ -96,23 +98,45 @@ public class USISubmissionToMLStudy implements Converter<uk.ac.ebi.subs.processi
         return mlPublications;
     }
 
-    private void assignDataFiles(List<uk.ac.ebi.subs.metabolights.model.Assay> assays, List<AssayData> assayDataList) {
-        for(AssayData assayData : assayDataList){
-             for(File file : assayData.getFiles()){
-                  if(file != null){
-                      MLFile mlFile = usiFileToMLFile.convert(file);
-                      for(AssayRef assayRef : assayData.getAssayRefs()){
-                          for(uk.ac.ebi.subs.metabolights.model.Assay assay : assays){
-                              if(assayRef.getAlias().equals(assay.getFilename())){
-                                  assay.getDataFiles().add(mlFile);
-                              }
-                          }
-                      }
-                  }
+//    private void assignDataFiles(List<uk.ac.ebi.subs.metabolights.model.Assay> assays, List<AssayData> assayDataList, List<uk.ac.ebi.subs.metabolights.model.Sample> samples) {
+//        for(AssayData assayData : assayDataList){
+//             for(File file : assayData.getFiles()){
+//                  if(file != null){
+//                      MLFile mlFile = usiFileToMLFile.convert(file);
+//                      for(AssayRef assayRef : assayData.getAssayRefs()){
+//                          for(uk.ac.ebi.subs.metabolights.model.Assay assay : assays){
+//                              if(assayRef.getAlias().equals(assay.getFilename())){
+//                                  assay.getDataFiles().add(mlFile);
+//                              }
+//                          }
+//                      }
+//                  }
+//
+//             }
+//        }
+//    }
 
-             }
+    private void assignDataFiles(List<uk.ac.ebi.subs.metabolights.model.Assay> assays, List<AssayData> assayDataList, List<uk.ac.ebi.subs.metabolights.model.Sample> samples) {
+        for(AssayData assayData : assayDataList){
+            for(File file : assayData.getFiles()){
+                if(file != null){
+                    MLFile mlFile = usiFileToMLFile.convert(file);
+
+                    if(file.getType().toLowerCase().equalsIgnoreCase("Metabolite Assignment File")){
+                       mlFile.setGeneratedFrom(samples);
+                    }
+
+                    for(AssayRef assayRef : assayData.getAssayRefs()){
+                        for(uk.ac.ebi.subs.metabolights.model.Assay assay : assays){
+                            if(assayRef.getAlias().equals(assay.getFilename())){
+                                assay.getDataFiles().add(mlFile);
+                            }
+                        }
+                    }
+                }
+
+            }
         }
     }
-
 
 }
