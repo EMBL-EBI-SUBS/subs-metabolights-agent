@@ -29,7 +29,8 @@ import java.util.List;
  */
 @Data
 public class ProtocolParameter {
-    private OntologyModel unit;
-    private List<String> comments;
-    private OntologyModel parameter_name;
+    //private OntologyModel unit;
+    private List<Comment> comments;
+    private OntologyModel parameterName;
+    //private String value;
 }

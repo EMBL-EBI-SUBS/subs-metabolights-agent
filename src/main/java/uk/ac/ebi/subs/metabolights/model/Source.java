@@ -30,8 +30,7 @@ import java.util.List;
  */
 @Data
 public class Source {
-    @JsonProperty("@id")
-    private String id;
-    private List<SourceCharacteristics> characteristics;
+    private List<Comment> comments;
+    private List<SampleSourceOntologyModel> characteristics;
     private String name;
 }

@@ -4,12 +4,10 @@ import lombok.Data;
 
 import java.util.List;
 
-/**
- * Created by kalai on 29/01/2018.
- */
 @Data
-public class SampleSourceModel {
+public class AssayOtherMaterial {
     private List<Comment> comments;
     private List<SampleSourceOntologyModel> characteristics;
     private String name;
+    private String type;
 }

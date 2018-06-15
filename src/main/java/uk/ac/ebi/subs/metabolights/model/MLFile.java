@@ -29,17 +29,9 @@ import java.util.List;
  * Created by kalai on 13/12/2017.
  */
 @Data
-public class StudyProtocol {
-    //todo Model for protocol within the whole study object. Different from the individual protocol chunk
-    //Need to make it consistent
-    @JsonProperty("@id")
-    private String id;
-    private List<String> comments;
-    private List<String> components;
-    private String description;
-    private String name;
-    private List<StudyProtocolParameter> parameters;
-    private CharacteristicType protocolType;
-    private String uri;
-    private String version;
+public class MLFile {
+    private List<Comment> comments;
+    private String filename;
+    private String label;
+    private List<Sample> generatedFrom;
 }

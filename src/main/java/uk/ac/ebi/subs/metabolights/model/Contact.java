@@ -31,13 +31,14 @@ import java.util.List;
 public class Contact {
     private String address;
     private String affiliation;
-    private List<String> comments;
+    private List<Comment> comments;
     private String email;
     private String fax;
     private String phone;
-    private String first_name;
-    private String last_name;
-    private String mid_initials;
+    private String firstName;
+    private String lastName;
+    private String midInitials;
     private List<OntologyModel> roles;
     private String orcid;
+    //orcid not in isa_json schema
 }

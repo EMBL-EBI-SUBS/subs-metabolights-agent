@@ -29,7 +29,7 @@ import java.util.List;
  */
 @Data
 public class Factor {
-    private List<String> comments;
-    private String name;
-    private OntologyModel factor_type;
+    private List<Comment> comments;
+    private String factorName;
+    private OntologyModel factorType;
 }

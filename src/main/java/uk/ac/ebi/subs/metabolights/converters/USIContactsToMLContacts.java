@@ -2,25 +2,20 @@ package uk.ac.ebi.subs.metabolights.converters;
 
 import org.springframework.core.convert.converter.Converter;
 import uk.ac.ebi.subs.data.component.Contact;
-import uk.ac.ebi.subs.data.component.Contacts;
-import uk.ac.ebi.subs.metabolights.model.CharacteristicType;
-import uk.ac.ebi.subs.metabolights.model.StudyContact;
+import uk.ac.ebi.subs.metabolights.model.OntologyModel;
 
-import java.util.AbstractList;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * Created by kalai on 13/12/2017.
  */
-public class USIContactsToMLContacts implements Converter<Contact, StudyContact> {
+public class USIContactsToMLContacts implements Converter<Contact, uk.ac.ebi.subs.metabolights.model.Contact> {
     @Override
-    public StudyContact convert(Contact source) {
+    public uk.ac.ebi.subs.metabolights.model.Contact convert(Contact source) {
         if (source == null) {
             return null;
         }
-        StudyContact mlContact = new StudyContact();
+        uk.ac.ebi.subs.metabolights.model.Contact mlContact = new uk.ac.ebi.subs.metabolights.model.Contact();
         mlContact.setFirstName(source.getFirstName());
         mlContact.setLastName(source.getLastName());
         mlContact.setMidInitials(source.getMiddleInitials());
@@ -31,7 +26,7 @@ public class USIContactsToMLContacts implements Converter<Contact, StudyContact>
         mlContact.setOrcid(source.getOrcid());
         //todo Should roled be Ontology term within USI
         if (source.getRoles().size() > 0) {
-            CharacteristicType roleType = new CharacteristicType();
+            OntologyModel roleType = new OntologyModel();
             roleType.setAnnotationValue(source.getRoles().get(0));
             mlContact.setRoles(Arrays.asList(roleType));
         }

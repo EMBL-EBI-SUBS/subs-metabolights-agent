@@ -2,19 +2,15 @@ package uk.ac.ebi.subs.metabolights.converters;
 
 import org.springframework.core.convert.converter.Converter;
 import uk.ac.ebi.subs.data.component.Contact;
-import uk.ac.ebi.subs.data.component.Contacts;
-import uk.ac.ebi.subs.metabolights.model.StudyContact;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * Created by kalai on 13/12/2017.
  */
-public class MLContactsToUSIContacts implements Converter<StudyContact, Contact> {
+public class MLContactsToUSIContacts implements Converter<uk.ac.ebi.subs.metabolights.model.Contact, Contact> {
     @Override
-    public Contact convert(StudyContact source) {
+    public Contact convert(uk.ac.ebi.subs.metabolights.model.Contact source) {
         if (source == null) {
             return null;
         }

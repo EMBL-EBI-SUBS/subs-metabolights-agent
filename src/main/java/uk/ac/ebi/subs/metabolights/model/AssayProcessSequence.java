@@ -20,7 +20,6 @@
 
 package uk.ac.ebi.subs.metabolights.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import java.util.List;
@@ -30,18 +29,18 @@ import java.util.List;
  */
 @Data
 public class AssayProcessSequence {
-    @JsonProperty("@id")
-    private String id;
-    private List<String> comments;
-    private String date;
-    private GenericId executesProtocol;
-    private List<GenericId> inputs;
+    private List<Comment> comments;
     private String name;
-    private GenericId nextProcess;
-    private List<GenericId> outputs;
-    private List<FactorValue> parameterValues;
+    private Protocol executesProtocol;
+    private String date;
     private String  performer;
-    private GenericId previousProcess;
+    private List<AssayProtocolParameterValue> parameterValues;
+    private List<Object> inputs;
+    private List<Object> outputs;
+
+//    private GenericId nextProcess;
+//    private GenericId previousProcess;
+    //todo harmonise assay and study process seqeuence
 }
 
 

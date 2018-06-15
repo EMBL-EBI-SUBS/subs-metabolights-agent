@@ -29,7 +29,7 @@ import java.util.List;
  */
 @Data
 public class TermSource {
-    private List<String> comments;
+    private List<Comment> comments;
     private String description;
     private String version;
     private String file;

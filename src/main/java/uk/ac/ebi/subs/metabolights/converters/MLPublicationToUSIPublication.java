@@ -3,14 +3,13 @@ package uk.ac.ebi.subs.metabolights.converters;
 import org.springframework.core.convert.converter.Converter;
 import uk.ac.ebi.subs.data.component.PublicationStatus;
 import uk.ac.ebi.subs.metabolights.model.Publication;
-import uk.ac.ebi.subs.metabolights.model.StudyPublication;
 
 /**
  * Created by kalai on 13/12/2017.
  */
-public class MLPublicationToUSIPublication implements Converter<StudyPublication, uk.ac.ebi.subs.data.component.Publication> {
+public class MLPublicationToUSIPublication implements Converter<Publication, uk.ac.ebi.subs.data.component.Publication> {
     @Override
-    public uk.ac.ebi.subs.data.component.Publication convert(StudyPublication source) {
+    public uk.ac.ebi.subs.data.component.Publication convert(Publication source) {
         if (source == null) {
             return null;
         }

@@ -29,21 +29,22 @@ import java.util.List;
  */
 @Data
 public class Study {
-    private List<Assay> assays;
-    private List<CharacteristicCategory> characteristicCategories;
     private List<Comment> comments;
-    private String description;
-    private List<StudyFactor> factors;
-    private String filename;
     private String identifier;
-    private StudyMaterials materials;
-    private List<StudyContact> people;
-    private List<StudyProcessSequence> processSequence;
-    private List<StudyProtocol> protocols;
-    private String publicReleaseDate;
-    private  List<StudyPublication> publications;
-    private List<CharacteristicType> studyDesignDescriptors;
-    private String submissionDate;
+    private String filename;
     private String title;
-    private List<CharacteristicType> unitCategories;
+    private String description;
+    private String submissionDate;
+    private String publicReleaseDate;
+    private List<Contact> people;
+    private List<OntologyModel> studyDesignDescriptors;
+    private List<Publication> publications;
+    private List<Factor> factors;
+    private List<Protocol> protocols;
+    private List<Assay> assays;
+    private List<Source> sources;
+    private List<Sample> samples;
+    private List<StudyProcessSequence> processSequence;
+    private List<OntologyModel> characteristicCategories;
+    private List<Object> units;
 }

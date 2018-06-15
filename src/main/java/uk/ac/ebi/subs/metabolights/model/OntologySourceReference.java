@@ -22,6 +22,8 @@ package uk.ac.ebi.subs.metabolights.model;
 
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * Created by kalai on 13/12/2017.
  */
@@ -31,4 +33,5 @@ public class OntologySourceReference {
     private String file;
     private String name;
     private String version;
+    private List<Comment> comments;
 }

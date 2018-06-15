@@ -4,13 +4,10 @@ import lombok.Data;
 
 import java.util.List;
 
-/**
- * Created by kalai on 29/01/2018.
- */
 @Data
-public class SampleSourceOntologyModel {
+public class SampleFactorValue {
     private List<Comment> comments;
-    private OntologyModel category;
-    private OntologyModel unit;
+    private SampleFactorCategory category;
     private OntologyModel value;
+    private OntologyModel unit;
 }
