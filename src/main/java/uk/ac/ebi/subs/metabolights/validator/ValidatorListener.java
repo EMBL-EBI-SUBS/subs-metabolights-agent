@@ -33,15 +33,15 @@ public class ValidatorListener {
         logger.info("Got study to validate with ID: {}.", envelope.getEntityToValidate().getId());
 
         logger.info("MetaboLights Study validation done.");
-        List<SingleValidationResult> validatedrResults = studyValidator.validate(envelope);
+        List<SingleValidationResult> validatedResults = studyValidator.validate(envelope);
+        validatedResults = ValidationUtils.getSinglePassResultIfNoErrors(validatedResults);
 
         sendResults(
-                ValidationUtils.buildSingleValidationResultsEnvelope(validatedrResults,
+                ValidationUtils.buildSingleValidationResultsEnvelope(validatedResults,
                         envelope.getValidationResultVersion(),
                         envelope.getValidationResultUUID()),
-                ValidationUtils.hasValidationError(validatedrResults)
+                ValidationUtils.hasValidationError(validatedResults)
         );
-        //todo if every is okay single validation result with pass, as a list 
     }
 
     @RabbitListener(queues = METABOLIGHTS_ASSAY_VALIDATION)

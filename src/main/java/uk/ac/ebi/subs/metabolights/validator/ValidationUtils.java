@@ -6,6 +6,7 @@ import uk.ac.ebi.subs.validator.data.SingleValidationResultsEnvelope;
 import uk.ac.ebi.subs.validator.data.structures.SingleValidationResultStatus;
 import uk.ac.ebi.subs.validator.data.structures.ValidationAuthor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ValidationUtils {
@@ -32,5 +33,18 @@ public class ValidationUtils {
                 .orElse(null);
 
         return errorValidationResult != null;
+    }
+
+    public static List<SingleValidationResult> getSinglePassResultIfNoErrors(List<SingleValidationResult> validatedResults){
+        if(validatedResults.size() == 0){
+            SingleValidationResult singleValidationResult = new SingleValidationResult();
+            singleValidationResult.setMessage("PASS");
+            singleValidationResult.setValidationAuthor(ValidationAuthor.Metabolights);
+            singleValidationResult.setValidationStatus(SingleValidationResultStatus.Pass);
+            List<SingleValidationResult> results = new ArrayList<>();
+            results.add(singleValidationResult);
+            return results;
+        }
+        return validatedResults;
     }
 }
