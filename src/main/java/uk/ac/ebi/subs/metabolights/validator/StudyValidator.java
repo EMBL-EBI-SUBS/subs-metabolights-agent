@@ -27,7 +27,7 @@ public class StudyValidator {
         return validationResults;
     }
 
-    private List<SingleValidationResult> validateContacts(Project project){
+    public List<SingleValidationResult> validateContacts(Project project){
         List<SingleValidationResult>  contactValidations = new ArrayList<>();
         if(project.getContacts()!=null){
           for(Contact contact : project.getContacts()){
@@ -41,7 +41,7 @@ public class StudyValidator {
        return contactValidations;
     }
 
-    private List<SingleValidationResult> validateProtocols(List<Protocol> protocols){
+    public List<SingleValidationResult> validateProtocols(List<Protocol> protocols){
         List<SingleValidationResult>  protocolValidations = new ArrayList<>();
         if(protocols!= null && !protocols.isEmpty()){
             for(Protocol protocol : protocols){
