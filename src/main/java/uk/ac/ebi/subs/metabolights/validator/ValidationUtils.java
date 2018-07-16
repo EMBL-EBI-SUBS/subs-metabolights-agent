@@ -47,4 +47,11 @@ public class ValidationUtils {
         }
         return validatedResults;
     }
+
+    public static boolean minCharRequirementPassed(String toCheck, int limit) {
+
+        // Test for null values
+        if (toCheck == null) return false;
+        return toCheck.length() >= limit;
+    }
 }
