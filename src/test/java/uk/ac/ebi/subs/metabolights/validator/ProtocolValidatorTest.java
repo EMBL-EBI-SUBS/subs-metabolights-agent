@@ -25,21 +25,21 @@ public class ProtocolValidatorTest {
     }
 
     @Test
-    public void validateProtocols() {
+    public void validateContent() {
         List<Protocol> protocols =  ValidationTestUtils.generateProtocols();
-        List<SingleValidationResult> validationResults = this.protocolValidator.validateProtocols(protocols);
+        List<SingleValidationResult> validationResults = this.protocolValidator.validateContent(protocols);
         assertEquals(validationResults.size(),1);
         assertEquals(validationResults.get(0).getMessage(),
                 "Protocol Sample collection has no description provided");
 
         protocols.get(0).setDescription("ab");
-        validationResults = this.protocolValidator.validateProtocols(protocols);
+        validationResults = this.protocolValidator.validateContent(protocols);
         assertEquals(validationResults.size(),1);
         assertEquals(validationResults.get(0).getMessage(),
                 "Protocol Sample collection description is not sufficient");
 
         protocols.get(0).setDescription("Sufficient");
-        validationResults = this.protocolValidator.validateProtocols(protocols);
+        validationResults = this.protocolValidator.validateContent(protocols);
         assertEquals(validationResults.size(),0);
     }
 }
