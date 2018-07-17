@@ -2,6 +2,7 @@ package uk.ac.ebi.subs.metabolights.converters;
 
 import org.springframework.core.convert.converter.Converter;
 import uk.ac.ebi.subs.data.component.Attribute;
+import uk.ac.ebi.subs.data.component.StudyDataType;
 import uk.ac.ebi.subs.metabolights.model.Factor;
 import uk.ac.ebi.subs.metabolights.model.OntologyModel;
 import uk.ac.ebi.subs.metabolights.model.Study;
@@ -25,7 +26,7 @@ public class MLStudyToUSIStudy  implements Converter<Study, uk.ac.ebi.subs.data.
         usiStudy.setAccession(source.getIdentifier());
         usiStudy.setDescription(source.getDescription());
         usiStudy.setAlias(source.getIdentifier());
-        //todo mtbls id is set as alias.  
+        //todo mtbls id is set as alias.
 
         usiStudy.getAttributes().put("studyDesignDescriptors", convertStudyDescriptors(source.getStudyDesignDescriptors()));
         usiStudy.getAttributes().put("factors", convertSampleFactors(source.getFactors()));
@@ -49,5 +50,11 @@ public class MLStudyToUSIStudy  implements Converter<Study, uk.ac.ebi.subs.data.
             descriptors.add(mlDescriptorToUSIDescriptor.convert(descriptor));
         }
         return descriptors;
+    }
+
+    private String getTechnologyType(Study source){
+        if(source.getAssays()!=null && source.getAssays().size() > 0){
+             return source.getAssays().get(0).getTechnologyType().getAnnotationValue();
+        }  return null;
     }
 }
