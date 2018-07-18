@@ -3,9 +3,11 @@ package uk.ac.ebi.subs.metabolights.validator;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import uk.ac.ebi.subs.data.component.StudyDataType;
 import uk.ac.ebi.subs.data.submittable.Protocol;
 import uk.ac.ebi.subs.validator.data.SingleValidationResult;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -26,20 +28,45 @@ public class ProtocolValidatorTest {
 
     @Test
     public void validateContent() {
-        List<Protocol> protocols =  ValidationTestUtils.generateProtocols();
+        List<Protocol> protocols = ValidationTestUtils.generateProtocols();
         List<SingleValidationResult> validationResults = this.protocolValidator.validateContent(protocols);
-        assertEquals(validationResults.size(),1);
+        assertEquals(validationResults.size(), 1);
         assertEquals(validationResults.get(0).getMessage(),
                 "Protocol Sample collection has no description provided");
 
         protocols.get(0).setDescription("ab");
         validationResults = this.protocolValidator.validateContent(protocols);
-        assertEquals(validationResults.size(),1);
+        assertEquals(validationResults.size(), 1);
         assertEquals(validationResults.get(0).getMessage(),
                 "Protocol Sample collection description is not sufficient");
 
         protocols.get(0).setDescription("Sufficient");
         validationResults = this.protocolValidator.validateContent(protocols);
+        assertEquals(validationResults.size(), 0);
+    }
+
+    @Test
+    public void validateRequiredFields() {
+        List<SingleValidationResult> validationResults = new ArrayList<>();
+        List<Protocol> msImagingProtocols =  ValidationTestUtils.generateProtocolsForImagingMS();
+        validationResults = protocolValidator.validateRequiredFields(msImagingProtocols, StudyDataType.Metabolomics_MS);
         assertEquals(validationResults.size(),0);
+
+        List<Protocol> msProtocols =  ValidationTestUtils.generateProtocolsForMS();
+        validationResults = protocolValidator.validateRequiredFields(msProtocols, StudyDataType.Metabolomics_MS);
+        assertEquals(validationResults.size(),0);
+
+        List<Protocol> nmrProtocols = ValidationTestUtils.generateProtocolsForNMR();
+        validationResults = protocolValidator.validateRequiredFields(nmrProtocols, StudyDataType.Metabolomics_NMR);
+        assertEquals(validationResults.size(), 0);
+
+        List<Protocol> nmrImagingProtocols = ValidationTestUtils.generateProtocolsForImagingNMR();
+        validationResults = protocolValidator.validateRequiredFields(nmrImagingProtocols, StudyDataType.Metabolomics_NMR);
+        assertEquals(validationResults.size(), 0);
+
+        nmrImagingProtocols = ValidationTestUtils.generateProtocolsForImagingNMRWithMissingEntries();
+        validationResults = protocolValidator.validateRequiredFields(nmrImagingProtocols, StudyDataType.Metabolomics_NMR);
+        assertEquals(validationResults.size(), 2);
+
     }
 }
