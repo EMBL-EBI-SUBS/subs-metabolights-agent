@@ -2,6 +2,7 @@ package uk.ac.ebi.subs.metabolights.validator;
 
 
 import uk.ac.ebi.subs.data.component.Contact;
+import uk.ac.ebi.subs.data.component.Publication;
 import uk.ac.ebi.subs.data.submittable.Project;
 import uk.ac.ebi.subs.data.submittable.Protocol;
 
@@ -159,6 +160,21 @@ public class ValidationTestUtils {
         Project project = new Project();
         project.setContacts(generateContacts());
         return project;
+    }
+
+    public static Project getProjectWithPublications(){
+        Project project = new Project();
+        project.setPublications(generatePublications());
+        return project;
+    }
+
+    public static List<Publication> generatePublications(){
+        List<Publication> publications = new ArrayList<>();
+        Publication publication = new Publication();
+        publication.setArticleTitle("This is a metabolomics test study");
+        publication.setPubmedId("12345");
+        publications.add(publication);
+        return publications;
     }
 
 }

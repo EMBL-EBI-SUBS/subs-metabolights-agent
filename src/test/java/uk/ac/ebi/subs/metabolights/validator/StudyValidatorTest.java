@@ -32,4 +32,11 @@ public class StudyValidatorTest {
         assertEquals(validationResults.get(0).getMessage(),
                 "Contact: Alex Ben has no associated email");
     }
+
+    @Test
+    public void validatePublications() {
+        Project project = ValidationTestUtils.getProjectWithPublications();
+        List<SingleValidationResult> validationResults = this.studyValidator.validatePublications(project);
+        assertEquals(validationResults.size(),0);
+    }
 }

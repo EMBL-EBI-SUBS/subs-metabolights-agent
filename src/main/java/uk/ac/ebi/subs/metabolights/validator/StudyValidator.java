@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uk.ac.ebi.subs.data.component.Contact;
+import uk.ac.ebi.subs.data.component.Publication;
 import uk.ac.ebi.subs.data.component.StudyDataType;
 import uk.ac.ebi.subs.data.submittable.Project;
 import uk.ac.ebi.subs.data.submittable.Protocol;
@@ -47,6 +48,28 @@ public class StudyValidator {
 
     public List<SingleValidationResult> validateProtocols(List<Protocol> protocols, StudyDataType studyType){
         return protocolValidator.validate(protocols,studyType);
+    }
+
+    public List<SingleValidationResult> validatePublications(Project project){
+        List<SingleValidationResult>  validationResults = new ArrayList<>();
+        if(project.getPublications()!=null){
+            for(Publication publication : project.getPublications()){
+                if(!pubmedIDIsPresentIn(publication) && !doiIsPresentIn(publication)){
+                    validationResults.add(ValidationUtils.generateSingleValidationResult(project, "Publication -  " +
+                            publication.getArticleTitle() +
+                            " - has no associated PubMed ID or DOI", SingleValidationResultStatus.Error));
+                }
+            }
+        }
+        return validationResults;
+    }
+
+    private boolean doiIsPresentIn(Publication publication){
+         return publication.getDoi()!=null && !publication.getDoi().isEmpty();
+    }
+
+    private boolean pubmedIDIsPresentIn(Publication publication){
+        return publication.getPubmedId()!=null && !publication.getPubmedId().isEmpty();
     }
 
 }
