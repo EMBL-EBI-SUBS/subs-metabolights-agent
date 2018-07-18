@@ -43,6 +43,118 @@ public class ValidationTestUtils {
         return protocols;
     }
 
+    public static List<Protocol> generateProtocolsForImagingMS(){
+        List<Protocol> protocols = new ArrayList<>();
+        protocols.addAll(getCommonProtocols());
+
+        Protocol protocol = new Protocol();
+        protocol.setTitle("Histology");
+        protocol.setDescription("This is test description");
+        protocols.add(protocol);
+
+        protocol = new Protocol();
+        protocol.setTitle("Preparation");
+        protocol.setDescription("This is test description");
+        protocols.add(protocol);
+        
+        return protocols;
+    }
+
+    public static List<Protocol> getCommonProtocols(){
+        List<Protocol> protocols = new ArrayList<>();
+
+        Protocol protocol = new Protocol();
+        protocol.setTitle("Extraction");
+        protocol.setDescription("This is test description");
+        protocols.add(protocol);
+
+        protocol = new Protocol();
+        protocol.setTitle("Data transformation");
+        protocol.setDescription("This is test description");
+        protocols.add(protocol);
+
+        protocol = new Protocol();
+        protocol.setTitle("Metabolite identification");
+        protocol.setDescription("This is test description");
+        protocols.add(protocol);
+
+        return protocols;
+
+    }
+
+    public static List<Protocol> generateProtocolsForMS(){
+        List<Protocol> protocols = new ArrayList<>();
+        protocols.addAll(getCommonProtocols());
+
+        Protocol protocol = new Protocol();
+        protocol.setTitle("Mass spectrometry");
+        protocol.setDescription("This is test description");
+        protocols.add(protocol);
+
+        protocol = new Protocol();
+        protocol.setTitle("Chromatography");
+        protocol.setDescription("This is test description");
+
+        protocols.add(protocol);
+        return protocols;
+    }
+
+    public static List<Protocol> generateProtocolsForImagingNMR(){
+        List<Protocol> protocols = new ArrayList<>();
+        protocols.addAll(getCommonProtocols());
+
+        Protocol nmrProtocol = new Protocol();
+        nmrProtocol.setTitle("Magnetic resonance imaging");
+        nmrProtocol.setDescription("This is test description");
+        protocols.add(nmrProtocol);
+
+        nmrProtocol = new Protocol();
+        nmrProtocol.setTitle("In vivo magnetic resonance spectroscopy");
+        nmrProtocol.setDescription("This is test description");
+        protocols.add(nmrProtocol);
+
+        nmrProtocol = new Protocol();
+        nmrProtocol.setTitle("In vivo magnetic resonance assay");
+        nmrProtocol.setDescription("This is test description");
+        protocols.add(nmrProtocol);
+
+        return protocols;
+    }
+
+    public static List<Protocol> generateProtocolsForImagingNMRWithMissingEntries(){
+        List<Protocol> protocols = new ArrayList<>();
+        protocols.addAll(getCommonProtocols());
+
+        Protocol nmrProtocol = new Protocol();
+        nmrProtocol.setTitle("Magnetic resonance imaging");
+        nmrProtocol.setDescription("This is test description");
+        protocols.add(nmrProtocol);
+
+        return protocols;
+    }
+
+    public static List<Protocol> generateProtocolsForNMR(){
+        List<Protocol> protocols = new ArrayList<>();
+        protocols.addAll(getCommonProtocols());
+
+        Protocol protocol = new Protocol();
+        protocol.setTitle("NMR sample");
+        protocol.setDescription("This is test description");
+        protocols.add(protocol);
+
+        protocol = new Protocol();
+        protocol.setTitle("NMR spectroscopy");
+        protocol.setDescription("This is test description");
+        protocols.add(protocol);
+
+        protocol = new Protocol();
+        protocol.setTitle("NMR assay");
+        protocol.setDescription("This is test description");
+        protocols.add(protocol);
+
+        return protocols;
+    }
+
     public static Project getProjectWithContacts(){
         Project project = new Project();
         project.setContacts(generateContacts());
