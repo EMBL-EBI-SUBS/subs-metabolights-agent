@@ -95,7 +95,7 @@ public class ProjectToSubmissionTest {
 
         // study
         Study usiStudy = new Study();
-        usiStudy.setStudyType(StudyDataType.Metabolomics);
+        usiStudy.setStudyType(StudyDataType.Metabolomics_NMR);
         usiStudy.setAlias("MTBLS2_TEST");
         usiStudy.setTeam(team);
         usiStudy.setTitle(mlStudy.getTitle());
