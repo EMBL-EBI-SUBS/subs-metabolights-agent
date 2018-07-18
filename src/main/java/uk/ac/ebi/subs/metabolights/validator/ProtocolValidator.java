@@ -155,6 +155,6 @@ public class ProtocolValidator {
     }
 
     public boolean isProtocolPresent(String requiredProtocolField, Protocol protocol) {
-        return requiredProtocolField.equalsIgnoreCase(protocol.getTitle();
+        return requiredProtocolField.equalsIgnoreCase(protocol.getTitle());
     }
 }
