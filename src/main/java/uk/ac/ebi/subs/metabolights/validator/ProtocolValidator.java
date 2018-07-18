@@ -3,28 +3,24 @@ package uk.ac.ebi.subs.metabolights.validator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import uk.ac.ebi.subs.data.component.Attribute;
-import uk.ac.ebi.subs.data.submittable.Assay;
+import uk.ac.ebi.subs.data.component.StudyDataType;
 import uk.ac.ebi.subs.data.submittable.Protocol;
 import uk.ac.ebi.subs.validator.data.SingleValidationResult;
 import uk.ac.ebi.subs.validator.data.structures.SingleValidationResultStatus;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class ProtocolValidator {
     public static final Logger logger = LoggerFactory.getLogger(ProtocolValidator.class);
 
 
-    public List<SingleValidationResult> validate(List<Protocol> protocols, Assay assay) {
+    public List<SingleValidationResult> validate(List<Protocol> protocols, StudyDataType studyDataType) {
 
         List<SingleValidationResult> protocolValidations = new ArrayList<>();
         if (protocols != null && !protocols.isEmpty()) {
             protocolValidations.addAll(validateContent(protocols));
-            protocolValidations.addAll(validateRequiredFields(protocols, assay));
+            protocolValidations.addAll(validateRequiredFields(protocols, studyDataType));
         } else {
             protocolValidations.add(ValidationUtils.generateSingleValidationResult("No study protocols provided", SingleValidationResultStatus.Error));
 
@@ -59,39 +55,58 @@ public class ProtocolValidator {
      *   study.
      *
      * */
-    public List<SingleValidationResult> validateRequiredFields(List<Protocol> protocols, Assay assay) {
+    public List<SingleValidationResult> validateRequiredFields(List<Protocol> protocols, StudyDataType studyDataType) {
         List<SingleValidationResult> requiredFieldsValidation = new ArrayList<>();
-        String technologyType = getTechnologyType(assay);
-        if (technologyType != null) {
-
+        if (studyDataType != null) {
+            validateBasedOn(studyDataType, protocols);
         } else {
             requiredFieldsValidation.add(ValidationUtils.generateSingleValidationResult(
-                    "Assay has no technologyType information", SingleValidationResultStatus.Error));
+                    "Study has no study technologyType information", SingleValidationResultStatus.Error));
         }
         return requiredFieldsValidation;
     }
 
-    private String getTechnologyType(Assay assay) {
-        if (assay != null) {
-            if (assay.getAttributes() != null && assay.getAttributes().size() > 0) {
-                for (Map.Entry<String, Collection<Attribute>> entry : assay.getAttributes().entrySet()) {
-                    if (entry.getKey().equalsIgnoreCase("technologyType")) {
-                        if (entry.getValue() != null && entry.getValue().size() > 0) {
-                            return entry.getValue().iterator().next().getValue();
-                        }
-                    }
+    private List<SingleValidationResult> validateBasedOn(StudyDataType studyDataType, List<Protocol> protocols) {
+        List<SingleValidationResult> validations = new ArrayList<>();
+        List<String> requiredProtocolFields = getRequiredProtocolFieldsFor(studyDataType, protocols);
+
+        for (String expectedField : requiredProtocolFields) {
+            boolean isPresent = true;
+            for (Protocol protocol : protocols) {
+                isPresent = isProtocolPresent(expectedField, protocol);
+                if(isPresent){
+                   break;
                 }
             }
+            if(!isPresent){
+                 validations.add(ValidationUtils.generateSingleValidationResult(expectedField + " protocol is not " +
+                         "present in the study protocols", SingleValidationResultStatus.Error )) ;
+            }
         }
-        return null;
+        return validations;
     }
 
-    private List<SingleValidationResult> validateBasedOn(String technologyType, List<Protocol> protocols) {
-        List<SingleValidationResult> validation = new ArrayList<>();
+    private List<String> getRequiredProtocolFieldsFor(StudyDataType studyDataType, List<Protocol> protocols) {
         List<String> requiredProtocolFields = new ArrayList<>();
+        boolean isImagingStudy = isImagingStudy(protocols);
+        requiredProtocolFields.addAll(getCommonFields(isImagingStudy));
+        if (isMS(studyDataType)) {
+            requiredProtocolFields.addAll(getMSSpecificFields(isImagingStudy));
 
+        } else if (isNMR(studyDataType)) {
+            requiredProtocolFields.addAll(getNMRSpecificFields(isImagingStudy));
+        }
+        return requiredProtocolFields;
+    }
 
-        return validation;
+    private List<String> getCommonFields(boolean isImagingStudy) {
+        List<String> requiredProtocolFields = new ArrayList<>();
+        requiredProtocolFields.add("Data transformation");
+        requiredProtocolFields.add("Metabolite identification");
+        if (!isImagingStudy) {
+            requiredProtocolFields.add("Extraction");
+        }
+        return requiredProtocolFields;
     }
 
     private boolean isImagingStudy(List<Protocol> protocols) {
@@ -106,35 +121,12 @@ public class ProtocolValidator {
         return false;
     }
 
-    private boolean isMS(String technologyType) {
-        return technologyType.equalsIgnoreCase("mass spectrometry");
+    private boolean isMS(StudyDataType studyDataType) {
+        return studyDataType.name().equalsIgnoreCase("Metabolomics_MS");
     }
 
-    private boolean isNMR(String technologyType) {
-        return technologyType.equalsIgnoreCase("NMR spectroscopy");
-    }
-
-    private List<String> getRequiredProtocolFieldsFor(String technologyType, List<Protocol> protocols) {
-        List<String> requiredProtocolFields = new ArrayList<>();
-        boolean isImagingStudy = isImagingStudy(protocols);
-        requiredProtocolFields.addAll(getCommonFields(isImagingStudy));
-        if (isMS(technologyType)) {
-            requiredProtocolFields.addAll(getMSSpecificFields(isImagingStudy));
-
-        } else if (isNMR(technologyType)) {
-            requiredProtocolFields.addAll(getNMRSpecificFields(isImagingStudy));
-        }
-        return requiredProtocolFields;
-    }
-
-    private List<String> getCommonFields(boolean isImagingStudy) {
-        List<String> requiredProtocolFields = new ArrayList<>();
-        requiredProtocolFields.add("Data transformation");
-        requiredProtocolFields.add("Metabolite identification");
-        if (!isImagingStudy) {
-            requiredProtocolFields.add("Extraction");
-        }
-        return requiredProtocolFields;
+    private boolean isNMR(StudyDataType studyDataType) {
+        return studyDataType.name().equalsIgnoreCase("Metabolomics_NMR");
     }
 
     private List<String> getMSSpecificFields(boolean isImagingStudy) {
@@ -160,5 +152,9 @@ public class ProtocolValidator {
             requiredProtocolFields.add("NMR assay");
         }
         return requiredProtocolFields;
+    }
+
+    public boolean isProtocolPresent(String requiredProtocolField, Protocol protocol) {
+        return requiredProtocolField.equalsIgnoreCase(protocol.getTitle();
     }
 }
