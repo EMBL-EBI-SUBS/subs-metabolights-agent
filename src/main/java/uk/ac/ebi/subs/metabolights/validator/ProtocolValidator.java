@@ -58,7 +58,8 @@ public class ProtocolValidator {
     public List<SingleValidationResult> validateRequiredFields(List<Protocol> protocols, StudyDataType studyDataType) {
         List<SingleValidationResult> requiredFieldsValidation = new ArrayList<>();
         if (studyDataType != null) {
-            validateBasedOn(studyDataType, protocols);
+            requiredFieldsValidation.addAll(validateBasedOn(studyDataType, protocols));
+            return requiredFieldsValidation;
         } else {
             requiredFieldsValidation.add(ValidationUtils.generateSingleValidationResult(
                     "Study has no study technologyType information", SingleValidationResultStatus.Error));
@@ -136,6 +137,7 @@ public class ProtocolValidator {
             requiredProtocolFields.add("Preparation");
         } else {
             requiredProtocolFields.add("Chromatography");
+            requiredProtocolFields.add("Mass spectrometry");
         }
         return requiredProtocolFields;
     }
