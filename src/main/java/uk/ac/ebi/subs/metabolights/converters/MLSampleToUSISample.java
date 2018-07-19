@@ -71,24 +71,47 @@ public class MLSampleToUSISample implements Converter<uk.ac.ebi.subs.metabolight
     private Map<String, Collection<Attribute>> convertToUSISampleAttributes(List<SampleFactorValue> mlSampleFactorValues) {
         Map<String, Collection<Attribute>> usiSampleAttributes = new HashMap<>();
         for (SampleFactorValue factorValue : mlSampleFactorValues) {
-            String key = factorValue.getCategory().getFactorName();
-            String url = factorValue.getCategory().getFactorType().getTermAccession();
-//            String description; todo description is ignored for samples
-            String value = factorValue.getValue().getAnnotationValue();
+            if(factorValue.getCategory()!=null && factorValue.getValue()!=null){
+                //            String description; todo description is ignored for samples
+                String key = factorValue.getCategory().getFactorName();
 
-            Attribute attribute = new Attribute();
-            attribute.setValue(value);
-            Term term = new Term();
-            term.setUrl(url);
+                Attribute attribute = new Attribute();
+                if(factorValue.getValue() !=null){
+                   if(LinkedHashMap.class == factorValue.getValue().getClass()){
+                       LinkedHashMap value = (LinkedHashMap) factorValue.getValue();
+                       if(value.containsKey("annotationValue")){
+                          String annotationValue = (String) value.get("annotationValue");
+                          attribute.setValue(annotationValue);
+                       }
+                       if(value.containsKey("termAccession")){
+                           String termAccession = (String) value.get("termAccession");
+                           if(termAccession!= null && !termAccession.isEmpty()){
+                               Term term = new Term();
+                               term.setUrl(termAccession);
+                               attribute.setTerms(Arrays.asList(term));
+                           }
+                       }
+                   }  else if (String.class == factorValue.getValue().getClass()){
+                       attribute.setValue((String) factorValue.getValue());
+                   }
+                   else if (Integer.class == factorValue.getValue().getClass()){
+                       attribute.setValue(((Integer)factorValue.getValue()).toString());
+                   }
+                }
 
-            if (factorValue.getUnit() != null) {
-                attribute.setUnits(factorValue.getUnit().getAnnotationValue());
+                if (factorValue.getUnit() != null) {
+                    attribute.setUnits(factorValue.getUnit().getAnnotationValue());
+                }
+
+               usiSampleAttributes.put(key, Arrays.asList(attribute));
             }
-
-            attribute.setTerms(Arrays.asList(term));
-            usiSampleAttributes.put(key, Arrays.asList(attribute));
         }
         return usiSampleAttributes;
+    }
+
+    private String extractSampleFactorValue(Object value){
+        return "";
+
     }
 
 

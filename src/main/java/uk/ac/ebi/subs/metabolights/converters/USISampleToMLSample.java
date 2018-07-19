@@ -65,17 +65,19 @@ public class USISampleToMLSample implements Converter<uk.ac.ebi.subs.data.submit
                     sampleFactorCategory.setFactorType(new OntologyModel());
                     sampleFactorValue.setCategory(sampleFactorCategory);
                     sampleFactorValue.setUnit(new OntologyModel());
-                    sampleFactorValue.setValue(new OntologyModel());
-
-                    sampleFactorValue.getValue().setAnnotationValue(attribute.getValue());
+                   // sampleFactorValue.setValue(new OntologyModel());
+                    OntologyModel model = new OntologyModel();
+                    model.setAnnotationValue(attribute.getValue());
+                   // FactorValue value = new FactorValue(model);
+                    //value.setAnnotationValue(model);
+                    //sampleFactorValue.getValue().setAnnotationValue(attribute.getValue());
+                    sampleFactorValue.setValue(model);
                     String url = "";
                     if (attribute.getTerms().size() > 0) {
                         url = attribute.getTerms().iterator().next().getUrl();
-                        sampleFactorValue.getCategory().getFactorType().setTermAccession(url);
+                        ((OntologyModel)sampleFactorValue.getValue()).setTermAccession(url);
                     }
                     sampleFactorValue.getUnit().setAnnotationValue(attribute.getUnits());
-
-
                     mlSampleFactorValues.add(sampleFactorValue);
                 }
             }

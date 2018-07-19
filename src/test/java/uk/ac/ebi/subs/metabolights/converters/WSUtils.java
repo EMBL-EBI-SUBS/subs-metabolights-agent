@@ -109,7 +109,7 @@ public class WSUtils {
     }
 
     public static Sample getTestMLSample() {
-        String response = makeGetRequest("MTBLS2/samples/Ex1-Col0-48h-Ag-1", null, "GET");
+        String response = makeGetRequest("MTBLS3/samples?name=Cecilia_AA_batch23_05&list_only=true", null, "GET");
         System.out.println(response);
         return processSampleResponse(response);
     }
@@ -198,6 +198,40 @@ public class WSUtils {
                 mapper.registerModule(new JavaTimeModule());
                 submissionEnvelope = mapper.readValue(result, SubmissionEnvelope.class);
                 return submissionEnvelope;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static Sample getMLSampleFromDisc() {
+        Sample sample;
+        try {
+            String result = IOUtils.toString(WSUtils.class.getClassLoader().getResourceAsStream("Test_json/ML_Single_Sample.json"));
+            try {
+                mapper.registerModule(new JavaTimeModule());
+                sample = mapper.readValue(result, Sample.class);
+                return sample;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static uk.ac.ebi.subs.data.submittable.Sample getUSISampleFromDisc() {
+        uk.ac.ebi.subs.data.submittable.Sample sample;
+        try {
+            String result = IOUtils.toString(WSUtils.class.getClassLoader().getResourceAsStream("Test_json/USI_Single_Sample.json"));
+            try {
+                mapper.registerModule(new JavaTimeModule());
+                sample = mapper.readValue(result, uk.ac.ebi.subs.data.submittable.Sample.class);
+                return sample;
             } catch (IOException e) {
                 e.printStackTrace();
             }

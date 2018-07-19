@@ -8,6 +8,6 @@ import java.util.List;
 public class SampleFactorValue {
     private List<Comment> comments;
     private SampleFactorCategory category;
-    private OntologyModel value;
+    private Object value;
     private OntologyModel unit;
 }
