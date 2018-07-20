@@ -73,7 +73,7 @@ public class MLSampleToUSISample implements Converter<uk.ac.ebi.subs.metabolight
         for (SampleFactorValue factorValue : mlSampleFactorValues) {
             if(factorValue.getCategory()!=null && factorValue.getValue()!=null){
                 //            String description; todo description is ignored for samples
-                String key = factorValue.getCategory().getFactorName();
+                String key = factorValue.getCategory().getFactorType().getAnnotationValue();
 
                 Attribute attribute = new Attribute();
                 if(factorValue.getValue() !=null){

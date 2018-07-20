@@ -55,23 +55,22 @@ public class AssayValidator {
             } else {
                 for (Attribute studyFactorAttribute : factors.get("factors")) {
                     boolean facotorUsed = false;
-                    /*
-                    compare annotation value with attribute value
-                     */
-                    for (String factor : sampleFactors.keySet()) {
-                        Collection<Attribute> attributes = sampleFactors.get(factor);
-                        for (Attribute sampleFactorAttribute : attributes) {
-                            if (sampleFactorAttribute.getValue() != null || !sampleFactorAttribute.getValue().isEmpty()) {
-                                if(sampleFactorAttribute.getValue().equalsIgnoreCase(studyFactorAttribute.getValue())){
+                    for (String factorName : sampleFactors.keySet()) {
+                        /*
+                        The Key in the Sample factor is equal to the Attribute Value in the Study factor collection
+                         */
+                        if (factorName.equalsIgnoreCase(studyFactorAttribute.getValue())) {
+                            Collection<Attribute> attributes = sampleFactors.get(factorName);
+                            if (attributes.size() > 0) {
+                                Attribute sampleAttribute = attributes.iterator().next();
+                                if (sampleAttribute.getValue() != null || !sampleAttribute.getValue().isEmpty()) {
                                     facotorUsed = true;
-                                    break;
                                 }
                             }
                         }
-                        if(facotorUsed) break;
                     }
-                    if(!facotorUsed){
-                        validationResults.add(ValidationUtils.generateSingleValidationResult(studyFactorAttribute + " factor is not used in the samples" , SingleValidationResultStatus.Error));
+                    if (!facotorUsed) {
+                        validationResults.add(ValidationUtils.generateSingleValidationResult(studyFactorAttribute + " factor is not used in the samples", SingleValidationResultStatus.Error));
                     }
                 }
             }
