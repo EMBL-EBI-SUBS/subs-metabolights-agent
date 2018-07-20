@@ -1,0 +1,866 @@
+[
+  {
+    "id": null,
+    "accession": null,
+    "alias": "Ex1-Col0-48h-Ag-1",
+    "team": {
+      "name": "ML_test_team",
+      "description": null,
+      "profile": {}
+    },
+    "title": "IPB Halle.Group-1.Subject-1",
+    "description": null,
+    "attributes": {
+      "Organism": [
+        {
+          "value": "Arabidopsis thaliana",
+          "units": null,
+          "terms": [
+            {
+              "url": "http://purl.obolibrary.org/obo/NCBITaxon_3702"
+            }
+          ]
+        }
+      ],
+      "technical replicate": [
+        {
+          "value": "Exp1",
+          "units": null,
+          "terms": []
+        }
+      ],
+      "Organism part": [
+        {
+          "value": "rosette leaf",
+          "units": null,
+          "terms": [
+            {
+              "url": "http://purl.obolibrary.org/obo/BTO_0003086"
+            }
+          ]
+        }
+      ],
+      "genotype": [
+        {
+          "value": "Col-0",
+          "units": null,
+          "terms": []
+        }
+      ]
+    },
+    "sampleRelationships": [],
+    "taxonId": 3702,
+    "taxon": "Arabidopsis thaliana",
+    "releaseDate": null
+  },
+  {
+    "id": null,
+    "accession": null,
+    "alias": "Ex1-Col0-48h-Ag-2",
+    "team": {
+      "name": "ML_test_team",
+      "description": null,
+      "profile": {}
+    },
+    "title": "IPB Halle.Group-1.Subject-2",
+    "description": null,
+    "attributes": {
+      "Organism": [
+        {
+          "value": "Arabidopsis thaliana",
+          "units": null,
+          "terms": [
+            {
+              "url": "http://purl.obolibrary.org/obo/NCBITaxon_3702"
+            }
+          ]
+        }
+      ],
+      "technical replicate": [
+        {
+          "value": "Exp1",
+          "units": null,
+          "terms": []
+        }
+      ],
+      "Organism part": [
+        {
+          "value": "rosette leaf",
+          "units": null,
+          "terms": [
+            {
+              "url": "http://purl.obolibrary.org/obo/BTO_0003086"
+            }
+          ]
+        }
+      ],
+      "genotype": [
+        {
+          "value": "Col-0",
+          "units": null,
+          "terms": []
+        }
+      ]
+    },
+    "sampleRelationships": [],
+    "taxonId": 3702,
+    "taxon": "Arabidopsis thaliana",
+    "releaseDate": null
+  },
+  {
+    "id": null,
+    "accession": null,
+    "alias": "Ex1-Col0-48h-Ag-3",
+    "team": {
+      "name": "ML_test_team",
+      "description": null,
+      "profile": {}
+    },
+    "title": "IPB Halle.Group-1.Subject-3",
+    "description": null,
+    "attributes": {
+      "Organism": [
+        {
+          "value": "Arabidopsis thaliana",
+          "units": null,
+          "terms": [
+            {
+              "url": "http://purl.obolibrary.org/obo/NCBITaxon_3702"
+            }
+          ]
+        }
+      ],
+      "technical replicate": [
+        {
+          "value": "Exp1",
+          "units": null,
+          "terms": []
+        }
+      ],
+      "Organism part": [
+        {
+          "value": "rosette leaf",
+          "units": null,
+          "terms": [
+            {
+              "url": "http://purl.obolibrary.org/obo/BTO_0003086"
+            }
+          ]
+        }
+      ],
+      "genotype": [
+        {
+          "value": "Col-0",
+          "units": null,
+          "terms": []
+        }
+      ]
+    },
+    "sampleRelationships": [],
+    "taxonId": 3702,
+    "taxon": "Arabidopsis thaliana",
+    "releaseDate": null
+  },
+  {
+    "id": null,
+    "accession": null,
+    "alias": "Ex1-Col0-48h-Ag-4",
+    "team": {
+      "name": "ML_test_team",
+      "description": null,
+      "profile": {}
+    },
+    "title": "IPB Halle.Group-1.Subject-4",
+    "description": null,
+    "attributes": {
+      "Organism": [
+        {
+          "value": "Arabidopsis thaliana",
+          "units": null,
+          "terms": [
+            {
+              "url": "http://purl.obolibrary.org/obo/NCBITaxon_3702"
+            }
+          ]
+        }
+      ],
+      "technical replicate": [
+        {
+          "value": "Exp1",
+          "units": null,
+          "terms": []
+        }
+      ],
+      "Organism part": [
+        {
+          "value": "rosette leaf",
+          "units": null,
+          "terms": [
+            {
+              "url": "http://purl.obolibrary.org/obo/BTO_0003086"
+            }
+          ]
+        }
+      ],
+      "genotype": [
+        {
+          "value": "Col-0",
+          "units": null,
+          "terms": []
+        }
+      ]
+    },
+    "sampleRelationships": [],
+    "taxonId": 3702,
+    "taxon": "Arabidopsis thaliana",
+    "releaseDate": null
+  },
+  {
+    "id": null,
+    "accession": null,
+    "alias": "Ex1-cyp79-48h-Ag-1",
+    "team": {
+      "name": "ML_test_team",
+      "description": null,
+      "profile": {}
+    },
+    "title": "IPB Halle.Group-2.Subject-1",
+    "description": null,
+    "attributes": {
+      "Organism": [
+        {
+          "value": "Arabidopsis thaliana",
+          "units": null,
+          "terms": [
+            {
+              "url": "http://purl.obolibrary.org/obo/NCBITaxon_3702"
+            }
+          ]
+        }
+      ],
+      "technical replicate": [
+        {
+          "value": "Exp1",
+          "units": null,
+          "terms": []
+        }
+      ],
+      "Organism part": [
+        {
+          "value": "rosette leaf",
+          "units": null,
+          "terms": [
+            {
+              "url": "http://purl.obolibrary.org/obo/BTO_0003086"
+            }
+          ]
+        }
+      ],
+      "genotype": [
+        {
+          "value": "cyp79",
+          "units": null,
+          "terms": []
+        }
+      ]
+    },
+    "sampleRelationships": [],
+    "taxonId": 3702,
+    "taxon": "Arabidopsis thaliana",
+    "releaseDate": null
+  },
+  {
+    "id": null,
+    "accession": null,
+    "alias": "Ex1-cyp79-48h-Ag-2",
+    "team": {
+      "name": "ML_test_team",
+      "description": null,
+      "profile": {}
+    },
+    "title": "IPB Halle.Group-2.Subject-2",
+    "description": null,
+    "attributes": {
+      "Organism": [
+        {
+          "value": "Arabidopsis thaliana",
+          "units": null,
+          "terms": [
+            {
+              "url": "http://purl.obolibrary.org/obo/NCBITaxon_3702"
+            }
+          ]
+        }
+      ],
+      "technical replicate": [
+        {
+          "value": "Exp1",
+          "units": null,
+          "terms": []
+        }
+      ],
+      "Organism part": [
+        {
+          "value": "rosette leaf",
+          "units": null,
+          "terms": [
+            {
+              "url": "http://purl.obolibrary.org/obo/BTO_0003086"
+            }
+          ]
+        }
+      ],
+      "genotype": [
+        {
+          "value": "cyp79",
+          "units": null,
+          "terms": []
+        }
+      ]
+    },
+    "sampleRelationships": [],
+    "taxonId": 3702,
+    "taxon": "Arabidopsis thaliana",
+    "releaseDate": null
+  },
+  {
+    "id": null,
+    "accession": null,
+    "alias": "Ex1-cyp79-48h-Ag-3",
+    "team": {
+      "name": "ML_test_team",
+      "description": null,
+      "profile": {}
+    },
+    "title": "IPB Halle.Group-2.Subject-3",
+    "description": null,
+    "attributes": {
+      "Organism": [
+        {
+          "value": "Arabidopsis thaliana",
+          "units": null,
+          "terms": [
+            {
+              "url": "http://purl.obolibrary.org/obo/NCBITaxon_3702"
+            }
+          ]
+        }
+      ],
+      "technical replicate": [
+        {
+          "value": "Exp1",
+          "units": null,
+          "terms": []
+        }
+      ],
+      "Organism part": [
+        {
+          "value": "rosette leaf",
+          "units": null,
+          "terms": [
+            {
+              "url": "http://purl.obolibrary.org/obo/BTO_0003086"
+            }
+          ]
+        }
+      ],
+      "genotype": [
+        {
+          "value": "cyp79",
+          "units": null,
+          "terms": []
+        }
+      ]
+    },
+    "sampleRelationships": [],
+    "taxonId": 3702,
+    "taxon": "Arabidopsis thaliana",
+    "releaseDate": null
+  },
+  {
+    "id": null,
+    "accession": null,
+    "alias": "Ex1-cyp79-48h-Ag-4",
+    "team": {
+      "name": "ML_test_team",
+      "description": null,
+      "profile": {}
+    },
+    "title": "IPB Halle.Group-2.Subject-4",
+    "description": null,
+    "attributes": {
+      "Organism": [
+        {
+          "value": "Arabidopsis thaliana",
+          "units": null,
+          "terms": [
+            {
+              "url": "http://purl.obolibrary.org/obo/NCBITaxon_3702"
+            }
+          ]
+        }
+      ],
+      "technical replicate": [
+        {
+          "value": "Exp1",
+          "units": null,
+          "terms": []
+        }
+      ],
+      "Organism part": [
+        {
+          "value": "rosette leaf",
+          "units": null,
+          "terms": [
+            {
+              "url": "http://purl.obolibrary.org/obo/BTO_0003086"
+            }
+          ]
+        }
+      ],
+      "genotype": [
+        {
+          "value": "cyp79",
+          "units": null,
+          "terms": []
+        }
+      ]
+    },
+    "sampleRelationships": [],
+    "taxonId": 3702,
+    "taxon": "Arabidopsis thaliana",
+    "releaseDate": null
+  },
+  {
+    "id": null,
+    "accession": null,
+    "alias": "Ex2-Col0-48h-Ag-1",
+    "team": {
+      "name": "ML_test_team",
+      "description": null,
+      "profile": {}
+    },
+    "title": "IPB Halle.Group-3.Subject-1",
+    "description": null,
+    "attributes": {
+      "Organism": [
+        {
+          "value": "Arabidopsis thaliana",
+          "units": null,
+          "terms": [
+            {
+              "url": "http://purl.obolibrary.org/obo/NCBITaxon_3702"
+            }
+          ]
+        }
+      ],
+      "technical replicate": [
+        {
+          "value": "Exp2",
+          "units": null,
+          "terms": []
+        }
+      ],
+      "Organism part": [
+        {
+          "value": "rosette leaf",
+          "units": null,
+          "terms": [
+            {
+              "url": "http://purl.obolibrary.org/obo/BTO_0003086"
+            }
+          ]
+        }
+      ],
+      "genotype": [
+        {
+          "value": "Col-0",
+          "units": null,
+          "terms": []
+        }
+      ]
+    },
+    "sampleRelationships": [],
+    "taxonId": 3702,
+    "taxon": "Arabidopsis thaliana",
+    "releaseDate": null
+  },
+  {
+    "id": null,
+    "accession": null,
+    "alias": "Ex2-Col0-48h-Ag-2",
+    "team": {
+      "name": "ML_test_team",
+      "description": null,
+      "profile": {}
+    },
+    "title": "IPB Halle.Group-3.Subject-2",
+    "description": null,
+    "attributes": {
+      "Organism": [
+        {
+          "value": "Arabidopsis thaliana",
+          "units": null,
+          "terms": [
+            {
+              "url": "http://purl.obolibrary.org/obo/NCBITaxon_3702"
+            }
+          ]
+        }
+      ],
+      "technical replicate": [
+        {
+          "value": "Exp2",
+          "units": null,
+          "terms": []
+        }
+      ],
+      "Organism part": [
+        {
+          "value": "rosette leaf",
+          "units": null,
+          "terms": [
+            {
+              "url": "http://purl.obolibrary.org/obo/BTO_0003086"
+            }
+          ]
+        }
+      ],
+      "genotype": [
+        {
+          "value": "Col-0",
+          "units": null,
+          "terms": []
+        }
+      ]
+    },
+    "sampleRelationships": [],
+    "taxonId": 3702,
+    "taxon": "Arabidopsis thaliana",
+    "releaseDate": null
+  },
+  {
+    "id": null,
+    "accession": null,
+    "alias": "Ex2-Col0-48h-Ag-3",
+    "team": {
+      "name": "ML_test_team",
+      "description": null,
+      "profile": {}
+    },
+    "title": "IPB Halle.Group-3.Subject-3",
+    "description": null,
+    "attributes": {
+      "Organism": [
+        {
+          "value": "Arabidopsis thaliana",
+          "units": null,
+          "terms": [
+            {
+              "url": "http://purl.obolibrary.org/obo/NCBITaxon_3702"
+            }
+          ]
+        }
+      ],
+      "technical replicate": [
+        {
+          "value": "Exp2",
+          "units": null,
+          "terms": []
+        }
+      ],
+      "Organism part": [
+        {
+          "value": "rosette leaf",
+          "units": null,
+          "terms": [
+            {
+              "url": "http://purl.obolibrary.org/obo/BTO_0003086"
+            }
+          ]
+        }
+      ],
+      "genotype": [
+        {
+          "value": "Col-0",
+          "units": null,
+          "terms": []
+        }
+      ]
+    },
+    "sampleRelationships": [],
+    "taxonId": 3702,
+    "taxon": "Arabidopsis thaliana",
+    "releaseDate": null
+  },
+  {
+    "id": null,
+    "accession": null,
+    "alias": "Ex2-Col0-48h-Ag-4",
+    "team": {
+      "name": "ML_test_team",
+      "description": null,
+      "profile": {}
+    },
+    "title": "IPB Halle.Group-3.Subject-4",
+    "description": null,
+    "attributes": {
+      "Organism": [
+        {
+          "value": "Arabidopsis thaliana",
+          "units": null,
+          "terms": [
+            {
+              "url": "http://purl.obolibrary.org/obo/NCBITaxon_3702"
+            }
+          ]
+        }
+      ],
+      "technical replicate": [
+        {
+          "value": "Exp2",
+          "units": null,
+          "terms": []
+        }
+      ],
+      "Organism part": [
+        {
+          "value": "rosette leaf",
+          "units": null,
+          "terms": [
+            {
+              "url": "http://purl.obolibrary.org/obo/BTO_0003086"
+            }
+          ]
+        }
+      ],
+      "genotype": [
+        {
+          "value": "Col-0",
+          "units": null,
+          "terms": []
+        }
+      ]
+    },
+    "sampleRelationships": [],
+    "taxonId": 3702,
+    "taxon": "Arabidopsis thaliana",
+    "releaseDate": null
+  },
+  {
+    "id": null,
+    "accession": null,
+    "alias": "Ex2-cyp79-48h-Ag-1",
+    "team": {
+      "name": "ML_test_team",
+      "description": null,
+      "profile": {}
+    },
+    "title": "IPB Halle.Group-4.Subject-1",
+    "description": null,
+    "attributes": {
+      "Organism": [
+        {
+          "value": "Arabidopsis thaliana",
+          "units": null,
+          "terms": [
+            {
+              "url": "http://purl.obolibrary.org/obo/NCBITaxon_3702"
+            }
+          ]
+        }
+      ],
+      "technical replicate": [
+        {
+          "value": "Exp2",
+          "units": null,
+          "terms": []
+        }
+      ],
+      "Organism part": [
+        {
+          "value": "rosette leaf",
+          "units": null,
+          "terms": [
+            {
+              "url": "http://purl.obolibrary.org/obo/BTO_0003086"
+            }
+          ]
+        }
+      ],
+      "genotype": [
+        {
+          "value": "cyp79",
+          "units": null,
+          "terms": []
+        }
+      ]
+    },
+    "sampleRelationships": [],
+    "taxonId": 3702,
+    "taxon": "Arabidopsis thaliana",
+    "releaseDate": null
+  },
+  {
+    "id": null,
+    "accession": null,
+    "alias": "Ex2-cyp79-48h-Ag-2",
+    "team": {
+      "name": "ML_test_team",
+      "description": null,
+      "profile": {}
+    },
+    "title": "IPB Halle.Group-4.Subject-2",
+    "description": null,
+    "attributes": {
+      "Organism": [
+        {
+          "value": "Arabidopsis thaliana",
+          "units": null,
+          "terms": [
+            {
+              "url": "http://purl.obolibrary.org/obo/NCBITaxon_3702"
+            }
+          ]
+        }
+      ],
+      "technical replicate": [
+        {
+          "value": "Exp2",
+          "units": null,
+          "terms": []
+        }
+      ],
+      "Organism part": [
+        {
+          "value": "rosette leaf",
+          "units": null,
+          "terms": [
+            {
+              "url": "http://purl.obolibrary.org/obo/BTO_0003086"
+            }
+          ]
+        }
+      ],
+      "genotype": [
+        {
+          "value": "cyp79",
+          "units": null,
+          "terms": []
+        }
+      ]
+    },
+    "sampleRelationships": [],
+    "taxonId": 3702,
+    "taxon": "Arabidopsis thaliana",
+    "releaseDate": null
+  },
+  {
+    "id": null,
+    "accession": null,
+    "alias": "Ex2-cyp79-48h-Ag-3",
+    "team": {
+      "name": "ML_test_team",
+      "description": null,
+      "profile": {}
+    },
+    "title": "IPB Halle.Group-4.Subject-3",
+    "description": null,
+    "attributes": {
+      "Organism": [
+        {
+          "value": "Arabidopsis thaliana",
+          "units": null,
+          "terms": [
+            {
+              "url": "http://purl.obolibrary.org/obo/NCBITaxon_3702"
+            }
+          ]
+        }
+      ],
+      "technical replicate": [
+        {
+          "value": "Exp2",
+          "units": null,
+          "terms": []
+        }
+      ],
+      "Organism part": [
+        {
+          "value": "rosette leaf",
+          "units": null,
+          "terms": [
+            {
+              "url": "http://purl.obolibrary.org/obo/BTO_0003086"
+            }
+          ]
+        }
+      ],
+      "genotype": [
+        {
+          "value": "cyp79",
+          "units": null,
+          "terms": []
+        }
+      ]
+    },
+    "sampleRelationships": [],
+    "taxonId": 3702,
+    "taxon": "Arabidopsis thaliana",
+    "releaseDate": null
+  },
+  {
+    "id": null,
+    "accession": null,
+    "alias": "Ex2-cyp79-48h-Ag-4",
+    "team": {
+      "name": "ML_test_team",
+      "description": null,
+      "profile": {}
+    },
+    "title": "IPB Halle.Group-4.Subject-4",
+    "description": null,
+    "attributes": {
+      "Organism": [
+        {
+          "value": "Arabidopsis thaliana",
+          "units": null,
+          "terms": [
+            {
+              "url": "http://purl.obolibrary.org/obo/NCBITaxon_3702"
+            }
+          ]
+        }
+      ],
+      "technical replicate": [
+        {
+          "value": "Exp2",
+          "units": null,
+          "terms": []
+        }
+      ],
+      "Organism part": [
+        {
+          "value": "rosette leaf",
+          "units": null,
+          "terms": [
+            {
+              "url": "http://purl.obolibrary.org/obo/BTO_0003086"
+            }
+          ]
+        }
+      ],
+      "genotype": [
+        {
+          "value": "cyp79",
+          "units": null,
+          "terms": []
+        }
+      ]
+    },
+    "sampleRelationships": [],
+    "taxonId": 3702,
+    "taxon": "Arabidopsis thaliana",
+    "releaseDate": null
+  }
+]
