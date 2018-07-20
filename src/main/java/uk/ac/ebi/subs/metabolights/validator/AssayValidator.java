@@ -23,12 +23,13 @@ public class AssayValidator {
         Map<String, Collection<Attribute>> factors = getFactorsFrom(envelope.getStudy());
         List<Submittable<Sample>> sampleList = envelope.getSampleList();
         if (factors.isEmpty()) {
-            validationResults.add(ValidationUtils.generateSingleValidationResult("No study factors found", SingleValidationResultStatus.Error));
-        } else {
-            if (sampleList != null && !sampleList.isEmpty()) {
+            validationResults.add(ValidationUtils.generateSingleValidationResult("No study factors found in the Study", SingleValidationResultStatus.Error));
+        }
+        if (sampleList == null || sampleList.isEmpty()) {
+            validationResults.add(ValidationUtils.generateSingleValidationResult("No samples found in assays", SingleValidationResultStatus.Error));
+        } else{
+            if(factors!= null && !factors.isEmpty()){
                 validationResults.addAll(validateFactorsUseInSamples(factors, sampleList));
-            } else {
-                validationResults.add(ValidationUtils.generateSingleValidationResult("No samples found in assays", SingleValidationResultStatus.Error));
             }
         }
         return validationResults;
@@ -51,7 +52,7 @@ public class AssayValidator {
         for (Submittable<Sample> sample : sampleList) {
             Map<String, Collection<Attribute>> sampleFactors = getFactors(sample);
             if (sampleFactors.isEmpty()) {
-                validationResults.add(ValidationUtils.generateSingleValidationResult(sample.getAlias() + " has no factors referenced from studies", SingleValidationResultStatus.Error));
+                validationResults.add(ValidationUtils.generateSingleValidationResult("Sample - " + sample.getAlias() + " - has no reference to the factors given in the Study", SingleValidationResultStatus.Error));
             } else {
                 for (Attribute studyFactorAttribute : factors.get("factors")) {
                     boolean facotorUsed = false;
@@ -60,17 +61,20 @@ public class AssayValidator {
                         The Key in the Sample factor is equal to the Attribute Value in the Study factor collection
                          */
                         if (factorName.equalsIgnoreCase(studyFactorAttribute.getValue())) {
+                            facotorUsed = true;
                             Collection<Attribute> attributes = sampleFactors.get(factorName);
                             if (attributes.size() > 0) {
                                 Attribute sampleAttribute = attributes.iterator().next();
-                                if (sampleAttribute.getValue() != null || !sampleAttribute.getValue().isEmpty()) {
-                                    facotorUsed = true;
+                                if (sampleAttribute.getValue() == null || sampleAttribute.getValue().isEmpty()) {
+                                    validationResults.add(ValidationUtils.generateSingleValidationResult("Factor - " + studyFactorAttribute.getValue() + " - is used in the sample - " + sample.getAlias() + " - but has no value provided", SingleValidationResultStatus.Error));
                                 }
+                            } else {
+                                validationResults.add(ValidationUtils.generateSingleValidationResult("Factor - " + studyFactorAttribute.getValue() + " - is used in the sample - " + sample.getAlias() + " - but has no value provided", SingleValidationResultStatus.Error));
                             }
                         }
                     }
                     if (!facotorUsed) {
-                        validationResults.add(ValidationUtils.generateSingleValidationResult( "Factor - " + studyFactorAttribute.getValue()  + " - is not used in the sample - " +  sample.getAlias(), SingleValidationResultStatus.Error));
+                        validationResults.add(ValidationUtils.generateSingleValidationResult("Factor - " + studyFactorAttribute.getValue() + " - is not used in the sample - " + sample.getAlias(), SingleValidationResultStatus.Error));
                     }
                 }
             }
@@ -82,12 +86,12 @@ public class AssayValidator {
     public Map<String, Collection<Attribute>> getFactors(Submittable<Sample> sample) {
         Map<String, Collection<Attribute>> factors = new HashMap<>();
         if (sample.getAttributes() != null && !sample.getAttributes().isEmpty()) {
-            for(Map.Entry<String,Collection<Attribute>> entry : sample.getAttributes().entrySet()){
+            for (Map.Entry<String, Collection<Attribute>> entry : sample.getAttributes().entrySet()) {
                 if (!entry.getKey().equalsIgnoreCase("Organism") && !entry.getKey().equalsIgnoreCase("Organism part")) {
-                    factors.put(entry.getKey(),entry.getValue());
+                    factors.put(entry.getKey(), entry.getValue());
                 }
             }
-         }
+        }
         return factors;
     }
 
