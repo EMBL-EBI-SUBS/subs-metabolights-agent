@@ -2,26 +2,33 @@
   "submission": {
     "id": null,
     "submitter": {
-      "email": null
+      "email": null,
+      "name": null
     },
     "team": {
-      "name": "ML_test_team"
+      "name": "ML_test_team",
+      "description": null,
+      "profile": {}
     },
     "submissionDate": "2012-01-22"
   },
   "supportingSamplesRequired": [],
   "supportingSamples": [],
+  "uploadedFiles": [],
   "analyses": [
     {
       "id": null,
       "accession": null,
       "alias": null,
       "team": {
-        "name": "ML_test_team"
+        "name": "ML_test_team",
+        "description": null,
+        "profile": {}
       },
       "title": null,
       "description": null,
       "attributes": {},
+      "analysisType": null,
       "analysisRefs": [],
       "assayDataRefs": [
         {
@@ -265,7 +272,9 @@
       "accession": null,
       "alias": "a_mtbl2_metabolite profiling_mass spectrometry.txt",
       "team": {
-        "name": "ML_test_team"
+        "name": "ML_test_team",
+        "description": null,
+        "profile": {}
       },
       "title": null,
       "description": null,
@@ -493,7 +502,9 @@
       "accession": null,
       "alias": "MSpos-Ex1-Col0-48h-Ag-1_1-A,1_01_9818.mzData",
       "team": {
-        "name": "ML_test_team"
+        "name": "ML_test_team",
+        "description": null,
+        "profile": {}
       },
       "title": null,
       "description": null,
@@ -521,7 +532,9 @@
       "accession": null,
       "alias": "MSpos-Ex1-Col0-48h-Ag-2_1-A,1_01_9820.mzData",
       "team": {
-        "name": "ML_test_team"
+        "name": "ML_test_team",
+        "description": null,
+        "profile": {}
       },
       "title": null,
       "description": null,
@@ -549,7 +562,9 @@
       "accession": null,
       "alias": "MSpos-Ex1-Col0-48h-Ag-3_1-A,1_01_9822.mzData",
       "team": {
-        "name": "ML_test_team"
+        "name": "ML_test_team",
+        "description": null,
+        "profile": {}
       },
       "title": null,
       "description": null,
@@ -577,7 +592,9 @@
       "accession": null,
       "alias": "MSpos-Ex1-Col0-48h-Ag-4_1-A,1_01_9824.mzData",
       "team": {
-        "name": "ML_test_team"
+        "name": "ML_test_team",
+        "description": null,
+        "profile": {}
       },
       "title": null,
       "description": null,
@@ -605,7 +622,9 @@
       "accession": null,
       "alias": "MSpos-Ex1-cyp79-48h-Ag-1_1-B,1_01_9819.mzData",
       "team": {
-        "name": "ML_test_team"
+        "name": "ML_test_team",
+        "description": null,
+        "profile": {}
       },
       "title": null,
       "description": null,
@@ -633,7 +652,9 @@
       "accession": null,
       "alias": "MSpos-Ex1-cyp79-48h-Ag-2_1-B,2_01_9821.mzData",
       "team": {
-        "name": "ML_test_team"
+        "name": "ML_test_team",
+        "description": null,
+        "profile": {}
       },
       "title": null,
       "description": null,
@@ -661,7 +682,9 @@
       "accession": null,
       "alias": "MSpos-Ex1-cyp79-48h-Ag-3_1-B,1_01_9823.mzData",
       "team": {
-        "name": "ML_test_team"
+        "name": "ML_test_team",
+        "description": null,
+        "profile": {}
       },
       "title": null,
       "description": null,
@@ -689,7 +712,9 @@
       "accession": null,
       "alias": "MSpos-Ex1-cyp79-48h-Ag-4_1-B,2_01_9825.mzData",
       "team": {
-        "name": "ML_test_team"
+        "name": "ML_test_team",
+        "description": null,
+        "profile": {}
       },
       "title": null,
       "description": null,
@@ -717,7 +742,9 @@
       "accession": null,
       "alias": "MSpos-Ex2-Col0-48h-Ag-1_1-A,2_01_9827.mzData",
       "team": {
-        "name": "ML_test_team"
+        "name": "ML_test_team",
+        "description": null,
+        "profile": {}
       },
       "title": null,
       "description": null,
@@ -745,7 +772,9 @@
       "accession": null,
       "alias": "MSpos-Ex2-Col0-48h-Ag-2_1-A,3_01_9829.mzData",
       "team": {
-        "name": "ML_test_team"
+        "name": "ML_test_team",
+        "description": null,
+        "profile": {}
       },
       "title": null,
       "description": null,
@@ -773,7 +802,9 @@
       "accession": null,
       "alias": "MSpos-Ex2-Col0-48h-Ag-3_1-A,4_01_9831.mzData",
       "team": {
-        "name": "ML_test_team"
+        "name": "ML_test_team",
+        "description": null,
+        "profile": {}
       },
       "title": null,
       "description": null,
@@ -801,7 +832,9 @@
       "accession": null,
       "alias": "MSpos-Ex2-Col0-48h-Ag-4_1-A,2_01_9833.mzData",
       "team": {
-        "name": "ML_test_team"
+        "name": "ML_test_team",
+        "description": null,
+        "profile": {}
       },
       "title": null,
       "description": null,
@@ -829,7 +862,9 @@
       "accession": null,
       "alias": "MSpos-Ex2-cyp79-48h-Ag-1_1-B,3_01_9828.mzData",
       "team": {
-        "name": "ML_test_team"
+        "name": "ML_test_team",
+        "description": null,
+        "profile": {}
       },
       "title": null,
       "description": null,
@@ -857,7 +892,9 @@
       "accession": null,
       "alias": "MSpos-Ex2-cyp79-48h-Ag-2_1-B,4_01_9830.mzData",
       "team": {
-        "name": "ML_test_team"
+        "name": "ML_test_team",
+        "description": null,
+        "profile": {}
       },
       "title": null,
       "description": null,
@@ -885,7 +922,9 @@
       "accession": null,
       "alias": "MSpos-Ex2-cyp79-48h-Ag-3_1-B,3_01_9832.mzData",
       "team": {
-        "name": "ML_test_team"
+        "name": "ML_test_team",
+        "description": null,
+        "profile": {}
       },
       "title": null,
       "description": null,
@@ -913,7 +952,9 @@
       "accession": null,
       "alias": "MSpos-Ex2-cyp79-48h-Ag-4_1-B,4_01_9834.mzData",
       "team": {
-        "name": "ML_test_team"
+        "name": "ML_test_team",
+        "description": null,
+        "profile": {}
       },
       "title": null,
       "description": null,
@@ -941,7 +982,9 @@
       "accession": null,
       "alias": "m_mtbl2_metabolite profiling_mass spectrometry_v2_maf.tsv",
       "team": {
-        "name": "ML_test_team"
+        "name": "ML_test_team",
+        "description": null,
+        "profile": {}
       },
       "title": null,
       "description": null,
@@ -974,7 +1017,9 @@
       "accession": "MTBLS2",
       "alias": null,
       "team": {
-        "name": "ML_test_team"
+        "name": "ML_test_team",
+        "description": null,
+        "profile": {}
       },
       "title": "Investigation",
       "description": "",
@@ -1037,7 +1082,20 @@
           "status": "Published"
         }
       ],
-      "releaseDate": "2012-05-22"
+      "releaseDate": {
+        "year": 2012,
+        "month": "MAY",
+        "chronology": {
+          "id": "ISO",
+          "calendarType": "iso8601"
+        },
+        "dayOfMonth": 22,
+        "dayOfWeek": "TUESDAY",
+        "era": "CE",
+        "monthValue": 5,
+        "leapYear": true,
+        "dayOfYear": 143
+      }
     }
   ],
   "samples": [
@@ -1046,22 +1104,13 @@
       "accession": null,
       "alias": "Ex1-Col0-48h-Ag-1",
       "team": {
-        "name": "ML_test_team"
+        "name": "ML_test_team",
+        "description": null,
+        "profile": {}
       },
       "title": "IPB Halle.Group-1.Subject-1",
       "description": null,
       "attributes": {
-        "replicate": [
-          {
-            "value": "Exp1",
-            "units": null,
-            "terms": [
-              {
-                "url": "http://www.ebi.ac.uk/efo/EFO_0002090"
-              }
-            ]
-          }
-        ],
         "Organism": [
           {
             "value": "Arabidopsis thaliana",
@@ -1071,6 +1120,13 @@
                 "url": "http://purl.obolibrary.org/obo/NCBITaxon_3702"
               }
             ]
+          }
+        ],
+        "technical replicate": [
+          {
+            "value": "Exp1",
+            "units": null,
+            "terms": []
           }
         ],
         "Organism part": [
@@ -1088,11 +1144,7 @@
           {
             "value": "Col-0",
             "units": null,
-            "terms": [
-              {
-                "url": "http://www.ebi.ac.uk/efo/EFO_0000513"
-              }
-            ]
+            "terms": []
           }
         ]
       },
@@ -1106,22 +1158,13 @@
       "accession": null,
       "alias": "Ex1-Col0-48h-Ag-2",
       "team": {
-        "name": "ML_test_team"
+        "name": "ML_test_team",
+        "description": null,
+        "profile": {}
       },
       "title": "IPB Halle.Group-1.Subject-2",
       "description": null,
       "attributes": {
-        "replicate": [
-          {
-            "value": "Exp1",
-            "units": null,
-            "terms": [
-              {
-                "url": "http://www.ebi.ac.uk/efo/EFO_0002090"
-              }
-            ]
-          }
-        ],
         "Organism": [
           {
             "value": "Arabidopsis thaliana",
@@ -1131,6 +1174,13 @@
                 "url": "http://purl.obolibrary.org/obo/NCBITaxon_3702"
               }
             ]
+          }
+        ],
+        "technical replicate": [
+          {
+            "value": "Exp1",
+            "units": null,
+            "terms": []
           }
         ],
         "Organism part": [
@@ -1148,11 +1198,7 @@
           {
             "value": "Col-0",
             "units": null,
-            "terms": [
-              {
-                "url": "http://www.ebi.ac.uk/efo/EFO_0000513"
-              }
-            ]
+            "terms": []
           }
         ]
       },
@@ -1166,22 +1212,13 @@
       "accession": null,
       "alias": "Ex1-Col0-48h-Ag-3",
       "team": {
-        "name": "ML_test_team"
+        "name": "ML_test_team",
+        "description": null,
+        "profile": {}
       },
       "title": "IPB Halle.Group-1.Subject-3",
       "description": null,
       "attributes": {
-        "replicate": [
-          {
-            "value": "Exp1",
-            "units": null,
-            "terms": [
-              {
-                "url": "http://www.ebi.ac.uk/efo/EFO_0002090"
-              }
-            ]
-          }
-        ],
         "Organism": [
           {
             "value": "Arabidopsis thaliana",
@@ -1191,6 +1228,13 @@
                 "url": "http://purl.obolibrary.org/obo/NCBITaxon_3702"
               }
             ]
+          }
+        ],
+        "technical replicate": [
+          {
+            "value": "Exp1",
+            "units": null,
+            "terms": []
           }
         ],
         "Organism part": [
@@ -1208,11 +1252,7 @@
           {
             "value": "Col-0",
             "units": null,
-            "terms": [
-              {
-                "url": "http://www.ebi.ac.uk/efo/EFO_0000513"
-              }
-            ]
+            "terms": []
           }
         ]
       },
@@ -1226,22 +1266,13 @@
       "accession": null,
       "alias": "Ex1-Col0-48h-Ag-4",
       "team": {
-        "name": "ML_test_team"
+        "name": "ML_test_team",
+        "description": null,
+        "profile": {}
       },
       "title": "IPB Halle.Group-1.Subject-4",
       "description": null,
       "attributes": {
-        "replicate": [
-          {
-            "value": "Exp1",
-            "units": null,
-            "terms": [
-              {
-                "url": "http://www.ebi.ac.uk/efo/EFO_0002090"
-              }
-            ]
-          }
-        ],
         "Organism": [
           {
             "value": "Arabidopsis thaliana",
@@ -1251,6 +1282,13 @@
                 "url": "http://purl.obolibrary.org/obo/NCBITaxon_3702"
               }
             ]
+          }
+        ],
+        "technical replicate": [
+          {
+            "value": "Exp1",
+            "units": null,
+            "terms": []
           }
         ],
         "Organism part": [
@@ -1268,11 +1306,7 @@
           {
             "value": "Col-0",
             "units": null,
-            "terms": [
-              {
-                "url": "http://www.ebi.ac.uk/efo/EFO_0000513"
-              }
-            ]
+            "terms": []
           }
         ]
       },
@@ -1286,22 +1320,13 @@
       "accession": null,
       "alias": "Ex1-cyp79-48h-Ag-1",
       "team": {
-        "name": "ML_test_team"
+        "name": "ML_test_team",
+        "description": null,
+        "profile": {}
       },
       "title": "IPB Halle.Group-2.Subject-1",
       "description": null,
       "attributes": {
-        "replicate": [
-          {
-            "value": "Exp1",
-            "units": null,
-            "terms": [
-              {
-                "url": "http://www.ebi.ac.uk/efo/EFO_0002090"
-              }
-            ]
-          }
-        ],
         "Organism": [
           {
             "value": "Arabidopsis thaliana",
@@ -1311,6 +1336,13 @@
                 "url": "http://purl.obolibrary.org/obo/NCBITaxon_3702"
               }
             ]
+          }
+        ],
+        "technical replicate": [
+          {
+            "value": "Exp1",
+            "units": null,
+            "terms": []
           }
         ],
         "Organism part": [
@@ -1328,11 +1360,7 @@
           {
             "value": "cyp79",
             "units": null,
-            "terms": [
-              {
-                "url": "http://www.ebi.ac.uk/efo/EFO_0000513"
-              }
-            ]
+            "terms": []
           }
         ]
       },
@@ -1346,22 +1374,13 @@
       "accession": null,
       "alias": "Ex1-cyp79-48h-Ag-2",
       "team": {
-        "name": "ML_test_team"
+        "name": "ML_test_team",
+        "description": null,
+        "profile": {}
       },
       "title": "IPB Halle.Group-2.Subject-2",
       "description": null,
       "attributes": {
-        "replicate": [
-          {
-            "value": "Exp1",
-            "units": null,
-            "terms": [
-              {
-                "url": "http://www.ebi.ac.uk/efo/EFO_0002090"
-              }
-            ]
-          }
-        ],
         "Organism": [
           {
             "value": "Arabidopsis thaliana",
@@ -1371,6 +1390,13 @@
                 "url": "http://purl.obolibrary.org/obo/NCBITaxon_3702"
               }
             ]
+          }
+        ],
+        "technical replicate": [
+          {
+            "value": "Exp1",
+            "units": null,
+            "terms": []
           }
         ],
         "Organism part": [
@@ -1388,11 +1414,7 @@
           {
             "value": "cyp79",
             "units": null,
-            "terms": [
-              {
-                "url": "http://www.ebi.ac.uk/efo/EFO_0000513"
-              }
-            ]
+            "terms": []
           }
         ]
       },
@@ -1406,22 +1428,13 @@
       "accession": null,
       "alias": "Ex1-cyp79-48h-Ag-3",
       "team": {
-        "name": "ML_test_team"
+        "name": "ML_test_team",
+        "description": null,
+        "profile": {}
       },
       "title": "IPB Halle.Group-2.Subject-3",
       "description": null,
       "attributes": {
-        "replicate": [
-          {
-            "value": "Exp1",
-            "units": null,
-            "terms": [
-              {
-                "url": "http://www.ebi.ac.uk/efo/EFO_0002090"
-              }
-            ]
-          }
-        ],
         "Organism": [
           {
             "value": "Arabidopsis thaliana",
@@ -1431,6 +1444,13 @@
                 "url": "http://purl.obolibrary.org/obo/NCBITaxon_3702"
               }
             ]
+          }
+        ],
+        "technical replicate": [
+          {
+            "value": "Exp1",
+            "units": null,
+            "terms": []
           }
         ],
         "Organism part": [
@@ -1448,11 +1468,7 @@
           {
             "value": "cyp79",
             "units": null,
-            "terms": [
-              {
-                "url": "http://www.ebi.ac.uk/efo/EFO_0000513"
-              }
-            ]
+            "terms": []
           }
         ]
       },
@@ -1466,22 +1482,13 @@
       "accession": null,
       "alias": "Ex1-cyp79-48h-Ag-4",
       "team": {
-        "name": "ML_test_team"
+        "name": "ML_test_team",
+        "description": null,
+        "profile": {}
       },
       "title": "IPB Halle.Group-2.Subject-4",
       "description": null,
       "attributes": {
-        "replicate": [
-          {
-            "value": "Exp1",
-            "units": null,
-            "terms": [
-              {
-                "url": "http://www.ebi.ac.uk/efo/EFO_0002090"
-              }
-            ]
-          }
-        ],
         "Organism": [
           {
             "value": "Arabidopsis thaliana",
@@ -1491,6 +1498,13 @@
                 "url": "http://purl.obolibrary.org/obo/NCBITaxon_3702"
               }
             ]
+          }
+        ],
+        "technical replicate": [
+          {
+            "value": "Exp1",
+            "units": null,
+            "terms": []
           }
         ],
         "Organism part": [
@@ -1508,11 +1522,7 @@
           {
             "value": "cyp79",
             "units": null,
-            "terms": [
-              {
-                "url": "http://www.ebi.ac.uk/efo/EFO_0000513"
-              }
-            ]
+            "terms": []
           }
         ]
       },
@@ -1526,22 +1536,13 @@
       "accession": null,
       "alias": "Ex2-Col0-48h-Ag-1",
       "team": {
-        "name": "ML_test_team"
+        "name": "ML_test_team",
+        "description": null,
+        "profile": {}
       },
       "title": "IPB Halle.Group-3.Subject-1",
       "description": null,
       "attributes": {
-        "replicate": [
-          {
-            "value": "Exp2",
-            "units": null,
-            "terms": [
-              {
-                "url": "http://www.ebi.ac.uk/efo/EFO_0002090"
-              }
-            ]
-          }
-        ],
         "Organism": [
           {
             "value": "Arabidopsis thaliana",
@@ -1551,6 +1552,13 @@
                 "url": "http://purl.obolibrary.org/obo/NCBITaxon_3702"
               }
             ]
+          }
+        ],
+        "technical replicate": [
+          {
+            "value": "Exp2",
+            "units": null,
+            "terms": []
           }
         ],
         "Organism part": [
@@ -1568,11 +1576,7 @@
           {
             "value": "Col-0",
             "units": null,
-            "terms": [
-              {
-                "url": "http://www.ebi.ac.uk/efo/EFO_0000513"
-              }
-            ]
+            "terms": []
           }
         ]
       },
@@ -1586,22 +1590,13 @@
       "accession": null,
       "alias": "Ex2-Col0-48h-Ag-2",
       "team": {
-        "name": "ML_test_team"
+        "name": "ML_test_team",
+        "description": null,
+        "profile": {}
       },
       "title": "IPB Halle.Group-3.Subject-2",
       "description": null,
       "attributes": {
-        "replicate": [
-          {
-            "value": "Exp2",
-            "units": null,
-            "terms": [
-              {
-                "url": "http://www.ebi.ac.uk/efo/EFO_0002090"
-              }
-            ]
-          }
-        ],
         "Organism": [
           {
             "value": "Arabidopsis thaliana",
@@ -1611,6 +1606,13 @@
                 "url": "http://purl.obolibrary.org/obo/NCBITaxon_3702"
               }
             ]
+          }
+        ],
+        "technical replicate": [
+          {
+            "value": "Exp2",
+            "units": null,
+            "terms": []
           }
         ],
         "Organism part": [
@@ -1628,11 +1630,7 @@
           {
             "value": "Col-0",
             "units": null,
-            "terms": [
-              {
-                "url": "http://www.ebi.ac.uk/efo/EFO_0000513"
-              }
-            ]
+            "terms": []
           }
         ]
       },
@@ -1646,22 +1644,13 @@
       "accession": null,
       "alias": "Ex2-Col0-48h-Ag-3",
       "team": {
-        "name": "ML_test_team"
+        "name": "ML_test_team",
+        "description": null,
+        "profile": {}
       },
       "title": "IPB Halle.Group-3.Subject-3",
       "description": null,
       "attributes": {
-        "replicate": [
-          {
-            "value": "Exp2",
-            "units": null,
-            "terms": [
-              {
-                "url": "http://www.ebi.ac.uk/efo/EFO_0002090"
-              }
-            ]
-          }
-        ],
         "Organism": [
           {
             "value": "Arabidopsis thaliana",
@@ -1671,6 +1660,13 @@
                 "url": "http://purl.obolibrary.org/obo/NCBITaxon_3702"
               }
             ]
+          }
+        ],
+        "technical replicate": [
+          {
+            "value": "Exp2",
+            "units": null,
+            "terms": []
           }
         ],
         "Organism part": [
@@ -1688,11 +1684,7 @@
           {
             "value": "Col-0",
             "units": null,
-            "terms": [
-              {
-                "url": "http://www.ebi.ac.uk/efo/EFO_0000513"
-              }
-            ]
+            "terms": []
           }
         ]
       },
@@ -1706,22 +1698,13 @@
       "accession": null,
       "alias": "Ex2-Col0-48h-Ag-4",
       "team": {
-        "name": "ML_test_team"
+        "name": "ML_test_team",
+        "description": null,
+        "profile": {}
       },
       "title": "IPB Halle.Group-3.Subject-4",
       "description": null,
       "attributes": {
-        "replicate": [
-          {
-            "value": "Exp2",
-            "units": null,
-            "terms": [
-              {
-                "url": "http://www.ebi.ac.uk/efo/EFO_0002090"
-              }
-            ]
-          }
-        ],
         "Organism": [
           {
             "value": "Arabidopsis thaliana",
@@ -1731,6 +1714,13 @@
                 "url": "http://purl.obolibrary.org/obo/NCBITaxon_3702"
               }
             ]
+          }
+        ],
+        "technical replicate": [
+          {
+            "value": "Exp2",
+            "units": null,
+            "terms": []
           }
         ],
         "Organism part": [
@@ -1748,11 +1738,7 @@
           {
             "value": "Col-0",
             "units": null,
-            "terms": [
-              {
-                "url": "http://www.ebi.ac.uk/efo/EFO_0000513"
-              }
-            ]
+            "terms": []
           }
         ]
       },
@@ -1766,22 +1752,13 @@
       "accession": null,
       "alias": "Ex2-cyp79-48h-Ag-1",
       "team": {
-        "name": "ML_test_team"
+        "name": "ML_test_team",
+        "description": null,
+        "profile": {}
       },
       "title": "IPB Halle.Group-4.Subject-1",
       "description": null,
       "attributes": {
-        "replicate": [
-          {
-            "value": "Exp2",
-            "units": null,
-            "terms": [
-              {
-                "url": "http://www.ebi.ac.uk/efo/EFO_0002090"
-              }
-            ]
-          }
-        ],
         "Organism": [
           {
             "value": "Arabidopsis thaliana",
@@ -1791,6 +1768,13 @@
                 "url": "http://purl.obolibrary.org/obo/NCBITaxon_3702"
               }
             ]
+          }
+        ],
+        "technical replicate": [
+          {
+            "value": "Exp2",
+            "units": null,
+            "terms": []
           }
         ],
         "Organism part": [
@@ -1808,11 +1792,7 @@
           {
             "value": "cyp79",
             "units": null,
-            "terms": [
-              {
-                "url": "http://www.ebi.ac.uk/efo/EFO_0000513"
-              }
-            ]
+            "terms": []
           }
         ]
       },
@@ -1826,22 +1806,13 @@
       "accession": null,
       "alias": "Ex2-cyp79-48h-Ag-2",
       "team": {
-        "name": "ML_test_team"
+        "name": "ML_test_team",
+        "description": null,
+        "profile": {}
       },
       "title": "IPB Halle.Group-4.Subject-2",
       "description": null,
       "attributes": {
-        "replicate": [
-          {
-            "value": "Exp2",
-            "units": null,
-            "terms": [
-              {
-                "url": "http://www.ebi.ac.uk/efo/EFO_0002090"
-              }
-            ]
-          }
-        ],
         "Organism": [
           {
             "value": "Arabidopsis thaliana",
@@ -1851,6 +1822,13 @@
                 "url": "http://purl.obolibrary.org/obo/NCBITaxon_3702"
               }
             ]
+          }
+        ],
+        "technical replicate": [
+          {
+            "value": "Exp2",
+            "units": null,
+            "terms": []
           }
         ],
         "Organism part": [
@@ -1868,11 +1846,7 @@
           {
             "value": "cyp79",
             "units": null,
-            "terms": [
-              {
-                "url": "http://www.ebi.ac.uk/efo/EFO_0000513"
-              }
-            ]
+            "terms": []
           }
         ]
       },
@@ -1886,22 +1860,13 @@
       "accession": null,
       "alias": "Ex2-cyp79-48h-Ag-3",
       "team": {
-        "name": "ML_test_team"
+        "name": "ML_test_team",
+        "description": null,
+        "profile": {}
       },
       "title": "IPB Halle.Group-4.Subject-3",
       "description": null,
       "attributes": {
-        "replicate": [
-          {
-            "value": "Exp2",
-            "units": null,
-            "terms": [
-              {
-                "url": "http://www.ebi.ac.uk/efo/EFO_0002090"
-              }
-            ]
-          }
-        ],
         "Organism": [
           {
             "value": "Arabidopsis thaliana",
@@ -1911,6 +1876,13 @@
                 "url": "http://purl.obolibrary.org/obo/NCBITaxon_3702"
               }
             ]
+          }
+        ],
+        "technical replicate": [
+          {
+            "value": "Exp2",
+            "units": null,
+            "terms": []
           }
         ],
         "Organism part": [
@@ -1928,11 +1900,7 @@
           {
             "value": "cyp79",
             "units": null,
-            "terms": [
-              {
-                "url": "http://www.ebi.ac.uk/efo/EFO_0000513"
-              }
-            ]
+            "terms": []
           }
         ]
       },
@@ -1946,22 +1914,13 @@
       "accession": null,
       "alias": "Ex2-cyp79-48h-Ag-4",
       "team": {
-        "name": "ML_test_team"
+        "name": "ML_test_team",
+        "description": null,
+        "profile": {}
       },
       "title": "IPB Halle.Group-4.Subject-4",
       "description": null,
       "attributes": {
-        "replicate": [
-          {
-            "value": "Exp2",
-            "units": null,
-            "terms": [
-              {
-                "url": "http://www.ebi.ac.uk/efo/EFO_0002090"
-              }
-            ]
-          }
-        ],
         "Organism": [
           {
             "value": "Arabidopsis thaliana",
@@ -1971,6 +1930,13 @@
                 "url": "http://purl.obolibrary.org/obo/NCBITaxon_3702"
               }
             ]
+          }
+        ],
+        "technical replicate": [
+          {
+            "value": "Exp2",
+            "units": null,
+            "terms": []
           }
         ],
         "Organism part": [
@@ -1988,11 +1954,7 @@
           {
             "value": "cyp79",
             "units": null,
-            "terms": [
-              {
-                "url": "http://www.ebi.ac.uk/efo/EFO_0000513"
-              }
-            ]
+            "terms": []
           }
         ]
       },
@@ -2009,7 +1971,9 @@
       "accession": "MTBLS2",
       "alias": "MTBLS2",
       "team": {
-        "name": "ML_test_team"
+        "name": "ML_test_team",
+        "description": null,
+        "profile": {}
       },
       "title": "Comparative LC/MS-based profiling of silver nitrate-treated Arabidopsis thaliana leaves of wild-type and cyp79B2 cyp79B3 double knockout plants",
       "description": "Indole-3-acetaldoxime (IAOx) represents an early intermediate of the biosynthesis of a variety of indolic secondary metabolites including the phytoanticipin indol-3-ylmethyl glucosinolate and the phytoalexin camalexin (3-thiazol-2′-yl-indole). Arabidopsis thaliana cyp79B2 cyp79B3 double knockout plants are completely impaired in the conversion of tryptophan to indole-3-acetaldoxime and do not accumulate IAOx-derived metabolites any longer. Consequently, comparative analysis of wild-type and cyp79B2 cyp79B3 plant lines has the potential to explore the complete range of IAOx-derived indolic secondary metabolites.",
@@ -2135,7 +2099,7 @@
         "accession": "MTBLS2",
         "team": "ML_test_team"
       },
-      "studyType": "Metabolomics"
+      "studyType": "Metabolomics_MS"
     }
   ],
   "protocols": [
@@ -2144,7 +2108,9 @@
       "accession": null,
       "alias": "Sample collection",
       "team": {
-        "name": "ML_test_team"
+        "name": "ML_test_team",
+        "description": null,
+        "profile": {}
       },
       "title": null,
       "description": "Arabidopsis thaliana Col-0 and cyp79B2 cyp79B3 lines were grown for about six weeks after cold stratification (3 days, 4 °C) in parallel on a soil/vermiculite mixture (3/2) in a growth cabinet with 8 h light (~150 µE/m2/s) at 22 °C and 16 h dark at 20 °C to developmental stage 3.5. Plants were sprayed with an aqueous solution of silver nitrate (5 mM) in order to stimulate accumulation of indolic secondary metabolites and incubated for 48 h in a growth cabinet under the same conditions as described above. Rosette leaves of six individual plants per genotype were harvested, immediately frozen in liquid nitrogen, pooled and stored at –80 °C until analysis. Two independent experiments (biological replicates) were performed on independent sets of plants grown at different times.",
@@ -2163,7 +2129,9 @@
       "accession": null,
       "alias": "Metabolite identification",
       "team": {
-        "name": "ML_test_team"
+        "name": "ML_test_team",
+        "description": null,
+        "profile": {}
       },
       "title": null,
       "description": "Differential features detected in narrow retention time windows displaying a high chromatogram correlation were grouped. In combination with the raw data, individual compound mass spectra were reconstructed and features annotated as cluster ion, quasimolecular ion, or in-source fragment ion. Annotated lists of all differential feature sets are provided in Supplemental DataSet S5 of DOI: 10.1007/s11306-012-0401-0 online. Afterwards, targeted CID-MS/MS experiments of quasimolecular ions (MS2) were performed using QTOF-MS. Based on accurate mass measurements, putative elemental compositions were calculated, filtered by isotope abundance and the number of double bond equivalents and electron parity [1], and checked for consistency in relation to elemental compositions calculated for fragment ions and observed neutral losses [2]. Mass spectral characterization of CID mass spectra can be found in Supplemental Data Set S6 (DOI: 10.1007/s11306-012-0401-0) online. Identification was based on reference spectra in MassBank (MSI Level 2 and 3), and in some cases on authentic standards (MSI Level 1).\n</p>\nRef: </br>\n[1] Kind, T., & Fiehn, O. (2006). Metabolomic database annotations via query of elemental compositions: Mass accuracy is insufficient even at less than 1 ppm. BMC Bioinformatics, 7(1), 234. PMID: 16646969\n[2] Konishi Y1, Kiyota T, Draghici C, Gao JM, Yeboah F, Acoca S, Jarussophon S, Purisima E. Molecular formula analysis by an MS/MS/MS technique to expedite dereplication of natural products. Anal Chem. 2007 Feb 1;79(3):1187-97. PMID: 17263353",
@@ -2182,7 +2150,9 @@
       "accession": null,
       "alias": "Extraction",
       "team": {
-        "name": "ML_test_team"
+        "name": "ML_test_team",
+        "description": null,
+        "profile": {}
       },
       "title": null,
       "description": "Plant material was homogenized in liquid nitrogen using a pestle and mortar and aliquots of 100 +/- 5 mg were weighed into pre-cooled 2 ml, round bottom tubes. After addition of 200 µl methanol/water, 80/20 (v/v) pre-cooled at –40 °C the samples were immediately vortexed for 15 s, sonicated for 15 min at 20 °C and centrifuged for 10 min at 19000 x g. The supernatants were transferred to new 2 ml tubes and the remaining pellets subjected to a second extraction using 200 µl methanol/water, 80/20 (v/v). The combined extracts were evaporated to dryness in a vacuum centrifuge at 30 °C, thoroughly reconstituted in 200 µl methanol/water, 30/70 (v/v) and filtered using 0.2 µm PTFE syringe filters. Four extracts (technical replicates) were prepared for each of the four leaf pools.",
@@ -2213,7 +2183,9 @@
       "accession": null,
       "alias": "Mass spectrometry",
       "team": {
-        "name": "ML_test_team"
+        "name": "ML_test_team",
+        "description": null,
+        "profile": {}
       },
       "title": null,
       "description": "Eluting compounds were detected from m/z 100-1000 using a micrOTOF-Q II hybrid quadrupole time-of-flight mass spectrometer (Bruker Daltonics) equipped with an Apollo II electrospray ion source in positive and negative ion mode using following instrument settings: nebulizer gas, nitrogen, 1.4 bar; dry gas, nitrogen, 6 l/min, 190 °C; capillary, –5000 V; end plate offset, -500 V; funnel 1 RF, 200 V; funnel 2 RF, 200 V; in-source CID energy, 0 V; hexapole RF, 100 V; quadrupole ion energy, 5 eV; collision gas, nitrogen; collision energy, 7 eV; collision RF 150/350 V (timing 50/50); transfer time, 70 µs; pre pulse storage, 5 µs; pulser frequency, 10 kHz; spectra rate, 3 Hz. Mass spectra were acquired in centroid mode. Mass calibration of individual raw data files was performed on lithium formate cluster ions obtained by automatic infusion of 20 µl 10 mM lithium hydroxide in isopropanol/water/formic acid, 49.9/49.9/0.2 (v/v/v) at a gradient time of 18 min using a diverter valve.",
@@ -2259,7 +2231,9 @@
       "accession": null,
       "alias": "Chromatography",
       "team": {
-        "name": "ML_test_team"
+        "name": "ML_test_team",
+        "description": null,
+        "profile": {}
       },
       "title": null,
       "description": "Chromatographic separations were performed on an Acquity UPLC system (Waters) equipped with a HSS T3 column (100 x 1.0 mm, particle size 1.8 µm, Waters) applying the following binary gradient at a flow rate of 150 µl/min: 0-1 min, isocratic 95% A (water/formic acid, 99.9/0.1 (v/v)), 5% B (acetonitrile/formic acid, 99.9/0.1 (v/v)); 1-16 min, linear from 5 to 45% B; 16-18 min, isocratic 95% B; 18-20 min, isocratic 5% B. The injection volume was 3.0 µl (full loop injection).",
@@ -2295,7 +2269,9 @@
       "accession": null,
       "alias": "Data transformation",
       "team": {
-        "name": "ML_test_team"
+        "name": "ML_test_team",
+        "description": null,
+        "profile": {}
       },
       "title": null,
       "description": "Raw data files were converted to mzData format using the vendor-specific CompassXport (http://www.bdal.de/) and processed using the XCMS package (http://bioconductor.org/packages/release/bioc/html/xcms.html). XCMS settings for processing LC/MS data with findPeaks.centWave() were prefilter=(3,200); snthr=5; ppm=25; peakwidth=(5,12). For alignment group.density() function with parameters minfrac=0.75 and bw=2 was used.",
