@@ -1,0 +1,144 @@
+{
+  "comments": [],
+  "name": "OCC 1.5xChemo 24hr A",
+  "characteristics": [],
+  "factorValues": [
+    {
+      "comments": [],
+      "category": {
+        "comments": [],
+        "factorName": "Cell Type",
+        "factorType": {
+          "comments": [],
+          "annotationValue": "cell type",
+          "termSource": {
+            "comments": [],
+            "name": "EFO",
+            "file": "http://data.bioontology.org/ontologies/EFO",
+            "version": "113",
+            "description": "Experimental Factor Ontology"
+          },
+          "termAccession": "http://www.ebi.ac.uk/efo/EFO_0000324"
+        }
+      },
+      "value": {
+        "annotationValue": "cancer cell",
+        "termAccession": "",
+        "comments": [],
+        "termSource": null
+      },
+      "unit": null
+    },
+    {
+      "comments": [],
+      "category": {
+        "comments": [],
+        "factorName": "Peturbation",
+        "factorType": {
+          "comments": [],
+          "annotationValue": "Group",
+          "termSource": {
+            "comments": [],
+            "name": "NCIT",
+            "file": "http://data.bioontology.org/ontologies/NCIT",
+            "version": "34",
+            "description": "National Cancer Institute Thesaurus"
+          },
+          "termAccession": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl"
+        }
+      },
+      "value": {
+        "annotationValue": "chemo",
+        "termAccession": "",
+        "comments": [],
+        "termSource": null
+      },
+      "unit": null
+    },
+    {
+      "comments": [],
+      "category": {
+        "comments": [],
+        "factorName": "Time Point",
+        "factorType": {
+          "comments": [],
+          "annotationValue": "timepoint",
+          "termSource": {
+            "comments": [],
+            "name": "EFO",
+            "file": "http://data.bioontology.org/ontologies/EFO",
+            "version": "113",
+            "description": "Experimental Factor Ontology"
+          },
+          "termAccession": ""
+        }
+      },
+      "value": "24",
+      "unit": {
+        "comments": [],
+        "annotationValue": "hour",
+        "termSource": {
+          "comments": [],
+          "name": "UO",
+          "file": "http://data.bioontology.org/ontologies/UO",
+          "version": "42",
+          "description": "Units of Measurement Ontology"
+        },
+        "termAccession": "http://purl.obolibrary.org/obo/UO_0000032"
+      }
+    }
+  ],
+  "derivesFrom": [
+    {
+      "comments": [],
+      "name": "intracellular",
+      "characteristics": [
+        {
+          "comments": [],
+          "category": {
+            "comments": [],
+            "annotationValue": "Organism",
+            "termSource": null,
+            "termAccession": ""
+          },
+          "value": {
+            "annotationValue": "Homo sapiens",
+            "termAccession": "http://purl.bioontology.org/ontology/NCBITAXON/9606",
+            "comments": [],
+            "termSource": {
+              "comments": [],
+              "name": "NCBITAXON",
+              "file": "http://data.bioontology.org/ontologies/NCBITAXON",
+              "version": "3",
+              "description": "National Center for Biotechnology Information (NCBI) Organismal Classification"
+            }
+          },
+          "unit": null
+        },
+        {
+          "comments": [],
+          "category": {
+            "comments": [],
+            "annotationValue": "Organism part",
+            "termSource": null,
+            "termAccession": ""
+          },
+          "value": {
+            "annotationValue": "ovarian serous adenocarcinoma cell line",
+            "termAccession": "http://purl.obolibrary.org/obo/BTO_0003804",
+            "comments": [],
+            "termSource": {
+              "comments": [],
+              "name": "BTO",
+              "file": "http://data.bioontology.org/ontologies/BTO",
+              "version": "24",
+              "description": "BRENDA Tissue and Enzyme Source Ontology"
+            }
+          },
+          "unit": null
+        }
+      ]
+    }
+  ]
+}
+

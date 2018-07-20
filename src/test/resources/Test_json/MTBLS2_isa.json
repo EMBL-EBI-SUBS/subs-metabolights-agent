@@ -68,14 +68,14 @@
         "identifier": "MTBLS2",
         "filename": "s_MTBL2.txt",
         "title": "Comparative LC/MS-based profiling of silver nitrate-treated Arabidopsis thaliana leaves of wild-type and cyp79B2 cyp79B3 double knockout plants",
-        "description": "Indole-3-acetaldoxime (IAOx) represents an early intermediate of the biosynthesis of a variety of indolic secondary metabolites including the phytoanticipin indol-3-ylmethyl glucosinolate and the phytoalexin camalexin (3-thiazol-2\u2032-yl-indole). Arabidopsis thaliana cyp79B2 cyp79B3 double knockout plants are completely impaired in the conversion of tryptophan to indole-3-acetaldoxime and do not accumulate IAOx-derived metabolites any longer. Consequently, comparative analysis of wild-type and cyp79B2 cyp79B3 plant lines has the potential to explore the complete range of IAOx-derived indolic secondary metabolites.",
+        "description": "Indole-3-acetaldoxime (IAOx) represents an early intermediate of the biosynthesis of a variety of indolic secondary metabolites including the phytoanticipin indol-3-ylmethyl glucosinolate and the phytoalexin camalexin (3-thiazol-2′-yl-indole). Arabidopsis thaliana cyp79B2 cyp79B3 double knockout plants are completely impaired in the conversion of tryptophan to indole-3-acetaldoxime and do not accumulate IAOx-derived metabolites any longer. Consequently, comparative analysis of wild-type and cyp79B2 cyp79B3 plant lines has the potential to explore the complete range of IAOx-derived indolic secondary metabolites.",
         "submissionDate": "2012-05-22",
         "publicReleaseDate": "2012-05-22",
         "people": [
           {
             "comments": [],
             "firstName": "Christoph",
-            "lastName": "B\u00f6ttcher",
+            "lastName": "Böttcher",
             "email": "boettch@ipb-halle.de",
             "affiliation": "IPB Halle",
             "address": "Weinberg 3 06120 Halle Germany",
@@ -172,7 +172,7 @@
           {
             "comments": [],
             "title": "Nearline acquisition and processing of liquid chromatography-tandem mass spectrometry data",
-            "authorList": "Steffen Neumann, Andrea Thum and Christoph B\u00f6ttcher",
+            "authorList": "Steffen Neumann, Andrea Thum and Christoph Böttcher",
             "pubMedID": "",
             "doi": "http://dx.doi.org/10.1007/s11306-012-0401-0",
             "status": {
@@ -196,16 +196,6 @@
           },
           {
             "comments": [],
-            "factorName": "age",
-            "factorType": {
-              "comments": [],
-              "annotationValue": "age",
-              "termSource": null,
-              "termAccession": "http://www.ebi.ac.uk/efo/EFO_0000513"
-            }
-          },
-          {
-            "comments": [],
             "factorName": "replicate",
             "factorType": {
               "comments": [],
@@ -219,26 +209,6 @@
               },
               "termAccession": "http://www.ebi.ac.uk/efo/EFO_0002090"
             }
-          },
-          {
-            "comments": [],
-            "factorName": "bird",
-            "factorType": {
-              "comments": [],
-              "annotationValue": "bird",
-              "termSource": null,
-              "termAccession": "http://purl.obolibrary.org/obo/IDOMAL_0000980"
-            }
-          },
-          {
-            "comments": [],
-            "factorName": "flower",
-            "factorType": {
-              "comments": [],
-              "annotationValue": "flower",
-              "termSource": null,
-              "termAccession": "http://purl.obolibrary.org/obo/PO_0009046"
-            }
           }
         ],
         "protocols": [
@@ -251,7 +221,7 @@
               "termSource": null,
               "termAccession": ""
             },
-            "description": "Arabidopsis thaliana Col-0 and cyp79B2 cyp79B3 lines were grown for about six weeks after cold stratification (3 days, 4 \u00b0C) in parallel on a soil/vermiculite mixture (3/2) in a growth cabinet with 8 h light (~150 \u00b5E/m2/s) at 22 \u00b0C and 16 h dark at 20 \u00b0C to developmental stage 3.5. Plants were sprayed with an aqueous solution of silver nitrate (5 mM) in order to stimulate accumulation of indolic secondary metabolites and incubated for 48 h in a growth cabinet under the same conditions as described above. Rosette leaves of six individual plants per genotype were harvested, immediately frozen in liquid nitrogen, pooled and stored at \u201380 \u00b0C until analysis. Two independent experiments (biological replicates) were performed on independent sets of plants grown at different times.",
+            "description": "Arabidopsis thaliana Col-0 and cyp79B2 cyp79B3 lines were grown for about six weeks after cold stratification (3 days, 4 °C) in parallel on a soil/vermiculite mixture (3/2) in a growth cabinet with 8 h light (~150 µE/m2/s) at 22 °C and 16 h dark at 20 °C to developmental stage 3.5. Plants were sprayed with an aqueous solution of silver nitrate (5 mM) in order to stimulate accumulation of indolic secondary metabolites and incubated for 48 h in a growth cabinet under the same conditions as described above. Rosette leaves of six individual plants per genotype were harvested, immediately frozen in liquid nitrogen, pooled and stored at –80 °C until analysis. Two independent experiments (biological replicates) were performed on independent sets of plants grown at different times.",
             "uri": "",
             "version": "",
             "parameters": [],
@@ -281,7 +251,7 @@
               "termSource": null,
               "termAccession": ""
             },
-            "description": "Plant material was homogenized in liquid nitrogen using a pestle and mortar and aliquots of 100 +/- 5 mg were weighed into pre-cooled 2 ml, round bottom tubes. After addition of 200 \u00b5l methanol/water, 80/20 (v/v) pre-cooled at \u201340 \u00b0C the samples were immediately vortexed for 15 s, sonicated for 15 min at 20 \u00b0C and centrifuged for 10 min at 19000 x g. The supernatants were transferred to new 2 ml tubes and the remaining pellets subjected to a second extraction using 200 \u00b5l methanol/water, 80/20 (v/v). The combined extracts were evaporated to dryness in a vacuum centrifuge at 30 \u00b0C, thoroughly reconstituted in 200 \u00b5l methanol/water, 30/70 (v/v) and filtered using 0.2 \u00b5m PTFE syringe filters. Four extracts (technical replicates) were prepared for each of the four leaf pools.",
+            "description": "Plant material was homogenized in liquid nitrogen using a pestle and mortar and aliquots of 100 +/- 5 mg were weighed into pre-cooled 2 ml, round bottom tubes. After addition of 200 µl methanol/water, 80/20 (v/v) pre-cooled at –40 °C the samples were immediately vortexed for 15 s, sonicated for 15 min at 20 °C and centrifuged for 10 min at 19000 x g. The supernatants were transferred to new 2 ml tubes and the remaining pellets subjected to a second extraction using 200 µl methanol/water, 80/20 (v/v). The combined extracts were evaporated to dryness in a vacuum centrifuge at 30 °C, thoroughly reconstituted in 200 µl methanol/water, 30/70 (v/v) and filtered using 0.2 µm PTFE syringe filters. Four extracts (technical replicates) were prepared for each of the four leaf pools.",
             "uri": "",
             "version": "",
             "parameters": [
@@ -315,7 +285,7 @@
               "termSource": null,
               "termAccession": ""
             },
-            "description": "Eluting compounds were detected from m/z 100-1000 using a micrOTOF-Q II hybrid quadrupole time-of-flight mass spectrometer (Bruker Daltonics) equipped with an Apollo II electrospray ion source in positive and negative ion mode using following instrument settings: nebulizer gas, nitrogen, 1.4 bar; dry gas, nitrogen, 6 l/min, 190 \u00b0C; capillary, \u20135000 V; end plate offset, -500 V; funnel 1 RF, 200 V; funnel 2 RF, 200 V; in-source CID energy, 0 V; hexapole RF, 100 V; quadrupole ion energy, 5 eV; collision gas, nitrogen; collision energy, 7 eV; collision RF 150/350 V (timing 50/50); transfer time, 70 \u00b5s; pre pulse storage, 5 \u00b5s; pulser frequency, 10 kHz; spectra rate, 3 Hz. Mass spectra were acquired in centroid mode. Mass calibration of individual raw data files was performed on lithium formate cluster ions obtained by automatic infusion of 20 \u00b5l 10 mM lithium hydroxide in isopropanol/water/formic acid, 49.9/49.9/0.2 (v/v/v) at a gradient time of 18 min using a diverter valve.",
+            "description": "Eluting compounds were detected from m/z 100-1000 using a micrOTOF-Q II hybrid quadrupole time-of-flight mass spectrometer (Bruker Daltonics) equipped with an Apollo II electrospray ion source in positive and negative ion mode using following instrument settings: nebulizer gas, nitrogen, 1.4 bar; dry gas, nitrogen, 6 l/min, 190 °C; capillary, –5000 V; end plate offset, -500 V; funnel 1 RF, 200 V; funnel 2 RF, 200 V; in-source CID energy, 0 V; hexapole RF, 100 V; quadrupole ion energy, 5 eV; collision gas, nitrogen; collision energy, 7 eV; collision RF 150/350 V (timing 50/50); transfer time, 70 µs; pre pulse storage, 5 µs; pulser frequency, 10 kHz; spectra rate, 3 Hz. Mass spectra were acquired in centroid mode. Mass calibration of individual raw data files was performed on lithium formate cluster ions obtained by automatic infusion of 20 µl 10 mM lithium hydroxide in isopropanol/water/formic acid, 49.9/49.9/0.2 (v/v/v) at a gradient time of 18 min using a diverter valve.",
             "uri": "",
             "version": "",
             "parameters": [
@@ -376,7 +346,7 @@
               "termSource": null,
               "termAccession": ""
             },
-            "description": "Chromatographic separations were performed on an Acquity UPLC system (Waters) equipped with a HSS T3 column (100 x 1.0 mm, particle size 1.8 \u00b5m, Waters) applying the following binary gradient at a flow rate of 150 \u00b5l/min: 0-1 min, isocratic 95% A (water/formic acid, 99.9/0.1 (v/v)), 5% B (acetonitrile/formic acid, 99.9/0.1 (v/v)); 1-16 min, linear from 5 to 45% B; 16-18 min, isocratic 95% B; 18-20 min, isocratic 5% B. The injection volume was 3.0 \u00b5l (full loop injection).",
+            "description": "Chromatographic separations were performed on an Acquity UPLC system (Waters) equipped with a HSS T3 column (100 x 1.0 mm, particle size 1.8 µm, Waters) applying the following binary gradient at a flow rate of 150 µl/min: 0-1 min, isocratic 95% A (water/formic acid, 99.9/0.1 (v/v)), 5% B (acetonitrile/formic acid, 99.9/0.1 (v/v)); 1-16 min, linear from 5 to 45% B; 16-18 min, isocratic 95% B; 18-20 min, isocratic 5% B. The injection volume was 3.0 µl (full loop injection).",
             "uri": "",
             "version": "",
             "parameters": [
@@ -2281,7 +2251,7 @@
                     "termSource": null,
                     "termAccession": ""
                   },
-                  "description": "Chromatographic separations were performed on an Acquity UPLC system (Waters) equipped with a HSS T3 column (100 x 1.0 mm, particle size 1.8 \u00b5m, Waters) applying the following binary gradient at a flow rate of 150 \u00b5l/min: 0-1 min, isocratic 95% A (water/formic acid, 99.9/0.1 (v/v)), 5% B (acetonitrile/formic acid, 99.9/0.1 (v/v)); 1-16 min, linear from 5 to 45% B; 16-18 min, isocratic 95% B; 18-20 min, isocratic 5% B. The injection volume was 3.0 \u00b5l (full loop injection).",
+                  "description": "Chromatographic separations were performed on an Acquity UPLC system (Waters) equipped with a HSS T3 column (100 x 1.0 mm, particle size 1.8 µm, Waters) applying the following binary gradient at a flow rate of 150 µl/min: 0-1 min, isocratic 95% A (water/formic acid, 99.9/0.1 (v/v)), 5% B (acetonitrile/formic acid, 99.9/0.1 (v/v)); 1-16 min, linear from 5 to 45% B; 16-18 min, isocratic 95% B; 18-20 min, isocratic 5% B. The injection volume was 3.0 µl (full loop injection).",
                   "uri": "",
                   "version": "",
                   "parameters": [
@@ -2346,7 +2316,7 @@
                         "termAccession": ""
                       }
                     },
-                    "value": "ACQUITY UPLC HSS T3 (1.8 \u00b5m, 1 mm x 100 mm; Waters)",
+                    "value": "ACQUITY UPLC HSS T3 (1.8 µm, 1 mm x 100 mm; Waters)",
                     "unit": null
                   },
                   {
@@ -2385,7 +2355,7 @@
                     "termSource": null,
                     "termAccession": ""
                   },
-                  "description": "Plant material was homogenized in liquid nitrogen using a pestle and mortar and aliquots of 100 +/- 5 mg were weighed into pre-cooled 2 ml, round bottom tubes. After addition of 200 \u00b5l methanol/water, 80/20 (v/v) pre-cooled at \u201340 \u00b0C the samples were immediately vortexed for 15 s, sonicated for 15 min at 20 \u00b0C and centrifuged for 10 min at 19000 x g. The supernatants were transferred to new 2 ml tubes and the remaining pellets subjected to a second extraction using 200 \u00b5l methanol/water, 80/20 (v/v). The combined extracts were evaporated to dryness in a vacuum centrifuge at 30 \u00b0C, thoroughly reconstituted in 200 \u00b5l methanol/water, 30/70 (v/v) and filtered using 0.2 \u00b5m PTFE syringe filters. Four extracts (technical replicates) were prepared for each of the four leaf pools.",
+                  "description": "Plant material was homogenized in liquid nitrogen using a pestle and mortar and aliquots of 100 +/- 5 mg were weighed into pre-cooled 2 ml, round bottom tubes. After addition of 200 µl methanol/water, 80/20 (v/v) pre-cooled at –40 °C the samples were immediately vortexed for 15 s, sonicated for 15 min at 20 °C and centrifuged for 10 min at 19000 x g. The supernatants were transferred to new 2 ml tubes and the remaining pellets subjected to a second extraction using 200 µl methanol/water, 80/20 (v/v). The combined extracts were evaporated to dryness in a vacuum centrifuge at 30 °C, thoroughly reconstituted in 200 µl methanol/water, 30/70 (v/v) and filtered using 0.2 µm PTFE syringe filters. Four extracts (technical replicates) were prepared for each of the four leaf pools.",
                   "uri": "",
                   "version": "",
                   "parameters": [
@@ -2423,7 +2393,7 @@
                         "termAccession": ""
                       }
                     },
-                    "value": "200 \u00b5l methanol/water, 30/70 (v/v)",
+                    "value": "200 µl methanol/water, 30/70 (v/v)",
                     "unit": null
                   },
                   {
@@ -2561,7 +2531,7 @@
                     "termSource": null,
                     "termAccession": ""
                   },
-                  "description": "Plant material was homogenized in liquid nitrogen using a pestle and mortar and aliquots of 100 +/- 5 mg were weighed into pre-cooled 2 ml, round bottom tubes. After addition of 200 \u00b5l methanol/water, 80/20 (v/v) pre-cooled at \u201340 \u00b0C the samples were immediately vortexed for 15 s, sonicated for 15 min at 20 \u00b0C and centrifuged for 10 min at 19000 x g. The supernatants were transferred to new 2 ml tubes and the remaining pellets subjected to a second extraction using 200 \u00b5l methanol/water, 80/20 (v/v). The combined extracts were evaporated to dryness in a vacuum centrifuge at 30 \u00b0C, thoroughly reconstituted in 200 \u00b5l methanol/water, 30/70 (v/v) and filtered using 0.2 \u00b5m PTFE syringe filters. Four extracts (technical replicates) were prepared for each of the four leaf pools.",
+                  "description": "Plant material was homogenized in liquid nitrogen using a pestle and mortar and aliquots of 100 +/- 5 mg were weighed into pre-cooled 2 ml, round bottom tubes. After addition of 200 µl methanol/water, 80/20 (v/v) pre-cooled at –40 °C the samples were immediately vortexed for 15 s, sonicated for 15 min at 20 °C and centrifuged for 10 min at 19000 x g. The supernatants were transferred to new 2 ml tubes and the remaining pellets subjected to a second extraction using 200 µl methanol/water, 80/20 (v/v). The combined extracts were evaporated to dryness in a vacuum centrifuge at 30 °C, thoroughly reconstituted in 200 µl methanol/water, 30/70 (v/v) and filtered using 0.2 µm PTFE syringe filters. Four extracts (technical replicates) were prepared for each of the four leaf pools.",
                   "uri": "",
                   "version": "",
                   "parameters": [
@@ -2599,7 +2569,7 @@
                         "termAccession": ""
                       }
                     },
-                    "value": "200 \u00b5l methanol/water, 30/70 (v/v)",
+                    "value": "200 µl methanol/water, 30/70 (v/v)",
                     "unit": null
                   },
                   {
@@ -2737,7 +2707,7 @@
                     "termSource": null,
                     "termAccession": ""
                   },
-                  "description": "Chromatographic separations were performed on an Acquity UPLC system (Waters) equipped with a HSS T3 column (100 x 1.0 mm, particle size 1.8 \u00b5m, Waters) applying the following binary gradient at a flow rate of 150 \u00b5l/min: 0-1 min, isocratic 95% A (water/formic acid, 99.9/0.1 (v/v)), 5% B (acetonitrile/formic acid, 99.9/0.1 (v/v)); 1-16 min, linear from 5 to 45% B; 16-18 min, isocratic 95% B; 18-20 min, isocratic 5% B. The injection volume was 3.0 \u00b5l (full loop injection).",
+                  "description": "Chromatographic separations were performed on an Acquity UPLC system (Waters) equipped with a HSS T3 column (100 x 1.0 mm, particle size 1.8 µm, Waters) applying the following binary gradient at a flow rate of 150 µl/min: 0-1 min, isocratic 95% A (water/formic acid, 99.9/0.1 (v/v)), 5% B (acetonitrile/formic acid, 99.9/0.1 (v/v)); 1-16 min, linear from 5 to 45% B; 16-18 min, isocratic 95% B; 18-20 min, isocratic 5% B. The injection volume was 3.0 µl (full loop injection).",
                   "uri": "",
                   "version": "",
                   "parameters": [
@@ -2802,7 +2772,7 @@
                         "termAccession": ""
                       }
                     },
-                    "value": "ACQUITY UPLC HSS T3 (1.8 \u00b5m, 1 mm x 100 mm; Waters)",
+                    "value": "ACQUITY UPLC HSS T3 (1.8 µm, 1 mm x 100 mm; Waters)",
                     "unit": null
                   },
                   {
@@ -2841,7 +2811,7 @@
                     "termSource": null,
                     "termAccession": ""
                   },
-                  "description": "Plant material was homogenized in liquid nitrogen using a pestle and mortar and aliquots of 100 +/- 5 mg were weighed into pre-cooled 2 ml, round bottom tubes. After addition of 200 \u00b5l methanol/water, 80/20 (v/v) pre-cooled at \u201340 \u00b0C the samples were immediately vortexed for 15 s, sonicated for 15 min at 20 \u00b0C and centrifuged for 10 min at 19000 x g. The supernatants were transferred to new 2 ml tubes and the remaining pellets subjected to a second extraction using 200 \u00b5l methanol/water, 80/20 (v/v). The combined extracts were evaporated to dryness in a vacuum centrifuge at 30 \u00b0C, thoroughly reconstituted in 200 \u00b5l methanol/water, 30/70 (v/v) and filtered using 0.2 \u00b5m PTFE syringe filters. Four extracts (technical replicates) were prepared for each of the four leaf pools.",
+                  "description": "Plant material was homogenized in liquid nitrogen using a pestle and mortar and aliquots of 100 +/- 5 mg were weighed into pre-cooled 2 ml, round bottom tubes. After addition of 200 µl methanol/water, 80/20 (v/v) pre-cooled at –40 °C the samples were immediately vortexed for 15 s, sonicated for 15 min at 20 °C and centrifuged for 10 min at 19000 x g. The supernatants were transferred to new 2 ml tubes and the remaining pellets subjected to a second extraction using 200 µl methanol/water, 80/20 (v/v). The combined extracts were evaporated to dryness in a vacuum centrifuge at 30 °C, thoroughly reconstituted in 200 µl methanol/water, 30/70 (v/v) and filtered using 0.2 µm PTFE syringe filters. Four extracts (technical replicates) were prepared for each of the four leaf pools.",
                   "uri": "",
                   "version": "",
                   "parameters": [
@@ -2879,7 +2849,7 @@
                         "termAccession": ""
                       }
                     },
-                    "value": "200 \u00b5l methanol/water, 30/70 (v/v)",
+                    "value": "200 µl methanol/water, 30/70 (v/v)",
                     "unit": null
                   },
                   {
@@ -3017,7 +2987,7 @@
                     "termSource": null,
                     "termAccession": ""
                   },
-                  "description": "Plant material was homogenized in liquid nitrogen using a pestle and mortar and aliquots of 100 +/- 5 mg were weighed into pre-cooled 2 ml, round bottom tubes. After addition of 200 \u00b5l methanol/water, 80/20 (v/v) pre-cooled at \u201340 \u00b0C the samples were immediately vortexed for 15 s, sonicated for 15 min at 20 \u00b0C and centrifuged for 10 min at 19000 x g. The supernatants were transferred to new 2 ml tubes and the remaining pellets subjected to a second extraction using 200 \u00b5l methanol/water, 80/20 (v/v). The combined extracts were evaporated to dryness in a vacuum centrifuge at 30 \u00b0C, thoroughly reconstituted in 200 \u00b5l methanol/water, 30/70 (v/v) and filtered using 0.2 \u00b5m PTFE syringe filters. Four extracts (technical replicates) were prepared for each of the four leaf pools.",
+                  "description": "Plant material was homogenized in liquid nitrogen using a pestle and mortar and aliquots of 100 +/- 5 mg were weighed into pre-cooled 2 ml, round bottom tubes. After addition of 200 µl methanol/water, 80/20 (v/v) pre-cooled at –40 °C the samples were immediately vortexed for 15 s, sonicated for 15 min at 20 °C and centrifuged for 10 min at 19000 x g. The supernatants were transferred to new 2 ml tubes and the remaining pellets subjected to a second extraction using 200 µl methanol/water, 80/20 (v/v). The combined extracts were evaporated to dryness in a vacuum centrifuge at 30 °C, thoroughly reconstituted in 200 µl methanol/water, 30/70 (v/v) and filtered using 0.2 µm PTFE syringe filters. Four extracts (technical replicates) were prepared for each of the four leaf pools.",
                   "uri": "",
                   "version": "",
                   "parameters": [
@@ -3055,7 +3025,7 @@
                         "termAccession": ""
                       }
                     },
-                    "value": "200 \u00b5l methanol/water, 30/70 (v/v)",
+                    "value": "200 µl methanol/water, 30/70 (v/v)",
                     "unit": null
                   },
                   {
@@ -3193,7 +3163,7 @@
                     "termSource": null,
                     "termAccession": ""
                   },
-                  "description": "Eluting compounds were detected from m/z 100-1000 using a micrOTOF-Q II hybrid quadrupole time-of-flight mass spectrometer (Bruker Daltonics) equipped with an Apollo II electrospray ion source in positive and negative ion mode using following instrument settings: nebulizer gas, nitrogen, 1.4 bar; dry gas, nitrogen, 6 l/min, 190 \u00b0C; capillary, \u20135000 V; end plate offset, -500 V; funnel 1 RF, 200 V; funnel 2 RF, 200 V; in-source CID energy, 0 V; hexapole RF, 100 V; quadrupole ion energy, 5 eV; collision gas, nitrogen; collision energy, 7 eV; collision RF 150/350 V (timing 50/50); transfer time, 70 \u00b5s; pre pulse storage, 5 \u00b5s; pulser frequency, 10 kHz; spectra rate, 3 Hz. Mass spectra were acquired in centroid mode. Mass calibration of individual raw data files was performed on lithium formate cluster ions obtained by automatic infusion of 20 \u00b5l 10 mM lithium hydroxide in isopropanol/water/formic acid, 49.9/49.9/0.2 (v/v/v) at a gradient time of 18 min using a diverter valve.",
+                  "description": "Eluting compounds were detected from m/z 100-1000 using a micrOTOF-Q II hybrid quadrupole time-of-flight mass spectrometer (Bruker Daltonics) equipped with an Apollo II electrospray ion source in positive and negative ion mode using following instrument settings: nebulizer gas, nitrogen, 1.4 bar; dry gas, nitrogen, 6 l/min, 190 °C; capillary, –5000 V; end plate offset, -500 V; funnel 1 RF, 200 V; funnel 2 RF, 200 V; in-source CID energy, 0 V; hexapole RF, 100 V; quadrupole ion energy, 5 eV; collision gas, nitrogen; collision energy, 7 eV; collision RF 150/350 V (timing 50/50); transfer time, 70 µs; pre pulse storage, 5 µs; pulser frequency, 10 kHz; spectra rate, 3 Hz. Mass spectra were acquired in centroid mode. Mass calibration of individual raw data files was performed on lithium formate cluster ions obtained by automatic infusion of 20 µl 10 mM lithium hydroxide in isopropanol/water/formic acid, 49.9/49.9/0.2 (v/v/v) at a gradient time of 18 min using a diverter valve.",
                   "uri": "",
                   "version": "",
                   "parameters": [
@@ -3350,7 +3320,7 @@
                     "termSource": null,
                     "termAccession": ""
                   },
-                  "description": "Plant material was homogenized in liquid nitrogen using a pestle and mortar and aliquots of 100 +/- 5 mg were weighed into pre-cooled 2 ml, round bottom tubes. After addition of 200 \u00b5l methanol/water, 80/20 (v/v) pre-cooled at \u201340 \u00b0C the samples were immediately vortexed for 15 s, sonicated for 15 min at 20 \u00b0C and centrifuged for 10 min at 19000 x g. The supernatants were transferred to new 2 ml tubes and the remaining pellets subjected to a second extraction using 200 \u00b5l methanol/water, 80/20 (v/v). The combined extracts were evaporated to dryness in a vacuum centrifuge at 30 \u00b0C, thoroughly reconstituted in 200 \u00b5l methanol/water, 30/70 (v/v) and filtered using 0.2 \u00b5m PTFE syringe filters. Four extracts (technical replicates) were prepared for each of the four leaf pools.",
+                  "description": "Plant material was homogenized in liquid nitrogen using a pestle and mortar and aliquots of 100 +/- 5 mg were weighed into pre-cooled 2 ml, round bottom tubes. After addition of 200 µl methanol/water, 80/20 (v/v) pre-cooled at –40 °C the samples were immediately vortexed for 15 s, sonicated for 15 min at 20 °C and centrifuged for 10 min at 19000 x g. The supernatants were transferred to new 2 ml tubes and the remaining pellets subjected to a second extraction using 200 µl methanol/water, 80/20 (v/v). The combined extracts were evaporated to dryness in a vacuum centrifuge at 30 °C, thoroughly reconstituted in 200 µl methanol/water, 30/70 (v/v) and filtered using 0.2 µm PTFE syringe filters. Four extracts (technical replicates) were prepared for each of the four leaf pools.",
                   "uri": "",
                   "version": "",
                   "parameters": [
@@ -3388,7 +3358,7 @@
                         "termAccession": ""
                       }
                     },
-                    "value": "200 \u00b5l methanol/water, 30/70 (v/v)",
+                    "value": "200 µl methanol/water, 30/70 (v/v)",
                     "unit": null
                   },
                   {
@@ -3526,7 +3496,7 @@
                     "termSource": null,
                     "termAccession": ""
                   },
-                  "description": "Plant material was homogenized in liquid nitrogen using a pestle and mortar and aliquots of 100 +/- 5 mg were weighed into pre-cooled 2 ml, round bottom tubes. After addition of 200 \u00b5l methanol/water, 80/20 (v/v) pre-cooled at \u201340 \u00b0C the samples were immediately vortexed for 15 s, sonicated for 15 min at 20 \u00b0C and centrifuged for 10 min at 19000 x g. The supernatants were transferred to new 2 ml tubes and the remaining pellets subjected to a second extraction using 200 \u00b5l methanol/water, 80/20 (v/v). The combined extracts were evaporated to dryness in a vacuum centrifuge at 30 \u00b0C, thoroughly reconstituted in 200 \u00b5l methanol/water, 30/70 (v/v) and filtered using 0.2 \u00b5m PTFE syringe filters. Four extracts (technical replicates) were prepared for each of the four leaf pools.",
+                  "description": "Plant material was homogenized in liquid nitrogen using a pestle and mortar and aliquots of 100 +/- 5 mg were weighed into pre-cooled 2 ml, round bottom tubes. After addition of 200 µl methanol/water, 80/20 (v/v) pre-cooled at –40 °C the samples were immediately vortexed for 15 s, sonicated for 15 min at 20 °C and centrifuged for 10 min at 19000 x g. The supernatants were transferred to new 2 ml tubes and the remaining pellets subjected to a second extraction using 200 µl methanol/water, 80/20 (v/v). The combined extracts were evaporated to dryness in a vacuum centrifuge at 30 °C, thoroughly reconstituted in 200 µl methanol/water, 30/70 (v/v) and filtered using 0.2 µm PTFE syringe filters. Four extracts (technical replicates) were prepared for each of the four leaf pools.",
                   "uri": "",
                   "version": "",
                   "parameters": [
@@ -3564,7 +3534,7 @@
                         "termAccession": ""
                       }
                     },
-                    "value": "200 \u00b5l methanol/water, 30/70 (v/v)",
+                    "value": "200 µl methanol/water, 30/70 (v/v)",
                     "unit": null
                   },
                   {
@@ -3702,7 +3672,7 @@
                     "termSource": null,
                     "termAccession": ""
                   },
-                  "description": "Chromatographic separations were performed on an Acquity UPLC system (Waters) equipped with a HSS T3 column (100 x 1.0 mm, particle size 1.8 \u00b5m, Waters) applying the following binary gradient at a flow rate of 150 \u00b5l/min: 0-1 min, isocratic 95% A (water/formic acid, 99.9/0.1 (v/v)), 5% B (acetonitrile/formic acid, 99.9/0.1 (v/v)); 1-16 min, linear from 5 to 45% B; 16-18 min, isocratic 95% B; 18-20 min, isocratic 5% B. The injection volume was 3.0 \u00b5l (full loop injection).",
+                  "description": "Chromatographic separations were performed on an Acquity UPLC system (Waters) equipped with a HSS T3 column (100 x 1.0 mm, particle size 1.8 µm, Waters) applying the following binary gradient at a flow rate of 150 µl/min: 0-1 min, isocratic 95% A (water/formic acid, 99.9/0.1 (v/v)), 5% B (acetonitrile/formic acid, 99.9/0.1 (v/v)); 1-16 min, linear from 5 to 45% B; 16-18 min, isocratic 95% B; 18-20 min, isocratic 5% B. The injection volume was 3.0 µl (full loop injection).",
                   "uri": "",
                   "version": "",
                   "parameters": [
@@ -3767,7 +3737,7 @@
                         "termAccession": ""
                       }
                     },
-                    "value": "ACQUITY UPLC HSS T3 (1.8 \u00b5m, 1 mm x 100 mm; Waters)",
+                    "value": "ACQUITY UPLC HSS T3 (1.8 µm, 1 mm x 100 mm; Waters)",
                     "unit": null
                   },
                   {
@@ -3806,7 +3776,7 @@
                     "termSource": null,
                     "termAccession": ""
                   },
-                  "description": "Plant material was homogenized in liquid nitrogen using a pestle and mortar and aliquots of 100 +/- 5 mg were weighed into pre-cooled 2 ml, round bottom tubes. After addition of 200 \u00b5l methanol/water, 80/20 (v/v) pre-cooled at \u201340 \u00b0C the samples were immediately vortexed for 15 s, sonicated for 15 min at 20 \u00b0C and centrifuged for 10 min at 19000 x g. The supernatants were transferred to new 2 ml tubes and the remaining pellets subjected to a second extraction using 200 \u00b5l methanol/water, 80/20 (v/v). The combined extracts were evaporated to dryness in a vacuum centrifuge at 30 \u00b0C, thoroughly reconstituted in 200 \u00b5l methanol/water, 30/70 (v/v) and filtered using 0.2 \u00b5m PTFE syringe filters. Four extracts (technical replicates) were prepared for each of the four leaf pools.",
+                  "description": "Plant material was homogenized in liquid nitrogen using a pestle and mortar and aliquots of 100 +/- 5 mg were weighed into pre-cooled 2 ml, round bottom tubes. After addition of 200 µl methanol/water, 80/20 (v/v) pre-cooled at –40 °C the samples were immediately vortexed for 15 s, sonicated for 15 min at 20 °C and centrifuged for 10 min at 19000 x g. The supernatants were transferred to new 2 ml tubes and the remaining pellets subjected to a second extraction using 200 µl methanol/water, 80/20 (v/v). The combined extracts were evaporated to dryness in a vacuum centrifuge at 30 °C, thoroughly reconstituted in 200 µl methanol/water, 30/70 (v/v) and filtered using 0.2 µm PTFE syringe filters. Four extracts (technical replicates) were prepared for each of the four leaf pools.",
                   "uri": "",
                   "version": "",
                   "parameters": [
@@ -3844,7 +3814,7 @@
                         "termAccession": ""
                       }
                     },
-                    "value": "200 \u00b5l methanol/water, 30/70 (v/v)",
+                    "value": "200 µl methanol/water, 30/70 (v/v)",
                     "unit": null
                   },
                   {
@@ -3982,7 +3952,7 @@
                     "termSource": null,
                     "termAccession": ""
                   },
-                  "description": "Eluting compounds were detected from m/z 100-1000 using a micrOTOF-Q II hybrid quadrupole time-of-flight mass spectrometer (Bruker Daltonics) equipped with an Apollo II electrospray ion source in positive and negative ion mode using following instrument settings: nebulizer gas, nitrogen, 1.4 bar; dry gas, nitrogen, 6 l/min, 190 \u00b0C; capillary, \u20135000 V; end plate offset, -500 V; funnel 1 RF, 200 V; funnel 2 RF, 200 V; in-source CID energy, 0 V; hexapole RF, 100 V; quadrupole ion energy, 5 eV; collision gas, nitrogen; collision energy, 7 eV; collision RF 150/350 V (timing 50/50); transfer time, 70 \u00b5s; pre pulse storage, 5 \u00b5s; pulser frequency, 10 kHz; spectra rate, 3 Hz. Mass spectra were acquired in centroid mode. Mass calibration of individual raw data files was performed on lithium formate cluster ions obtained by automatic infusion of 20 \u00b5l 10 mM lithium hydroxide in isopropanol/water/formic acid, 49.9/49.9/0.2 (v/v/v) at a gradient time of 18 min using a diverter valve.",
+                  "description": "Eluting compounds were detected from m/z 100-1000 using a micrOTOF-Q II hybrid quadrupole time-of-flight mass spectrometer (Bruker Daltonics) equipped with an Apollo II electrospray ion source in positive and negative ion mode using following instrument settings: nebulizer gas, nitrogen, 1.4 bar; dry gas, nitrogen, 6 l/min, 190 °C; capillary, –5000 V; end plate offset, -500 V; funnel 1 RF, 200 V; funnel 2 RF, 200 V; in-source CID energy, 0 V; hexapole RF, 100 V; quadrupole ion energy, 5 eV; collision gas, nitrogen; collision energy, 7 eV; collision RF 150/350 V (timing 50/50); transfer time, 70 µs; pre pulse storage, 5 µs; pulser frequency, 10 kHz; spectra rate, 3 Hz. Mass spectra were acquired in centroid mode. Mass calibration of individual raw data files was performed on lithium formate cluster ions obtained by automatic infusion of 20 µl 10 mM lithium hydroxide in isopropanol/water/formic acid, 49.9/49.9/0.2 (v/v/v) at a gradient time of 18 min using a diverter valve.",
                   "uri": "",
                   "version": "",
                   "parameters": [
@@ -4139,7 +4109,7 @@
                     "termSource": null,
                     "termAccession": ""
                   },
-                  "description": "Chromatographic separations were performed on an Acquity UPLC system (Waters) equipped with a HSS T3 column (100 x 1.0 mm, particle size 1.8 \u00b5m, Waters) applying the following binary gradient at a flow rate of 150 \u00b5l/min: 0-1 min, isocratic 95% A (water/formic acid, 99.9/0.1 (v/v)), 5% B (acetonitrile/formic acid, 99.9/0.1 (v/v)); 1-16 min, linear from 5 to 45% B; 16-18 min, isocratic 95% B; 18-20 min, isocratic 5% B. The injection volume was 3.0 \u00b5l (full loop injection).",
+                  "description": "Chromatographic separations were performed on an Acquity UPLC system (Waters) equipped with a HSS T3 column (100 x 1.0 mm, particle size 1.8 µm, Waters) applying the following binary gradient at a flow rate of 150 µl/min: 0-1 min, isocratic 95% A (water/formic acid, 99.9/0.1 (v/v)), 5% B (acetonitrile/formic acid, 99.9/0.1 (v/v)); 1-16 min, linear from 5 to 45% B; 16-18 min, isocratic 95% B; 18-20 min, isocratic 5% B. The injection volume was 3.0 µl (full loop injection).",
                   "uri": "",
                   "version": "",
                   "parameters": [
@@ -4204,7 +4174,7 @@
                         "termAccession": ""
                       }
                     },
-                    "value": "ACQUITY UPLC HSS T3 (1.8 \u00b5m, 1 mm x 100 mm; Waters)",
+                    "value": "ACQUITY UPLC HSS T3 (1.8 µm, 1 mm x 100 mm; Waters)",
                     "unit": null
                   },
                   {
@@ -4243,7 +4213,7 @@
                     "termSource": null,
                     "termAccession": ""
                   },
-                  "description": "Plant material was homogenized in liquid nitrogen using a pestle and mortar and aliquots of 100 +/- 5 mg were weighed into pre-cooled 2 ml, round bottom tubes. After addition of 200 \u00b5l methanol/water, 80/20 (v/v) pre-cooled at \u201340 \u00b0C the samples were immediately vortexed for 15 s, sonicated for 15 min at 20 \u00b0C and centrifuged for 10 min at 19000 x g. The supernatants were transferred to new 2 ml tubes and the remaining pellets subjected to a second extraction using 200 \u00b5l methanol/water, 80/20 (v/v). The combined extracts were evaporated to dryness in a vacuum centrifuge at 30 \u00b0C, thoroughly reconstituted in 200 \u00b5l methanol/water, 30/70 (v/v) and filtered using 0.2 \u00b5m PTFE syringe filters. Four extracts (technical replicates) were prepared for each of the four leaf pools.",
+                  "description": "Plant material was homogenized in liquid nitrogen using a pestle and mortar and aliquots of 100 +/- 5 mg were weighed into pre-cooled 2 ml, round bottom tubes. After addition of 200 µl methanol/water, 80/20 (v/v) pre-cooled at –40 °C the samples were immediately vortexed for 15 s, sonicated for 15 min at 20 °C and centrifuged for 10 min at 19000 x g. The supernatants were transferred to new 2 ml tubes and the remaining pellets subjected to a second extraction using 200 µl methanol/water, 80/20 (v/v). The combined extracts were evaporated to dryness in a vacuum centrifuge at 30 °C, thoroughly reconstituted in 200 µl methanol/water, 30/70 (v/v) and filtered using 0.2 µm PTFE syringe filters. Four extracts (technical replicates) were prepared for each of the four leaf pools.",
                   "uri": "",
                   "version": "",
                   "parameters": [
@@ -4281,7 +4251,7 @@
                         "termAccession": ""
                       }
                     },
-                    "value": "200 \u00b5l methanol/water, 30/70 (v/v)",
+                    "value": "200 µl methanol/water, 30/70 (v/v)",
                     "unit": null
                   },
                   {
@@ -4419,7 +4389,7 @@
                     "termSource": null,
                     "termAccession": ""
                   },
-                  "description": "Eluting compounds were detected from m/z 100-1000 using a micrOTOF-Q II hybrid quadrupole time-of-flight mass spectrometer (Bruker Daltonics) equipped with an Apollo II electrospray ion source in positive and negative ion mode using following instrument settings: nebulizer gas, nitrogen, 1.4 bar; dry gas, nitrogen, 6 l/min, 190 \u00b0C; capillary, \u20135000 V; end plate offset, -500 V; funnel 1 RF, 200 V; funnel 2 RF, 200 V; in-source CID energy, 0 V; hexapole RF, 100 V; quadrupole ion energy, 5 eV; collision gas, nitrogen; collision energy, 7 eV; collision RF 150/350 V (timing 50/50); transfer time, 70 \u00b5s; pre pulse storage, 5 \u00b5s; pulser frequency, 10 kHz; spectra rate, 3 Hz. Mass spectra were acquired in centroid mode. Mass calibration of individual raw data files was performed on lithium formate cluster ions obtained by automatic infusion of 20 \u00b5l 10 mM lithium hydroxide in isopropanol/water/formic acid, 49.9/49.9/0.2 (v/v/v) at a gradient time of 18 min using a diverter valve.",
+                  "description": "Eluting compounds were detected from m/z 100-1000 using a micrOTOF-Q II hybrid quadrupole time-of-flight mass spectrometer (Bruker Daltonics) equipped with an Apollo II electrospray ion source in positive and negative ion mode using following instrument settings: nebulizer gas, nitrogen, 1.4 bar; dry gas, nitrogen, 6 l/min, 190 °C; capillary, –5000 V; end plate offset, -500 V; funnel 1 RF, 200 V; funnel 2 RF, 200 V; in-source CID energy, 0 V; hexapole RF, 100 V; quadrupole ion energy, 5 eV; collision gas, nitrogen; collision energy, 7 eV; collision RF 150/350 V (timing 50/50); transfer time, 70 µs; pre pulse storage, 5 µs; pulser frequency, 10 kHz; spectra rate, 3 Hz. Mass spectra were acquired in centroid mode. Mass calibration of individual raw data files was performed on lithium formate cluster ions obtained by automatic infusion of 20 µl 10 mM lithium hydroxide in isopropanol/water/formic acid, 49.9/49.9/0.2 (v/v/v) at a gradient time of 18 min using a diverter valve.",
                   "uri": "",
                   "version": "",
                   "parameters": [
@@ -4576,7 +4546,7 @@
                     "termSource": null,
                     "termAccession": ""
                   },
-                  "description": "Chromatographic separations were performed on an Acquity UPLC system (Waters) equipped with a HSS T3 column (100 x 1.0 mm, particle size 1.8 \u00b5m, Waters) applying the following binary gradient at a flow rate of 150 \u00b5l/min: 0-1 min, isocratic 95% A (water/formic acid, 99.9/0.1 (v/v)), 5% B (acetonitrile/formic acid, 99.9/0.1 (v/v)); 1-16 min, linear from 5 to 45% B; 16-18 min, isocratic 95% B; 18-20 min, isocratic 5% B. The injection volume was 3.0 \u00b5l (full loop injection).",
+                  "description": "Chromatographic separations were performed on an Acquity UPLC system (Waters) equipped with a HSS T3 column (100 x 1.0 mm, particle size 1.8 µm, Waters) applying the following binary gradient at a flow rate of 150 µl/min: 0-1 min, isocratic 95% A (water/formic acid, 99.9/0.1 (v/v)), 5% B (acetonitrile/formic acid, 99.9/0.1 (v/v)); 1-16 min, linear from 5 to 45% B; 16-18 min, isocratic 95% B; 18-20 min, isocratic 5% B. The injection volume was 3.0 µl (full loop injection).",
                   "uri": "",
                   "version": "",
                   "parameters": [
@@ -4641,7 +4611,7 @@
                         "termAccession": ""
                       }
                     },
-                    "value": "ACQUITY UPLC HSS T3 (1.8 \u00b5m, 1 mm x 100 mm; Waters)",
+                    "value": "ACQUITY UPLC HSS T3 (1.8 µm, 1 mm x 100 mm; Waters)",
                     "unit": null
                   },
                   {
@@ -4680,7 +4650,7 @@
                     "termSource": null,
                     "termAccession": ""
                   },
-                  "description": "Eluting compounds were detected from m/z 100-1000 using a micrOTOF-Q II hybrid quadrupole time-of-flight mass spectrometer (Bruker Daltonics) equipped with an Apollo II electrospray ion source in positive and negative ion mode using following instrument settings: nebulizer gas, nitrogen, 1.4 bar; dry gas, nitrogen, 6 l/min, 190 \u00b0C; capillary, \u20135000 V; end plate offset, -500 V; funnel 1 RF, 200 V; funnel 2 RF, 200 V; in-source CID energy, 0 V; hexapole RF, 100 V; quadrupole ion energy, 5 eV; collision gas, nitrogen; collision energy, 7 eV; collision RF 150/350 V (timing 50/50); transfer time, 70 \u00b5s; pre pulse storage, 5 \u00b5s; pulser frequency, 10 kHz; spectra rate, 3 Hz. Mass spectra were acquired in centroid mode. Mass calibration of individual raw data files was performed on lithium formate cluster ions obtained by automatic infusion of 20 \u00b5l 10 mM lithium hydroxide in isopropanol/water/formic acid, 49.9/49.9/0.2 (v/v/v) at a gradient time of 18 min using a diverter valve.",
+                  "description": "Eluting compounds were detected from m/z 100-1000 using a micrOTOF-Q II hybrid quadrupole time-of-flight mass spectrometer (Bruker Daltonics) equipped with an Apollo II electrospray ion source in positive and negative ion mode using following instrument settings: nebulizer gas, nitrogen, 1.4 bar; dry gas, nitrogen, 6 l/min, 190 °C; capillary, –5000 V; end plate offset, -500 V; funnel 1 RF, 200 V; funnel 2 RF, 200 V; in-source CID energy, 0 V; hexapole RF, 100 V; quadrupole ion energy, 5 eV; collision gas, nitrogen; collision energy, 7 eV; collision RF 150/350 V (timing 50/50); transfer time, 70 µs; pre pulse storage, 5 µs; pulser frequency, 10 kHz; spectra rate, 3 Hz. Mass spectra were acquired in centroid mode. Mass calibration of individual raw data files was performed on lithium formate cluster ions obtained by automatic infusion of 20 µl 10 mM lithium hydroxide in isopropanol/water/formic acid, 49.9/49.9/0.2 (v/v/v) at a gradient time of 18 min using a diverter valve.",
                   "uri": "",
                   "version": "",
                   "parameters": [
@@ -4837,7 +4807,7 @@
                     "termSource": null,
                     "termAccession": ""
                   },
-                  "description": "Plant material was homogenized in liquid nitrogen using a pestle and mortar and aliquots of 100 +/- 5 mg were weighed into pre-cooled 2 ml, round bottom tubes. After addition of 200 \u00b5l methanol/water, 80/20 (v/v) pre-cooled at \u201340 \u00b0C the samples were immediately vortexed for 15 s, sonicated for 15 min at 20 \u00b0C and centrifuged for 10 min at 19000 x g. The supernatants were transferred to new 2 ml tubes and the remaining pellets subjected to a second extraction using 200 \u00b5l methanol/water, 80/20 (v/v). The combined extracts were evaporated to dryness in a vacuum centrifuge at 30 \u00b0C, thoroughly reconstituted in 200 \u00b5l methanol/water, 30/70 (v/v) and filtered using 0.2 \u00b5m PTFE syringe filters. Four extracts (technical replicates) were prepared for each of the four leaf pools.",
+                  "description": "Plant material was homogenized in liquid nitrogen using a pestle and mortar and aliquots of 100 +/- 5 mg were weighed into pre-cooled 2 ml, round bottom tubes. After addition of 200 µl methanol/water, 80/20 (v/v) pre-cooled at –40 °C the samples were immediately vortexed for 15 s, sonicated for 15 min at 20 °C and centrifuged for 10 min at 19000 x g. The supernatants were transferred to new 2 ml tubes and the remaining pellets subjected to a second extraction using 200 µl methanol/water, 80/20 (v/v). The combined extracts were evaporated to dryness in a vacuum centrifuge at 30 °C, thoroughly reconstituted in 200 µl methanol/water, 30/70 (v/v) and filtered using 0.2 µm PTFE syringe filters. Four extracts (technical replicates) were prepared for each of the four leaf pools.",
                   "uri": "",
                   "version": "",
                   "parameters": [
@@ -4875,7 +4845,7 @@
                         "termAccession": ""
                       }
                     },
-                    "value": "200 \u00b5l methanol/water, 30/70 (v/v)",
+                    "value": "200 µl methanol/water, 30/70 (v/v)",
                     "unit": null
                   },
                   {
@@ -5013,7 +4983,7 @@
                     "termSource": null,
                     "termAccession": ""
                   },
-                  "description": "Eluting compounds were detected from m/z 100-1000 using a micrOTOF-Q II hybrid quadrupole time-of-flight mass spectrometer (Bruker Daltonics) equipped with an Apollo II electrospray ion source in positive and negative ion mode using following instrument settings: nebulizer gas, nitrogen, 1.4 bar; dry gas, nitrogen, 6 l/min, 190 \u00b0C; capillary, \u20135000 V; end plate offset, -500 V; funnel 1 RF, 200 V; funnel 2 RF, 200 V; in-source CID energy, 0 V; hexapole RF, 100 V; quadrupole ion energy, 5 eV; collision gas, nitrogen; collision energy, 7 eV; collision RF 150/350 V (timing 50/50); transfer time, 70 \u00b5s; pre pulse storage, 5 \u00b5s; pulser frequency, 10 kHz; spectra rate, 3 Hz. Mass spectra were acquired in centroid mode. Mass calibration of individual raw data files was performed on lithium formate cluster ions obtained by automatic infusion of 20 \u00b5l 10 mM lithium hydroxide in isopropanol/water/formic acid, 49.9/49.9/0.2 (v/v/v) at a gradient time of 18 min using a diverter valve.",
+                  "description": "Eluting compounds were detected from m/z 100-1000 using a micrOTOF-Q II hybrid quadrupole time-of-flight mass spectrometer (Bruker Daltonics) equipped with an Apollo II electrospray ion source in positive and negative ion mode using following instrument settings: nebulizer gas, nitrogen, 1.4 bar; dry gas, nitrogen, 6 l/min, 190 °C; capillary, –5000 V; end plate offset, -500 V; funnel 1 RF, 200 V; funnel 2 RF, 200 V; in-source CID energy, 0 V; hexapole RF, 100 V; quadrupole ion energy, 5 eV; collision gas, nitrogen; collision energy, 7 eV; collision RF 150/350 V (timing 50/50); transfer time, 70 µs; pre pulse storage, 5 µs; pulser frequency, 10 kHz; spectra rate, 3 Hz. Mass spectra were acquired in centroid mode. Mass calibration of individual raw data files was performed on lithium formate cluster ions obtained by automatic infusion of 20 µl 10 mM lithium hydroxide in isopropanol/water/formic acid, 49.9/49.9/0.2 (v/v/v) at a gradient time of 18 min using a diverter valve.",
                   "uri": "",
                   "version": "",
                   "parameters": [
@@ -5170,7 +5140,7 @@
                     "termSource": null,
                     "termAccession": ""
                   },
-                  "description": "Eluting compounds were detected from m/z 100-1000 using a micrOTOF-Q II hybrid quadrupole time-of-flight mass spectrometer (Bruker Daltonics) equipped with an Apollo II electrospray ion source in positive and negative ion mode using following instrument settings: nebulizer gas, nitrogen, 1.4 bar; dry gas, nitrogen, 6 l/min, 190 \u00b0C; capillary, \u20135000 V; end plate offset, -500 V; funnel 1 RF, 200 V; funnel 2 RF, 200 V; in-source CID energy, 0 V; hexapole RF, 100 V; quadrupole ion energy, 5 eV; collision gas, nitrogen; collision energy, 7 eV; collision RF 150/350 V (timing 50/50); transfer time, 70 \u00b5s; pre pulse storage, 5 \u00b5s; pulser frequency, 10 kHz; spectra rate, 3 Hz. Mass spectra were acquired in centroid mode. Mass calibration of individual raw data files was performed on lithium formate cluster ions obtained by automatic infusion of 20 \u00b5l 10 mM lithium hydroxide in isopropanol/water/formic acid, 49.9/49.9/0.2 (v/v/v) at a gradient time of 18 min using a diverter valve.",
+                  "description": "Eluting compounds were detected from m/z 100-1000 using a micrOTOF-Q II hybrid quadrupole time-of-flight mass spectrometer (Bruker Daltonics) equipped with an Apollo II electrospray ion source in positive and negative ion mode using following instrument settings: nebulizer gas, nitrogen, 1.4 bar; dry gas, nitrogen, 6 l/min, 190 °C; capillary, –5000 V; end plate offset, -500 V; funnel 1 RF, 200 V; funnel 2 RF, 200 V; in-source CID energy, 0 V; hexapole RF, 100 V; quadrupole ion energy, 5 eV; collision gas, nitrogen; collision energy, 7 eV; collision RF 150/350 V (timing 50/50); transfer time, 70 µs; pre pulse storage, 5 µs; pulser frequency, 10 kHz; spectra rate, 3 Hz. Mass spectra were acquired in centroid mode. Mass calibration of individual raw data files was performed on lithium formate cluster ions obtained by automatic infusion of 20 µl 10 mM lithium hydroxide in isopropanol/water/formic acid, 49.9/49.9/0.2 (v/v/v) at a gradient time of 18 min using a diverter valve.",
                   "uri": "",
                   "version": "",
                   "parameters": [
@@ -5327,7 +5297,7 @@
                     "termSource": null,
                     "termAccession": ""
                   },
-                  "description": "Chromatographic separations were performed on an Acquity UPLC system (Waters) equipped with a HSS T3 column (100 x 1.0 mm, particle size 1.8 \u00b5m, Waters) applying the following binary gradient at a flow rate of 150 \u00b5l/min: 0-1 min, isocratic 95% A (water/formic acid, 99.9/0.1 (v/v)), 5% B (acetonitrile/formic acid, 99.9/0.1 (v/v)); 1-16 min, linear from 5 to 45% B; 16-18 min, isocratic 95% B; 18-20 min, isocratic 5% B. The injection volume was 3.0 \u00b5l (full loop injection).",
+                  "description": "Chromatographic separations were performed on an Acquity UPLC system (Waters) equipped with a HSS T3 column (100 x 1.0 mm, particle size 1.8 µm, Waters) applying the following binary gradient at a flow rate of 150 µl/min: 0-1 min, isocratic 95% A (water/formic acid, 99.9/0.1 (v/v)), 5% B (acetonitrile/formic acid, 99.9/0.1 (v/v)); 1-16 min, linear from 5 to 45% B; 16-18 min, isocratic 95% B; 18-20 min, isocratic 5% B. The injection volume was 3.0 µl (full loop injection).",
                   "uri": "",
                   "version": "",
                   "parameters": [
@@ -5392,7 +5362,7 @@
                         "termAccession": ""
                       }
                     },
-                    "value": "ACQUITY UPLC HSS T3 (1.8 \u00b5m, 1 mm x 100 mm; Waters)",
+                    "value": "ACQUITY UPLC HSS T3 (1.8 µm, 1 mm x 100 mm; Waters)",
                     "unit": null
                   },
                   {
@@ -5431,7 +5401,7 @@
                     "termSource": null,
                     "termAccession": ""
                   },
-                  "description": "Chromatographic separations were performed on an Acquity UPLC system (Waters) equipped with a HSS T3 column (100 x 1.0 mm, particle size 1.8 \u00b5m, Waters) applying the following binary gradient at a flow rate of 150 \u00b5l/min: 0-1 min, isocratic 95% A (water/formic acid, 99.9/0.1 (v/v)), 5% B (acetonitrile/formic acid, 99.9/0.1 (v/v)); 1-16 min, linear from 5 to 45% B; 16-18 min, isocratic 95% B; 18-20 min, isocratic 5% B. The injection volume was 3.0 \u00b5l (full loop injection).",
+                  "description": "Chromatographic separations were performed on an Acquity UPLC system (Waters) equipped with a HSS T3 column (100 x 1.0 mm, particle size 1.8 µm, Waters) applying the following binary gradient at a flow rate of 150 µl/min: 0-1 min, isocratic 95% A (water/formic acid, 99.9/0.1 (v/v)), 5% B (acetonitrile/formic acid, 99.9/0.1 (v/v)); 1-16 min, linear from 5 to 45% B; 16-18 min, isocratic 95% B; 18-20 min, isocratic 5% B. The injection volume was 3.0 µl (full loop injection).",
                   "uri": "",
                   "version": "",
                   "parameters": [
@@ -5496,7 +5466,7 @@
                         "termAccession": ""
                       }
                     },
-                    "value": "ACQUITY UPLC HSS T3 (1.8 \u00b5m, 1 mm x 100 mm; Waters)",
+                    "value": "ACQUITY UPLC HSS T3 (1.8 µm, 1 mm x 100 mm; Waters)",
                     "unit": null
                   },
                   {
@@ -5535,7 +5505,7 @@
                     "termSource": null,
                     "termAccession": ""
                   },
-                  "description": "Plant material was homogenized in liquid nitrogen using a pestle and mortar and aliquots of 100 +/- 5 mg were weighed into pre-cooled 2 ml, round bottom tubes. After addition of 200 \u00b5l methanol/water, 80/20 (v/v) pre-cooled at \u201340 \u00b0C the samples were immediately vortexed for 15 s, sonicated for 15 min at 20 \u00b0C and centrifuged for 10 min at 19000 x g. The supernatants were transferred to new 2 ml tubes and the remaining pellets subjected to a second extraction using 200 \u00b5l methanol/water, 80/20 (v/v). The combined extracts were evaporated to dryness in a vacuum centrifuge at 30 \u00b0C, thoroughly reconstituted in 200 \u00b5l methanol/water, 30/70 (v/v) and filtered using 0.2 \u00b5m PTFE syringe filters. Four extracts (technical replicates) were prepared for each of the four leaf pools.",
+                  "description": "Plant material was homogenized in liquid nitrogen using a pestle and mortar and aliquots of 100 +/- 5 mg were weighed into pre-cooled 2 ml, round bottom tubes. After addition of 200 µl methanol/water, 80/20 (v/v) pre-cooled at –40 °C the samples were immediately vortexed for 15 s, sonicated for 15 min at 20 °C and centrifuged for 10 min at 19000 x g. The supernatants were transferred to new 2 ml tubes and the remaining pellets subjected to a second extraction using 200 µl methanol/water, 80/20 (v/v). The combined extracts were evaporated to dryness in a vacuum centrifuge at 30 °C, thoroughly reconstituted in 200 µl methanol/water, 30/70 (v/v) and filtered using 0.2 µm PTFE syringe filters. Four extracts (technical replicates) were prepared for each of the four leaf pools.",
                   "uri": "",
                   "version": "",
                   "parameters": [
@@ -5573,7 +5543,7 @@
                         "termAccession": ""
                       }
                     },
-                    "value": "200 \u00b5l methanol/water, 30/70 (v/v)",
+                    "value": "200 µl methanol/water, 30/70 (v/v)",
                     "unit": null
                   },
                   {
@@ -5711,7 +5681,7 @@
                     "termSource": null,
                     "termAccession": ""
                   },
-                  "description": "Eluting compounds were detected from m/z 100-1000 using a micrOTOF-Q II hybrid quadrupole time-of-flight mass spectrometer (Bruker Daltonics) equipped with an Apollo II electrospray ion source in positive and negative ion mode using following instrument settings: nebulizer gas, nitrogen, 1.4 bar; dry gas, nitrogen, 6 l/min, 190 \u00b0C; capillary, \u20135000 V; end plate offset, -500 V; funnel 1 RF, 200 V; funnel 2 RF, 200 V; in-source CID energy, 0 V; hexapole RF, 100 V; quadrupole ion energy, 5 eV; collision gas, nitrogen; collision energy, 7 eV; collision RF 150/350 V (timing 50/50); transfer time, 70 \u00b5s; pre pulse storage, 5 \u00b5s; pulser frequency, 10 kHz; spectra rate, 3 Hz. Mass spectra were acquired in centroid mode. Mass calibration of individual raw data files was performed on lithium formate cluster ions obtained by automatic infusion of 20 \u00b5l 10 mM lithium hydroxide in isopropanol/water/formic acid, 49.9/49.9/0.2 (v/v/v) at a gradient time of 18 min using a diverter valve.",
+                  "description": "Eluting compounds were detected from m/z 100-1000 using a micrOTOF-Q II hybrid quadrupole time-of-flight mass spectrometer (Bruker Daltonics) equipped with an Apollo II electrospray ion source in positive and negative ion mode using following instrument settings: nebulizer gas, nitrogen, 1.4 bar; dry gas, nitrogen, 6 l/min, 190 °C; capillary, –5000 V; end plate offset, -500 V; funnel 1 RF, 200 V; funnel 2 RF, 200 V; in-source CID energy, 0 V; hexapole RF, 100 V; quadrupole ion energy, 5 eV; collision gas, nitrogen; collision energy, 7 eV; collision RF 150/350 V (timing 50/50); transfer time, 70 µs; pre pulse storage, 5 µs; pulser frequency, 10 kHz; spectra rate, 3 Hz. Mass spectra were acquired in centroid mode. Mass calibration of individual raw data files was performed on lithium formate cluster ions obtained by automatic infusion of 20 µl 10 mM lithium hydroxide in isopropanol/water/formic acid, 49.9/49.9/0.2 (v/v/v) at a gradient time of 18 min using a diverter valve.",
                   "uri": "",
                   "version": "",
                   "parameters": [
@@ -5868,7 +5838,7 @@
                     "termSource": null,
                     "termAccession": ""
                   },
-                  "description": "Eluting compounds were detected from m/z 100-1000 using a micrOTOF-Q II hybrid quadrupole time-of-flight mass spectrometer (Bruker Daltonics) equipped with an Apollo II electrospray ion source in positive and negative ion mode using following instrument settings: nebulizer gas, nitrogen, 1.4 bar; dry gas, nitrogen, 6 l/min, 190 \u00b0C; capillary, \u20135000 V; end plate offset, -500 V; funnel 1 RF, 200 V; funnel 2 RF, 200 V; in-source CID energy, 0 V; hexapole RF, 100 V; quadrupole ion energy, 5 eV; collision gas, nitrogen; collision energy, 7 eV; collision RF 150/350 V (timing 50/50); transfer time, 70 \u00b5s; pre pulse storage, 5 \u00b5s; pulser frequency, 10 kHz; spectra rate, 3 Hz. Mass spectra were acquired in centroid mode. Mass calibration of individual raw data files was performed on lithium formate cluster ions obtained by automatic infusion of 20 \u00b5l 10 mM lithium hydroxide in isopropanol/water/formic acid, 49.9/49.9/0.2 (v/v/v) at a gradient time of 18 min using a diverter valve.",
+                  "description": "Eluting compounds were detected from m/z 100-1000 using a micrOTOF-Q II hybrid quadrupole time-of-flight mass spectrometer (Bruker Daltonics) equipped with an Apollo II electrospray ion source in positive and negative ion mode using following instrument settings: nebulizer gas, nitrogen, 1.4 bar; dry gas, nitrogen, 6 l/min, 190 °C; capillary, –5000 V; end plate offset, -500 V; funnel 1 RF, 200 V; funnel 2 RF, 200 V; in-source CID energy, 0 V; hexapole RF, 100 V; quadrupole ion energy, 5 eV; collision gas, nitrogen; collision energy, 7 eV; collision RF 150/350 V (timing 50/50); transfer time, 70 µs; pre pulse storage, 5 µs; pulser frequency, 10 kHz; spectra rate, 3 Hz. Mass spectra were acquired in centroid mode. Mass calibration of individual raw data files was performed on lithium formate cluster ions obtained by automatic infusion of 20 µl 10 mM lithium hydroxide in isopropanol/water/formic acid, 49.9/49.9/0.2 (v/v/v) at a gradient time of 18 min using a diverter valve.",
                   "uri": "",
                   "version": "",
                   "parameters": [
@@ -6025,7 +5995,7 @@
                     "termSource": null,
                     "termAccession": ""
                   },
-                  "description": "Plant material was homogenized in liquid nitrogen using a pestle and mortar and aliquots of 100 +/- 5 mg were weighed into pre-cooled 2 ml, round bottom tubes. After addition of 200 \u00b5l methanol/water, 80/20 (v/v) pre-cooled at \u201340 \u00b0C the samples were immediately vortexed for 15 s, sonicated for 15 min at 20 \u00b0C and centrifuged for 10 min at 19000 x g. The supernatants were transferred to new 2 ml tubes and the remaining pellets subjected to a second extraction using 200 \u00b5l methanol/water, 80/20 (v/v). The combined extracts were evaporated to dryness in a vacuum centrifuge at 30 \u00b0C, thoroughly reconstituted in 200 \u00b5l methanol/water, 30/70 (v/v) and filtered using 0.2 \u00b5m PTFE syringe filters. Four extracts (technical replicates) were prepared for each of the four leaf pools.",
+                  "description": "Plant material was homogenized in liquid nitrogen using a pestle and mortar and aliquots of 100 +/- 5 mg were weighed into pre-cooled 2 ml, round bottom tubes. After addition of 200 µl methanol/water, 80/20 (v/v) pre-cooled at –40 °C the samples were immediately vortexed for 15 s, sonicated for 15 min at 20 °C and centrifuged for 10 min at 19000 x g. The supernatants were transferred to new 2 ml tubes and the remaining pellets subjected to a second extraction using 200 µl methanol/water, 80/20 (v/v). The combined extracts were evaporated to dryness in a vacuum centrifuge at 30 °C, thoroughly reconstituted in 200 µl methanol/water, 30/70 (v/v) and filtered using 0.2 µm PTFE syringe filters. Four extracts (technical replicates) were prepared for each of the four leaf pools.",
                   "uri": "",
                   "version": "",
                   "parameters": [
@@ -6063,7 +6033,7 @@
                         "termAccession": ""
                       }
                     },
-                    "value": "200 \u00b5l methanol/water, 30/70 (v/v)",
+                    "value": "200 µl methanol/water, 30/70 (v/v)",
                     "unit": null
                   },
                   {
@@ -6201,7 +6171,7 @@
                     "termSource": null,
                     "termAccession": ""
                   },
-                  "description": "Chromatographic separations were performed on an Acquity UPLC system (Waters) equipped with a HSS T3 column (100 x 1.0 mm, particle size 1.8 \u00b5m, Waters) applying the following binary gradient at a flow rate of 150 \u00b5l/min: 0-1 min, isocratic 95% A (water/formic acid, 99.9/0.1 (v/v)), 5% B (acetonitrile/formic acid, 99.9/0.1 (v/v)); 1-16 min, linear from 5 to 45% B; 16-18 min, isocratic 95% B; 18-20 min, isocratic 5% B. The injection volume was 3.0 \u00b5l (full loop injection).",
+                  "description": "Chromatographic separations were performed on an Acquity UPLC system (Waters) equipped with a HSS T3 column (100 x 1.0 mm, particle size 1.8 µm, Waters) applying the following binary gradient at a flow rate of 150 µl/min: 0-1 min, isocratic 95% A (water/formic acid, 99.9/0.1 (v/v)), 5% B (acetonitrile/formic acid, 99.9/0.1 (v/v)); 1-16 min, linear from 5 to 45% B; 16-18 min, isocratic 95% B; 18-20 min, isocratic 5% B. The injection volume was 3.0 µl (full loop injection).",
                   "uri": "",
                   "version": "",
                   "parameters": [
@@ -6266,7 +6236,7 @@
                         "termAccession": ""
                       }
                     },
-                    "value": "ACQUITY UPLC HSS T3 (1.8 \u00b5m, 1 mm x 100 mm; Waters)",
+                    "value": "ACQUITY UPLC HSS T3 (1.8 µm, 1 mm x 100 mm; Waters)",
                     "unit": null
                   },
                   {
@@ -6305,7 +6275,7 @@
                     "termSource": null,
                     "termAccession": ""
                   },
-                  "description": "Eluting compounds were detected from m/z 100-1000 using a micrOTOF-Q II hybrid quadrupole time-of-flight mass spectrometer (Bruker Daltonics) equipped with an Apollo II electrospray ion source in positive and negative ion mode using following instrument settings: nebulizer gas, nitrogen, 1.4 bar; dry gas, nitrogen, 6 l/min, 190 \u00b0C; capillary, \u20135000 V; end plate offset, -500 V; funnel 1 RF, 200 V; funnel 2 RF, 200 V; in-source CID energy, 0 V; hexapole RF, 100 V; quadrupole ion energy, 5 eV; collision gas, nitrogen; collision energy, 7 eV; collision RF 150/350 V (timing 50/50); transfer time, 70 \u00b5s; pre pulse storage, 5 \u00b5s; pulser frequency, 10 kHz; spectra rate, 3 Hz. Mass spectra were acquired in centroid mode. Mass calibration of individual raw data files was performed on lithium formate cluster ions obtained by automatic infusion of 20 \u00b5l 10 mM lithium hydroxide in isopropanol/water/formic acid, 49.9/49.9/0.2 (v/v/v) at a gradient time of 18 min using a diverter valve.",
+                  "description": "Eluting compounds were detected from m/z 100-1000 using a micrOTOF-Q II hybrid quadrupole time-of-flight mass spectrometer (Bruker Daltonics) equipped with an Apollo II electrospray ion source in positive and negative ion mode using following instrument settings: nebulizer gas, nitrogen, 1.4 bar; dry gas, nitrogen, 6 l/min, 190 °C; capillary, –5000 V; end plate offset, -500 V; funnel 1 RF, 200 V; funnel 2 RF, 200 V; in-source CID energy, 0 V; hexapole RF, 100 V; quadrupole ion energy, 5 eV; collision gas, nitrogen; collision energy, 7 eV; collision RF 150/350 V (timing 50/50); transfer time, 70 µs; pre pulse storage, 5 µs; pulser frequency, 10 kHz; spectra rate, 3 Hz. Mass spectra were acquired in centroid mode. Mass calibration of individual raw data files was performed on lithium formate cluster ions obtained by automatic infusion of 20 µl 10 mM lithium hydroxide in isopropanol/water/formic acid, 49.9/49.9/0.2 (v/v/v) at a gradient time of 18 min using a diverter valve.",
                   "uri": "",
                   "version": "",
                   "parameters": [
@@ -6462,7 +6432,7 @@
                     "termSource": null,
                     "termAccession": ""
                   },
-                  "description": "Plant material was homogenized in liquid nitrogen using a pestle and mortar and aliquots of 100 +/- 5 mg were weighed into pre-cooled 2 ml, round bottom tubes. After addition of 200 \u00b5l methanol/water, 80/20 (v/v) pre-cooled at \u201340 \u00b0C the samples were immediately vortexed for 15 s, sonicated for 15 min at 20 \u00b0C and centrifuged for 10 min at 19000 x g. The supernatants were transferred to new 2 ml tubes and the remaining pellets subjected to a second extraction using 200 \u00b5l methanol/water, 80/20 (v/v). The combined extracts were evaporated to dryness in a vacuum centrifuge at 30 \u00b0C, thoroughly reconstituted in 200 \u00b5l methanol/water, 30/70 (v/v) and filtered using 0.2 \u00b5m PTFE syringe filters. Four extracts (technical replicates) were prepared for each of the four leaf pools.",
+                  "description": "Plant material was homogenized in liquid nitrogen using a pestle and mortar and aliquots of 100 +/- 5 mg were weighed into pre-cooled 2 ml, round bottom tubes. After addition of 200 µl methanol/water, 80/20 (v/v) pre-cooled at –40 °C the samples were immediately vortexed for 15 s, sonicated for 15 min at 20 °C and centrifuged for 10 min at 19000 x g. The supernatants were transferred to new 2 ml tubes and the remaining pellets subjected to a second extraction using 200 µl methanol/water, 80/20 (v/v). The combined extracts were evaporated to dryness in a vacuum centrifuge at 30 °C, thoroughly reconstituted in 200 µl methanol/water, 30/70 (v/v) and filtered using 0.2 µm PTFE syringe filters. Four extracts (technical replicates) were prepared for each of the four leaf pools.",
                   "uri": "",
                   "version": "",
                   "parameters": [
@@ -6500,7 +6470,7 @@
                         "termAccession": ""
                       }
                     },
-                    "value": "200 \u00b5l methanol/water, 30/70 (v/v)",
+                    "value": "200 µl methanol/water, 30/70 (v/v)",
                     "unit": null
                   },
                   {
@@ -6638,7 +6608,7 @@
                     "termSource": null,
                     "termAccession": ""
                   },
-                  "description": "Eluting compounds were detected from m/z 100-1000 using a micrOTOF-Q II hybrid quadrupole time-of-flight mass spectrometer (Bruker Daltonics) equipped with an Apollo II electrospray ion source in positive and negative ion mode using following instrument settings: nebulizer gas, nitrogen, 1.4 bar; dry gas, nitrogen, 6 l/min, 190 \u00b0C; capillary, \u20135000 V; end plate offset, -500 V; funnel 1 RF, 200 V; funnel 2 RF, 200 V; in-source CID energy, 0 V; hexapole RF, 100 V; quadrupole ion energy, 5 eV; collision gas, nitrogen; collision energy, 7 eV; collision RF 150/350 V (timing 50/50); transfer time, 70 \u00b5s; pre pulse storage, 5 \u00b5s; pulser frequency, 10 kHz; spectra rate, 3 Hz. Mass spectra were acquired in centroid mode. Mass calibration of individual raw data files was performed on lithium formate cluster ions obtained by automatic infusion of 20 \u00b5l 10 mM lithium hydroxide in isopropanol/water/formic acid, 49.9/49.9/0.2 (v/v/v) at a gradient time of 18 min using a diverter valve.",
+                  "description": "Eluting compounds were detected from m/z 100-1000 using a micrOTOF-Q II hybrid quadrupole time-of-flight mass spectrometer (Bruker Daltonics) equipped with an Apollo II electrospray ion source in positive and negative ion mode using following instrument settings: nebulizer gas, nitrogen, 1.4 bar; dry gas, nitrogen, 6 l/min, 190 °C; capillary, –5000 V; end plate offset, -500 V; funnel 1 RF, 200 V; funnel 2 RF, 200 V; in-source CID energy, 0 V; hexapole RF, 100 V; quadrupole ion energy, 5 eV; collision gas, nitrogen; collision energy, 7 eV; collision RF 150/350 V (timing 50/50); transfer time, 70 µs; pre pulse storage, 5 µs; pulser frequency, 10 kHz; spectra rate, 3 Hz. Mass spectra were acquired in centroid mode. Mass calibration of individual raw data files was performed on lithium formate cluster ions obtained by automatic infusion of 20 µl 10 mM lithium hydroxide in isopropanol/water/formic acid, 49.9/49.9/0.2 (v/v/v) at a gradient time of 18 min using a diverter valve.",
                   "uri": "",
                   "version": "",
                   "parameters": [
@@ -6795,7 +6765,7 @@
                     "termSource": null,
                     "termAccession": ""
                   },
-                  "description": "Chromatographic separations were performed on an Acquity UPLC system (Waters) equipped with a HSS T3 column (100 x 1.0 mm, particle size 1.8 \u00b5m, Waters) applying the following binary gradient at a flow rate of 150 \u00b5l/min: 0-1 min, isocratic 95% A (water/formic acid, 99.9/0.1 (v/v)), 5% B (acetonitrile/formic acid, 99.9/0.1 (v/v)); 1-16 min, linear from 5 to 45% B; 16-18 min, isocratic 95% B; 18-20 min, isocratic 5% B. The injection volume was 3.0 \u00b5l (full loop injection).",
+                  "description": "Chromatographic separations were performed on an Acquity UPLC system (Waters) equipped with a HSS T3 column (100 x 1.0 mm, particle size 1.8 µm, Waters) applying the following binary gradient at a flow rate of 150 µl/min: 0-1 min, isocratic 95% A (water/formic acid, 99.9/0.1 (v/v)), 5% B (acetonitrile/formic acid, 99.9/0.1 (v/v)); 1-16 min, linear from 5 to 45% B; 16-18 min, isocratic 95% B; 18-20 min, isocratic 5% B. The injection volume was 3.0 µl (full loop injection).",
                   "uri": "",
                   "version": "",
                   "parameters": [
@@ -6860,7 +6830,7 @@
                         "termAccession": ""
                       }
                     },
-                    "value": "ACQUITY UPLC HSS T3 (1.8 \u00b5m, 1 mm x 100 mm; Waters)",
+                    "value": "ACQUITY UPLC HSS T3 (1.8 µm, 1 mm x 100 mm; Waters)",
                     "unit": null
                   },
                   {
@@ -6899,7 +6869,7 @@
                     "termSource": null,
                     "termAccession": ""
                   },
-                  "description": "Eluting compounds were detected from m/z 100-1000 using a micrOTOF-Q II hybrid quadrupole time-of-flight mass spectrometer (Bruker Daltonics) equipped with an Apollo II electrospray ion source in positive and negative ion mode using following instrument settings: nebulizer gas, nitrogen, 1.4 bar; dry gas, nitrogen, 6 l/min, 190 \u00b0C; capillary, \u20135000 V; end plate offset, -500 V; funnel 1 RF, 200 V; funnel 2 RF, 200 V; in-source CID energy, 0 V; hexapole RF, 100 V; quadrupole ion energy, 5 eV; collision gas, nitrogen; collision energy, 7 eV; collision RF 150/350 V (timing 50/50); transfer time, 70 \u00b5s; pre pulse storage, 5 \u00b5s; pulser frequency, 10 kHz; spectra rate, 3 Hz. Mass spectra were acquired in centroid mode. Mass calibration of individual raw data files was performed on lithium formate cluster ions obtained by automatic infusion of 20 \u00b5l 10 mM lithium hydroxide in isopropanol/water/formic acid, 49.9/49.9/0.2 (v/v/v) at a gradient time of 18 min using a diverter valve.",
+                  "description": "Eluting compounds were detected from m/z 100-1000 using a micrOTOF-Q II hybrid quadrupole time-of-flight mass spectrometer (Bruker Daltonics) equipped with an Apollo II electrospray ion source in positive and negative ion mode using following instrument settings: nebulizer gas, nitrogen, 1.4 bar; dry gas, nitrogen, 6 l/min, 190 °C; capillary, –5000 V; end plate offset, -500 V; funnel 1 RF, 200 V; funnel 2 RF, 200 V; in-source CID energy, 0 V; hexapole RF, 100 V; quadrupole ion energy, 5 eV; collision gas, nitrogen; collision energy, 7 eV; collision RF 150/350 V (timing 50/50); transfer time, 70 µs; pre pulse storage, 5 µs; pulser frequency, 10 kHz; spectra rate, 3 Hz. Mass spectra were acquired in centroid mode. Mass calibration of individual raw data files was performed on lithium formate cluster ions obtained by automatic infusion of 20 µl 10 mM lithium hydroxide in isopropanol/water/formic acid, 49.9/49.9/0.2 (v/v/v) at a gradient time of 18 min using a diverter valve.",
                   "uri": "",
                   "version": "",
                   "parameters": [
@@ -7056,7 +7026,7 @@
                     "termSource": null,
                     "termAccession": ""
                   },
-                  "description": "Chromatographic separations were performed on an Acquity UPLC system (Waters) equipped with a HSS T3 column (100 x 1.0 mm, particle size 1.8 \u00b5m, Waters) applying the following binary gradient at a flow rate of 150 \u00b5l/min: 0-1 min, isocratic 95% A (water/formic acid, 99.9/0.1 (v/v)), 5% B (acetonitrile/formic acid, 99.9/0.1 (v/v)); 1-16 min, linear from 5 to 45% B; 16-18 min, isocratic 95% B; 18-20 min, isocratic 5% B. The injection volume was 3.0 \u00b5l (full loop injection).",
+                  "description": "Chromatographic separations were performed on an Acquity UPLC system (Waters) equipped with a HSS T3 column (100 x 1.0 mm, particle size 1.8 µm, Waters) applying the following binary gradient at a flow rate of 150 µl/min: 0-1 min, isocratic 95% A (water/formic acid, 99.9/0.1 (v/v)), 5% B (acetonitrile/formic acid, 99.9/0.1 (v/v)); 1-16 min, linear from 5 to 45% B; 16-18 min, isocratic 95% B; 18-20 min, isocratic 5% B. The injection volume was 3.0 µl (full loop injection).",
                   "uri": "",
                   "version": "",
                   "parameters": [
@@ -7121,7 +7091,7 @@
                         "termAccession": ""
                       }
                     },
-                    "value": "ACQUITY UPLC HSS T3 (1.8 \u00b5m, 1 mm x 100 mm; Waters)",
+                    "value": "ACQUITY UPLC HSS T3 (1.8 µm, 1 mm x 100 mm; Waters)",
                     "unit": null
                   },
                   {
@@ -7160,7 +7130,7 @@
                     "termSource": null,
                     "termAccession": ""
                   },
-                  "description": "Plant material was homogenized in liquid nitrogen using a pestle and mortar and aliquots of 100 +/- 5 mg were weighed into pre-cooled 2 ml, round bottom tubes. After addition of 200 \u00b5l methanol/water, 80/20 (v/v) pre-cooled at \u201340 \u00b0C the samples were immediately vortexed for 15 s, sonicated for 15 min at 20 \u00b0C and centrifuged for 10 min at 19000 x g. The supernatants were transferred to new 2 ml tubes and the remaining pellets subjected to a second extraction using 200 \u00b5l methanol/water, 80/20 (v/v). The combined extracts were evaporated to dryness in a vacuum centrifuge at 30 \u00b0C, thoroughly reconstituted in 200 \u00b5l methanol/water, 30/70 (v/v) and filtered using 0.2 \u00b5m PTFE syringe filters. Four extracts (technical replicates) were prepared for each of the four leaf pools.",
+                  "description": "Plant material was homogenized in liquid nitrogen using a pestle and mortar and aliquots of 100 +/- 5 mg were weighed into pre-cooled 2 ml, round bottom tubes. After addition of 200 µl methanol/water, 80/20 (v/v) pre-cooled at –40 °C the samples were immediately vortexed for 15 s, sonicated for 15 min at 20 °C and centrifuged for 10 min at 19000 x g. The supernatants were transferred to new 2 ml tubes and the remaining pellets subjected to a second extraction using 200 µl methanol/water, 80/20 (v/v). The combined extracts were evaporated to dryness in a vacuum centrifuge at 30 °C, thoroughly reconstituted in 200 µl methanol/water, 30/70 (v/v) and filtered using 0.2 µm PTFE syringe filters. Four extracts (technical replicates) were prepared for each of the four leaf pools.",
                   "uri": "",
                   "version": "",
                   "parameters": [
@@ -7198,7 +7168,7 @@
                         "termAccession": ""
                       }
                     },
-                    "value": "200 \u00b5l methanol/water, 30/70 (v/v)",
+                    "value": "200 µl methanol/water, 30/70 (v/v)",
                     "unit": null
                   },
                   {
@@ -7336,7 +7306,7 @@
                     "termSource": null,
                     "termAccession": ""
                   },
-                  "description": "Eluting compounds were detected from m/z 100-1000 using a micrOTOF-Q II hybrid quadrupole time-of-flight mass spectrometer (Bruker Daltonics) equipped with an Apollo II electrospray ion source in positive and negative ion mode using following instrument settings: nebulizer gas, nitrogen, 1.4 bar; dry gas, nitrogen, 6 l/min, 190 \u00b0C; capillary, \u20135000 V; end plate offset, -500 V; funnel 1 RF, 200 V; funnel 2 RF, 200 V; in-source CID energy, 0 V; hexapole RF, 100 V; quadrupole ion energy, 5 eV; collision gas, nitrogen; collision energy, 7 eV; collision RF 150/350 V (timing 50/50); transfer time, 70 \u00b5s; pre pulse storage, 5 \u00b5s; pulser frequency, 10 kHz; spectra rate, 3 Hz. Mass spectra were acquired in centroid mode. Mass calibration of individual raw data files was performed on lithium formate cluster ions obtained by automatic infusion of 20 \u00b5l 10 mM lithium hydroxide in isopropanol/water/formic acid, 49.9/49.9/0.2 (v/v/v) at a gradient time of 18 min using a diverter valve.",
+                  "description": "Eluting compounds were detected from m/z 100-1000 using a micrOTOF-Q II hybrid quadrupole time-of-flight mass spectrometer (Bruker Daltonics) equipped with an Apollo II electrospray ion source in positive and negative ion mode using following instrument settings: nebulizer gas, nitrogen, 1.4 bar; dry gas, nitrogen, 6 l/min, 190 °C; capillary, –5000 V; end plate offset, -500 V; funnel 1 RF, 200 V; funnel 2 RF, 200 V; in-source CID energy, 0 V; hexapole RF, 100 V; quadrupole ion energy, 5 eV; collision gas, nitrogen; collision energy, 7 eV; collision RF 150/350 V (timing 50/50); transfer time, 70 µs; pre pulse storage, 5 µs; pulser frequency, 10 kHz; spectra rate, 3 Hz. Mass spectra were acquired in centroid mode. Mass calibration of individual raw data files was performed on lithium formate cluster ions obtained by automatic infusion of 20 µl 10 mM lithium hydroxide in isopropanol/water/formic acid, 49.9/49.9/0.2 (v/v/v) at a gradient time of 18 min using a diverter valve.",
                   "uri": "",
                   "version": "",
                   "parameters": [
@@ -7493,7 +7463,7 @@
                     "termSource": null,
                     "termAccession": ""
                   },
-                  "description": "Chromatographic separations were performed on an Acquity UPLC system (Waters) equipped with a HSS T3 column (100 x 1.0 mm, particle size 1.8 \u00b5m, Waters) applying the following binary gradient at a flow rate of 150 \u00b5l/min: 0-1 min, isocratic 95% A (water/formic acid, 99.9/0.1 (v/v)), 5% B (acetonitrile/formic acid, 99.9/0.1 (v/v)); 1-16 min, linear from 5 to 45% B; 16-18 min, isocratic 95% B; 18-20 min, isocratic 5% B. The injection volume was 3.0 \u00b5l (full loop injection).",
+                  "description": "Chromatographic separations were performed on an Acquity UPLC system (Waters) equipped with a HSS T3 column (100 x 1.0 mm, particle size 1.8 µm, Waters) applying the following binary gradient at a flow rate of 150 µl/min: 0-1 min, isocratic 95% A (water/formic acid, 99.9/0.1 (v/v)), 5% B (acetonitrile/formic acid, 99.9/0.1 (v/v)); 1-16 min, linear from 5 to 45% B; 16-18 min, isocratic 95% B; 18-20 min, isocratic 5% B. The injection volume was 3.0 µl (full loop injection).",
                   "uri": "",
                   "version": "",
                   "parameters": [
@@ -7558,7 +7528,7 @@
                         "termAccession": ""
                       }
                     },
-                    "value": "ACQUITY UPLC HSS T3 (1.8 \u00b5m, 1 mm x 100 mm; Waters)",
+                    "value": "ACQUITY UPLC HSS T3 (1.8 µm, 1 mm x 100 mm; Waters)",
                     "unit": null
                   },
                   {
@@ -7597,7 +7567,7 @@
                     "termSource": null,
                     "termAccession": ""
                   },
-                  "description": "Plant material was homogenized in liquid nitrogen using a pestle and mortar and aliquots of 100 +/- 5 mg were weighed into pre-cooled 2 ml, round bottom tubes. After addition of 200 \u00b5l methanol/water, 80/20 (v/v) pre-cooled at \u201340 \u00b0C the samples were immediately vortexed for 15 s, sonicated for 15 min at 20 \u00b0C and centrifuged for 10 min at 19000 x g. The supernatants were transferred to new 2 ml tubes and the remaining pellets subjected to a second extraction using 200 \u00b5l methanol/water, 80/20 (v/v). The combined extracts were evaporated to dryness in a vacuum centrifuge at 30 \u00b0C, thoroughly reconstituted in 200 \u00b5l methanol/water, 30/70 (v/v) and filtered using 0.2 \u00b5m PTFE syringe filters. Four extracts (technical replicates) were prepared for each of the four leaf pools.",
+                  "description": "Plant material was homogenized in liquid nitrogen using a pestle and mortar and aliquots of 100 +/- 5 mg were weighed into pre-cooled 2 ml, round bottom tubes. After addition of 200 µl methanol/water, 80/20 (v/v) pre-cooled at –40 °C the samples were immediately vortexed for 15 s, sonicated for 15 min at 20 °C and centrifuged for 10 min at 19000 x g. The supernatants were transferred to new 2 ml tubes and the remaining pellets subjected to a second extraction using 200 µl methanol/water, 80/20 (v/v). The combined extracts were evaporated to dryness in a vacuum centrifuge at 30 °C, thoroughly reconstituted in 200 µl methanol/water, 30/70 (v/v) and filtered using 0.2 µm PTFE syringe filters. Four extracts (technical replicates) were prepared for each of the four leaf pools.",
                   "uri": "",
                   "version": "",
                   "parameters": [
@@ -7635,7 +7605,7 @@
                         "termAccession": ""
                       }
                     },
-                    "value": "200 \u00b5l methanol/water, 30/70 (v/v)",
+                    "value": "200 µl methanol/water, 30/70 (v/v)",
                     "unit": null
                   },
                   {
@@ -7773,7 +7743,7 @@
                     "termSource": null,
                     "termAccession": ""
                   },
-                  "description": "Plant material was homogenized in liquid nitrogen using a pestle and mortar and aliquots of 100 +/- 5 mg were weighed into pre-cooled 2 ml, round bottom tubes. After addition of 200 \u00b5l methanol/water, 80/20 (v/v) pre-cooled at \u201340 \u00b0C the samples were immediately vortexed for 15 s, sonicated for 15 min at 20 \u00b0C and centrifuged for 10 min at 19000 x g. The supernatants were transferred to new 2 ml tubes and the remaining pellets subjected to a second extraction using 200 \u00b5l methanol/water, 80/20 (v/v). The combined extracts were evaporated to dryness in a vacuum centrifuge at 30 \u00b0C, thoroughly reconstituted in 200 \u00b5l methanol/water, 30/70 (v/v) and filtered using 0.2 \u00b5m PTFE syringe filters. Four extracts (technical replicates) were prepared for each of the four leaf pools.",
+                  "description": "Plant material was homogenized in liquid nitrogen using a pestle and mortar and aliquots of 100 +/- 5 mg were weighed into pre-cooled 2 ml, round bottom tubes. After addition of 200 µl methanol/water, 80/20 (v/v) pre-cooled at –40 °C the samples were immediately vortexed for 15 s, sonicated for 15 min at 20 °C and centrifuged for 10 min at 19000 x g. The supernatants were transferred to new 2 ml tubes and the remaining pellets subjected to a second extraction using 200 µl methanol/water, 80/20 (v/v). The combined extracts were evaporated to dryness in a vacuum centrifuge at 30 °C, thoroughly reconstituted in 200 µl methanol/water, 30/70 (v/v) and filtered using 0.2 µm PTFE syringe filters. Four extracts (technical replicates) were prepared for each of the four leaf pools.",
                   "uri": "",
                   "version": "",
                   "parameters": [
@@ -7811,7 +7781,7 @@
                         "termAccession": ""
                       }
                     },
-                    "value": "200 \u00b5l methanol/water, 30/70 (v/v)",
+                    "value": "200 µl methanol/water, 30/70 (v/v)",
                     "unit": null
                   },
                   {
@@ -7949,7 +7919,7 @@
                     "termSource": null,
                     "termAccession": ""
                   },
-                  "description": "Chromatographic separations were performed on an Acquity UPLC system (Waters) equipped with a HSS T3 column (100 x 1.0 mm, particle size 1.8 \u00b5m, Waters) applying the following binary gradient at a flow rate of 150 \u00b5l/min: 0-1 min, isocratic 95% A (water/formic acid, 99.9/0.1 (v/v)), 5% B (acetonitrile/formic acid, 99.9/0.1 (v/v)); 1-16 min, linear from 5 to 45% B; 16-18 min, isocratic 95% B; 18-20 min, isocratic 5% B. The injection volume was 3.0 \u00b5l (full loop injection).",
+                  "description": "Chromatographic separations were performed on an Acquity UPLC system (Waters) equipped with a HSS T3 column (100 x 1.0 mm, particle size 1.8 µm, Waters) applying the following binary gradient at a flow rate of 150 µl/min: 0-1 min, isocratic 95% A (water/formic acid, 99.9/0.1 (v/v)), 5% B (acetonitrile/formic acid, 99.9/0.1 (v/v)); 1-16 min, linear from 5 to 45% B; 16-18 min, isocratic 95% B; 18-20 min, isocratic 5% B. The injection volume was 3.0 µl (full loop injection).",
                   "uri": "",
                   "version": "",
                   "parameters": [
@@ -8014,7 +7984,7 @@
                         "termAccession": ""
                       }
                     },
-                    "value": "ACQUITY UPLC HSS T3 (1.8 \u00b5m, 1 mm x 100 mm; Waters)",
+                    "value": "ACQUITY UPLC HSS T3 (1.8 µm, 1 mm x 100 mm; Waters)",
                     "unit": null
                   },
                   {
@@ -8053,7 +8023,7 @@
                     "termSource": null,
                     "termAccession": ""
                   },
-                  "description": "Eluting compounds were detected from m/z 100-1000 using a micrOTOF-Q II hybrid quadrupole time-of-flight mass spectrometer (Bruker Daltonics) equipped with an Apollo II electrospray ion source in positive and negative ion mode using following instrument settings: nebulizer gas, nitrogen, 1.4 bar; dry gas, nitrogen, 6 l/min, 190 \u00b0C; capillary, \u20135000 V; end plate offset, -500 V; funnel 1 RF, 200 V; funnel 2 RF, 200 V; in-source CID energy, 0 V; hexapole RF, 100 V; quadrupole ion energy, 5 eV; collision gas, nitrogen; collision energy, 7 eV; collision RF 150/350 V (timing 50/50); transfer time, 70 \u00b5s; pre pulse storage, 5 \u00b5s; pulser frequency, 10 kHz; spectra rate, 3 Hz. Mass spectra were acquired in centroid mode. Mass calibration of individual raw data files was performed on lithium formate cluster ions obtained by automatic infusion of 20 \u00b5l 10 mM lithium hydroxide in isopropanol/water/formic acid, 49.9/49.9/0.2 (v/v/v) at a gradient time of 18 min using a diverter valve.",
+                  "description": "Eluting compounds were detected from m/z 100-1000 using a micrOTOF-Q II hybrid quadrupole time-of-flight mass spectrometer (Bruker Daltonics) equipped with an Apollo II electrospray ion source in positive and negative ion mode using following instrument settings: nebulizer gas, nitrogen, 1.4 bar; dry gas, nitrogen, 6 l/min, 190 °C; capillary, –5000 V; end plate offset, -500 V; funnel 1 RF, 200 V; funnel 2 RF, 200 V; in-source CID energy, 0 V; hexapole RF, 100 V; quadrupole ion energy, 5 eV; collision gas, nitrogen; collision energy, 7 eV; collision RF 150/350 V (timing 50/50); transfer time, 70 µs; pre pulse storage, 5 µs; pulser frequency, 10 kHz; spectra rate, 3 Hz. Mass spectra were acquired in centroid mode. Mass calibration of individual raw data files was performed on lithium formate cluster ions obtained by automatic infusion of 20 µl 10 mM lithium hydroxide in isopropanol/water/formic acid, 49.9/49.9/0.2 (v/v/v) at a gradient time of 18 min using a diverter valve.",
                   "uri": "",
                   "version": "",
                   "parameters": [
@@ -8210,7 +8180,7 @@
                     "termSource": null,
                     "termAccession": ""
                   },
-                  "description": "Eluting compounds were detected from m/z 100-1000 using a micrOTOF-Q II hybrid quadrupole time-of-flight mass spectrometer (Bruker Daltonics) equipped with an Apollo II electrospray ion source in positive and negative ion mode using following instrument settings: nebulizer gas, nitrogen, 1.4 bar; dry gas, nitrogen, 6 l/min, 190 \u00b0C; capillary, \u20135000 V; end plate offset, -500 V; funnel 1 RF, 200 V; funnel 2 RF, 200 V; in-source CID energy, 0 V; hexapole RF, 100 V; quadrupole ion energy, 5 eV; collision gas, nitrogen; collision energy, 7 eV; collision RF 150/350 V (timing 50/50); transfer time, 70 \u00b5s; pre pulse storage, 5 \u00b5s; pulser frequency, 10 kHz; spectra rate, 3 Hz. Mass spectra were acquired in centroid mode. Mass calibration of individual raw data files was performed on lithium formate cluster ions obtained by automatic infusion of 20 \u00b5l 10 mM lithium hydroxide in isopropanol/water/formic acid, 49.9/49.9/0.2 (v/v/v) at a gradient time of 18 min using a diverter valve.",
+                  "description": "Eluting compounds were detected from m/z 100-1000 using a micrOTOF-Q II hybrid quadrupole time-of-flight mass spectrometer (Bruker Daltonics) equipped with an Apollo II electrospray ion source in positive and negative ion mode using following instrument settings: nebulizer gas, nitrogen, 1.4 bar; dry gas, nitrogen, 6 l/min, 190 °C; capillary, –5000 V; end plate offset, -500 V; funnel 1 RF, 200 V; funnel 2 RF, 200 V; in-source CID energy, 0 V; hexapole RF, 100 V; quadrupole ion energy, 5 eV; collision gas, nitrogen; collision energy, 7 eV; collision RF 150/350 V (timing 50/50); transfer time, 70 µs; pre pulse storage, 5 µs; pulser frequency, 10 kHz; spectra rate, 3 Hz. Mass spectra were acquired in centroid mode. Mass calibration of individual raw data files was performed on lithium formate cluster ions obtained by automatic infusion of 20 µl 10 mM lithium hydroxide in isopropanol/water/formic acid, 49.9/49.9/0.2 (v/v/v) at a gradient time of 18 min using a diverter valve.",
                   "uri": "",
                   "version": "",
                   "parameters": [
@@ -8367,7 +8337,7 @@
                     "termSource": null,
                     "termAccession": ""
                   },
-                  "description": "Chromatographic separations were performed on an Acquity UPLC system (Waters) equipped with a HSS T3 column (100 x 1.0 mm, particle size 1.8 \u00b5m, Waters) applying the following binary gradient at a flow rate of 150 \u00b5l/min: 0-1 min, isocratic 95% A (water/formic acid, 99.9/0.1 (v/v)), 5% B (acetonitrile/formic acid, 99.9/0.1 (v/v)); 1-16 min, linear from 5 to 45% B; 16-18 min, isocratic 95% B; 18-20 min, isocratic 5% B. The injection volume was 3.0 \u00b5l (full loop injection).",
+                  "description": "Chromatographic separations were performed on an Acquity UPLC system (Waters) equipped with a HSS T3 column (100 x 1.0 mm, particle size 1.8 µm, Waters) applying the following binary gradient at a flow rate of 150 µl/min: 0-1 min, isocratic 95% A (water/formic acid, 99.9/0.1 (v/v)), 5% B (acetonitrile/formic acid, 99.9/0.1 (v/v)); 1-16 min, linear from 5 to 45% B; 16-18 min, isocratic 95% B; 18-20 min, isocratic 5% B. The injection volume was 3.0 µl (full loop injection).",
                   "uri": "",
                   "version": "",
                   "parameters": [
@@ -8432,7 +8402,7 @@
                         "termAccession": ""
                       }
                     },
-                    "value": "ACQUITY UPLC HSS T3 (1.8 \u00b5m, 1 mm x 100 mm; Waters)",
+                    "value": "ACQUITY UPLC HSS T3 (1.8 µm, 1 mm x 100 mm; Waters)",
                     "unit": null
                   },
                   {
@@ -8471,7 +8441,7 @@
                     "termSource": null,
                     "termAccession": ""
                   },
-                  "description": "Chromatographic separations were performed on an Acquity UPLC system (Waters) equipped with a HSS T3 column (100 x 1.0 mm, particle size 1.8 \u00b5m, Waters) applying the following binary gradient at a flow rate of 150 \u00b5l/min: 0-1 min, isocratic 95% A (water/formic acid, 99.9/0.1 (v/v)), 5% B (acetonitrile/formic acid, 99.9/0.1 (v/v)); 1-16 min, linear from 5 to 45% B; 16-18 min, isocratic 95% B; 18-20 min, isocratic 5% B. The injection volume was 3.0 \u00b5l (full loop injection).",
+                  "description": "Chromatographic separations were performed on an Acquity UPLC system (Waters) equipped with a HSS T3 column (100 x 1.0 mm, particle size 1.8 µm, Waters) applying the following binary gradient at a flow rate of 150 µl/min: 0-1 min, isocratic 95% A (water/formic acid, 99.9/0.1 (v/v)), 5% B (acetonitrile/formic acid, 99.9/0.1 (v/v)); 1-16 min, linear from 5 to 45% B; 16-18 min, isocratic 95% B; 18-20 min, isocratic 5% B. The injection volume was 3.0 µl (full loop injection).",
                   "uri": "",
                   "version": "",
                   "parameters": [
@@ -8536,7 +8506,7 @@
                         "termAccession": ""
                       }
                     },
-                    "value": "ACQUITY UPLC HSS T3 (1.8 \u00b5m, 1 mm x 100 mm; Waters)",
+                    "value": "ACQUITY UPLC HSS T3 (1.8 µm, 1 mm x 100 mm; Waters)",
                     "unit": null
                   },
                   {
@@ -8575,7 +8545,7 @@
                     "termSource": null,
                     "termAccession": ""
                   },
-                  "description": "Chromatographic separations were performed on an Acquity UPLC system (Waters) equipped with a HSS T3 column (100 x 1.0 mm, particle size 1.8 \u00b5m, Waters) applying the following binary gradient at a flow rate of 150 \u00b5l/min: 0-1 min, isocratic 95% A (water/formic acid, 99.9/0.1 (v/v)), 5% B (acetonitrile/formic acid, 99.9/0.1 (v/v)); 1-16 min, linear from 5 to 45% B; 16-18 min, isocratic 95% B; 18-20 min, isocratic 5% B. The injection volume was 3.0 \u00b5l (full loop injection).",
+                  "description": "Chromatographic separations were performed on an Acquity UPLC system (Waters) equipped with a HSS T3 column (100 x 1.0 mm, particle size 1.8 µm, Waters) applying the following binary gradient at a flow rate of 150 µl/min: 0-1 min, isocratic 95% A (water/formic acid, 99.9/0.1 (v/v)), 5% B (acetonitrile/formic acid, 99.9/0.1 (v/v)); 1-16 min, linear from 5 to 45% B; 16-18 min, isocratic 95% B; 18-20 min, isocratic 5% B. The injection volume was 3.0 µl (full loop injection).",
                   "uri": "",
                   "version": "",
                   "parameters": [
@@ -8640,7 +8610,7 @@
                         "termAccession": ""
                       }
                     },
-                    "value": "ACQUITY UPLC HSS T3 (1.8 \u00b5m, 1 mm x 100 mm; Waters)",
+                    "value": "ACQUITY UPLC HSS T3 (1.8 µm, 1 mm x 100 mm; Waters)",
                     "unit": null
                   },
                   {
@@ -8679,7 +8649,7 @@
                     "termSource": null,
                     "termAccession": ""
                   },
-                  "description": "Eluting compounds were detected from m/z 100-1000 using a micrOTOF-Q II hybrid quadrupole time-of-flight mass spectrometer (Bruker Daltonics) equipped with an Apollo II electrospray ion source in positive and negative ion mode using following instrument settings: nebulizer gas, nitrogen, 1.4 bar; dry gas, nitrogen, 6 l/min, 190 \u00b0C; capillary, \u20135000 V; end plate offset, -500 V; funnel 1 RF, 200 V; funnel 2 RF, 200 V; in-source CID energy, 0 V; hexapole RF, 100 V; quadrupole ion energy, 5 eV; collision gas, nitrogen; collision energy, 7 eV; collision RF 150/350 V (timing 50/50); transfer time, 70 \u00b5s; pre pulse storage, 5 \u00b5s; pulser frequency, 10 kHz; spectra rate, 3 Hz. Mass spectra were acquired in centroid mode. Mass calibration of individual raw data files was performed on lithium formate cluster ions obtained by automatic infusion of 20 \u00b5l 10 mM lithium hydroxide in isopropanol/water/formic acid, 49.9/49.9/0.2 (v/v/v) at a gradient time of 18 min using a diverter valve.",
+                  "description": "Eluting compounds were detected from m/z 100-1000 using a micrOTOF-Q II hybrid quadrupole time-of-flight mass spectrometer (Bruker Daltonics) equipped with an Apollo II electrospray ion source in positive and negative ion mode using following instrument settings: nebulizer gas, nitrogen, 1.4 bar; dry gas, nitrogen, 6 l/min, 190 °C; capillary, –5000 V; end plate offset, -500 V; funnel 1 RF, 200 V; funnel 2 RF, 200 V; in-source CID energy, 0 V; hexapole RF, 100 V; quadrupole ion energy, 5 eV; collision gas, nitrogen; collision energy, 7 eV; collision RF 150/350 V (timing 50/50); transfer time, 70 µs; pre pulse storage, 5 µs; pulser frequency, 10 kHz; spectra rate, 3 Hz. Mass spectra were acquired in centroid mode. Mass calibration of individual raw data files was performed on lithium formate cluster ions obtained by automatic infusion of 20 µl 10 mM lithium hydroxide in isopropanol/water/formic acid, 49.9/49.9/0.2 (v/v/v) at a gradient time of 18 min using a diverter valve.",
                   "uri": "",
                   "version": "",
                   "parameters": [
@@ -8836,7 +8806,7 @@
                     "termSource": null,
                     "termAccession": ""
                   },
-                  "description": "Plant material was homogenized in liquid nitrogen using a pestle and mortar and aliquots of 100 +/- 5 mg were weighed into pre-cooled 2 ml, round bottom tubes. After addition of 200 \u00b5l methanol/water, 80/20 (v/v) pre-cooled at \u201340 \u00b0C the samples were immediately vortexed for 15 s, sonicated for 15 min at 20 \u00b0C and centrifuged for 10 min at 19000 x g. The supernatants were transferred to new 2 ml tubes and the remaining pellets subjected to a second extraction using 200 \u00b5l methanol/water, 80/20 (v/v). The combined extracts were evaporated to dryness in a vacuum centrifuge at 30 \u00b0C, thoroughly reconstituted in 200 \u00b5l methanol/water, 30/70 (v/v) and filtered using 0.2 \u00b5m PTFE syringe filters. Four extracts (technical replicates) were prepared for each of the four leaf pools.",
+                  "description": "Plant material was homogenized in liquid nitrogen using a pestle and mortar and aliquots of 100 +/- 5 mg were weighed into pre-cooled 2 ml, round bottom tubes. After addition of 200 µl methanol/water, 80/20 (v/v) pre-cooled at –40 °C the samples were immediately vortexed for 15 s, sonicated for 15 min at 20 °C and centrifuged for 10 min at 19000 x g. The supernatants were transferred to new 2 ml tubes and the remaining pellets subjected to a second extraction using 200 µl methanol/water, 80/20 (v/v). The combined extracts were evaporated to dryness in a vacuum centrifuge at 30 °C, thoroughly reconstituted in 200 µl methanol/water, 30/70 (v/v) and filtered using 0.2 µm PTFE syringe filters. Four extracts (technical replicates) were prepared for each of the four leaf pools.",
                   "uri": "",
                   "version": "",
                   "parameters": [
@@ -8874,7 +8844,7 @@
                         "termAccession": ""
                       }
                     },
-                    "value": "200 \u00b5l methanol/water, 30/70 (v/v)",
+                    "value": "200 µl methanol/water, 30/70 (v/v)",
                     "unit": null
                   },
                   {
@@ -9012,7 +8982,7 @@
                     "termSource": null,
                     "termAccession": ""
                   },
-                  "description": "Eluting compounds were detected from m/z 100-1000 using a micrOTOF-Q II hybrid quadrupole time-of-flight mass spectrometer (Bruker Daltonics) equipped with an Apollo II electrospray ion source in positive and negative ion mode using following instrument settings: nebulizer gas, nitrogen, 1.4 bar; dry gas, nitrogen, 6 l/min, 190 \u00b0C; capillary, \u20135000 V; end plate offset, -500 V; funnel 1 RF, 200 V; funnel 2 RF, 200 V; in-source CID energy, 0 V; hexapole RF, 100 V; quadrupole ion energy, 5 eV; collision gas, nitrogen; collision energy, 7 eV; collision RF 150/350 V (timing 50/50); transfer time, 70 \u00b5s; pre pulse storage, 5 \u00b5s; pulser frequency, 10 kHz; spectra rate, 3 Hz. Mass spectra were acquired in centroid mode. Mass calibration of individual raw data files was performed on lithium formate cluster ions obtained by automatic infusion of 20 \u00b5l 10 mM lithium hydroxide in isopropanol/water/formic acid, 49.9/49.9/0.2 (v/v/v) at a gradient time of 18 min using a diverter valve.",
+                  "description": "Eluting compounds were detected from m/z 100-1000 using a micrOTOF-Q II hybrid quadrupole time-of-flight mass spectrometer (Bruker Daltonics) equipped with an Apollo II electrospray ion source in positive and negative ion mode using following instrument settings: nebulizer gas, nitrogen, 1.4 bar; dry gas, nitrogen, 6 l/min, 190 °C; capillary, –5000 V; end plate offset, -500 V; funnel 1 RF, 200 V; funnel 2 RF, 200 V; in-source CID energy, 0 V; hexapole RF, 100 V; quadrupole ion energy, 5 eV; collision gas, nitrogen; collision energy, 7 eV; collision RF 150/350 V (timing 50/50); transfer time, 70 µs; pre pulse storage, 5 µs; pulser frequency, 10 kHz; spectra rate, 3 Hz. Mass spectra were acquired in centroid mode. Mass calibration of individual raw data files was performed on lithium formate cluster ions obtained by automatic infusion of 20 µl 10 mM lithium hydroxide in isopropanol/water/formic acid, 49.9/49.9/0.2 (v/v/v) at a gradient time of 18 min using a diverter valve.",
                   "uri": "",
                   "version": "",
                   "parameters": [
@@ -9169,7 +9139,7 @@
                     "termSource": null,
                     "termAccession": ""
                   },
-                  "description": "Chromatographic separations were performed on an Acquity UPLC system (Waters) equipped with a HSS T3 column (100 x 1.0 mm, particle size 1.8 \u00b5m, Waters) applying the following binary gradient at a flow rate of 150 \u00b5l/min: 0-1 min, isocratic 95% A (water/formic acid, 99.9/0.1 (v/v)), 5% B (acetonitrile/formic acid, 99.9/0.1 (v/v)); 1-16 min, linear from 5 to 45% B; 16-18 min, isocratic 95% B; 18-20 min, isocratic 5% B. The injection volume was 3.0 \u00b5l (full loop injection).",
+                  "description": "Chromatographic separations were performed on an Acquity UPLC system (Waters) equipped with a HSS T3 column (100 x 1.0 mm, particle size 1.8 µm, Waters) applying the following binary gradient at a flow rate of 150 µl/min: 0-1 min, isocratic 95% A (water/formic acid, 99.9/0.1 (v/v)), 5% B (acetonitrile/formic acid, 99.9/0.1 (v/v)); 1-16 min, linear from 5 to 45% B; 16-18 min, isocratic 95% B; 18-20 min, isocratic 5% B. The injection volume was 3.0 µl (full loop injection).",
                   "uri": "",
                   "version": "",
                   "parameters": [
@@ -9234,7 +9204,7 @@
                         "termAccession": ""
                       }
                     },
-                    "value": "ACQUITY UPLC HSS T3 (1.8 \u00b5m, 1 mm x 100 mm; Waters)",
+                    "value": "ACQUITY UPLC HSS T3 (1.8 µm, 1 mm x 100 mm; Waters)",
                     "unit": null
                   },
                   {
@@ -13551,7 +13521,7 @@
                 "termSource": null,
                 "termAccession": ""
               },
-              "description": "Arabidopsis thaliana Col-0 and cyp79B2 cyp79B3 lines were grown for about six weeks after cold stratification (3 days, 4 \u00b0C) in parallel on a soil/vermiculite mixture (3/2) in a growth cabinet with 8 h light (~150 \u00b5E/m2/s) at 22 \u00b0C and 16 h dark at 20 \u00b0C to developmental stage 3.5. Plants were sprayed with an aqueous solution of silver nitrate (5 mM) in order to stimulate accumulation of indolic secondary metabolites and incubated for 48 h in a growth cabinet under the same conditions as described above. Rosette leaves of six individual plants per genotype were harvested, immediately frozen in liquid nitrogen, pooled and stored at \u201380 \u00b0C until analysis. Two independent experiments (biological replicates) were performed on independent sets of plants grown at different times.",
+              "description": "Arabidopsis thaliana Col-0 and cyp79B2 cyp79B3 lines were grown for about six weeks after cold stratification (3 days, 4 °C) in parallel on a soil/vermiculite mixture (3/2) in a growth cabinet with 8 h light (~150 µE/m2/s) at 22 °C and 16 h dark at 20 °C to developmental stage 3.5. Plants were sprayed with an aqueous solution of silver nitrate (5 mM) in order to stimulate accumulation of indolic secondary metabolites and incubated for 48 h in a growth cabinet under the same conditions as described above. Rosette leaves of six individual plants per genotype were harvested, immediately frozen in liquid nitrogen, pooled and stored at –80 °C until analysis. Two independent experiments (biological replicates) were performed on independent sets of plants grown at different times.",
               "uri": "",
               "version": "",
               "parameters": [],
@@ -13734,7 +13704,7 @@
                 "termSource": null,
                 "termAccession": ""
               },
-              "description": "Arabidopsis thaliana Col-0 and cyp79B2 cyp79B3 lines were grown for about six weeks after cold stratification (3 days, 4 \u00b0C) in parallel on a soil/vermiculite mixture (3/2) in a growth cabinet with 8 h light (~150 \u00b5E/m2/s) at 22 \u00b0C and 16 h dark at 20 \u00b0C to developmental stage 3.5. Plants were sprayed with an aqueous solution of silver nitrate (5 mM) in order to stimulate accumulation of indolic secondary metabolites and incubated for 48 h in a growth cabinet under the same conditions as described above. Rosette leaves of six individual plants per genotype were harvested, immediately frozen in liquid nitrogen, pooled and stored at \u201380 \u00b0C until analysis. Two independent experiments (biological replicates) were performed on independent sets of plants grown at different times.",
+              "description": "Arabidopsis thaliana Col-0 and cyp79B2 cyp79B3 lines were grown for about six weeks after cold stratification (3 days, 4 °C) in parallel on a soil/vermiculite mixture (3/2) in a growth cabinet with 8 h light (~150 µE/m2/s) at 22 °C and 16 h dark at 20 °C to developmental stage 3.5. Plants were sprayed with an aqueous solution of silver nitrate (5 mM) in order to stimulate accumulation of indolic secondary metabolites and incubated for 48 h in a growth cabinet under the same conditions as described above. Rosette leaves of six individual plants per genotype were harvested, immediately frozen in liquid nitrogen, pooled and stored at –80 °C until analysis. Two independent experiments (biological replicates) were performed on independent sets of plants grown at different times.",
               "uri": "",
               "version": "",
               "parameters": [],
@@ -13917,7 +13887,7 @@
                 "termSource": null,
                 "termAccession": ""
               },
-              "description": "Arabidopsis thaliana Col-0 and cyp79B2 cyp79B3 lines were grown for about six weeks after cold stratification (3 days, 4 \u00b0C) in parallel on a soil/vermiculite mixture (3/2) in a growth cabinet with 8 h light (~150 \u00b5E/m2/s) at 22 \u00b0C and 16 h dark at 20 \u00b0C to developmental stage 3.5. Plants were sprayed with an aqueous solution of silver nitrate (5 mM) in order to stimulate accumulation of indolic secondary metabolites and incubated for 48 h in a growth cabinet under the same conditions as described above. Rosette leaves of six individual plants per genotype were harvested, immediately frozen in liquid nitrogen, pooled and stored at \u201380 \u00b0C until analysis. Two independent experiments (biological replicates) were performed on independent sets of plants grown at different times.",
+              "description": "Arabidopsis thaliana Col-0 and cyp79B2 cyp79B3 lines were grown for about six weeks after cold stratification (3 days, 4 °C) in parallel on a soil/vermiculite mixture (3/2) in a growth cabinet with 8 h light (~150 µE/m2/s) at 22 °C and 16 h dark at 20 °C to developmental stage 3.5. Plants were sprayed with an aqueous solution of silver nitrate (5 mM) in order to stimulate accumulation of indolic secondary metabolites and incubated for 48 h in a growth cabinet under the same conditions as described above. Rosette leaves of six individual plants per genotype were harvested, immediately frozen in liquid nitrogen, pooled and stored at –80 °C until analysis. Two independent experiments (biological replicates) were performed on independent sets of plants grown at different times.",
               "uri": "",
               "version": "",
               "parameters": [],
@@ -14100,7 +14070,7 @@
                 "termSource": null,
                 "termAccession": ""
               },
-              "description": "Arabidopsis thaliana Col-0 and cyp79B2 cyp79B3 lines were grown for about six weeks after cold stratification (3 days, 4 \u00b0C) in parallel on a soil/vermiculite mixture (3/2) in a growth cabinet with 8 h light (~150 \u00b5E/m2/s) at 22 \u00b0C and 16 h dark at 20 \u00b0C to developmental stage 3.5. Plants were sprayed with an aqueous solution of silver nitrate (5 mM) in order to stimulate accumulation of indolic secondary metabolites and incubated for 48 h in a growth cabinet under the same conditions as described above. Rosette leaves of six individual plants per genotype were harvested, immediately frozen in liquid nitrogen, pooled and stored at \u201380 \u00b0C until analysis. Two independent experiments (biological replicates) were performed on independent sets of plants grown at different times.",
+              "description": "Arabidopsis thaliana Col-0 and cyp79B2 cyp79B3 lines were grown for about six weeks after cold stratification (3 days, 4 °C) in parallel on a soil/vermiculite mixture (3/2) in a growth cabinet with 8 h light (~150 µE/m2/s) at 22 °C and 16 h dark at 20 °C to developmental stage 3.5. Plants were sprayed with an aqueous solution of silver nitrate (5 mM) in order to stimulate accumulation of indolic secondary metabolites and incubated for 48 h in a growth cabinet under the same conditions as described above. Rosette leaves of six individual plants per genotype were harvested, immediately frozen in liquid nitrogen, pooled and stored at –80 °C until analysis. Two independent experiments (biological replicates) were performed on independent sets of plants grown at different times.",
               "uri": "",
               "version": "",
               "parameters": [],
@@ -14283,7 +14253,7 @@
                 "termSource": null,
                 "termAccession": ""
               },
-              "description": "Arabidopsis thaliana Col-0 and cyp79B2 cyp79B3 lines were grown for about six weeks after cold stratification (3 days, 4 \u00b0C) in parallel on a soil/vermiculite mixture (3/2) in a growth cabinet with 8 h light (~150 \u00b5E/m2/s) at 22 \u00b0C and 16 h dark at 20 \u00b0C to developmental stage 3.5. Plants were sprayed with an aqueous solution of silver nitrate (5 mM) in order to stimulate accumulation of indolic secondary metabolites and incubated for 48 h in a growth cabinet under the same conditions as described above. Rosette leaves of six individual plants per genotype were harvested, immediately frozen in liquid nitrogen, pooled and stored at \u201380 \u00b0C until analysis. Two independent experiments (biological replicates) were performed on independent sets of plants grown at different times.",
+              "description": "Arabidopsis thaliana Col-0 and cyp79B2 cyp79B3 lines were grown for about six weeks after cold stratification (3 days, 4 °C) in parallel on a soil/vermiculite mixture (3/2) in a growth cabinet with 8 h light (~150 µE/m2/s) at 22 °C and 16 h dark at 20 °C to developmental stage 3.5. Plants were sprayed with an aqueous solution of silver nitrate (5 mM) in order to stimulate accumulation of indolic secondary metabolites and incubated for 48 h in a growth cabinet under the same conditions as described above. Rosette leaves of six individual plants per genotype were harvested, immediately frozen in liquid nitrogen, pooled and stored at –80 °C until analysis. Two independent experiments (biological replicates) were performed on independent sets of plants grown at different times.",
               "uri": "",
               "version": "",
               "parameters": [],
@@ -14466,7 +14436,7 @@
                 "termSource": null,
                 "termAccession": ""
               },
-              "description": "Arabidopsis thaliana Col-0 and cyp79B2 cyp79B3 lines were grown for about six weeks after cold stratification (3 days, 4 \u00b0C) in parallel on a soil/vermiculite mixture (3/2) in a growth cabinet with 8 h light (~150 \u00b5E/m2/s) at 22 \u00b0C and 16 h dark at 20 \u00b0C to developmental stage 3.5. Plants were sprayed with an aqueous solution of silver nitrate (5 mM) in order to stimulate accumulation of indolic secondary metabolites and incubated for 48 h in a growth cabinet under the same conditions as described above. Rosette leaves of six individual plants per genotype were harvested, immediately frozen in liquid nitrogen, pooled and stored at \u201380 \u00b0C until analysis. Two independent experiments (biological replicates) were performed on independent sets of plants grown at different times.",
+              "description": "Arabidopsis thaliana Col-0 and cyp79B2 cyp79B3 lines were grown for about six weeks after cold stratification (3 days, 4 °C) in parallel on a soil/vermiculite mixture (3/2) in a growth cabinet with 8 h light (~150 µE/m2/s) at 22 °C and 16 h dark at 20 °C to developmental stage 3.5. Plants were sprayed with an aqueous solution of silver nitrate (5 mM) in order to stimulate accumulation of indolic secondary metabolites and incubated for 48 h in a growth cabinet under the same conditions as described above. Rosette leaves of six individual plants per genotype were harvested, immediately frozen in liquid nitrogen, pooled and stored at –80 °C until analysis. Two independent experiments (biological replicates) were performed on independent sets of plants grown at different times.",
               "uri": "",
               "version": "",
               "parameters": [],
@@ -14649,7 +14619,7 @@
                 "termSource": null,
                 "termAccession": ""
               },
-              "description": "Arabidopsis thaliana Col-0 and cyp79B2 cyp79B3 lines were grown for about six weeks after cold stratification (3 days, 4 \u00b0C) in parallel on a soil/vermiculite mixture (3/2) in a growth cabinet with 8 h light (~150 \u00b5E/m2/s) at 22 \u00b0C and 16 h dark at 20 \u00b0C to developmental stage 3.5. Plants were sprayed with an aqueous solution of silver nitrate (5 mM) in order to stimulate accumulation of indolic secondary metabolites and incubated for 48 h in a growth cabinet under the same conditions as described above. Rosette leaves of six individual plants per genotype were harvested, immediately frozen in liquid nitrogen, pooled and stored at \u201380 \u00b0C until analysis. Two independent experiments (biological replicates) were performed on independent sets of plants grown at different times.",
+              "description": "Arabidopsis thaliana Col-0 and cyp79B2 cyp79B3 lines were grown for about six weeks after cold stratification (3 days, 4 °C) in parallel on a soil/vermiculite mixture (3/2) in a growth cabinet with 8 h light (~150 µE/m2/s) at 22 °C and 16 h dark at 20 °C to developmental stage 3.5. Plants were sprayed with an aqueous solution of silver nitrate (5 mM) in order to stimulate accumulation of indolic secondary metabolites and incubated for 48 h in a growth cabinet under the same conditions as described above. Rosette leaves of six individual plants per genotype were harvested, immediately frozen in liquid nitrogen, pooled and stored at –80 °C until analysis. Two independent experiments (biological replicates) were performed on independent sets of plants grown at different times.",
               "uri": "",
               "version": "",
               "parameters": [],
@@ -14832,7 +14802,7 @@
                 "termSource": null,
                 "termAccession": ""
               },
-              "description": "Arabidopsis thaliana Col-0 and cyp79B2 cyp79B3 lines were grown for about six weeks after cold stratification (3 days, 4 \u00b0C) in parallel on a soil/vermiculite mixture (3/2) in a growth cabinet with 8 h light (~150 \u00b5E/m2/s) at 22 \u00b0C and 16 h dark at 20 \u00b0C to developmental stage 3.5. Plants were sprayed with an aqueous solution of silver nitrate (5 mM) in order to stimulate accumulation of indolic secondary metabolites and incubated for 48 h in a growth cabinet under the same conditions as described above. Rosette leaves of six individual plants per genotype were harvested, immediately frozen in liquid nitrogen, pooled and stored at \u201380 \u00b0C until analysis. Two independent experiments (biological replicates) were performed on independent sets of plants grown at different times.",
+              "description": "Arabidopsis thaliana Col-0 and cyp79B2 cyp79B3 lines were grown for about six weeks after cold stratification (3 days, 4 °C) in parallel on a soil/vermiculite mixture (3/2) in a growth cabinet with 8 h light (~150 µE/m2/s) at 22 °C and 16 h dark at 20 °C to developmental stage 3.5. Plants were sprayed with an aqueous solution of silver nitrate (5 mM) in order to stimulate accumulation of indolic secondary metabolites and incubated for 48 h in a growth cabinet under the same conditions as described above. Rosette leaves of six individual plants per genotype were harvested, immediately frozen in liquid nitrogen, pooled and stored at –80 °C until analysis. Two independent experiments (biological replicates) were performed on independent sets of plants grown at different times.",
               "uri": "",
               "version": "",
               "parameters": [],
@@ -15015,7 +14985,7 @@
                 "termSource": null,
                 "termAccession": ""
               },
-              "description": "Arabidopsis thaliana Col-0 and cyp79B2 cyp79B3 lines were grown for about six weeks after cold stratification (3 days, 4 \u00b0C) in parallel on a soil/vermiculite mixture (3/2) in a growth cabinet with 8 h light (~150 \u00b5E/m2/s) at 22 \u00b0C and 16 h dark at 20 \u00b0C to developmental stage 3.5. Plants were sprayed with an aqueous solution of silver nitrate (5 mM) in order to stimulate accumulation of indolic secondary metabolites and incubated for 48 h in a growth cabinet under the same conditions as described above. Rosette leaves of six individual plants per genotype were harvested, immediately frozen in liquid nitrogen, pooled and stored at \u201380 \u00b0C until analysis. Two independent experiments (biological replicates) were performed on independent sets of plants grown at different times.",
+              "description": "Arabidopsis thaliana Col-0 and cyp79B2 cyp79B3 lines were grown for about six weeks after cold stratification (3 days, 4 °C) in parallel on a soil/vermiculite mixture (3/2) in a growth cabinet with 8 h light (~150 µE/m2/s) at 22 °C and 16 h dark at 20 °C to developmental stage 3.5. Plants were sprayed with an aqueous solution of silver nitrate (5 mM) in order to stimulate accumulation of indolic secondary metabolites and incubated for 48 h in a growth cabinet under the same conditions as described above. Rosette leaves of six individual plants per genotype were harvested, immediately frozen in liquid nitrogen, pooled and stored at –80 °C until analysis. Two independent experiments (biological replicates) were performed on independent sets of plants grown at different times.",
               "uri": "",
               "version": "",
               "parameters": [],
@@ -15198,7 +15168,7 @@
                 "termSource": null,
                 "termAccession": ""
               },
-              "description": "Arabidopsis thaliana Col-0 and cyp79B2 cyp79B3 lines were grown for about six weeks after cold stratification (3 days, 4 \u00b0C) in parallel on a soil/vermiculite mixture (3/2) in a growth cabinet with 8 h light (~150 \u00b5E/m2/s) at 22 \u00b0C and 16 h dark at 20 \u00b0C to developmental stage 3.5. Plants were sprayed with an aqueous solution of silver nitrate (5 mM) in order to stimulate accumulation of indolic secondary metabolites and incubated for 48 h in a growth cabinet under the same conditions as described above. Rosette leaves of six individual plants per genotype were harvested, immediately frozen in liquid nitrogen, pooled and stored at \u201380 \u00b0C until analysis. Two independent experiments (biological replicates) were performed on independent sets of plants grown at different times.",
+              "description": "Arabidopsis thaliana Col-0 and cyp79B2 cyp79B3 lines were grown for about six weeks after cold stratification (3 days, 4 °C) in parallel on a soil/vermiculite mixture (3/2) in a growth cabinet with 8 h light (~150 µE/m2/s) at 22 °C and 16 h dark at 20 °C to developmental stage 3.5. Plants were sprayed with an aqueous solution of silver nitrate (5 mM) in order to stimulate accumulation of indolic secondary metabolites and incubated for 48 h in a growth cabinet under the same conditions as described above. Rosette leaves of six individual plants per genotype were harvested, immediately frozen in liquid nitrogen, pooled and stored at –80 °C until analysis. Two independent experiments (biological replicates) were performed on independent sets of plants grown at different times.",
               "uri": "",
               "version": "",
               "parameters": [],
@@ -15381,7 +15351,7 @@
                 "termSource": null,
                 "termAccession": ""
               },
-              "description": "Arabidopsis thaliana Col-0 and cyp79B2 cyp79B3 lines were grown for about six weeks after cold stratification (3 days, 4 \u00b0C) in parallel on a soil/vermiculite mixture (3/2) in a growth cabinet with 8 h light (~150 \u00b5E/m2/s) at 22 \u00b0C and 16 h dark at 20 \u00b0C to developmental stage 3.5. Plants were sprayed with an aqueous solution of silver nitrate (5 mM) in order to stimulate accumulation of indolic secondary metabolites and incubated for 48 h in a growth cabinet under the same conditions as described above. Rosette leaves of six individual plants per genotype were harvested, immediately frozen in liquid nitrogen, pooled and stored at \u201380 \u00b0C until analysis. Two independent experiments (biological replicates) were performed on independent sets of plants grown at different times.",
+              "description": "Arabidopsis thaliana Col-0 and cyp79B2 cyp79B3 lines were grown for about six weeks after cold stratification (3 days, 4 °C) in parallel on a soil/vermiculite mixture (3/2) in a growth cabinet with 8 h light (~150 µE/m2/s) at 22 °C and 16 h dark at 20 °C to developmental stage 3.5. Plants were sprayed with an aqueous solution of silver nitrate (5 mM) in order to stimulate accumulation of indolic secondary metabolites and incubated for 48 h in a growth cabinet under the same conditions as described above. Rosette leaves of six individual plants per genotype were harvested, immediately frozen in liquid nitrogen, pooled and stored at –80 °C until analysis. Two independent experiments (biological replicates) were performed on independent sets of plants grown at different times.",
               "uri": "",
               "version": "",
               "parameters": [],
@@ -15564,7 +15534,7 @@
                 "termSource": null,
                 "termAccession": ""
               },
-              "description": "Arabidopsis thaliana Col-0 and cyp79B2 cyp79B3 lines were grown for about six weeks after cold stratification (3 days, 4 \u00b0C) in parallel on a soil/vermiculite mixture (3/2) in a growth cabinet with 8 h light (~150 \u00b5E/m2/s) at 22 \u00b0C and 16 h dark at 20 \u00b0C to developmental stage 3.5. Plants were sprayed with an aqueous solution of silver nitrate (5 mM) in order to stimulate accumulation of indolic secondary metabolites and incubated for 48 h in a growth cabinet under the same conditions as described above. Rosette leaves of six individual plants per genotype were harvested, immediately frozen in liquid nitrogen, pooled and stored at \u201380 \u00b0C until analysis. Two independent experiments (biological replicates) were performed on independent sets of plants grown at different times.",
+              "description": "Arabidopsis thaliana Col-0 and cyp79B2 cyp79B3 lines were grown for about six weeks after cold stratification (3 days, 4 °C) in parallel on a soil/vermiculite mixture (3/2) in a growth cabinet with 8 h light (~150 µE/m2/s) at 22 °C and 16 h dark at 20 °C to developmental stage 3.5. Plants were sprayed with an aqueous solution of silver nitrate (5 mM) in order to stimulate accumulation of indolic secondary metabolites and incubated for 48 h in a growth cabinet under the same conditions as described above. Rosette leaves of six individual plants per genotype were harvested, immediately frozen in liquid nitrogen, pooled and stored at –80 °C until analysis. Two independent experiments (biological replicates) were performed on independent sets of plants grown at different times.",
               "uri": "",
               "version": "",
               "parameters": [],
@@ -15747,7 +15717,7 @@
                 "termSource": null,
                 "termAccession": ""
               },
-              "description": "Arabidopsis thaliana Col-0 and cyp79B2 cyp79B3 lines were grown for about six weeks after cold stratification (3 days, 4 \u00b0C) in parallel on a soil/vermiculite mixture (3/2) in a growth cabinet with 8 h light (~150 \u00b5E/m2/s) at 22 \u00b0C and 16 h dark at 20 \u00b0C to developmental stage 3.5. Plants were sprayed with an aqueous solution of silver nitrate (5 mM) in order to stimulate accumulation of indolic secondary metabolites and incubated for 48 h in a growth cabinet under the same conditions as described above. Rosette leaves of six individual plants per genotype were harvested, immediately frozen in liquid nitrogen, pooled and stored at \u201380 \u00b0C until analysis. Two independent experiments (biological replicates) were performed on independent sets of plants grown at different times.",
+              "description": "Arabidopsis thaliana Col-0 and cyp79B2 cyp79B3 lines were grown for about six weeks after cold stratification (3 days, 4 °C) in parallel on a soil/vermiculite mixture (3/2) in a growth cabinet with 8 h light (~150 µE/m2/s) at 22 °C and 16 h dark at 20 °C to developmental stage 3.5. Plants were sprayed with an aqueous solution of silver nitrate (5 mM) in order to stimulate accumulation of indolic secondary metabolites and incubated for 48 h in a growth cabinet under the same conditions as described above. Rosette leaves of six individual plants per genotype were harvested, immediately frozen in liquid nitrogen, pooled and stored at –80 °C until analysis. Two independent experiments (biological replicates) were performed on independent sets of plants grown at different times.",
               "uri": "",
               "version": "",
               "parameters": [],
@@ -15930,7 +15900,7 @@
                 "termSource": null,
                 "termAccession": ""
               },
-              "description": "Arabidopsis thaliana Col-0 and cyp79B2 cyp79B3 lines were grown for about six weeks after cold stratification (3 days, 4 \u00b0C) in parallel on a soil/vermiculite mixture (3/2) in a growth cabinet with 8 h light (~150 \u00b5E/m2/s) at 22 \u00b0C and 16 h dark at 20 \u00b0C to developmental stage 3.5. Plants were sprayed with an aqueous solution of silver nitrate (5 mM) in order to stimulate accumulation of indolic secondary metabolites and incubated for 48 h in a growth cabinet under the same conditions as described above. Rosette leaves of six individual plants per genotype were harvested, immediately frozen in liquid nitrogen, pooled and stored at \u201380 \u00b0C until analysis. Two independent experiments (biological replicates) were performed on independent sets of plants grown at different times.",
+              "description": "Arabidopsis thaliana Col-0 and cyp79B2 cyp79B3 lines were grown for about six weeks after cold stratification (3 days, 4 °C) in parallel on a soil/vermiculite mixture (3/2) in a growth cabinet with 8 h light (~150 µE/m2/s) at 22 °C and 16 h dark at 20 °C to developmental stage 3.5. Plants were sprayed with an aqueous solution of silver nitrate (5 mM) in order to stimulate accumulation of indolic secondary metabolites and incubated for 48 h in a growth cabinet under the same conditions as described above. Rosette leaves of six individual plants per genotype were harvested, immediately frozen in liquid nitrogen, pooled and stored at –80 °C until analysis. Two independent experiments (biological replicates) were performed on independent sets of plants grown at different times.",
               "uri": "",
               "version": "",
               "parameters": [],
@@ -16113,7 +16083,7 @@
                 "termSource": null,
                 "termAccession": ""
               },
-              "description": "Arabidopsis thaliana Col-0 and cyp79B2 cyp79B3 lines were grown for about six weeks after cold stratification (3 days, 4 \u00b0C) in parallel on a soil/vermiculite mixture (3/2) in a growth cabinet with 8 h light (~150 \u00b5E/m2/s) at 22 \u00b0C and 16 h dark at 20 \u00b0C to developmental stage 3.5. Plants were sprayed with an aqueous solution of silver nitrate (5 mM) in order to stimulate accumulation of indolic secondary metabolites and incubated for 48 h in a growth cabinet under the same conditions as described above. Rosette leaves of six individual plants per genotype were harvested, immediately frozen in liquid nitrogen, pooled and stored at \u201380 \u00b0C until analysis. Two independent experiments (biological replicates) were performed on independent sets of plants grown at different times.",
+              "description": "Arabidopsis thaliana Col-0 and cyp79B2 cyp79B3 lines were grown for about six weeks after cold stratification (3 days, 4 °C) in parallel on a soil/vermiculite mixture (3/2) in a growth cabinet with 8 h light (~150 µE/m2/s) at 22 °C and 16 h dark at 20 °C to developmental stage 3.5. Plants were sprayed with an aqueous solution of silver nitrate (5 mM) in order to stimulate accumulation of indolic secondary metabolites and incubated for 48 h in a growth cabinet under the same conditions as described above. Rosette leaves of six individual plants per genotype were harvested, immediately frozen in liquid nitrogen, pooled and stored at –80 °C until analysis. Two independent experiments (biological replicates) were performed on independent sets of plants grown at different times.",
               "uri": "",
               "version": "",
               "parameters": [],
@@ -16296,7 +16266,7 @@
                 "termSource": null,
                 "termAccession": ""
               },
-              "description": "Arabidopsis thaliana Col-0 and cyp79B2 cyp79B3 lines were grown for about six weeks after cold stratification (3 days, 4 \u00b0C) in parallel on a soil/vermiculite mixture (3/2) in a growth cabinet with 8 h light (~150 \u00b5E/m2/s) at 22 \u00b0C and 16 h dark at 20 \u00b0C to developmental stage 3.5. Plants were sprayed with an aqueous solution of silver nitrate (5 mM) in order to stimulate accumulation of indolic secondary metabolites and incubated for 48 h in a growth cabinet under the same conditions as described above. Rosette leaves of six individual plants per genotype were harvested, immediately frozen in liquid nitrogen, pooled and stored at \u201380 \u00b0C until analysis. Two independent experiments (biological replicates) were performed on independent sets of plants grown at different times.",
+              "description": "Arabidopsis thaliana Col-0 and cyp79B2 cyp79B3 lines were grown for about six weeks after cold stratification (3 days, 4 °C) in parallel on a soil/vermiculite mixture (3/2) in a growth cabinet with 8 h light (~150 µE/m2/s) at 22 °C and 16 h dark at 20 °C to developmental stage 3.5. Plants were sprayed with an aqueous solution of silver nitrate (5 mM) in order to stimulate accumulation of indolic secondary metabolites and incubated for 48 h in a growth cabinet under the same conditions as described above. Rosette leaves of six individual plants per genotype were harvested, immediately frozen in liquid nitrogen, pooled and stored at –80 °C until analysis. Two independent experiments (biological replicates) were performed on independent sets of plants grown at different times.",
               "uri": "",
               "version": "",
               "parameters": [],

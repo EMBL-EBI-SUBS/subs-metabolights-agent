@@ -33,13 +33,13 @@ public class MLProjectToUSISubmission implements Converter<uk.ac.ebi.subs.metabo
     public uk.ac.ebi.subs.processing.SubmissionEnvelope convert(uk.ac.ebi.subs.metabolights.model.Project source) {
 
 
-        Project project = mlProjectToUSIProject.convert(source);
+        Project usiProject = mlProjectToUSIProject.convert(source);
 
         //todo Store team in ML model
         Team team = new Team();
         team.setName("ML_test_team");
-        project.setTeam(team);
-        
+        usiProject.setTeam(team);
+
         List<Study> usiStudies = new ArrayList<>();
         List<Protocol> usiProtocols = new ArrayList<>();
         List<Sample> usiSamples = new ArrayList<>();
@@ -48,18 +48,19 @@ public class MLProjectToUSISubmission implements Converter<uk.ac.ebi.subs.metabo
         List<Analysis> usiAnalysis = new ArrayList<>();
 
 
-        for(uk.ac.ebi.subs.metabolights.model.Study mlStudy : source.getStudies()){
+        for (uk.ac.ebi.subs.metabolights.model.Study mlStudy : source.getStudies()) {
             List<Protocol> protocols = convertProtocols(mlStudy.getProtocols(), team);
             List<Sample> samples = convertSamples(mlStudy.getSamples(), team);
 
-            Study usiStudy =  mlStudyToUSIStudy.convert(mlStudy);
-            addStudyMetadata(usiStudy, team, project, protocols);
+            Study usiStudy = mlStudyToUSIStudy.convert(mlStudy);
+            usiStudy.setStudyType(getStudyDataTypeFrom(source));
+            addStudyMetadata(usiStudy, team, usiProject, protocols);
             usiStudies.add(usiStudy);
-           
-           List<Assay> assays = convertAssays(mlStudy.getAssays(), team, usiStudy, usiAssayDataList);
+
+            List<Assay> assays = convertAssays(mlStudy.getAssays(), team, usiStudy, usiAssayDataList);
             setProtocolUse(assays, protocols);
             setSampleUse(assays, samples);
-            
+
             Analysis analysis = new Analysis();
             analysis.setTeam(team);
             analysis.getStudyRefs().add((StudyRef) usiStudy.asRef());
@@ -73,15 +74,15 @@ public class MLProjectToUSISubmission implements Converter<uk.ac.ebi.subs.metabo
             usiAssays.addAll(assays);
             usiAnalysis.add(analysis);
         }
-        
+
 
         Submission submission = new Submission();
-        if(source.getSubmissionDate()!=null && !source.getSubmissionDate().isEmpty()){
+        if (source.getSubmissionDate() != null && !source.getSubmissionDate().isEmpty()) {
             submission.setSubmissionDate(java.sql.Date.valueOf(LocalDate.parse(source.getSubmissionDate())));
         }
         SubmissionEnvelope submissionEnvelope = new SubmissionEnvelope(submission);
         submissionEnvelope.getSubmission().setTeam(team);
-        submissionEnvelope.getProjects().add(project);
+        submissionEnvelope.getProjects().add(usiProject);
         submissionEnvelope.setStudies(usiStudies);
         submissionEnvelope.setProtocols(usiProtocols);
         submissionEnvelope.setSamples(usiSamples);
@@ -95,15 +96,34 @@ public class MLProjectToUSISubmission implements Converter<uk.ac.ebi.subs.metabo
 
 
     private uk.ac.ebi.subs.data.submittable.Study addStudyMetadata(Study usiStudy, Team team, Project project, List<Protocol> protocols) {
-        usiStudy.setStudyType(StudyDataType.Metabolomics);
         usiStudy.setTeam(team);
         usiStudy.setProjectRef((ProjectRef) project.asRef());
         List<ProtocolRef> protocolRefs = new ArrayList<>();
-        for(Protocol protocol : protocols){
-           protocolRefs.add((ProtocolRef)protocol.asRef());
+        for (Protocol protocol : protocols) {
+            protocolRefs.add((ProtocolRef) protocol.asRef());
         }
         usiStudy.setProtocolRefs(protocolRefs);
         return usiStudy;
+    }
+
+    private StudyDataType getStudyDataTypeFrom(uk.ac.ebi.subs.metabolights.model.Project project) {
+        if (project.getStudies() != null && project.getStudies().size() > 0) {
+            if (project.getStudies().get(0).getAssays() != null && project.getStudies().get(0).getAssays().size() > 0) {
+                if (project.getStudies().get(0).getAssays().get(0) != null) {
+                    if (project.getStudies().get(0).getAssays().get(0).getTechnologyType() != null) {
+                        if (project.getStudies().get(0).getAssays().get(0).getTechnologyType().getAnnotationValue() != null) {
+                            if (project.getStudies().get(0).getAssays().get(0).getTechnologyType().getAnnotationValue().equalsIgnoreCase("mass spectrometry")) {
+                                return StudyDataType.Metabolomics_MS;
+                            }  else if(project.getStudies().get(0).getAssays().get(0).getTechnologyType().getAnnotationValue().equalsIgnoreCase("NMR spectroscopy")){
+                                return StudyDataType.Metabolomics_NMR;
+                            }
+
+                        }
+                    }
+                }
+            }
+        }
+        return null;
     }
 
     private List<Protocol> convertProtocols(List<uk.ac.ebi.subs.metabolights.model.Protocol> mlStudyProtocols, Team team) {
@@ -167,7 +187,7 @@ public class MLProjectToUSISubmission implements Converter<uk.ac.ebi.subs.metabo
         }
     }
 
-    private List<ProtocolUse> getProtocolUse(List<Protocol> usiProtocols){
+    private List<ProtocolUse> getProtocolUse(List<Protocol> usiProtocols) {
         List<ProtocolUse> protocolUses = new ArrayList<>();
         for (Protocol usiProtocol : usiProtocols) {
             ProtocolUse protocolUse = new ProtocolUse();
@@ -191,7 +211,7 @@ public class MLProjectToUSISubmission implements Converter<uk.ac.ebi.subs.metabo
 
     private List<AssayRef> getAssayReferences(List<Assay> usiAssays) {
         List<AssayRef> assayRefs = new ArrayList<>();
-        for(Assay assay : usiAssays){
+        for (Assay assay : usiAssays) {
             assayRefs.add((AssayRef) assay.asRef());
         }
         return assayRefs;
@@ -213,7 +233,6 @@ public class MLProjectToUSISubmission implements Converter<uk.ac.ebi.subs.metabo
         }
         return assayDataRefList;
     }
-
 
 
 }

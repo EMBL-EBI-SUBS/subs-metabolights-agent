@@ -20,6 +20,14 @@ public class ValidationUtils {
         return result;
     }
 
+    public static SingleValidationResult generateSingleValidationResult(String message, SingleValidationResultStatus status) {
+        SingleValidationResult result = new SingleValidationResult();
+        result.setMessage(message);
+        result.setValidationAuthor(ValidationAuthor.Metabolights);
+        result.setValidationStatus(status);
+        return result;
+    }
+
     public static SingleValidationResultsEnvelope buildSingleValidationResultsEnvelope(List<SingleValidationResult> validationResults, int validationResultVersion, String validationResultUUID) {
         return new SingleValidationResultsEnvelope(
                 validationResults, validationResultVersion, validationResultUUID, ValidationAuthor.Metabolights
@@ -46,5 +54,12 @@ public class ValidationUtils {
             return results;
         }
         return validatedResults;
+    }
+
+    public static boolean minCharRequirementPassed(String toCheck, int limit) {
+
+        // Test for null values
+        if (toCheck == null) return false;
+        return toCheck.length() >= limit;
     }
 }
