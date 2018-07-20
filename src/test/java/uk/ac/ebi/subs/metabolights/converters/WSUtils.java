@@ -1,6 +1,7 @@
 package uk.ac.ebi.subs.metabolights.converters;
 
-import com.fasterxml.jackson.core.JsonParser;
+
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -8,6 +9,7 @@ import org.apache.commons.io.IOUtils;
 import org.json.JSONObject;
 import uk.ac.ebi.subs.metabolights.model.*;
 import uk.ac.ebi.subs.processing.SubmissionEnvelope;
+import uk.ac.ebi.subs.validator.model.Submittable;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -193,7 +195,7 @@ public class WSUtils {
     public static SubmissionEnvelope getUSISubmisisonFromDisc() {
         SubmissionEnvelope submissionEnvelope = new SubmissionEnvelope();
         try {
-            String result = IOUtils.toString(WSUtils.class.getClassLoader().getResourceAsStream("Test_json/MTBLS2_usi_2.json"));
+            String result = IOUtils.toString(WSUtils.class.getClassLoader().getResourceAsStream("Test_json/MTBLS2_usi.json"));
             try {
                 mapper.registerModule(new JavaTimeModule());
                 submissionEnvelope = mapper.readValue(result, SubmissionEnvelope.class);
@@ -239,5 +241,32 @@ public class WSUtils {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static List<Submittable<uk.ac.ebi.subs.data.submittable.Sample>> getUSISampleListFromDisc() {
+        List<uk.ac.ebi.subs.data.submittable.Sample> samples;
+        List<Submittable<uk.ac.ebi.subs.data.submittable.Sample>> submittableSamples = new ArrayList<>();
+        try {
+            String result = IOUtils.toString(WSUtils.class.getClassLoader().getResourceAsStream("Test_json/MTBLS2_usi_sampleList.json"));
+            try {
+                mapper.registerModule(new JavaTimeModule());
+                samples = mapper.readValue(result, new TypeReference<List<uk.ac.ebi.subs.data.submittable.Sample>>(){});
+                for(uk.ac.ebi.subs.data.submittable.Sample sample : samples){
+                    submittableSamples.add(new Submittable<>(sample,"1"));
+                }
+                return submittableSamples;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static Submittable<uk.ac.ebi.subs.data.submittable.Study> getUSIStudyFromDisc() {
+        SubmissionEnvelope submissionEnvelope = WSUtils.getUSISubmisisonFromDisc();
+        List<uk.ac.ebi.subs.data.submittable.Study> studies = submissionEnvelope.getStudies();
+        return new Submittable<>(studies.get(0),submissionEnvelope.getSubmission().getId());
     }
 }
