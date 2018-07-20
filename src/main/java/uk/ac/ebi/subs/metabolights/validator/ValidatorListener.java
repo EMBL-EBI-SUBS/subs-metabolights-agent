@@ -21,6 +21,7 @@ public class ValidatorListener {
     private static Logger logger = LoggerFactory.getLogger(ValidatorListener.class);
     private RabbitMessagingTemplate rabbitMessagingTemplate;
     private StudyValidator studyValidator;
+    private AssayValidator assayValidator;
 
     public ValidatorListener(RabbitMessagingTemplate rabbitMessagingTemplate,
                              StudyValidator studyValidator) {
@@ -32,7 +33,6 @@ public class ValidatorListener {
     public void processStudyValidationRequest(StudyValidationMessageEnvelope envelope){
         logger.info("Got study to validate with ID: {}.", envelope.getEntityToValidate().getId());
 
-        logger.info("MetaboLights Study validation done.");
         List<SingleValidationResult> validatedResults = studyValidator.validate(envelope);
         validatedResults = ValidationUtils.getSinglePassResultIfNoErrors(validatedResults);
 
@@ -42,11 +42,22 @@ public class ValidatorListener {
                         envelope.getValidationResultUUID()),
                 ValidationUtils.hasValidationError(validatedResults)
         );
+        logger.info("MetaboLights Study validation done.");
     }
 
     @RabbitListener(queues = METABOLIGHTS_ASSAY_VALIDATION)
     public void processAssayValidationRequest(AssayValidationMessageEnvelope envelope){
         logger.info("Got assay to validate with ID: {}.", envelope.getEntityToValidate().getId());
+        List<SingleValidationResult> validatedResults = assayValidator.validate(envelope);
+        validatedResults = ValidationUtils.getSinglePassResultIfNoErrors(validatedResults);
+
+        sendResults(
+                ValidationUtils.buildSingleValidationResultsEnvelope(validatedResults,
+                        envelope.getValidationResultVersion(),
+                        envelope.getValidationResultUUID()),
+                ValidationUtils.hasValidationError(validatedResults)
+        );
+        logger.info("MetaboLights Assay validation done.");
     }
 
     @RabbitListener(queues = METABOLIGHTS_SAMPLE_VALIDATION)
