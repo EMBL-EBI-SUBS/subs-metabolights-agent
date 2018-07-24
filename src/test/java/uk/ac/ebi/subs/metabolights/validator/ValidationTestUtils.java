@@ -2,9 +2,12 @@ package uk.ac.ebi.subs.metabolights.validator;
 
 
 import uk.ac.ebi.subs.data.component.Contact;
+import uk.ac.ebi.subs.data.component.File;
 import uk.ac.ebi.subs.data.component.Publication;
+import uk.ac.ebi.subs.data.submittable.AssayData;
 import uk.ac.ebi.subs.data.submittable.Project;
 import uk.ac.ebi.subs.data.submittable.Protocol;
+import uk.ac.ebi.subs.validator.model.Submittable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,6 +84,23 @@ public class ValidationTestUtils {
 
         return protocols;
 
+    }
+
+    public static List<Submittable<Protocol>> getProtocols(){
+        List<Submittable<Protocol>> protocols = new ArrayList<>();
+        Submittable<Protocol> protocolSubmittable = new Submittable<Protocol>();
+        Protocol protocol = new Protocol();
+
+        protocol.setTitle("Metabolite identification");
+        protocol.setDescription("This is test description");
+        protocols.add(new Submittable<Protocol>(protocol,"1"));
+
+        protocol = new Protocol();
+        protocol.setTitle("Data transformation");
+        protocol.setDescription("This is test description");
+        protocols.add(new Submittable<Protocol>(protocol,"1"));
+
+        return protocols;
     }
 
     public static List<Protocol> generateProtocolsForMS(){
@@ -175,6 +195,21 @@ public class ValidationTestUtils {
         publication.setPubmedId("12345");
         publications.add(publication);
         return publications;
+    }
+
+    public static List<File> getDataFiles(){
+        List<File> dataFiles = new ArrayList<>();
+        File file = new File();
+        file.setName("m_mtbl2_metabolite profiling_mass spectrometry_v2_maf.tsv");
+        file.setType("Metabolite Assignment File");
+        dataFiles.add(file);
+        return dataFiles;
+    }
+
+    public static AssayData getAssayData(){
+        AssayData assayData = new AssayData();
+        assayData.setFiles(getDataFiles());
+        return assayData;
     }
 
 }
