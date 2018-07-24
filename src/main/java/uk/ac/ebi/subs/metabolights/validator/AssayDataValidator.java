@@ -24,11 +24,25 @@ public class AssayDataValidator {
         List<File> files = envelope.getEntityToValidate().getFiles();
         List<Submittable<Protocol>> protocols = envelope.getProtocols();
 
+        validationResults.addAll(validateMAF(files, protocols));
+        validationResults.addAll(hasMafThenValidateCorrespondingProtocol(files,protocols));
+
         return validationResults;
     }
 
     public List<SingleValidationResult> validateMAF(List<File> files, List<Submittable<Protocol>> protocols) {
         List<SingleValidationResult> validationResults = new ArrayList<>();
+        if (metaboliteIdentificationProtocolPresent(protocols)) {
+            File mafFile = getMAFFile(files);
+            if (mafFile == null) {
+                validationResults.add(ValidationUtils.generateSingleValidationResult("Metabolite identification protocol is given " +
+                                "but no Metabolite Annotation File (MAF) is present.",
+                        SingleValidationResultStatus.Error));
+            } else {
+                validationResults.addAll(hasValidFileNamePattern(mafFile));
+                //todo validate content
+            }
+        }
         return validationResults;
     }
 
@@ -57,11 +71,14 @@ public class AssayDataValidator {
     public List<SingleValidationResult> hasValidFileNamePattern(File metaboliteAnnotationFile) {
         List<SingleValidationResult> validationResults = new ArrayList<>();
         if (metaboliteAnnotationFile.getName() != null && !metaboliteAnnotationFile.getName().isEmpty()) {
-            SingleValidationResult validation1 = isTSV(metaboliteAnnotationFile);
-            if (validation1 != null) {
-                validationResults.add(validation1);
+            SingleValidationResult validation = isTSV(metaboliteAnnotationFile);
+            if (validation != null) {
+                validationResults.add(validation);
             }
-
+            validation = hasCorrectPattern(metaboliteAnnotationFile);
+            if (validation != null) {
+                validationResults.add(validation);
+            }
         }
         return validationResults;
     }
@@ -81,12 +98,14 @@ public class AssayDataValidator {
             if (!hasCorrectStart(split[0]) && !hasCorrectEnd(split[split.length - 1])) {
                 return ValidationUtils.generateSingleValidationResult(maf.getName() + " has invalid file name format." +
                                 " Please provide TSV file that is of format m_*_maf.tsv where " +
-                                "* is substituted your given MAFile name.",
+                                "* is substituted by your given MAFile name.",
                         SingleValidationResultStatus.Error);
             }
 
         } else {
-            return ValidationUtils.generateSingleValidationResult(maf.getName() + " has invalid extension. Please provide TSV file.",
+            return ValidationUtils.generateSingleValidationResult(maf.getName() + " has invalid file name format." +
+                            " Please provide TSV file that is of format m_*_maf.tsv where " +
+                            "* is substituted by your given MAFile name.",
                     SingleValidationResultStatus.Error);
         }
         return null;
@@ -98,6 +117,19 @@ public class AssayDataValidator {
 
     private boolean hasCorrectEnd(String endString) {
         return endString.equalsIgnoreCase("maf.tsv");
+    }
+
+    public List<SingleValidationResult> hasMafThenValidateCorrespondingProtocol(List<File> files, List<Submittable<Protocol>> protocols) {
+        List<SingleValidationResult> validationResults = new ArrayList<>();
+        File mafFile = getMAFFile(files);
+        if (mafFile != null) {
+            if (!metaboliteIdentificationProtocolPresent(protocols)) {
+                validationResults.add(ValidationUtils.generateSingleValidationResult(mafFile.getName() + " is provided. " +
+                                "But no metabolite identification protocol is present",
+                        SingleValidationResultStatus.Error));
+            }
+        }
+        return validationResults;
     }
 
 }
