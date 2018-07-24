@@ -22,26 +22,23 @@ public class ValidatorListener {
     private RabbitMessagingTemplate rabbitMessagingTemplate;
     private StudyValidator studyValidator;
     private AssayValidator assayValidator;
+    private AssayDataValidator assayDataValidator;
 
     public ValidatorListener(RabbitMessagingTemplate rabbitMessagingTemplate,
-                             StudyValidator studyValidator) {
+                             StudyValidator studyValidator,
+                             AssayValidator assayValidator,
+                             AssayDataValidator assayDataValidator) {
         this.rabbitMessagingTemplate = rabbitMessagingTemplate;
         this.studyValidator = studyValidator;
+        this.assayValidator = assayValidator;
+        this.assayDataValidator = assayDataValidator;
     }
 
     @RabbitListener(queues = METABOLIGHTS_STUDY_VALIDATION)
     public void processStudyValidationRequest(StudyValidationMessageEnvelope envelope){
         logger.info("Got study to validate with ID: {}.", envelope.getEntityToValidate().getId());
-
         List<SingleValidationResult> validatedResults = studyValidator.validate(envelope);
-        validatedResults = ValidationUtils.getSinglePassResultIfNoErrors(validatedResults);
-
-        sendResults(
-                ValidationUtils.buildSingleValidationResultsEnvelope(validatedResults,
-                        envelope.getValidationResultVersion(),
-                        envelope.getValidationResultUUID()),
-                ValidationUtils.hasValidationError(validatedResults)
-        );
+        processAndSendResults(envelope,validatedResults);
         logger.info("MetaboLights Study validation done.");
     }
 
@@ -49,14 +46,7 @@ public class ValidatorListener {
     public void processAssayValidationRequest(AssayValidationMessageEnvelope envelope){
         logger.info("Got assay to validate with ID: {}.", envelope.getEntityToValidate().getId());
         List<SingleValidationResult> validatedResults = assayValidator.validate(envelope);
-        validatedResults = ValidationUtils.getSinglePassResultIfNoErrors(validatedResults);
-
-        sendResults(
-                ValidationUtils.buildSingleValidationResultsEnvelope(validatedResults,
-                        envelope.getValidationResultVersion(),
-                        envelope.getValidationResultUUID()),
-                ValidationUtils.hasValidationError(validatedResults)
-        );
+        processAndSendResults(envelope,validatedResults);
         logger.info("MetaboLights Assay validation done.");
     }
 
@@ -68,6 +58,19 @@ public class ValidatorListener {
     @RabbitListener(queues = METABOLIGHTS_ASSAYDATA_VALIDATION)
     public void processAssayDataValidationRequest(AssayDataValidationMessageEnvelope envelope){
         logger.info("Got assayData to validate with ID: {}.", envelope.getEntityToValidate().getId());
+        List<SingleValidationResult> validatedResults = assayDataValidator.validate(envelope);
+        processAndSendResults(envelope,validatedResults);
+        logger.info("MetaboLights Assay validation done.");
+    }
+
+    private void processAndSendResults(ValidationMessageEnvelope validationMessageEnvelope,List<SingleValidationResult> validatedResults ){
+        validatedResults = ValidationUtils.getSinglePassResultIfNoErrors(validatedResults);
+        sendResults(
+                ValidationUtils.buildSingleValidationResultsEnvelope(validatedResults,
+                        validationMessageEnvelope.getValidationResultVersion(),
+                        validationMessageEnvelope.getValidationResultUUID()),
+                ValidationUtils.hasValidationError(validatedResults)
+        );
     }
 
     private void sendResults(SingleValidationResultsEnvelope singleValidationResultsEnvelope, boolean hasValidationError) {
