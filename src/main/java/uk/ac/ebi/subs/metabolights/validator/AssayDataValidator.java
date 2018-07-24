@@ -25,7 +25,7 @@ public class AssayDataValidator {
         List<Submittable<Protocol>> protocols = envelope.getProtocols();
 
         validationResults.addAll(validateMAF(files, protocols));
-        validationResults.addAll(hasMafThenValidateCorrespondingProtocol(files,protocols));
+        validationResults.addAll(hasMafThenValidateCorrespondingProtocol(files, protocols));
 
         return validationResults;
     }
@@ -71,7 +71,7 @@ public class AssayDataValidator {
     public List<SingleValidationResult> hasValidFileNamePattern(File metaboliteAnnotationFile) {
         List<SingleValidationResult> validationResults = new ArrayList<>();
         if (metaboliteAnnotationFile.getName() != null && !metaboliteAnnotationFile.getName().isEmpty()) {
-            SingleValidationResult validation = isTSV(metaboliteAnnotationFile);
+            SingleValidationResult validation = hasValidTSV(metaboliteAnnotationFile);
             if (validation != null) {
                 validationResults.add(validation);
             }
@@ -83,10 +83,14 @@ public class AssayDataValidator {
         return validationResults;
     }
 
-    public SingleValidationResult isTSV(File maf) {
-        boolean isTSV = FilenameUtils.isExtension(maf.getName(), "tsv");
-        if (!isTSV) {
-            return ValidationUtils.generateSingleValidationResult(maf.getName() + " had invalid extension. Please provide TSV file.",
+    public boolean isTSV(File maf) {
+        return FilenameUtils.isExtension(maf.getName(), "tsv");
+    }
+
+    public SingleValidationResult hasValidTSV(File maf) {
+        if (!isTSV(maf)) {
+            return ValidationUtils.generateSingleValidationResult(maf.getName() + " has invalid extension. Please provide metabolite annotation file " +
+                            "with .tsv extension.",
                     SingleValidationResultStatus.Error);
         }
         return null;
@@ -94,21 +98,22 @@ public class AssayDataValidator {
 
     public SingleValidationResult hasCorrectPattern(File maf) {
         String[] split = maf.getName().split("_");
-        if (split.length > 2) {
-            if (!hasCorrectStart(split[0]) && !hasCorrectEnd(split[split.length - 1])) {
-                return ValidationUtils.generateSingleValidationResult(maf.getName() + " has invalid file name format." +
-                                " Please provide TSV file that is of format m_*_maf.tsv where " +
-                                "* is substituted by your given MAFile name.",
-                        SingleValidationResultStatus.Error);
+        if (split.length > 2 && hasCorrectStart(split[0])) {
+            if (hasCorrectEnd(split[split.length - 1])) {
+                return null;
+            } else if (!isTSV(maf)) {
+                if (hasCorrectEndExcludingExtension(split[split.length - 1])) {
+                    return ValidationUtils.generateSingleValidationResult(maf.getName() + " has valid file name format but has invalid file extension." +
+                                    " Please correct the file extension to .tsv format",
+                            SingleValidationResultStatus.Error);
+                }
             }
-
-        } else {
-            return ValidationUtils.generateSingleValidationResult(maf.getName() + " has invalid file name format." +
-                            " Please provide TSV file that is of format m_*_maf.tsv where " +
-                            "* is substituted by your given MAFile name.",
-                    SingleValidationResultStatus.Error);
         }
-        return null;
+        return ValidationUtils.generateSingleValidationResult(maf.getName() + " has invalid file name format." +
+                        " Please provide TSV file that is of name pattern m_*_maf.tsv where " +
+                        "* is substituted by your given MAFile name.",
+                SingleValidationResultStatus.Error);
+
     }
 
     private boolean hasCorrectStart(String startString) {
@@ -119,12 +124,20 @@ public class AssayDataValidator {
         return endString.equalsIgnoreCase("maf.tsv");
     }
 
+    private boolean hasCorrectEndExcludingExtension(String endString) {
+        String[] split = endString.split("\\.");
+        if (split.length == 2 && split[0].equalsIgnoreCase("maf")) {
+            return true;
+        }
+        return false;
+    }
+
     public List<SingleValidationResult> hasMafThenValidateCorrespondingProtocol(List<File> files, List<Submittable<Protocol>> protocols) {
         List<SingleValidationResult> validationResults = new ArrayList<>();
         File mafFile = getMAFFile(files);
         if (mafFile != null) {
             if (!metaboliteIdentificationProtocolPresent(protocols)) {
-                validationResults.add(ValidationUtils.generateSingleValidationResult(mafFile.getName() + " is provided. " +
+                validationResults.add(ValidationUtils.generateSingleValidationResult("Metabolite Annotation File - " + mafFile.getName() + " - is provided. " +
                                 "But no metabolite identification protocol is present",
                         SingleValidationResultStatus.Error));
             }
