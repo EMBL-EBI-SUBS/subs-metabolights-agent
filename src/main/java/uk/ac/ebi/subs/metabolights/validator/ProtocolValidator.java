@@ -124,7 +124,7 @@ public class ProtocolValidator {
     }
 
     private boolean isMS(StudyDataType studyDataType) {
-        return studyDataType.name().equalsIgnoreCase("Metabolomics_MS");
+        return studyDataType.name().equalsIgnoreCase("Metabolomics_LCMS");
     }
 
     private boolean isNMR(StudyDataType studyDataType) {
