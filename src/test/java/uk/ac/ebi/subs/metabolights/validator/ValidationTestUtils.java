@@ -54,12 +54,10 @@ public class ValidationTestUtils {
         protocol.setDescription("This is test description");
         protocols.add(new Submittable<>(protocol,"1"));
 
-
         protocol = new Protocol();
         protocol.setTitle("Preparation");
         protocol.setDescription("This is test description");
         protocols.add(new Submittable<>(protocol,"1"));
-
 
         return protocols;
     }
@@ -72,18 +70,15 @@ public class ValidationTestUtils {
         protocol.setDescription("This is test description");
         protocols.add(new Submittable<>(protocol,"1"));
 
-
         protocol = new Protocol();
         protocol.setTitle("Data transformation");
         protocol.setDescription("This is test description");
         protocols.add(new Submittable<>(protocol,"1"));
 
-
         protocol = new Protocol();
         protocol.setTitle("Metabolite identification");
         protocol.setDescription("This is test description");
         protocols.add(new Submittable<>(protocol,"1"));
-
 
         return protocols;
 
@@ -101,8 +96,8 @@ public class ValidationTestUtils {
         protocol = new Protocol();
         protocol.setTitle("Chromatography");
         protocol.setDescription("This is test description");
-
         protocols.add(new Submittable<>(protocol,"1"));
+      
         return protocols;
     }
 
@@ -115,18 +110,15 @@ public class ValidationTestUtils {
         nmrProtocol.setDescription("This is test description");
         protocols.add(new Submittable<>(nmrProtocol,"1"));
 
-
         nmrProtocol = new Protocol();
         nmrProtocol.setTitle("In vivo magnetic resonance spectroscopy");
         nmrProtocol.setDescription("This is test description");
         protocols.add(new Submittable<>(nmrProtocol,"1"));
 
-
         nmrProtocol = new Protocol();
         nmrProtocol.setTitle("In vivo magnetic resonance assay");
         nmrProtocol.setDescription("This is test description");
         protocols.add(new Submittable<>(nmrProtocol,"1"));
-
 
         return protocols;
     }
@@ -140,8 +132,7 @@ public class ValidationTestUtils {
         nmrProtocol.setDescription("This is test description");
         protocols.add(new Submittable<>(nmrProtocol,"1"));
 
-
-        return protocols;
+      return protocols;
     }
 
     public static List<Submittable<Protocol>> generateProtocolsForNMR(){
@@ -153,12 +144,10 @@ public class ValidationTestUtils {
         protocol.setDescription("This is test description");
         protocols.add(new Submittable<>(protocol,"1"));
 
-
         protocol = new Protocol();
         protocol.setTitle("NMR spectroscopy");
         protocol.setDescription("This is test description");
         protocols.add(new Submittable<>(protocol,"1"));
-
 
         protocol = new Protocol();
         protocol.setTitle("NMR assay");

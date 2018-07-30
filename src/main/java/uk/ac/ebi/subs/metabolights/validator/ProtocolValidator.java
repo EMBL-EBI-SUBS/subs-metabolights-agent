@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import uk.ac.ebi.subs.data.component.StudyDataType;
 import uk.ac.ebi.subs.data.submittable.Protocol;
+import uk.ac.ebi.subs.validator.model.Submittable;
 import uk.ac.ebi.subs.validator.data.SingleValidationResult;
 import uk.ac.ebi.subs.validator.data.structures.SingleValidationResultStatus;
 import uk.ac.ebi.subs.validator.model.Submittable;
@@ -124,7 +125,7 @@ public class ProtocolValidator {
     }
 
     private boolean isMS(StudyDataType studyDataType) {
-        return studyDataType.name().equalsIgnoreCase("Metabolomics_MS");
+        return studyDataType.name().equalsIgnoreCase("Metabolomics_LCMS");
     }
 
     private boolean isNMR(StudyDataType studyDataType) {
