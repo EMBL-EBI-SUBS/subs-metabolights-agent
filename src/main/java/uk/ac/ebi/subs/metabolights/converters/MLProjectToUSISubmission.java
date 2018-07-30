@@ -113,7 +113,7 @@ public class MLProjectToUSISubmission implements Converter<uk.ac.ebi.subs.metabo
                     if (project.getStudies().get(0).getAssays().get(0).getTechnologyType() != null) {
                         if (project.getStudies().get(0).getAssays().get(0).getTechnologyType().getAnnotationValue() != null) {
                             if (project.getStudies().get(0).getAssays().get(0).getTechnologyType().getAnnotationValue().equalsIgnoreCase("mass spectrometry")) {
-                                return StudyDataType.Metabolomics_MS;
+                                return StudyDataType.Metabolomics_LCMS; //todo fix the specific return of LCMS, GCMS, IMAGING MS, based on protocols
                             }  else if(project.getStudies().get(0).getAssays().get(0).getTechnologyType().getAnnotationValue().equalsIgnoreCase("NMR spectroscopy")){
                                 return StudyDataType.Metabolomics_NMR;
                             }
