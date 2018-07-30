@@ -29,7 +29,7 @@ public class ProtocolValidatorTest {
 
     @Test
     public void validateContent() {
-        List< Submittable<Protocol>> protocols = ValidationTestUtils.generateProtocols();
+        List<Submittable<Protocol>> protocols = ValidationTestUtils.generateProtocols();
         List<SingleValidationResult> validationResults = this.protocolValidator.validateContent(protocols);
         assertEquals(validationResults.size(), 1);
         assertEquals(validationResults.get(0).getMessage(),

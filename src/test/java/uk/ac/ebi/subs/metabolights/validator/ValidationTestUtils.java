@@ -58,7 +58,7 @@ public class ValidationTestUtils {
         protocol.setTitle("Preparation");
         protocol.setDescription("This is test description");
         protocols.add(new Submittable<>(protocol,"1"));
-        
+
         return protocols;
     }
 
@@ -97,7 +97,7 @@ public class ValidationTestUtils {
         protocol.setTitle("Chromatography");
         protocol.setDescription("This is test description");
         protocols.add(new Submittable<>(protocol,"1"));
-
+      
         return protocols;
     }
 
@@ -132,7 +132,7 @@ public class ValidationTestUtils {
         nmrProtocol.setDescription("This is test description");
         protocols.add(new Submittable<>(nmrProtocol,"1"));
 
-        return protocols;
+      return protocols;
     }
 
     public static List<Submittable<Protocol>> generateProtocolsForNMR(){
