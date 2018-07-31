@@ -57,6 +57,11 @@ public class ProtocolValidatorTest {
         validationResults = protocolValidator.validateRequiredFields(msProtocols, StudyDataType.Metabolomics_LCMS);
         assertEquals(validationResults.size(),0);
 
+        msProtocols.remove(0);
+        validationResults = protocolValidator.validateRequiredFields(msProtocols, StudyDataType.Metabolomics_LCMS);
+        assertEquals(validationResults.size(),1);
+        assertEquals(validationResults.get(0).getMessage(),"Extraction protocol is not present in the study protocols");
+
         List<Submittable<Protocol>> nmrProtocols = ValidationTestUtils.generateProtocolsForNMR();
         validationResults = protocolValidator.validateRequiredFields(nmrProtocols, StudyDataType.Metabolomics_NMR);
         assertEquals(validationResults.size(), 0);
@@ -64,6 +69,10 @@ public class ProtocolValidatorTest {
         List<Submittable<Protocol>> nmrImagingProtocols = ValidationTestUtils.generateProtocolsForImagingNMR();
         validationResults = protocolValidator.validateRequiredFields(nmrImagingProtocols, StudyDataType.Metabolomics_NMR);
         assertEquals(validationResults.size(), 0);
+
+        nmrImagingProtocols.remove(3);
+        validationResults = protocolValidator.validateRequiredFields(nmrImagingProtocols, StudyDataType.Metabolomics_NMR);
+        assertEquals(validationResults.size(), 3);
 
         nmrImagingProtocols = ValidationTestUtils.generateProtocolsForImagingNMRWithMissingEntries();
         validationResults = protocolValidator.validateRequiredFields(nmrImagingProtocols, StudyDataType.Metabolomics_NMR);
