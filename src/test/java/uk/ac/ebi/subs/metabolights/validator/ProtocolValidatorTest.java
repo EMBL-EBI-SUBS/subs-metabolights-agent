@@ -6,6 +6,7 @@ import org.junit.Test;
 import uk.ac.ebi.subs.data.component.StudyDataType;
 import uk.ac.ebi.subs.data.submittable.Protocol;
 import uk.ac.ebi.subs.validator.data.SingleValidationResult;
+import uk.ac.ebi.subs.validator.model.Submittable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +29,7 @@ public class ProtocolValidatorTest {
 
     @Test
     public void validateContent() {
-        List<Protocol> protocols = ValidationTestUtils.generateProtocols();
+        List<Submittable<Protocol>> protocols = ValidationTestUtils.generateProtocols();
         List<SingleValidationResult> validationResults = this.protocolValidator.validateContent(protocols);
         assertEquals(validationResults.size(), 1);
         assertEquals(validationResults.get(0).getMessage(),
@@ -48,21 +49,30 @@ public class ProtocolValidatorTest {
     @Test
     public void validateRequiredFields() {
         List<SingleValidationResult> validationResults = new ArrayList<>();
-        List<Protocol> msImagingProtocols =  ValidationTestUtils.generateProtocolsForImagingMS();
-        validationResults = protocolValidator.validateRequiredFields(msImagingProtocols, StudyDataType.Metabolomics_MS);
+        List<Submittable<Protocol>> msImagingProtocols =  ValidationTestUtils.generateProtocolsForImagingMS();
+        validationResults = protocolValidator.validateRequiredFields(msImagingProtocols, StudyDataType.Metabolomics_LCMS);
         assertEquals(validationResults.size(),0);
 
-        List<Protocol> msProtocols =  ValidationTestUtils.generateProtocolsForMS();
-        validationResults = protocolValidator.validateRequiredFields(msProtocols, StudyDataType.Metabolomics_MS);
+        List<Submittable<Protocol>> msProtocols =  ValidationTestUtils.generateProtocolsForMS();
+        validationResults = protocolValidator.validateRequiredFields(msProtocols, StudyDataType.Metabolomics_LCMS);
         assertEquals(validationResults.size(),0);
 
-        List<Protocol> nmrProtocols = ValidationTestUtils.generateProtocolsForNMR();
+        msProtocols.remove(0);
+        validationResults = protocolValidator.validateRequiredFields(msProtocols, StudyDataType.Metabolomics_LCMS);
+        assertEquals(validationResults.size(),1);
+        assertEquals(validationResults.get(0).getMessage(),"Extraction protocol is not present in the study protocols");
+
+        List<Submittable<Protocol>> nmrProtocols = ValidationTestUtils.generateProtocolsForNMR();
         validationResults = protocolValidator.validateRequiredFields(nmrProtocols, StudyDataType.Metabolomics_NMR);
         assertEquals(validationResults.size(), 0);
 
-        List<Protocol> nmrImagingProtocols = ValidationTestUtils.generateProtocolsForImagingNMR();
+        List<Submittable<Protocol>> nmrImagingProtocols = ValidationTestUtils.generateProtocolsForImagingNMR();
         validationResults = protocolValidator.validateRequiredFields(nmrImagingProtocols, StudyDataType.Metabolomics_NMR);
         assertEquals(validationResults.size(), 0);
+
+        nmrImagingProtocols.remove(3);
+        validationResults = protocolValidator.validateRequiredFields(nmrImagingProtocols, StudyDataType.Metabolomics_NMR);
+        assertEquals(validationResults.size(), 3);
 
         nmrImagingProtocols = ValidationTestUtils.generateProtocolsForImagingNMRWithMissingEntries();
         validationResults = protocolValidator.validateRequiredFields(nmrImagingProtocols, StudyDataType.Metabolomics_NMR);

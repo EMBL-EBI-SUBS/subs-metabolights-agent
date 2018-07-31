@@ -14,7 +14,7 @@ import java.util.List;
 
 public class ValidationTestUtils {
 
-    public static List<Contact> generateContacts(){
+    public static List<Contact> generateContacts() {
         List<Contact> contacts = new ArrayList<>();
         Contact contact1 = new Contact();
         contact1.setAddress("Hinxton");
@@ -37,50 +37,48 @@ public class ValidationTestUtils {
         return contacts;
     }
 
-    public static List<Protocol> generateProtocols(){
-        List<Protocol> protocols = new ArrayList<>();
+    public static List<Submittable<Protocol>> generateProtocols(){
+        List<Submittable<Protocol>> protocols = new ArrayList<>();
         Protocol protocol = new Protocol();
         protocol.setTitle("Sample collection");
         protocol.setDescription("");
 
-        protocols.add(protocol);
+        protocols.add(new Submittable<>(protocol,"1"));
         return protocols;
     }
 
-    public static List<Protocol> generateProtocolsForImagingMS(){
-        List<Protocol> protocols = new ArrayList<>();
+    public static List<Submittable<Protocol>> generateProtocolsForImagingMS(){
+        List<Submittable<Protocol>> protocols = new ArrayList<>();
         protocols.addAll(getCommonProtocols());
 
         Protocol protocol = new Protocol();
         protocol.setTitle("Histology");
         protocol.setDescription("This is test description");
-        protocols.add(protocol);
+        protocols.add(new Submittable<>(protocol,"1"));
 
         protocol = new Protocol();
         protocol.setTitle("Preparation");
         protocol.setDescription("This is test description");
-        protocols.add(protocol);
-        
+        protocols.add(new Submittable<>(protocol,"1"));
         return protocols;
     }
 
-    public static List<Protocol> getCommonProtocols(){
-        List<Protocol> protocols = new ArrayList<>();
-
+    public static List<Submittable<Protocol>> getCommonProtocols(){
+        List<Submittable<Protocol>> protocols = new ArrayList<>();
         Protocol protocol = new Protocol();
         protocol.setTitle("Extraction");
         protocol.setDescription("This is test description");
-        protocols.add(protocol);
+        protocols.add(new Submittable<>(protocol,"1"));
 
         protocol = new Protocol();
         protocol.setTitle("Data transformation");
         protocol.setDescription("This is test description");
-        protocols.add(protocol);
+        protocols.add(new Submittable<>(protocol,"1"));
 
         protocol = new Protocol();
         protocol.setTitle("Metabolite identification");
         protocol.setDescription("This is test description");
-        protocols.add(protocol);
+        protocols.add(new Submittable<>(protocol,"1"));
 
         return protocols;
 
@@ -110,85 +108,85 @@ public class ValidationTestUtils {
         Protocol protocol = new Protocol();
         protocol.setTitle("Mass spectrometry");
         protocol.setDescription("This is test description");
-        protocols.add(protocol);
+        protocols.add(new Submittable<>(protocol,"1"));
 
         protocol = new Protocol();
         protocol.setTitle("Chromatography");
         protocol.setDescription("This is test description");
-
-        protocols.add(protocol);
+        protocols.add(new Submittable<>(protocol,"1"));
+      
         return protocols;
     }
 
-    public static List<Protocol> generateProtocolsForImagingNMR(){
-        List<Protocol> protocols = new ArrayList<>();
+    public static List<Submittable<Protocol>> generateProtocolsForImagingNMR(){
+        List<Submittable<Protocol>> protocols = new ArrayList<>();
         protocols.addAll(getCommonProtocols());
 
         Protocol nmrProtocol = new Protocol();
         nmrProtocol.setTitle("Magnetic resonance imaging");
         nmrProtocol.setDescription("This is test description");
-        protocols.add(nmrProtocol);
+        protocols.add(new Submittable<>(nmrProtocol,"1"));
 
         nmrProtocol = new Protocol();
         nmrProtocol.setTitle("In vivo magnetic resonance spectroscopy");
         nmrProtocol.setDescription("This is test description");
-        protocols.add(nmrProtocol);
+        protocols.add(new Submittable<>(nmrProtocol,"1"));
 
         nmrProtocol = new Protocol();
         nmrProtocol.setTitle("In vivo magnetic resonance assay");
         nmrProtocol.setDescription("This is test description");
-        protocols.add(nmrProtocol);
+        protocols.add(new Submittable<>(nmrProtocol,"1"));
 
         return protocols;
     }
 
-    public static List<Protocol> generateProtocolsForImagingNMRWithMissingEntries(){
-        List<Protocol> protocols = new ArrayList<>();
+    public static List<Submittable<Protocol>> generateProtocolsForImagingNMRWithMissingEntries(){
+        List<Submittable<Protocol>> protocols = new ArrayList<>();
         protocols.addAll(getCommonProtocols());
 
         Protocol nmrProtocol = new Protocol();
         nmrProtocol.setTitle("Magnetic resonance imaging");
         nmrProtocol.setDescription("This is test description");
-        protocols.add(nmrProtocol);
+        protocols.add(new Submittable<>(nmrProtocol,"1"));
 
-        return protocols;
+      return protocols;
     }
 
-    public static List<Protocol> generateProtocolsForNMR(){
-        List<Protocol> protocols = new ArrayList<>();
+    public static List<Submittable<Protocol>> generateProtocolsForNMR(){
+        List<Submittable<Protocol>> protocols = new ArrayList<>();
         protocols.addAll(getCommonProtocols());
 
         Protocol protocol = new Protocol();
         protocol.setTitle("NMR sample");
         protocol.setDescription("This is test description");
-        protocols.add(protocol);
+        protocols.add(new Submittable<>(protocol,"1"));
 
         protocol = new Protocol();
         protocol.setTitle("NMR spectroscopy");
         protocol.setDescription("This is test description");
-        protocols.add(protocol);
+        protocols.add(new Submittable<>(protocol,"1"));
 
         protocol = new Protocol();
         protocol.setTitle("NMR assay");
         protocol.setDescription("This is test description");
-        protocols.add(protocol);
+        protocols.add(new Submittable<>(protocol,"1"));
 
         return protocols;
     }
 
-    public static Project getProjectWithContacts(){
+    public static Project getProjectWithContacts() {
         Project project = new Project();
         project.setContacts(generateContacts());
         return project;
     }
 
-    public static Project getProjectWithPublications(){
+    public static Project getProjectWithPublications() {
         Project project = new Project();
         project.setPublications(generatePublications());
         return project;
     }
 
-    public static List<Publication> generatePublications(){
+    public static List<Publication> generatePublications() {
         List<Publication> publications = new ArrayList<>();
         Publication publication = new Publication();
         publication.setArticleTitle("This is a metabolomics test study");
@@ -197,19 +195,10 @@ public class ValidationTestUtils {
         return publications;
     }
 
-    public static List<File> getDataFiles(){
-        List<File> dataFiles = new ArrayList<>();
-        File file = new File();
-        file.setName("m_mtbl2_metabolite profiling_mass spectrometry_v2_maf.tsv");
-        file.setType("Metabolite Assignment File");
-        dataFiles.add(file);
-        return dataFiles;
-    }
-
-    public static AssayData getAssayData(){
-        AssayData assayData = new AssayData();
-        assayData.setFiles(getDataFiles());
-        return assayData;
+    public static Publication generatePublication() {
+        Publication publication = new Publication();
+        publication.setArticleTitle("This is a metabolomics test study");
+        return publication;
     }
 
 }

@@ -5,8 +5,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import uk.ac.ebi.subs.data.component.StudyDataType;
 import uk.ac.ebi.subs.data.submittable.Protocol;
+import uk.ac.ebi.subs.validator.model.Submittable;
 import uk.ac.ebi.subs.validator.data.SingleValidationResult;
 import uk.ac.ebi.subs.validator.data.structures.SingleValidationResultStatus;
+import uk.ac.ebi.subs.validator.model.Submittable;
 
 import java.util.*;
 
@@ -15,7 +17,7 @@ public class ProtocolValidator {
     public static final Logger logger = LoggerFactory.getLogger(ProtocolValidator.class);
 
 
-    public List<SingleValidationResult> validate(List<Protocol> protocols, StudyDataType studyDataType) {
+    public List<SingleValidationResult> validate(List<Submittable<Protocol>> protocols, StudyDataType studyDataType) {
 
         List<SingleValidationResult> protocolValidations = new ArrayList<>();
         if (protocols != null && !protocols.isEmpty()) {
@@ -29,10 +31,10 @@ public class ProtocolValidator {
     }
 
 
-    public List<SingleValidationResult> validateContent(List<Protocol> protocols) {
+    public List<SingleValidationResult> validateContent(List<Submittable<Protocol>> protocols) {
         List<SingleValidationResult> protocolContentValidations = new ArrayList<>();
 
-        for (Protocol protocol : protocols) {
+        for (Submittable<Protocol> protocol : protocols) {
             String protocolName = protocol.getTitle();
             if (protocol.getDescription() == null || protocol.getDescription().isEmpty()) {
                 protocolContentValidations.add(ValidationUtils.generateSingleValidationResult(protocol, "Protocol " +
@@ -55,7 +57,7 @@ public class ProtocolValidator {
      *   study.
      *
      * */
-    public List<SingleValidationResult> validateRequiredFields(List<Protocol> protocols, StudyDataType studyDataType) {
+    public List<SingleValidationResult> validateRequiredFields(List<Submittable<Protocol>> protocols, StudyDataType studyDataType) {
         List<SingleValidationResult> requiredFieldsValidation = new ArrayList<>();
         if (studyDataType != null) {
             requiredFieldsValidation.addAll(validateBasedOn(studyDataType, protocols));
@@ -67,13 +69,13 @@ public class ProtocolValidator {
         return requiredFieldsValidation;
     }
 
-    private List<SingleValidationResult> validateBasedOn(StudyDataType studyDataType, List<Protocol> protocols) {
+    private List<SingleValidationResult> validateBasedOn(StudyDataType studyDataType, List<Submittable<Protocol>> protocols) {
         List<SingleValidationResult> validations = new ArrayList<>();
         List<String> requiredProtocolFields = getRequiredProtocolFieldsFor(studyDataType, protocols);
 
         for (String expectedField : requiredProtocolFields) {
             boolean isPresent = true;
-            for (Protocol protocol : protocols) {
+            for (Submittable<Protocol> protocol : protocols) {
                 isPresent = isProtocolPresent(expectedField, protocol);
                 if(isPresent){
                    break;
@@ -87,7 +89,7 @@ public class ProtocolValidator {
         return validations;
     }
 
-    private List<String> getRequiredProtocolFieldsFor(StudyDataType studyDataType, List<Protocol> protocols) {
+    private List<String> getRequiredProtocolFieldsFor(StudyDataType studyDataType, List<Submittable<Protocol>> protocols) {
         List<String> requiredProtocolFields = new ArrayList<>();
         boolean isImagingStudy = isImagingStudy(protocols);
         requiredProtocolFields.addAll(getCommonFields(isImagingStudy));
@@ -110,8 +112,8 @@ public class ProtocolValidator {
         return requiredProtocolFields;
     }
 
-    private boolean isImagingStudy(List<Protocol> protocols) {
-        for (Protocol protocol : protocols) {
+    private boolean isImagingStudy(List<Submittable<Protocol>> protocols) {
+        for (Submittable<Protocol> protocol : protocols) {
             if (protocol.getTitle().equalsIgnoreCase("Magnetic resonance imaging")) {
                 return true;
             }
@@ -123,7 +125,7 @@ public class ProtocolValidator {
     }
 
     private boolean isMS(StudyDataType studyDataType) {
-        return studyDataType.name().equalsIgnoreCase("Metabolomics_MS");
+        return studyDataType.name().equalsIgnoreCase("Metabolomics_LCMS");
     }
 
     private boolean isNMR(StudyDataType studyDataType) {
@@ -156,7 +158,7 @@ public class ProtocolValidator {
         return requiredProtocolFields;
     }
 
-    public boolean isProtocolPresent(String requiredProtocolField, Protocol protocol) {
+    public boolean isProtocolPresent(String requiredProtocolField, Submittable<Protocol> protocol) {
         return requiredProtocolField.equalsIgnoreCase(protocol.getTitle());
     }
 }
