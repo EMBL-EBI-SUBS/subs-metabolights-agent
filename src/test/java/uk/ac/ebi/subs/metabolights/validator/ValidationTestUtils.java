@@ -2,7 +2,9 @@ package uk.ac.ebi.subs.metabolights.validator;
 
 
 import uk.ac.ebi.subs.data.component.Contact;
+import uk.ac.ebi.subs.data.component.File;
 import uk.ac.ebi.subs.data.component.Publication;
+import uk.ac.ebi.subs.data.submittable.AssayData;
 import uk.ac.ebi.subs.data.submittable.Project;
 import uk.ac.ebi.subs.data.submittable.Protocol;
 import uk.ac.ebi.subs.validator.model.Submittable;
@@ -82,8 +84,25 @@ public class ValidationTestUtils {
 
     }
 
-    public static List<Submittable<Protocol>> generateProtocolsForMS(){
+    public static List<Submittable<Protocol>> getProtocols(){
         List<Submittable<Protocol>> protocols = new ArrayList<>();
+        Submittable<Protocol> protocolSubmittable = new Submittable<Protocol>();
+        Protocol protocol = new Protocol();
+
+        protocol.setTitle("Metabolite identification");
+        protocol.setDescription("This is test description");
+        protocols.add(new Submittable<Protocol>(protocol,"1"));
+
+        protocol = new Protocol();
+        protocol.setTitle("Data transformation");
+        protocol.setDescription("This is test description");
+        protocols.add(new Submittable<Protocol>(protocol,"1"));
+
+        return protocols;
+    }
+
+    public static List<Protocol> generateProtocolsForMS(){
+        List<Protocol> protocols = new ArrayList<>();
         protocols.addAll(getCommonProtocols());
 
         Protocol protocol = new Protocol();
