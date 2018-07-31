@@ -11,7 +11,7 @@ import java.util.List;
 
 public class ValidationTestUtils {
 
-    public static List<Contact> generateContacts(){
+    public static List<Contact> generateContacts() {
         List<Contact> contacts = new ArrayList<>();
         Contact contact1 = new Contact();
         contact1.setAddress("Hinxton");
@@ -34,7 +34,7 @@ public class ValidationTestUtils {
         return contacts;
     }
 
-    public static List<Protocol> generateProtocols(){
+    public static List<Protocol> generateProtocols() {
         List<Protocol> protocols = new ArrayList<>();
         Protocol protocol = new Protocol();
         protocol.setTitle("Sample collection");
@@ -44,7 +44,7 @@ public class ValidationTestUtils {
         return protocols;
     }
 
-    public static List<Protocol> generateProtocolsForImagingMS(){
+    public static List<Protocol> generateProtocolsForImagingMS() {
         List<Protocol> protocols = new ArrayList<>();
         protocols.addAll(getCommonProtocols());
 
@@ -57,11 +57,11 @@ public class ValidationTestUtils {
         protocol.setTitle("Preparation");
         protocol.setDescription("This is test description");
         protocols.add(protocol);
-        
+
         return protocols;
     }
 
-    public static List<Protocol> getCommonProtocols(){
+    public static List<Protocol> getCommonProtocols() {
         List<Protocol> protocols = new ArrayList<>();
 
         Protocol protocol = new Protocol();
@@ -83,7 +83,7 @@ public class ValidationTestUtils {
 
     }
 
-    public static List<Protocol> generateProtocolsForMS(){
+    public static List<Protocol> generateProtocolsForMS() {
         List<Protocol> protocols = new ArrayList<>();
         protocols.addAll(getCommonProtocols());
 
@@ -100,7 +100,7 @@ public class ValidationTestUtils {
         return protocols;
     }
 
-    public static List<Protocol> generateProtocolsForImagingNMR(){
+    public static List<Protocol> generateProtocolsForImagingNMR() {
         List<Protocol> protocols = new ArrayList<>();
         protocols.addAll(getCommonProtocols());
 
@@ -122,7 +122,7 @@ public class ValidationTestUtils {
         return protocols;
     }
 
-    public static List<Protocol> generateProtocolsForImagingNMRWithMissingEntries(){
+    public static List<Protocol> generateProtocolsForImagingNMRWithMissingEntries() {
         List<Protocol> protocols = new ArrayList<>();
         protocols.addAll(getCommonProtocols());
 
@@ -134,7 +134,7 @@ public class ValidationTestUtils {
         return protocols;
     }
 
-    public static List<Protocol> generateProtocolsForNMR(){
+    public static List<Protocol> generateProtocolsForNMR() {
         List<Protocol> protocols = new ArrayList<>();
         protocols.addAll(getCommonProtocols());
 
@@ -156,25 +156,31 @@ public class ValidationTestUtils {
         return protocols;
     }
 
-    public static Project getProjectWithContacts(){
+    public static Project getProjectWithContacts() {
         Project project = new Project();
         project.setContacts(generateContacts());
         return project;
     }
 
-    public static Project getProjectWithPublications(){
+    public static Project getProjectWithPublications() {
         Project project = new Project();
         project.setPublications(generatePublications());
         return project;
     }
 
-    public static List<Publication> generatePublications(){
+    public static List<Publication> generatePublications() {
         List<Publication> publications = new ArrayList<>();
         Publication publication = new Publication();
         publication.setArticleTitle("This is a metabolomics test study");
         publication.setPubmedId("12345");
         publications.add(publication);
         return publications;
+    }
+
+    public static Publication generatePublication() {
+        Publication publication = new Publication();
+        publication.setArticleTitle("This is a metabolomics test study");
+        return publication;
     }
 
 }

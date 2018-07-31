@@ -38,5 +38,10 @@ public class StudyValidatorTest {
         Project project = ValidationTestUtils.getProjectWithPublications();
         List<SingleValidationResult> validationResults = this.studyValidator.validatePublications(project);
         assertEquals(validationResults.size(),0);
+
+        project.getPublications().add(ValidationTestUtils.generatePublication());
+        validationResults = this.studyValidator.validatePublications(project);
+        assertEquals(validationResults.size(),1);
+        assertEquals(validationResults.get(0).getMessage(),"Publication -  This is a metabolomics test study - has no associated PubMed ID or DOI");
     }
 }
