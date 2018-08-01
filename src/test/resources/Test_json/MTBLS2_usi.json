@@ -2059,7 +2059,7 @@
         "accession": "MTBLS2",
         "team": "ML_test_team"
       },
-      "studyType": "Metabolomics_MS"
+      "studyType": "Metabolomics_LCMS"
     }
   ],
   "protocols": [
