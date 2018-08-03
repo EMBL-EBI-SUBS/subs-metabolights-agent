@@ -101,19 +101,19 @@ public class ValidationTestUtils {
         return protocols;
     }
 
-    public static List<Protocol> generateProtocolsForMS(){
-        List<Protocol> protocols = new ArrayList<>();
+    public static List<Submittable<Protocol>> generateProtocolsForMS(){
+        List<Submittable<Protocol>> protocols = new ArrayList<>();
         protocols.addAll(getCommonProtocols());
 
         Protocol protocol = new Protocol();
         protocol.setTitle("Mass spectrometry");
         protocol.setDescription("This is test description");
-        protocols.add(new Submittable<>(protocol,"1"));
+        protocols.add(new Submittable<Protocol>(protocol,"1"));
 
         protocol = new Protocol();
         protocol.setTitle("Chromatography");
         protocol.setDescription("This is test description");
-        protocols.add(new Submittable<>(protocol,"1"));
+        protocols.add(new Submittable<Protocol>(protocol,"1"));
       
         return protocols;
     }
@@ -200,5 +200,21 @@ public class ValidationTestUtils {
         publication.setArticleTitle("This is a metabolomics test study");
         return publication;
     }
+
+    public static List<File> getDataFiles(){
+        List<File> dataFiles = new ArrayList<>();
+        File file = new File();
+        file.setName("m_mtbl2_metabolite profiling_mass spectrometry_v2_maf.tsv");
+        file.setType("Metabolite Assignment File");
+        dataFiles.add(file);
+        return dataFiles;
+    }
+
+    public static AssayData getAssayData(){
+        AssayData assayData = new AssayData();
+        assayData.setFiles(getDataFiles());
+        return assayData;
+    }
+
 
 }
