@@ -62,4 +62,32 @@ public class ValidationUtils {
         if (toCheck == null) return false;
         return toCheck.length() >= limit;
     }
+
+
+    public static boolean statusIsNotPassOrPending(SingleValidationResult r) {
+
+        return !(r.getValidationStatus().equals(SingleValidationResultStatus.Pass)
+                || r.getValidationStatus().equals(SingleValidationResultStatus.Pending));
+    }
+
+    public static SingleValidationResultsEnvelope generateSingleValidationResultsEnvelope(
+            int validationResultVersion, String validationResultUUID, List<SingleValidationResult> singleValidationResults,
+            ValidationAuthor validationAuthor) {
+
+        return new SingleValidationResultsEnvelope(
+                singleValidationResults,
+                validationResultVersion,
+                validationResultUUID,
+                validationAuthor
+        );
+    }
+
+    public static SingleValidationResult generatePassingSingleValidationResult(String entityUuid, ValidationAuthor author) {
+        SingleValidationResult validationResult = new SingleValidationResult();
+        validationResult.setValidationAuthor(author);
+        validationResult.setEntityUuid(entityUuid);
+
+        validationResult.setValidationStatus(SingleValidationResultStatus.Pass);
+        return validationResult;
+    }
 }
