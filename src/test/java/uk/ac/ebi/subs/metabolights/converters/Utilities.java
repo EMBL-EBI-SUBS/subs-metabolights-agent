@@ -5,10 +5,7 @@ import uk.ac.ebi.subs.data.submittable.*;
 
 import java.time.Instant;
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by kalai on 19/12/2017.
@@ -68,6 +65,15 @@ public class Utilities {
         usiAttributes.put("age", Arrays.asList(attribute));
 
         return usiAttributes.entrySet().iterator().next();
+    }
+
+    public static List<uk.ac.ebi.subs.metabolights.model.Protocol> generateMLProtocols(){
+        List<uk.ac.ebi.subs.metabolights.model.Protocol> mlProtocols = new ArrayList<>();
+        uk.ac.ebi.subs.metabolights.model.Protocol protocol = new uk.ac.ebi.subs.metabolights.model.Protocol();
+        protocol.setName("Extraction");
+        protocol.setDescription("Test extraction");
+        mlProtocols.add(protocol);
+        return mlProtocols;
     }
 
     public static Map<String, Collection<Attribute>> generateUsiAttributes() {
