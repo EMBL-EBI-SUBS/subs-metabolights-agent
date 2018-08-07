@@ -19,20 +19,9 @@ public class USISampleToMLSampleTest {
         USISampleToMLSample sampleConverter = new USISampleToMLSample();
         MLSampleToUSISample mlSampleToUSISample = new MLSampleToUSISample();
         uk.ac.ebi.subs.metabolights.model.Sample mlSample = sampleConverter.convert(usiSample);
-      //  assertEquals("Mus musculus",mlSample.getDerives_from().get(0).getCharacteristics().get(0).getValue().getAnnotationValue());
-
-        String mlSampleJSON = mapper.writeValueAsString(mlSample);
-        System.out.println(mlSampleJSON);
-
-        System.out.println("-----------");
 
         Sample convertedUSI = mlSampleToUSISample.convert(mlSample);
-        String usiSampleJSON = mapper.writeValueAsString(convertedUSI);
-        System.out.println(usiSampleJSON);
-        assertEquals(usiSample.getTaxonId(),convertedUSI.getTaxonId());
-
-        testWSSample();
-
+        assertEquals(convertedUSI.getAlias(),"This is an USI alias");
     }
 
     @Test
