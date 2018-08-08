@@ -11,18 +11,18 @@ import java.util.*;
  * Created by kalai on 19/12/2017.
  */
 public class Utilities {
-    public static Contact generateMLContacts(){
-        Contact contact = new Contact();
-       contact.setAddress("Hinxton");
-       contact.setAffiliation("EMBL-EBI");
-       contact.setFax("+11123");
-       contact.setEmail("test@abc.com");
-       contact.setFirstName("Alice");
-       contact.setLastName("Bob");
-       return contact;
+    public static uk.ac.ebi.subs.metabolights.model.Contact generateMLContact() {
+        uk.ac.ebi.subs.metabolights.model.Contact contact = new uk.ac.ebi.subs.metabolights.model.Contact();
+        contact.setAddress("Hinxton");
+        contact.setAffiliation("EMBL-EBI");
+        contact.setFax("+11123");
+        contact.setEmail("test@abc.com");
+        contact.setFirstName("Alice");
+        contact.setLastName("Bob");
+        return contact;
     }
 
-    public static uk.ac.ebi.subs.metabolights.model.Publication generateMLPublication(){
+    public static uk.ac.ebi.subs.metabolights.model.Publication generateMLPublication() {
         uk.ac.ebi.subs.metabolights.model.Publication mlPublication = new uk.ac.ebi.subs.metabolights.model.Publication();
         mlPublication.setPubMedID("1000");
         mlPublication.setAuthorList("Bob, Alice, Tom");
@@ -47,7 +47,7 @@ public class Utilities {
         return usiSample;
     }
 
-    public static Team generateTeam (){
+    public static Team generateTeam() {
         Team team = new Team();
         team.setName("self.usi-team");
         return team;
@@ -67,7 +67,7 @@ public class Utilities {
         return usiAttributes.entrySet().iterator().next();
     }
 
-    public static List<uk.ac.ebi.subs.metabolights.model.Protocol> generateMLProtocols(){
+    public static List<uk.ac.ebi.subs.metabolights.model.Protocol> generateMLProtocols() {
         List<uk.ac.ebi.subs.metabolights.model.Protocol> mlProtocols = new ArrayList<>();
         uk.ac.ebi.subs.metabolights.model.Protocol protocol = new uk.ac.ebi.subs.metabolights.model.Protocol();
         protocol.setName("Extraction");
@@ -107,8 +107,6 @@ public class Utilities {
         usiRelationship.setAccession("SAM990");
         return usiRelationship;
     }
-
-
 
 
 }

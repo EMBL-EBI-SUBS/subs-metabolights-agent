@@ -12,21 +12,8 @@ import static org.junit.Assert.assertEquals;
 public class MLContactsToUSIContactsTest {
     @Test
     public void convert() throws Exception {
-      MLContactsToUSIContacts toUsiContacts = new MLContactsToUSIContacts();
-        USIContactsToMLContacts toMLContacts = new USIContactsToMLContacts();
-//      StudyContact mlTestContact =  Utilities.generateMLContacts();
-//      Contact contact = toUsiContacts.convert(mlTestContact);
-//      StudyContact mlContacts = toMLContacts.convert(contact);
-//      assertEquals(mlContacts,mlTestContact);
-
-      // test WS object
-        Study study = WSUtils.getMLStudy("MTBLS2");
-        for(uk.ac.ebi.subs.metabolights.model.Contact studyContact : study.getPeople()){
-            System.out.println("Testing ... ");
-            Contact usiContact = toUsiContacts.convert(studyContact);
-            uk.ac.ebi.subs.metabolights.model.Contact mlContacts2 = toMLContacts.convert(usiContact);
-            // todo fix Roles.
-            assertEquals(mlContacts2.getAddress(),studyContact.getAddress());
-        }
+        MLContactsToUSIContacts toUsiContacts = new MLContactsToUSIContacts();
+        Contact usiContact = toUsiContacts.convert(Utilities.generateMLContact());
+        assertEquals(usiContact.getEmail(), Utilities.generateMLContact().getEmail());
     }
 }
