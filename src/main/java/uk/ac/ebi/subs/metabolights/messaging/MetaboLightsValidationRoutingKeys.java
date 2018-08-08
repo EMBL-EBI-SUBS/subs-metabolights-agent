@@ -12,5 +12,6 @@ public class MetaboLightsValidationRoutingKeys {
     public static final String EVENT_METABOLIGHTS_ASSAYDATA_VALIDATION = "metabolights.assaydata.validation";
 
     public static final String EVENT_VALIDATION_SUCCESS = "validation.success";
+    
     public static final String EVENT_VALIDATION_ERROR = "validation.error";
 }

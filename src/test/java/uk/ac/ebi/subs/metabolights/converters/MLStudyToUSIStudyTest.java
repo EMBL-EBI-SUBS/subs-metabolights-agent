@@ -15,7 +15,7 @@ import static org.junit.Assert.assertEquals;
 public class MLStudyToUSIStudyTest {
     @Test
     public void convert() throws Exception {
-        Study mlStudyFromDisc = WSUtils.getMLStudyFromDisc();
+        Study mlStudyFromDisc = Utilities.getMLStudyFromDisc();
         MLStudyToUSIStudy mlStudyToUSIStudy = new MLStudyToUSIStudy();
         uk.ac.ebi.subs.data.submittable.Study usiStudy = mlStudyToUSIStudy.convert(mlStudyFromDisc);
         assertEquals(usiStudy.getAttributes().size(), 2);

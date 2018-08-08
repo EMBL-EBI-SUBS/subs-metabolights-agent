@@ -16,12 +16,9 @@ public class SubmissionToProjectTest {
         USISubmissionToMLProject usiSubmissionToMLProject = new USISubmissionToMLProject();
         SubmissionEnvelope submissionEnvelope = null;
         try {
-            submissionEnvelope = WSUtils.getUSISubmisisonFromDisc();
+            submissionEnvelope = Utilities.getUSISubmisisonFromDisc();
             Project project = usiSubmissionToMLProject.convert(submissionEnvelope);
-            ObjectMapper mapper = new ObjectMapper();
-            String mlStudy = mapper.writeValueAsString(project);
-            System.out.println(mlStudy);
-
+           
             assertEquals(project.getStudies().get(0).getSamples().size(), 16);
             assertEquals(project.getStudies().get(0).getProtocols().size(), 6);
             assertEquals(project.getStudies().get(0).getIdentifier(), "MTBLS2");

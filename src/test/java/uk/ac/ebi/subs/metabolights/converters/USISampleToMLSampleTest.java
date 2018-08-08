@@ -26,27 +26,20 @@ public class USISampleToMLSampleTest {
 
     @Test
     public void testWSSample() throws JsonProcessingException {
-        System.out.println("WS test");
-        uk.ac.ebi.subs.metabolights.model.Sample mlSample = WSUtils.getMLSampleFromDisc();
+        uk.ac.ebi.subs.metabolights.model.Sample mlSample = Utilities.getMLSampleFromDisc();
         MLSampleToUSISample mlSampleToUSISample = new MLSampleToUSISample();
 
         Sample usiSample = mlSampleToUSISample.convert(mlSample);
-        String usiSampleJson = mapper.writeValueAsString(usiSample);
-        System.out.println(usiSampleJson);
         assertEquals(usiSample.getTaxon(), "Homo sapiens");
-        System.out.println("Its true");
     }
 
     @Test
     public void testMLToUSISample() throws JsonProcessingException {
-        System.out.println("WS test");
-        Sample usiSample = WSUtils.getUSISampleFromDisc();
+        Sample usiSample = Utilities.getUSISampleFromDisc();
         USISampleToMLSample usiSampleToMLSample = new USISampleToMLSample();
 
         uk.ac.ebi.subs.metabolights.model.Sample mlSample = usiSampleToMLSample.convert(usiSample);
-        String mlSampleJson = mapper.writeValueAsString(mlSample);
-        System.out.println(mlSampleJson);
-        assertEquals(usiSample.getTaxon(), "Homo sapiens");
+       assertEquals(usiSample.getTaxon(), "Homo sapiens");
     }
 
 }
