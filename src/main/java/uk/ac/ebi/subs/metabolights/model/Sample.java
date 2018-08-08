@@ -29,7 +29,6 @@ import java.util.List;
  * Created by kalai on 13/12/2017.
  */
 @Data
-//@JsonRootName(value = "Study_sample")
 public class Sample {
 
       private List<Comment> comments;

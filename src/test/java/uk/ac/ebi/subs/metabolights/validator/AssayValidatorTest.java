@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import uk.ac.ebi.subs.data.submittable.Sample;
 import uk.ac.ebi.subs.data.submittable.Study;
+import uk.ac.ebi.subs.metabolights.converters.Utilities;
 import uk.ac.ebi.subs.metabolights.converters.WSUtils;
 import uk.ac.ebi.subs.validator.data.AssayValidationMessageEnvelope;
 import uk.ac.ebi.subs.validator.data.SingleValidationResult;
@@ -22,8 +23,8 @@ public class AssayValidatorTest {
 
     @Before
     public void setUp() throws Exception {
-        List<Submittable<Sample>> usiSampleList = WSUtils.getUSISampleListFromDisc();
-        Submittable<Study> usiStudy = WSUtils.getUSIStudyFromDisc();
+        List<Submittable<Sample>> usiSampleList = Utilities.getUSISampleListFromDisc();
+        Submittable<Study> usiStudy = Utilities.getUSIStudyFromDisc();
         assayValidationMessageEnvelope = new AssayValidationMessageEnvelope();
         assayValidationMessageEnvelope.setStudy(usiStudy);
         assayValidationMessageEnvelope.setSampleList(usiSampleList);
@@ -52,7 +53,7 @@ public class AssayValidatorTest {
     }
 
     private void resetSampleList() {
-        this.assayValidationMessageEnvelope.setSampleList(WSUtils.getUSISampleListFromDisc());
+        this.assayValidationMessageEnvelope.setSampleList(Utilities.getUSISampleListFromDisc());
     }
 
     private void removeEntryFromSampleList(String key) {

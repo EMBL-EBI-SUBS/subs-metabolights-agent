@@ -32,12 +32,8 @@ public class ProjectToSubmissionTest {
         MLProjectToUSISubmission mlProjectToUSISubmission = new MLProjectToUSISubmission();
         SubmissionEnvelope submissionEnvelope = null;
         try {
-//            submissionEnvelope = createUSIStudySubmission();
-            uk.ac.ebi.subs.metabolights.model.Project mlProject = WSUtils.getMLProjectFromDisc();
+            uk.ac.ebi.subs.metabolights.model.Project mlProject = Utilities.getMLProjectFromDisc();
             submissionEnvelope = mlProjectToUSISubmission.convert(mlProject);
-            ObjectMapper mapper = new ObjectMapper();
-            String submissionJSON = mapper.writeValueAsString(submissionEnvelope);
-            System.out.println(submissionJSON);
 
             assertEquals(submissionEnvelope.getSamples().size(), 16);
             assertEquals(submissionEnvelope.getProtocols().size(), 6);
@@ -49,9 +45,7 @@ public class ProjectToSubmissionTest {
     }
 
     public SubmissionEnvelope createUSIStudySubmission() throws JsonProcessingException {
-
-       // uk.ac.ebi.subs.metabolights.model.Study mlStudy = WSUtils.getMLStudy("MTBLS2");
-        uk.ac.ebi.subs.metabolights.model.Study mlStudy = WSUtils.getMLStudyFromDisc();
+        uk.ac.ebi.subs.metabolights.model.Study mlStudy = Utilities.getMLStudyFromDisc();
         MLContactsToUSIContacts toUsiContacts = new MLContactsToUSIContacts();
         MLPublicationToUSIPublication toUSIPublication = new MLPublicationToUSIPublication();
         MLSampleToUSISample mlSampleToUSISample = new MLSampleToUSISample();
