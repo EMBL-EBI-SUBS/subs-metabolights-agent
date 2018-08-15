@@ -1,12 +1,16 @@
 package uk.ac.ebi.subs.metabolights.validator;
 
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitMessagingTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uk.ac.ebi.subs.data.submittable.Project;
 import uk.ac.ebi.subs.messaging.Exchanges;
+import uk.ac.ebi.subs.metabolights.validator.schema.JsonSchemaValidationHandler;
 import uk.ac.ebi.subs.validator.data.*;
 
 import java.util.List;
@@ -16,26 +20,35 @@ import static uk.ac.ebi.subs.metabolights.messaging.MetaboLightsValidationRoutin
 import static uk.ac.ebi.subs.metabolights.messaging.MetaboLightsValidationRoutingKeys.EVENT_VALIDATION_SUCCESS;
 
 @Service
+@RequiredArgsConstructor
 public class ValidatorListener {
 
     private static Logger logger = LoggerFactory.getLogger(ValidatorListener.class);
+    @NonNull
     private RabbitMessagingTemplate rabbitMessagingTemplate;
+    @NonNull
     private StudyValidator studyValidator;
+    @NonNull
     private AssayValidator assayValidator;
+    @NonNull
     private AssayDataValidator assayDataValidator;
-    private SampleValidator sampleValidator;
+//    @NonNull
+//    private SampleValidator sampleValidator;
+    @NonNull
+    private JsonSchemaValidationHandler jsonSchemaValidationHandler;
 
-    public ValidatorListener(RabbitMessagingTemplate rabbitMessagingTemplate,
-                             StudyValidator studyValidator,
-                             AssayValidator assayValidator,
-                             AssayDataValidator assayDataValidator,
-                             SampleValidator sampleValidator) {
-        this.rabbitMessagingTemplate = rabbitMessagingTemplate;
-        this.studyValidator = studyValidator;
-        this.assayValidator = assayValidator;
-        this.assayDataValidator = assayDataValidator;
-        this.sampleValidator = sampleValidator;
-    }
+//    public ValidatorListener(RabbitMessagingTemplate rabbitMessagingTemplate,
+//                             StudyValidator studyValidator,
+//                             AssayValidator assayValidator,
+//                             AssayDataValidator assayDataValidator,
+//                             SampleValidator sampleValidator) {
+//        this.rabbitMessagingTemplate = rabbitMessagingTemplate;
+//        this.studyValidator = studyValidator;
+//        this.assayValidator = assayValidator;
+//        this.assayDataValidator = assayDataValidator;
+//        this.sampleValidator = sampleValidator;
+//       // this.jsonSchemaValidationHandler = jsonSchemaValidationHandler;
+//    }
 
     @RabbitListener(queues = METABOLIGHTS_STUDY_VALIDATION)
     public void processStudyValidationRequest(StudyValidationMessageEnvelope envelope) {
@@ -56,7 +69,7 @@ public class ValidatorListener {
     @RabbitListener(queues = METABOLIGHTS_SAMPLE_VALIDATION)
     public void processSampleValidationRequest(SampleValidationMessageEnvelope envelope) {
         logger.info("Got sample to validate with ID: {}.", envelope.getEntityToValidate().getId());
-        List<SingleValidationResult> validatedResults = sampleValidator.validate(envelope);
+        List<SingleValidationResult> validatedResults = jsonSchemaValidationHandler.handleSampleValidation(envelope);
         processAndSendResults(envelope, validatedResults);
     }
 

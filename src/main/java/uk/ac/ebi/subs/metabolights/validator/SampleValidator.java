@@ -16,13 +16,13 @@ import java.util.List;
 @Service
 public class SampleValidator {
 
-    public static final Logger logger = LoggerFactory.getLogger(StudyValidator.class);
-    @Autowired
-    private JsonSchemaValidationHandler jsonSchemaValidationHandler;
-
-
-    public List<SingleValidationResult> validate(SampleValidationMessageEnvelope envelope) {
-        List<SingleValidationResult> validationResults = jsonSchemaValidationHandler.handleSampleValidation(envelope);
-        return validationResults;
-    }
+//    public static final Logger logger = LoggerFactory.getLogger(StudyValidator.class);
+//    @Autowired
+//    private JsonSchemaValidationHandler jsonSchemaValidationHandler;
+//
+//
+//    public List<SingleValidationResult> validate(SampleValidationMessageEnvelope envelope) {
+//        List<SingleValidationResult> validationResults = jsonSchemaValidationHandler.handleSampleValidation(envelope);
+//        return validationResults;
+//    }
 }

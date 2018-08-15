@@ -5,6 +5,9 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import lombok.Data;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import uk.ac.ebi.subs.metabolights.validator.ValidationUtils;
@@ -21,6 +24,7 @@ import java.util.List;
 
 @Service
 @Data
+@RequiredArgsConstructor
 public class JsonSchemaValidationHandler {
 
     // Temporary solution - schema url should be provided not hardcoded
@@ -33,14 +37,17 @@ public class JsonSchemaValidationHandler {
     @Value("${assaydata.schema.url}")
     private String assayDataSchemaUrl;
 
+    @NonNull
     private JsonSchemaValidationService validationService;
+    @NonNull
     private SchemaService schemaService;
     private ObjectMapper mapper = new ObjectMapper();
     private SimpleModule module = new SimpleModule();
 
-    public JsonSchemaValidationHandler(JsonSchemaValidationService validationService, SchemaService schemaService) {
-        this.validationService = validationService;
-        this.schemaService = schemaService;
+    public JsonSchemaValidationHandler() {
+//        JsonSchemaValidationService validationService, SchemaService schemaService
+//        this.validationService = validationService;
+//        this.schemaService = schemaService;
         this.mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY); // Null fields and empty collections are not included in the serialization.
         this.module.addSerializer(LocalDate.class, new LocalDateCustomSerializer());
         this.mapper.registerModule(module);
