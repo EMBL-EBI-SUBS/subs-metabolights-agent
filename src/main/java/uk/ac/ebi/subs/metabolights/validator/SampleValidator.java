@@ -12,13 +12,15 @@ import uk.ac.ebi.subs.validator.data.SingleValidationResult;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class SampleValidator {
 
     public static final Logger logger = LoggerFactory.getLogger(StudyValidator.class);
 
-    @NonNull
     private JsonSchemaValidationHandler jsonSchemaValidationHandler;
+
+    public SampleValidator(JsonSchemaValidationHandler jsonSchemaValidationHandler){
+        this.jsonSchemaValidationHandler = jsonSchemaValidationHandler;
+    }
 
     public List<SingleValidationResult> validate(SampleValidationMessageEnvelope envelope) {
         List<SingleValidationResult> validationResults = jsonSchemaValidationHandler.handleSampleValidation(envelope);

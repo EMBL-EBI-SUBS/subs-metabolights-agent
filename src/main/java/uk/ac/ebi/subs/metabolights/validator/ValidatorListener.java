@@ -6,11 +6,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitMessagingTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
-import uk.ac.ebi.subs.data.submittable.Project;
 import uk.ac.ebi.subs.messaging.Exchanges;
-import uk.ac.ebi.subs.metabolights.validator.schema.JsonSchemaValidationHandler;
 import uk.ac.ebi.subs.validator.data.*;
 
 import java.util.List;
@@ -34,21 +32,6 @@ public class ValidatorListener {
     private AssayDataValidator assayDataValidator;
     @NonNull
     private SampleValidator sampleValidator;
-//    @NonNull
-//    private JsonSchemaValidationHandler jsonSchemaValidationHandler;
-
-//    public ValidatorListener(RabbitMessagingTemplate rabbitMessagingTemplate,
-//                             StudyValidator studyValidator,
-//                             AssayValidator assayValidator,
-//                             AssayDataValidator assayDataValidator,
-//                             SampleValidator sampleValidator) {
-//        this.rabbitMessagingTemplate = rabbitMessagingTemplate;
-//        this.studyValidator = studyValidator;
-//        this.assayValidator = assayValidator;
-//        this.assayDataValidator = assayDataValidator;
-//        this.sampleValidator = sampleValidator;
-//       // this.jsonSchemaValidationHandler = jsonSchemaValidationHandler;
-//    }
 
     @RabbitListener(queues = METABOLIGHTS_STUDY_VALIDATION)
     public void processStudyValidationRequest(StudyValidationMessageEnvelope envelope) {
