@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import lombok.Data;
-import org.springframework.beans.factory.annotation.Value;
+
 import org.springframework.stereotype.Service;
 import uk.ac.ebi.subs.metabolights.validator.ValidationUtils;
 import uk.ac.ebi.subs.metabolights.validator.schema.custom.LocalDateCustomSerializer;
@@ -24,14 +24,8 @@ import java.util.List;
 public class JsonSchemaValidationHandler {
 
     // Temporary solution - schema url should be provided not hardcoded
-    @Value("${mlsample.schema.url}")
-    private String mlSampleSchemaUrl;
-    @Value("${mlstudy.schema.url}")
-    private String mlStudySchemaUrl;
-    @Value("${mlassay.schema.url}")
-    private String mlAssaySchemaUrl;
-    @Value("${assaydata.schema.url}")
-    private String assayDataSchemaUrl;
+//    @Value("${mlsample.schema.url}")
+    private String mlSampleSchemaUrl = "https://raw.githubusercontent.com/EMBL-EBI-SUBS/validation-schemas/master/sample/ml-sample-schema.json";
 
     private JsonSchemaValidationService validationService;
     private SchemaService schemaService;
