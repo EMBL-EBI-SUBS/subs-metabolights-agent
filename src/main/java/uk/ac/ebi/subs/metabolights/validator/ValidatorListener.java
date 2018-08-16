@@ -32,10 +32,10 @@ public class ValidatorListener {
     private AssayValidator assayValidator;
     @NonNull
     private AssayDataValidator assayDataValidator;
-//    @NonNull
-//    private SampleValidator sampleValidator;
     @NonNull
-    private JsonSchemaValidationHandler jsonSchemaValidationHandler;
+    private SampleValidator sampleValidator;
+//    @NonNull
+//    private JsonSchemaValidationHandler jsonSchemaValidationHandler;
 
 //    public ValidatorListener(RabbitMessagingTemplate rabbitMessagingTemplate,
 //                             StudyValidator studyValidator,
@@ -69,7 +69,7 @@ public class ValidatorListener {
     @RabbitListener(queues = METABOLIGHTS_SAMPLE_VALIDATION)
     public void processSampleValidationRequest(SampleValidationMessageEnvelope envelope) {
         logger.info("Got sample to validate with ID: {}.", envelope.getEntityToValidate().getId());
-        List<SingleValidationResult> validatedResults = jsonSchemaValidationHandler.handleSampleValidation(envelope);
+        List<SingleValidationResult> validatedResults = sampleValidator.validate(envelope);
         processAndSendResults(envelope, validatedResults);
     }
 

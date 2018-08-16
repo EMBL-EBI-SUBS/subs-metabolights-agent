@@ -24,7 +24,6 @@ import java.util.List;
 
 @Service
 @Data
-@RequiredArgsConstructor
 public class JsonSchemaValidationHandler {
 
     // Temporary solution - schema url should be provided not hardcoded
@@ -34,20 +33,17 @@ public class JsonSchemaValidationHandler {
     private String mlStudySchemaUrl;
     @Value("${mlassay.schema.url}")
     private String mlAssaySchemaUrl;
-    @Value("${assaydata.schema.url}")
-    private String assayDataSchemaUrl;
+//    @Value("${assaydata.schema.url}")
+//    private String assayDataSchemaUrl;
 
-    @NonNull
     private JsonSchemaValidationService validationService;
-    @NonNull
     private SchemaService schemaService;
     private ObjectMapper mapper = new ObjectMapper();
     private SimpleModule module = new SimpleModule();
 
-    public JsonSchemaValidationHandler() {
-//        JsonSchemaValidationService validationService, SchemaService schemaService
-//        this.validationService = validationService;
-//        this.schemaService = schemaService;
+    public JsonSchemaValidationHandler(JsonSchemaValidationService validationService, SchemaService schemaService) {
+        this.validationService = validationService;
+        this.schemaService = schemaService;
         this.mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY); // Null fields and empty collections are not included in the serialization.
         this.module.addSerializer(LocalDate.class, new LocalDateCustomSerializer());
         this.mapper.registerModule(module);
