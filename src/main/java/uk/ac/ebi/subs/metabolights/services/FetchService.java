@@ -1,16 +1,16 @@
 package uk.ac.ebi.subs.metabolights.services;
 
-import lombok.Data;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
+import uk.ac.ebi.subs.metabolights.model.Investigation;
 import uk.ac.ebi.subs.metabolights.model.Project;
 import uk.ac.ebi.subs.metabolights.model.Study;
+import uk.ac.ebi.subs.metabolights.validator.schema.custom.JsonAsTextPlainHttpMessageConverter;
+
+import java.util.List;
 
 @Service
 public class FetchService {
@@ -21,14 +21,23 @@ public class FetchService {
     private RestTemplate restTemplate;
 
     public FetchService(){
-         this.restTemplate = new RestTemplate();
+        this.restTemplate = new RestTemplate();
+        List messageConverters = this.restTemplate.getMessageConverters();
+        messageConverters.add(new JsonAsTextPlainHttpMessageConverter());
+        this.restTemplate.setMessageConverters(messageConverters);
     }
 
     public Study getStudy(String accession) {
 
-        Project project = restTemplate.getForObject(METABOLIGHTS_API + "studies/" + accession, Project.class);
-        if (project != null) {
-            return project.getStudies() != null && project.getStudies().size() > 0 ? project.getStudies().get(0) : null;
+        try {
+            Investigation investigation = restTemplate.getForObject(METABOLIGHTS_API + "studies/" + accession, Investigation.class);
+            Project project = investigation.getIsaInvestigation();
+            if (project != null) {
+                return project.getStudies() != null && project.getStudies().size() > 0 ? project.getStudies().get(0) : null;
+            }
+
+        } catch (RestClientException e) {
+            throw new RestClientException( e.getMessage(), e);
         }
         return null;
     }
