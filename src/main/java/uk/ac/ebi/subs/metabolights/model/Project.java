@@ -30,8 +30,7 @@ import java.util.List;
  * Created by kalai on 13/12/2017.
  */
 @Data
-@JsonRootName("investigation")
-
+@JsonRootName("isaInvestigation")
 public class Project {
     private List<Comment> comments;
     private String description;

@@ -24,8 +24,8 @@ import java.util.List;
 public class JsonSchemaValidationService {
     private static final Logger logger = LoggerFactory.getLogger(JsonSchemaValidationService.class);
 
-    @Value("${validator.schema.url}")
-    private String jsonSchemaValidator;
+//    @Value("${validator.schema.url}")
+    private String jsonSchemaValidator = "https://subs-json-schema-validator.herokuapp.com/validate";
 
     private RestTemplate restTemplate;
 
