@@ -2,12 +2,6 @@ package uk.ac.ebi.subs.metabolights.services;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
@@ -19,7 +13,6 @@ import uk.ac.ebi.subs.metabolights.validator.schema.custom.JsonAsTextPlainHttpMe
 import java.util.List;
 
 @Service
-@ConfigurationProperties(prefix = "metabolights.api")
 public class FetchService {
     private static final Logger logger = LoggerFactory.getLogger(FetchService.class);
 
@@ -28,10 +21,12 @@ public class FetchService {
 //    @Value("${metabolightsUrl}")
 //    String METABOLIGHTS_API;
 //
-//    @Value("${metabolights.api.key}")
-//    String METABOLIGHTS_API_key;
+   // @Value("${metabolights.client.apiKey}")
+    private String apiKey;
 
     private String url;
+
+    private String key;
 
     private RestTemplate restTemplate;
 
@@ -43,15 +38,15 @@ public class FetchService {
         List messageConverters = this.restTemplate.getMessageConverters();
         messageConverters.add(new JsonAsTextPlainHttpMessageConverter());
         this.restTemplate.setMessageConverters(messageConverters);
+        System.out.println(url + " = " + key);
+        System.out.println("API key = " + this.apiKey);
     }
 
     public Study getStudy(String accession) {
 
         try {
             String localUrl = METABOLIGHTS_API + "studies/" + accession;
-            String loadedurl = mlProperties.getUrl();
-            String status = mlProperties.getStatus();
-            Investigation investigation = restTemplate.getForObject(localUrl, Investigation.class);
+             Investigation investigation = restTemplate.getForObject(localUrl, Investigation.class);
             Project project = investigation.getIsaInvestigation();
        
             if (project != null) {

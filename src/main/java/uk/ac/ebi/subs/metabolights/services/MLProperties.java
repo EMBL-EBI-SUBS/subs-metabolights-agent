@@ -1,11 +1,10 @@
 package uk.ac.ebi.subs.metabolights.services;
 
 import lombok.Data;
-import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.beans.factory.annotation.Value;
 
-@ConfigurationProperties(ignoreUnknownFields = false)
 @Data
 public class MLProperties {
-    private String url;
-    private String status;
+    @Value("${metabolights.client.apiKey}")
+    private String apiKey;
 }
