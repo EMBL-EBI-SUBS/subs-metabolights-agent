@@ -29,6 +29,6 @@ public class FetchServiceTest {
     @Test
     public void getStudy() {
         Study mlStudy = this.fetchService.getStudy("MTBLS2");
-        assertEquals(mlStudy.getTitle(),"Metabolome phenotyping of inorganic carbon limitation in cells of the wild type and photorespiratory mutants of the cyanobacterium Synechocystis sp. strain PCC 6803.");
+        assertEquals(mlStudy.getPublicReleaseDate(),"2012-05-22");
     }
 }
