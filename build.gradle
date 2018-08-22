@@ -49,7 +49,7 @@ dependencies {
     compile("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
     compileOnly('org.projectlombok:lombok:1.16.18')
 
-    optional("org.springframework.boot:spring-boot-configuration-processor")
+    compile("org.springframework.boot:spring-boot-configuration-processor")
     
     compile group: 'commons-io', name: 'commons-io', version: '2.0.1'
 

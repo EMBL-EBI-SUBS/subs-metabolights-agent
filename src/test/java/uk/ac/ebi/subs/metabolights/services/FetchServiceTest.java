@@ -4,7 +4,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import uk.ac.ebi.subs.metabolights.model.Study;
 
@@ -26,6 +29,6 @@ public class FetchServiceTest {
     @Test
     public void getStudy() {
         Study mlStudy = this.fetchService.getStudy("MTBLS2");
-        assertEquals(mlStudy.getTitle(),"Metabolome phenotyping of inorganic carbon limitation in cells of the wild type and photorespiratory mutants of the cyanobacterium Synechocystis sp. strain PCC 6803.");
+        assertEquals(mlStudy.getPublicReleaseDate(),"2012-05-22");
     }
 }

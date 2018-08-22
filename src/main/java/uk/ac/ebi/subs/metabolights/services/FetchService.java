@@ -16,11 +16,12 @@ import java.util.List;
 public class FetchService {
     private static final Logger logger = LoggerFactory.getLogger(FetchService.class);
 
-    private static final String METABOLIGHTS_API = "http://ves-ebi-8d:5000/mtbls/ws/";
+    private static final String METABOLIGHTS_API = "http://ves-ebi-90:5000/metabolights/ws/studies/";
 
     private RestTemplate restTemplate;
 
-    public FetchService(){
+
+    public FetchService() {
         this.restTemplate = new RestTemplate();
         List messageConverters = this.restTemplate.getMessageConverters();
         messageConverters.add(new JsonAsTextPlainHttpMessageConverter());
@@ -30,14 +31,16 @@ public class FetchService {
     public Study getStudy(String accession) {
 
         try {
-            Investigation investigation = restTemplate.getForObject(METABOLIGHTS_API + "studies/" + accession, Investigation.class);
+            String localUrl = METABOLIGHTS_API + accession;
+            Investigation investigation = restTemplate.getForObject(localUrl, Investigation.class);
             Project project = investigation.getIsaInvestigation();
+
             if (project != null) {
                 return project.getStudies() != null && project.getStudies().size() > 0 ? project.getStudies().get(0) : null;
             }
 
         } catch (RestClientException e) {
-            throw new RestClientException( e.getMessage(), e);
+            throw new RestClientException(e.getMessage(), e);
         }
         return null;
     }
