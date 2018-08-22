@@ -31,4 +31,10 @@ public class FetchServiceTest {
         Study mlStudy = this.fetchService.getStudy("MTBLS2");
         assertEquals(mlStudy.getPublicReleaseDate(),"2012-05-22");
     }
+
+    @Test
+    public void createNewStudyAndGetAccession() {
+        String accession = this.fetchService.createNewStudyAndGetAccession();
+        assertTrue(accession.contains("MTBLS"));
+    }
 }
