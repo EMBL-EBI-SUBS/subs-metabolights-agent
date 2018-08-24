@@ -14,7 +14,7 @@ node {
         sh 'git name-rev --name-only HEAD > GIT_BRANCH'
         sh 'cat GIT_BRANCH'
         git_branch = readFile('GIT_BRANCH').trim()
-        if (git_branch == 'remotes/origin/dev') {
+        if (git_branch == 'remotes/origin/develop') {
             sh "./gradlew --gradle-user-home=/homes/sub_adm/secrets -PsshKeyFile=/var/lib/jenkins/.ssh/id_rsa -Penv=dev deployJar"
         } else if (git_branch == 'remotes/origin/master') {
             sh "./gradlew --gradle-user-home=/homes/sub_adm/secrets -PsshKeyFile=/var/lib/jenkins/.ssh/id_rsa -Penv=test deployJar"
