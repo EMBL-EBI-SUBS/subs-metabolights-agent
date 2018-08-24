@@ -4,7 +4,9 @@ import org.springframework.core.convert.converter.Converter;
 import uk.ac.ebi.subs.data.component.Contact;
 import uk.ac.ebi.subs.metabolights.model.OntologyModel;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by kalai on 13/12/2017.
@@ -31,5 +33,13 @@ public class USIContactsToMLContacts implements Converter<Contact, uk.ac.ebi.sub
             mlContact.setRoles(Arrays.asList(roleType));
         }
         return mlContact;
+    }
+
+    public List<uk.ac.ebi.subs.metabolights.model.Contact> convert(List<Contact> contacts){
+        List<uk.ac.ebi.subs.metabolights.model.Contact> mlContacts = new ArrayList<>();
+        for (Contact contact : contacts) {
+            mlContacts.add(convert(contact));
+        }
+        return mlContacts;
     }
 }

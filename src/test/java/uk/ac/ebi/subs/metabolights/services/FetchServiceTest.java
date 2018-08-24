@@ -1,13 +1,12 @@
 package uk.ac.ebi.subs.metabolights.services;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import uk.ac.ebi.subs.metabolights.model.Study;
 
@@ -29,6 +28,19 @@ public class FetchServiceTest {
     @Test
     public void getStudy() {
         Study mlStudy = this.fetchService.getStudy("MTBLS2");
-        assertEquals(mlStudy.getPublicReleaseDate(),"2012-05-22");
+        ObjectMapper mapper = new ObjectMapper();
+        String json = null;
+        try {
+            json = mapper.writeValueAsString(mlStudy.getPeople());
+            System.out.println(json);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        assertTrue(!mlStudy.getDescription().isEmpty());
+    }
+    
+    public void createNewStudyAndGetAccession() {
+        String accession = this.fetchService.createNewStudyAndGetAccession();
+        assertTrue(accession.contains("MTBLS"));
     }
 }

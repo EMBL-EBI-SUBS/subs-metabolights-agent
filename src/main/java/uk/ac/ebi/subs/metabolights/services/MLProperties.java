@@ -10,9 +10,9 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "metabolights")
 public class MLProperties {
 
-    private String apiKey;
+    private String apiKey = "";
 
-    private String url;
+    private String url = "http://ves-ebi-8d:5000/mtbls/ws/studies/";
 
     public String getApiKey() {
         return apiKey;
