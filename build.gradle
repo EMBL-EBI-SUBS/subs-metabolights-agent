@@ -77,6 +77,41 @@ springBoot {
 executable = true
 }
 
+ssh.settings {
+    user = 'sub_adm'
+}
+
+if (project.hasProperty('sshKeyFile')) {
+    ssh.settings.identity = new File(sshKeyFile)
+}
+
+if (project.hasProperty('sshPassphrase')) {
+    ssh.settings.passphrase = sshPassphrase
+}
+
+task printJarName {
+    doLast {
+        println "$jar.archivePath.name"
+    }
+
+}
+
+task printJarFullPath {
+    doLast {
+        println "$jar.archivePath.absolutePath"
+    }
+}
+
+processTestResources {
+    filesMatching('application.properties') {
+        expand(project.properties)
+    }
+}
+
+task printClasspath doLast {
+    configurations.compile.each { println it }
+}
+
 ext.gradle_env = hasProperty('env') ? env : 'dev'
 
 def devDeployHostName = hasProperty(project.name + "DevDeployTarget") ? getProperty(project.name + "DevDeployTarget") : 'localhost'
