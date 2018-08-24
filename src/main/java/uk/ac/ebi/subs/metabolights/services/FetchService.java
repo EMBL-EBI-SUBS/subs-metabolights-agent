@@ -27,7 +27,6 @@ public class FetchService {
 
     private RestTemplate restTemplate;
 
-    @Autowired
     private MLProperties mlProperties;
 
 
@@ -36,12 +35,13 @@ public class FetchService {
         List messageConverters = this.restTemplate.getMessageConverters();
         messageConverters.add(new JsonAsTextPlainHttpMessageConverter());
         this.restTemplate.setMessageConverters(messageConverters);
+        mlProperties = new MLProperties();
     }
-
+    
     public Study getStudy(String accession) {
 
         try {
-            String localUrl = METABOLIGHTS_API + accession;
+            String localUrl = mlProperties.getUrl() + accession;
             Investigation investigation = restTemplate.getForObject(localUrl, Investigation.class);
             Project project = investigation.getIsaInvestigation();
 
