@@ -32,6 +32,19 @@ public class Utilities {
         return contact;
     }
 
+    public static Contact generateUSIContact() {
+        Contact contact = new Contact();
+        contact.setAddress("Hinxton");
+        contact.setAffiliation("EMBL-EBI");
+        contact.setFax("+11123");
+        contact.setPhone("+11125");
+        contact.setEmail("testie10@abc.com");
+        contact.setFirstName("Alice");
+        contact.setLastName("Bob");
+        contact.setMiddleInitials("");
+        return contact;
+    }
+
     public static uk.ac.ebi.subs.metabolights.model.Publication generateMLPublication() {
         uk.ac.ebi.subs.metabolights.model.Publication mlPublication = new uk.ac.ebi.subs.metabolights.model.Publication();
         mlPublication.setPubMedID("1000");
