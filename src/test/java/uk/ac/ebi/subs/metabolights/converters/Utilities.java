@@ -37,9 +37,11 @@ public class Utilities {
         contact.setAddress("Hinxton");
         contact.setAffiliation("EMBL-EBI");
         contact.setFax("+11123");
-        contact.setEmail("test@abc.com");
+        contact.setPhone("+11125");
+        contact.setEmail("testie10@abc.com");
         contact.setFirstName("Alice");
         contact.setLastName("Bob");
+        contact.setMiddleInitials("");
         return contact;
     }
 
