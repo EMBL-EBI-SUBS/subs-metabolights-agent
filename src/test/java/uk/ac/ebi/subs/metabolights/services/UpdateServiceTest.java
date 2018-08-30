@@ -3,7 +3,9 @@ package uk.ac.ebi.subs.metabolights.services;
 import org.junit.Before;
 import org.junit.Test;
 import uk.ac.ebi.subs.data.component.Contact;
+import uk.ac.ebi.subs.data.component.Publication;
 import uk.ac.ebi.subs.metabolights.converters.MLContactsToUSIContacts;
+import uk.ac.ebi.subs.metabolights.converters.MLPublicationToUSIPublication;
 import uk.ac.ebi.subs.metabolights.converters.Utilities;
 
 import java.util.ArrayList;
@@ -24,7 +26,6 @@ public class UpdateServiceTest {
     }
 
 
-    @Test
     public void updateContact() {
         Contact contact = Utilities.generateUSIContact();
         contact.setEmail(UUID.randomUUID().toString() + "@dummy.com");
@@ -33,5 +34,17 @@ public class UpdateServiceTest {
         addedContact.setFirstName("Changed");
         MLContactsToUSIContacts converter = new MLContactsToUSIContacts();
         this.updateService.updateContact("MTBLS2", converter.convert(addedContact));
+    }
+
+    public void updatePublication() {
+        Publication publication = Utilities.generateUSIPublication();
+        String newTitle =  publication.getArticleTitle() + " - " + UUID.randomUUID().toString();
+        publication.setArticleTitle(newTitle);
+        uk.ac.ebi.subs.metabolights.model.Publication modified = this.postService.add("MTBLS2", publication);
+        System.out.println(newTitle);
+
+        modified.setAuthorList("ALice and BOB only");
+        MLPublicationToUSIPublication converter = new MLPublicationToUSIPublication();
+        this.updateService.updatePublication("MTBLS2", converter.convert(modified));
     }
 }
