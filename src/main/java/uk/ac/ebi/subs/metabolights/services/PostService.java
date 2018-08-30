@@ -10,7 +10,9 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import uk.ac.ebi.subs.data.component.Contact;
+import uk.ac.ebi.subs.data.component.Publication;
 import uk.ac.ebi.subs.metabolights.converters.USIContactsToMLContacts;
+import uk.ac.ebi.subs.metabolights.converters.USIPublicationToMLPublication;
 import uk.ac.ebi.subs.metabolights.validator.schema.custom.JsonAsTextPlainHttpMessageConverter;
 
 import java.util.List;
@@ -22,10 +24,13 @@ public class PostService {
 
 
     private USIContactsToMLContacts usiContactsToMLContacts;
+    private USIPublicationToMLPublication usiPublicationToMLPublication;
 
     private RestTemplate restTemplate;
 
     private MLProperties mlProperties;
+
+    private  HttpHeaders headers;
 
 
     public PostService() {
@@ -40,7 +45,12 @@ public class PostService {
         this.restTemplate.setMessageConverters(messageConverters);
 
         usiContactsToMLContacts = new USIContactsToMLContacts();
+        usiPublicationToMLPublication = new USIPublicationToMLPublication();
+        
         mlProperties = new MLProperties();
+
+        headers = new HttpHeaders();
+        headers.set("user_token", mlProperties.getApiKey());
     }
 
 
@@ -49,9 +59,6 @@ public class PostService {
         if (contact == null) return addedContact;
         try {
             ObjectNode contactsJSON = ServiceUtils.convertToJSON(usiContactsToMLContacts.convert(contact), "contact");
-            HttpHeaders headers = new HttpHeaders();
-            headers.set("user_token", mlProperties.getApiKey());
-
             HttpEntity<ObjectNode> requestBody = new HttpEntity<>(contactsJSON, headers);
             String url = mlProperties.getUrl() + studyID + "/contacts";
             addedContact = restTemplate.postForObject(url, requestBody, uk.ac.ebi.subs.metabolights.model.Contact.class);
@@ -59,5 +66,20 @@ public class PostService {
             e.printStackTrace();
         }
         return addedContact;
+    }
+
+    public uk.ac.ebi.subs.metabolights.model.Publication add(String studyID, Publication publication) {
+        uk.ac.ebi.subs.metabolights.model.Publication addedpublication = null;
+        if (publication == null) return addedpublication;
+        try {
+            ObjectNode json = ServiceUtils.convertToJSON(usiPublicationToMLPublication.convert(publication), "publication");
+            HttpEntity<ObjectNode> requestBody = new HttpEntity<>(json, headers);
+
+            String url = mlProperties.getUrl() + studyID + "/publications";
+            addedpublication = restTemplate.postForObject(url, requestBody, uk.ac.ebi.subs.metabolights.model.Publication.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return addedpublication;
     }
 }

@@ -3,6 +3,7 @@ package uk.ac.ebi.subs.metabolights.services;
 import org.junit.Before;
 import org.junit.Test;
 import uk.ac.ebi.subs.data.component.Contact;
+import uk.ac.ebi.subs.data.component.Publication;
 import uk.ac.ebi.subs.metabolights.converters.Utilities;
 
 import java.util.UUID;
@@ -26,6 +27,15 @@ public class PostServiceTest {
         contact.setEmail(UUID.randomUUID().toString() + "@dummy.com");
         uk.ac.ebi.subs.metabolights.model.Contact addedContact = this.postService.add("MTBLS2", contact);
         assertEquals(contact.getEmail(),addedContact.getEmail());
+    }
+
+    @Test
+    public void addPublication() {
+        Publication publication = Utilities.generateUSIPublication();
+        String newTitle =  publication.getArticleTitle() + " - " + UUID.randomUUID().toString();
+        publication.setArticleTitle(newTitle);
+        uk.ac.ebi.subs.metabolights.model.Publication addedPublication = this.postService.add("MTBLS2", publication);
+        assertEquals(addedPublication.getTitle(),newTitle);
     }
 
 }

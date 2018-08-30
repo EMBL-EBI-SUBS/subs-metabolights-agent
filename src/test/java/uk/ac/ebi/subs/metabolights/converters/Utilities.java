@@ -54,6 +54,15 @@ public class Utilities {
         return mlPublication;
     }
 
+    public static Publication generateUSIPublication() {
+        Publication publication = new Publication();
+        publication.setPubmedId("10000");
+        publication.setAuthors("Bob, Alice, Tom");
+        publication.setArticleTitle("New Test publication");
+        publication.setDoi("123-343-567-890");
+        return publication;
+    }
+
 
     public static Sample generateUsiSample() {
         Sample usiSample = new Sample();
