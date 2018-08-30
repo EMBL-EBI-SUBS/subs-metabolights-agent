@@ -4,6 +4,8 @@ import org.springframework.core.convert.converter.Converter;
 import uk.ac.ebi.subs.data.component.Publication;
 import uk.ac.ebi.subs.metabolights.model.OntologyModel;
 
+import java.util.ArrayList;
+
 /**
  * Created by kalai on 13/12/2017.
  */
@@ -16,11 +18,19 @@ public class USIPublicationToMLPublication implements Converter<Publication, uk.
         publication.setAuthorList(source.getAuthors());
         publication.setTitle(source.getArticleTitle());
         publication.setPubMedID(source.getPubmedId());
+        OntologyModel status = new OntologyModel();
+        status.setComments(new ArrayList<>());
+        status.setTermAccession("");
+        //todo termAccession is ignored to set
+
         if(source.getStatus()!=null){
-            OntologyModel status = new OntologyModel();
             status.setAnnotationValue(source.getStatus().name());
             publication.setStatus(status);
+        } else{
+            status.setAnnotationValue("");
+            publication.setStatus(status);
         }
+        publication.setComments(new ArrayList<>());
         return publication;
     }
 }
