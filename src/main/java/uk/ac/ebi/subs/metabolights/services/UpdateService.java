@@ -19,7 +19,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import uk.ac.ebi.subs.data.component.Contact;
+import uk.ac.ebi.subs.data.submittable.Protocol;
 import uk.ac.ebi.subs.metabolights.converters.USIContactsToMLContacts;
+import uk.ac.ebi.subs.metabolights.converters.USIProtocolToMLProtocol;
 import uk.ac.ebi.subs.metabolights.converters.USIPublicationToMLPublication;
 import uk.ac.ebi.subs.metabolights.model.Publication;
 import uk.ac.ebi.subs.metabolights.model.Study;
@@ -43,6 +45,7 @@ public class UpdateService {
 
     private USIContactsToMLContacts usiContactsToMLContacts;
     private USIPublicationToMLPublication usiPublicationToMLPublication;
+    private USIProtocolToMLProtocol usiProtocolToMLProtocol;
 
 
     public UpdateService() {
@@ -58,6 +61,7 @@ public class UpdateService {
 
         usiContactsToMLContacts = new USIContactsToMLContacts();
         usiPublicationToMLPublication = new USIPublicationToMLPublication();
+        usiProtocolToMLProtocol = new USIProtocolToMLProtocol();
         mlProperties = new MLProperties();
 
         headers = new HttpHeaders();
@@ -94,6 +98,21 @@ public class UpdateService {
             e.printStackTrace();
         }
 
+    }
+
+    public void updateProtocol(String studyID, Protocol protocol) {
+        if (protocol == null) return;
+        if (protocol.getTitle() == null) return;
+
+        try {
+            ObjectNode contactToUpdateJSON = ServiceUtils.convertToJSON(usiProtocolToMLProtocol.convert(protocol), "protocol");
+            HttpEntity<ObjectNode> requestBody = new HttpEntity<>(contactToUpdateJSON, headers);
+            String url = mlProperties.getUrl() + studyID + "/protocols?name=" + protocol.getTitle();
+            restTemplate.put(url, requestBody, new Object[]{});
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
