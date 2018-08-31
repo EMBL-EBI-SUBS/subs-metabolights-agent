@@ -11,7 +11,9 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import uk.ac.ebi.subs.data.submittable.Protocol;
 import uk.ac.ebi.subs.metabolights.converters.USIContactsToMLContacts;
+import uk.ac.ebi.subs.metabolights.converters.USIProtocolToMLProtocol;
 import uk.ac.ebi.subs.metabolights.converters.USIPublicationToMLPublication;
 import uk.ac.ebi.subs.metabolights.validator.schema.custom.JsonAsTextPlainHttpMessageConverter;
 
@@ -32,6 +34,7 @@ public class DeletionService {
 
     private USIContactsToMLContacts usiContactsToMLContacts;
     private USIPublicationToMLPublication usiPublicationToMLPublication;
+    private USIProtocolToMLProtocol usiProtocolToMLProtocol;
 
 
     public DeletionService() {
@@ -47,6 +50,7 @@ public class DeletionService {
 
         usiContactsToMLContacts = new USIContactsToMLContacts();
         usiPublicationToMLPublication = new USIPublicationToMLPublication();
+        usiProtocolToMLProtocol = new USIProtocolToMLProtocol();
         mlProperties = new MLProperties();
 
         headers = new HttpHeaders();
@@ -66,9 +70,19 @@ public class DeletionService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
+    public void deleteProtocol(String studyID, Protocol protocol) {
+        if (protocol == null) return;
+        if (protocol.getTitle() == null) return;
 
+        try {
+            HttpEntity<String> requestParams = new HttpEntity<>("parameters", headers);
+            String url = mlProperties.getUrl() + studyID + "/protocols?name=" + protocol.getTitle();
+            restTemplate.delete(url,requestParams);
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
