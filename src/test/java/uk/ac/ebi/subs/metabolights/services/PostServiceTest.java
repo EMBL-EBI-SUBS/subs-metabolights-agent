@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import uk.ac.ebi.subs.data.component.Contact;
 import uk.ac.ebi.subs.data.component.Publication;
+import uk.ac.ebi.subs.data.submittable.Protocol;
 import uk.ac.ebi.subs.metabolights.converters.Utilities;
 
 import java.util.UUID;
@@ -36,6 +37,15 @@ public class PostServiceTest {
         publication.setArticleTitle(newTitle);
         uk.ac.ebi.subs.metabolights.model.Publication addedPublication = this.postService.add("MTBLS2", publication);
         assertEquals(addedPublication.getTitle(),newTitle);
+    }
+
+    @Test
+    public void addProtocol() {
+        Protocol protocol = Utilities.generateUSIProtocol();
+        String newTitle =  protocol.getTitle() + " - " + UUID.randomUUID().toString();
+        protocol.setTitle(newTitle);
+        uk.ac.ebi.subs.metabolights.model.Protocol addedProtocol = this.postService.add("MTBLS2", protocol);
+        assertEquals(addedProtocol.getName(),newTitle);
     }
 
 }

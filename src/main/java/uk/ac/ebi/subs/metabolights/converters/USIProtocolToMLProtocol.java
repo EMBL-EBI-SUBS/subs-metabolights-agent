@@ -17,21 +17,31 @@ public class USIProtocolToMLProtocol implements Converter<Protocol, uk.ac.ebi.su
 
 
         uk.ac.ebi.subs.metabolights.model.Protocol protocol = new uk.ac.ebi.subs.metabolights.model.Protocol();
-        protocol.setName(source.getAlias());
-        protocol.setDescription(source.getDescription());
-        protocol.setUri(source.getId());
+        protocol.setName(source.getTitle());
+        protocol.setDescription(source.getDescription() == null ? "" : source.getDescription());
         //todo URI is given for id
+
+        //set placeholder values and not leave fields null
+        protocol.setUri("");
+        protocol.setVersion("");
+        protocol.setComments(new ArrayList<>());
+        protocol.setComponents(new ArrayList<>());
+        OntologyModel protocolType = new OntologyModel();
+        protocolType.setComments(new ArrayList<>());
+        protocolType.setTermAccession("");
 
         Map<String, Collection<Attribute>> usiProtocolAttributes = source.getAttributes();
         // convert protocol type
         if (usiProtocolAttributes.get("protocolType") != null) {
-            List<Attribute> protocolTypes = (ArrayList<Attribute>) usiProtocolAttributes.get("protocolType");
+            List<Attribute> protocolTypes = (List<Attribute>) usiProtocolAttributes.get("protocolType");
             if (protocolTypes.size() > 0) {
                 Attribute attribute = protocolTypes.get(0);
-                OntologyModel protocolType = new OntologyModel();
                 protocolType.setAnnotationValue(attribute.getValue());
                 protocol.setProtocolType(protocolType);
             }
+        } else {
+            protocolType.setAnnotationValue("");
+            protocol.setProtocolType(protocolType);
         }
         // convert StudyProtocolParameters
 
@@ -42,6 +52,8 @@ public class USIProtocolToMLProtocol implements Converter<Protocol, uk.ac.ebi.su
                 for (int i = 0; i < usiProtocolAttributes.size(); i++) {
                     ProtocolParameter mlProtocolParameter = new ProtocolParameter();
                     OntologyModel mlProtocolParameterName = new OntologyModel();
+                    mlProtocolParameterName.setComments(new ArrayList<>());
+                    mlProtocolParameterName.setTermAccession("");
 
                     Attribute usiAttribute = usiProtocolParameters.get(0);
                     mlProtocolParameterName.setAnnotationValue(usiAttribute.getValue());
@@ -50,7 +62,12 @@ public class USIProtocolToMLProtocol implements Converter<Protocol, uk.ac.ebi.su
                 }
                 protocol.setParameters(mlProtocolparameters);
             }
+        } else{
+            protocol.setParameters(new ArrayList<>());
         }
+
+
+
         return protocol;
     }
 }

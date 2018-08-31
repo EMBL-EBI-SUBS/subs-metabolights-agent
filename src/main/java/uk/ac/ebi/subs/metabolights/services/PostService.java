@@ -12,6 +12,7 @@ import org.springframework.web.client.RestTemplate;
 import uk.ac.ebi.subs.data.component.Contact;
 import uk.ac.ebi.subs.data.component.Publication;
 import uk.ac.ebi.subs.metabolights.converters.USIContactsToMLContacts;
+import uk.ac.ebi.subs.metabolights.converters.USIProtocolToMLProtocol;
 import uk.ac.ebi.subs.metabolights.converters.USIPublicationToMLPublication;
 import uk.ac.ebi.subs.metabolights.validator.schema.custom.JsonAsTextPlainHttpMessageConverter;
 
@@ -25,6 +26,7 @@ public class PostService {
 
     private USIContactsToMLContacts usiContactsToMLContacts;
     private USIPublicationToMLPublication usiPublicationToMLPublication;
+    private USIProtocolToMLProtocol usiProtocolToMLProtocol;
 
     private RestTemplate restTemplate;
 
@@ -46,6 +48,7 @@ public class PostService {
 
         usiContactsToMLContacts = new USIContactsToMLContacts();
         usiPublicationToMLPublication = new USIPublicationToMLPublication();
+        usiProtocolToMLProtocol = new USIProtocolToMLProtocol();
         
         mlProperties = new MLProperties();
 
@@ -81,5 +84,20 @@ public class PostService {
             e.printStackTrace();
         }
         return addedpublication;
+    }
+
+    public uk.ac.ebi.subs.metabolights.model.Protocol add(String studyID, uk.ac.ebi.subs.data.submittable.Protocol protocol) {
+        uk.ac.ebi.subs.metabolights.model.Protocol addedProtocol = null;
+        if (protocol == null) return addedProtocol;
+        try {
+            ObjectNode json = ServiceUtils.convertToJSON(usiProtocolToMLProtocol.convert(protocol), "protocol");
+            HttpEntity<ObjectNode> requestBody = new HttpEntity<>(json, headers);
+           
+            String url = mlProperties.getUrl() + studyID + "/protocols";
+            addedProtocol = restTemplate.postForObject(url, requestBody, uk.ac.ebi.subs.metabolights.model.Protocol.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return addedProtocol;
     }
 }

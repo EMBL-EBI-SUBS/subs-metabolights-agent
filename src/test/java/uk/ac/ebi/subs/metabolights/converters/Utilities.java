@@ -108,6 +108,17 @@ public class Utilities {
         return mlProtocols;
     }
 
+    public static Protocol generateUSIProtocol(){
+        Protocol protocol = new Protocol();
+        protocol.setTitle("Test chromatography");
+
+        Attribute attribute = new Attribute();
+        attribute.setValue("Chromatography");
+        protocol.getAttributes().put("protocolType", Arrays.asList(attribute));
+
+        return protocol;
+    }
+
     public static Map<String, Collection<Attribute>> generateUsiAttributes() {
         Map<String, Collection<Attribute>> usiAttributes = new HashMap<>();
 

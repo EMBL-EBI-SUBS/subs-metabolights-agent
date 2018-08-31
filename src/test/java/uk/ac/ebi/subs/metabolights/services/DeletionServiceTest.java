@@ -3,6 +3,8 @@ package uk.ac.ebi.subs.metabolights.services;
 import org.junit.Before;
 import org.junit.Test;
 import uk.ac.ebi.subs.data.component.Publication;
+import uk.ac.ebi.subs.data.submittable.Protocol;
+import uk.ac.ebi.subs.metabolights.converters.MLProtocolToUSIProtocol;
 import uk.ac.ebi.subs.metabolights.converters.MLPublicationToUSIPublication;
 import uk.ac.ebi.subs.metabolights.converters.Utilities;
 
@@ -31,6 +33,19 @@ public class DeletionServiceTest {
 
         MLPublicationToUSIPublication converter = new MLPublicationToUSIPublication();
         this.deletionService.deletePublication("MTBLS2", converter.convert(modified));
+        System.out.println("deleted - " +  newTitle);
+    }
+
+    @Test
+    public void deleteProtocol() {
+        Protocol protocol = Utilities.generateUSIProtocol();
+        String newTitle =  protocol.getTitle() + " - " + UUID.randomUUID().toString();
+        protocol.setTitle(newTitle);
+        uk.ac.ebi.subs.metabolights.model.Protocol modified = this.postService.add("MTBLS2", protocol);
+        System.out.println(newTitle);
+
+        MLProtocolToUSIProtocol converter = new MLProtocolToUSIProtocol();
+        this.deletionService.deleteProtocol("MTBLS2", converter.convert(modified));
         System.out.println("deleted - " +  newTitle);
     }
 }

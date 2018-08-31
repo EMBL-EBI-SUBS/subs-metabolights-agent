@@ -4,7 +4,9 @@ import org.junit.Before;
 import org.junit.Test;
 import uk.ac.ebi.subs.data.component.Contact;
 import uk.ac.ebi.subs.data.component.Publication;
+import uk.ac.ebi.subs.data.submittable.Protocol;
 import uk.ac.ebi.subs.metabolights.converters.MLContactsToUSIContacts;
+import uk.ac.ebi.subs.metabolights.converters.MLProtocolToUSIProtocol;
 import uk.ac.ebi.subs.metabolights.converters.MLPublicationToUSIPublication;
 import uk.ac.ebi.subs.metabolights.converters.Utilities;
 
@@ -46,5 +48,15 @@ public class UpdateServiceTest {
         modified.setAuthorList("ALice and BOB only");
         MLPublicationToUSIPublication converter = new MLPublicationToUSIPublication();
         this.updateService.updatePublication("MTBLS2", converter.convert(modified));
+    }
+    
+    public void updateProtocol(){
+        Protocol protocol = Utilities.generateUSIProtocol();
+        String newTitle =  protocol.getTitle() + " - " + UUID.randomUUID().toString();
+        protocol.setTitle(newTitle);
+        uk.ac.ebi.subs.metabolights.model.Protocol modified = this.postService.add("MTBLS2", protocol);
+
+        MLProtocolToUSIProtocol converter = new MLProtocolToUSIProtocol();
+        this.updateService.updateProtocol("MTBLS2", converter.convert(modified));
     }
 }

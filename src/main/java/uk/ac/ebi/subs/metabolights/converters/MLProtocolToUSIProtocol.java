@@ -17,7 +17,7 @@ public class MLProtocolToUSIProtocol implements Converter<uk.ac.ebi.subs.metabol
         Protocol protocol = new Protocol();
         Map<String, Collection<Attribute>> attributes = new HashMap<>();
 
-        protocol.setAlias(source.getName());
+        protocol.setTitle(source.getName());
         protocol.setDescription(source.getDescription());
         protocol.setId(source.getUri());
         //todo URI is given for id
