@@ -8,6 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -17,7 +19,9 @@ import uk.ac.ebi.subs.metabolights.converters.USIProtocolToMLProtocol;
 import uk.ac.ebi.subs.metabolights.converters.USIPublicationToMLPublication;
 import uk.ac.ebi.subs.metabolights.validator.schema.custom.JsonAsTextPlainHttpMessageConverter;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class DeletionService {
@@ -29,7 +33,6 @@ public class DeletionService {
     private MLProperties mlProperties;
 
     private HttpHeaders headers;
-
 
 
     private USIContactsToMLContacts usiContactsToMLContacts;
@@ -63,9 +66,9 @@ public class DeletionService {
         if (publication.getArticleTitle() == null) return;
 
         try {
-            HttpEntity<String> requestParams = new HttpEntity<>("parameters", headers);
             String url = mlProperties.getUrl() + studyID + "/publications?title=" + publication.getArticleTitle();
-            restTemplate.delete(url,requestParams);
+            HttpEntity<?> request = new HttpEntity<Object>(headers);
+            restTemplate.exchange(url, HttpMethod.DELETE, request, Void.class, 1);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -77,9 +80,9 @@ public class DeletionService {
         if (protocol.getTitle() == null) return;
 
         try {
-            HttpEntity<String> requestParams = new HttpEntity<>("parameters", headers);
-            String url = mlProperties.getUrl() + studyID + "/protocols?name=" + protocol.getTitle();
-            restTemplate.delete(url,requestParams);
+             String url = mlProperties.getUrl() + studyID + "/protocols?name=" + protocol.getTitle();
+             HttpEntity<?> request = new HttpEntity<Object>(headers);
+             restTemplate.exchange(url, HttpMethod.DELETE, request, Void.class, 1);
 
         } catch (Exception e) {
             e.printStackTrace();
