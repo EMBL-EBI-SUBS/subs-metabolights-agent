@@ -18,9 +18,11 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
+import uk.ac.ebi.subs.data.component.Attribute;
 import uk.ac.ebi.subs.data.component.Contact;
 import uk.ac.ebi.subs.data.submittable.Protocol;
 import uk.ac.ebi.subs.metabolights.converters.USIContactsToMLContacts;
+import uk.ac.ebi.subs.metabolights.converters.USIFactorToMLFactor;
 import uk.ac.ebi.subs.metabolights.converters.USIProtocolToMLProtocol;
 import uk.ac.ebi.subs.metabolights.converters.USIPublicationToMLPublication;
 import uk.ac.ebi.subs.metabolights.model.Publication;
@@ -46,6 +48,7 @@ public class UpdateService {
     private USIContactsToMLContacts usiContactsToMLContacts;
     private USIPublicationToMLPublication usiPublicationToMLPublication;
     private USIProtocolToMLProtocol usiProtocolToMLProtocol;
+    private USIFactorToMLFactor usiFactorToMLFactor;
 
 
     public UpdateService() {
@@ -62,6 +65,7 @@ public class UpdateService {
         usiContactsToMLContacts = new USIContactsToMLContacts();
         usiPublicationToMLPublication = new USIPublicationToMLPublication();
         usiProtocolToMLProtocol = new USIProtocolToMLProtocol();
+        usiFactorToMLFactor = new USIFactorToMLFactor();
         mlProperties = new MLProperties();
 
         headers = new HttpHeaders();
@@ -108,6 +112,21 @@ public class UpdateService {
             ObjectNode contactToUpdateJSON = ServiceUtils.convertToJSON(usiProtocolToMLProtocol.convert(protocol), "protocol");
             HttpEntity<ObjectNode> requestBody = new HttpEntity<>(contactToUpdateJSON, headers);
             String url = mlProperties.getUrl() + studyID + "/protocols?name=" + protocol.getTitle();
+            restTemplate.put(url, requestBody, new Object[]{});
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateFactor(String studyID, Attribute attribute) {
+        if (attribute == null) return;
+        if (attribute.getValue() == null) return;
+
+        try {
+            ObjectNode contactToUpdateJSON = ServiceUtils.convertToJSON(usiFactorToMLFactor.convert(attribute), "factor");
+            HttpEntity<ObjectNode> requestBody = new HttpEntity<>(contactToUpdateJSON, headers);
+            String url = mlProperties.getUrl() + studyID + "/factors?name=" + attribute.getValue();
             restTemplate.put(url, requestBody, new Object[]{});
 
         } catch (Exception e) {
