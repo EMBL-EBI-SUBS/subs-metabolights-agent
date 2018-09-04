@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import uk.ac.ebi.subs.data.component.Attribute;
 import uk.ac.ebi.subs.data.submittable.Protocol;
 import uk.ac.ebi.subs.metabolights.converters.USIContactsToMLContacts;
 import uk.ac.ebi.subs.metabolights.converters.USIProtocolToMLProtocol;
@@ -84,6 +85,19 @@ public class DeletionService {
              HttpEntity<?> request = new HttpEntity<Object>(headers);
              restTemplate.exchange(url, HttpMethod.DELETE, request, Void.class, 1);
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteFactor(String studyID, Attribute attribute) {
+        if (attribute == null) return;
+        if (attribute.getValue() == null) return;
+
+        try {
+            String url = mlProperties.getUrl() + studyID + "/factors?name=" + attribute.getValue();
+            HttpEntity<?> request = new HttpEntity<Object>(headers);
+            restTemplate.exchange(url, HttpMethod.DELETE, request, Void.class, 1);
         } catch (Exception e) {
             e.printStackTrace();
         }

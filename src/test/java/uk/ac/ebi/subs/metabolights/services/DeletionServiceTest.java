@@ -2,11 +2,14 @@ package uk.ac.ebi.subs.metabolights.services;
 
 import org.junit.Before;
 import org.junit.Test;
+import uk.ac.ebi.subs.data.component.Attribute;
 import uk.ac.ebi.subs.data.component.Publication;
 import uk.ac.ebi.subs.data.submittable.Protocol;
+import uk.ac.ebi.subs.metabolights.converters.MLFactorToUSIFactor;
 import uk.ac.ebi.subs.metabolights.converters.MLProtocolToUSIProtocol;
 import uk.ac.ebi.subs.metabolights.converters.MLPublicationToUSIPublication;
 import uk.ac.ebi.subs.metabolights.converters.Utilities;
+import uk.ac.ebi.subs.metabolights.model.Factor;
 
 import java.util.UUID;
 
@@ -47,5 +50,18 @@ public class DeletionServiceTest {
         MLProtocolToUSIProtocol converter = new MLProtocolToUSIProtocol();
         this.deletionService.deleteProtocol("MTBLS2", converter.convert(modified));
         System.out.println("deleted - " +  newTitle);
+    }
+
+    @Test
+    public void deleteFactor(){
+        Attribute attribute = Utilities.generateSingleUSIAttribute();
+        String newName =  attribute.getValue() + " - " + UUID.randomUUID().toString();
+        attribute.setValue(newName);
+        Factor factor = this.postService.add("MTBLS2", attribute);
+        System.out.println(newName);
+
+        MLFactorToUSIFactor mlFactorToUSIFactor = new MLFactorToUSIFactor();
+        this.deletionService.deleteFactor("MTBLS2", mlFactorToUSIFactor.convert(factor));
+        System.out.println("deleted - " +  newName);
     }
 }
