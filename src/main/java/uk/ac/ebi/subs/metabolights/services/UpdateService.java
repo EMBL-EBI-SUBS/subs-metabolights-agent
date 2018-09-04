@@ -21,10 +21,7 @@ import org.springframework.web.client.RestTemplate;
 import uk.ac.ebi.subs.data.component.Attribute;
 import uk.ac.ebi.subs.data.component.Contact;
 import uk.ac.ebi.subs.data.submittable.Protocol;
-import uk.ac.ebi.subs.metabolights.converters.USIContactsToMLContacts;
-import uk.ac.ebi.subs.metabolights.converters.USIFactorToMLFactor;
-import uk.ac.ebi.subs.metabolights.converters.USIProtocolToMLProtocol;
-import uk.ac.ebi.subs.metabolights.converters.USIPublicationToMLPublication;
+import uk.ac.ebi.subs.metabolights.converters.*;
 import uk.ac.ebi.subs.metabolights.model.Publication;
 import uk.ac.ebi.subs.metabolights.model.Study;
 import uk.ac.ebi.subs.metabolights.validator.schema.custom.JsonAsTextPlainHttpMessageConverter;
@@ -49,6 +46,7 @@ public class UpdateService {
     private USIPublicationToMLPublication usiPublicationToMLPublication;
     private USIProtocolToMLProtocol usiProtocolToMLProtocol;
     private USIFactorToMLFactor usiFactorToMLFactor;
+    private USIDescriptorToMLDescriptor usiDescriptorToMLDescriptor;
 
 
     public UpdateService() {
@@ -66,6 +64,7 @@ public class UpdateService {
         usiPublicationToMLPublication = new USIPublicationToMLPublication();
         usiProtocolToMLProtocol = new USIProtocolToMLProtocol();
         usiFactorToMLFactor = new USIFactorToMLFactor();
+        usiDescriptorToMLDescriptor = new USIDescriptorToMLDescriptor();
         mlProperties = new MLProperties();
 
         headers = new HttpHeaders();
@@ -127,6 +126,21 @@ public class UpdateService {
             ObjectNode contactToUpdateJSON = ServiceUtils.convertToJSON(usiFactorToMLFactor.convert(attribute), "factor");
             HttpEntity<ObjectNode> requestBody = new HttpEntity<>(contactToUpdateJSON, headers);
             String url = mlProperties.getUrl() + studyID + "/factors?name=" + attribute.getValue();
+            restTemplate.put(url, requestBody, new Object[]{});
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateDescriptor(String studyID, Attribute attribute) {
+        if (attribute == null) return;
+        if (attribute.getValue() == null) return;
+
+        try {
+            ObjectNode contactToUpdateJSON = ServiceUtils.convertToJSON(usiDescriptorToMLDescriptor.convert(attribute), "studyDesignDescriptor");
+            HttpEntity<ObjectNode> requestBody = new HttpEntity<>(contactToUpdateJSON, headers);
+            String url = mlProperties.getUrl() + studyID + "/descriptors?term=" + attribute.getValue();
             restTemplate.put(url, requestBody, new Object[]{});
 
         } catch (Exception e) {
