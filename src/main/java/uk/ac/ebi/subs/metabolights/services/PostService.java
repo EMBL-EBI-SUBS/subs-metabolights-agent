@@ -9,9 +9,11 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import uk.ac.ebi.subs.data.component.Attribute;
 import uk.ac.ebi.subs.data.component.Contact;
 import uk.ac.ebi.subs.data.component.Publication;
 import uk.ac.ebi.subs.metabolights.converters.USIContactsToMLContacts;
+import uk.ac.ebi.subs.metabolights.converters.USIFactorToMLFactor;
 import uk.ac.ebi.subs.metabolights.converters.USIProtocolToMLProtocol;
 import uk.ac.ebi.subs.metabolights.converters.USIPublicationToMLPublication;
 import uk.ac.ebi.subs.metabolights.validator.schema.custom.JsonAsTextPlainHttpMessageConverter;
@@ -27,6 +29,7 @@ public class PostService {
     private USIContactsToMLContacts usiContactsToMLContacts;
     private USIPublicationToMLPublication usiPublicationToMLPublication;
     private USIProtocolToMLProtocol usiProtocolToMLProtocol;
+    private USIFactorToMLFactor usiFactorToMLFactor;
 
     private RestTemplate restTemplate;
 
@@ -49,6 +52,7 @@ public class PostService {
         usiContactsToMLContacts = new USIContactsToMLContacts();
         usiPublicationToMLPublication = new USIPublicationToMLPublication();
         usiProtocolToMLProtocol = new USIProtocolToMLProtocol();
+        usiFactorToMLFactor = new USIFactorToMLFactor();
         
         mlProperties = new MLProperties();
 
@@ -99,5 +103,22 @@ public class PostService {
             e.printStackTrace();
         }
         return addedProtocol;
+    }
+
+    public uk.ac.ebi.subs.metabolights.model.Factor add(String studyID, Attribute attribute) {
+        uk.ac.ebi.subs.metabolights.model.Factor addedFactor = null;
+        if (attribute == null) return addedFactor;
+        try {
+            ObjectNode json = ServiceUtils.convertToJSON(usiFactorToMLFactor.convert(attribute), "factor");
+            System.out.println("JSON = " + json);
+            HttpEntity<ObjectNode> requestBody = new HttpEntity<>(json, headers);
+
+            String url = mlProperties.getUrl() + studyID + "/factors";
+            addedFactor = restTemplate.postForObject(url, requestBody, uk.ac.ebi.subs.metabolights.model.Factor.class);
+            System.out.println(addedFactor);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return addedFactor;
     }
 }
