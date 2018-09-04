@@ -87,4 +87,16 @@ public class UpdateServiceTest {
         this.updateService.updateDescriptor("MTBLS2", mlDescriptorToUSIDescriptor.convert(descriptor));
         System.out.println("deleted - " +  newName);
     }
+
+    public void updateTitle(){
+        String title =    "Metabolome phenotyping of inorganic carbon limitation in cells of the wild type and photorespiratory mutants of the cyanobacterium Synechocystis sp. strain PCC 6803.";
+        this.updateService.updateTitle("MTBLS2",title);
+        System.out.println(title);
+    }
+    
+    public void updateDescription(){
+        String title =    "The cotton-melon aphid, Aphis gossypii Glover, is a major insect pest worldwide. Lysiphlebia japonica (Ashmead) is an obligate parasitic wasp of A. gossypii, and has the ability to regulate lipid metabolism of the cotton-melon aphid. Lipids are known to play critical roles in energy homeostasis, membrane structure, and signaling. However, the parasitoid genes that regulate fat metabolism and lipid composition in aphids are not known. 34 glycerolipids and 248 glycerophospholipids were identified in this study.<br> We have shown that a 3-day parasitism of aphids can induce significant changes in the content and acyl chain composition of triacylglycerols (TAGs) and subspecies composition of glycerophospholipids content and acyl chains. It also upregulate the expression of several genes involved in triacylglycerol synthesis and glycerophospholipid metabolism. Pathway analysis showed that a higher expression of genes involved in the tricarboxylic acid cycle and glycolysis pathways may contribute to TAGs synthesis in parasitized aphids. Interestingly, the higher expression of genes in the sphingomyelin pathway and reduced sphingomyelin content may be related to the reproductive ability of A. gossypii. We provide a comprehensive resource describing the molecular signature of parasitized A. gossypii particularly the changes associated with the lipid metabolism and discuss the biological and ecological significance of this change.";
+        this.updateService.updateDescription("MTBLS2",title);
+        System.out.println(title);
+    }
 }
