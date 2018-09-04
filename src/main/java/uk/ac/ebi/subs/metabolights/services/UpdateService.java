@@ -37,7 +37,7 @@ public class UpdateService {
 
     private MLProperties mlProperties;
 
-    private  HttpHeaders headers;
+    private HttpHeaders headers;
 
     @Autowired
     private FetchService fetchService;
@@ -76,8 +76,8 @@ public class UpdateService {
         if (contact.getEmail() == null) return;
 
         try {
-            ObjectNode contactToUpdateJSON = ServiceUtils.convertToJSON(usiContactsToMLContacts.convert(contact), "contact");
-            HttpEntity<ObjectNode> requestBody = new HttpEntity<>(contactToUpdateJSON, headers);
+            ObjectNode json = ServiceUtils.convertToJSON(usiContactsToMLContacts.convert(contact), "contact");
+            HttpEntity<ObjectNode> requestBody = new HttpEntity<>(json, headers);
             String url = mlProperties.getUrl() + studyID + "/contacts?email=" + contact.getEmail();
             restTemplate.put(url, requestBody, new Object[]{});
 
@@ -92,8 +92,8 @@ public class UpdateService {
         if (publication.getArticleTitle() == null) return;
 
         try {
-            ObjectNode contactToUpdateJSON = ServiceUtils.convertToJSON(usiPublicationToMLPublication.convert(publication), "publication");
-            HttpEntity<ObjectNode> requestBody = new HttpEntity<>(contactToUpdateJSON, headers);
+            ObjectNode json = ServiceUtils.convertToJSON(usiPublicationToMLPublication.convert(publication), "publication");
+            HttpEntity<ObjectNode> requestBody = new HttpEntity<>(json, headers);
             String url = mlProperties.getUrl() + studyID + "/publications?title=" + publication.getArticleTitle();
             restTemplate.put(url, requestBody, new Object[]{});
 
@@ -108,8 +108,8 @@ public class UpdateService {
         if (protocol.getTitle() == null) return;
 
         try {
-            ObjectNode contactToUpdateJSON = ServiceUtils.convertToJSON(usiProtocolToMLProtocol.convert(protocol), "protocol");
-            HttpEntity<ObjectNode> requestBody = new HttpEntity<>(contactToUpdateJSON, headers);
+            ObjectNode json = ServiceUtils.convertToJSON(usiProtocolToMLProtocol.convert(protocol), "protocol");
+            HttpEntity<ObjectNode> requestBody = new HttpEntity<>(json, headers);
             String url = mlProperties.getUrl() + studyID + "/protocols?name=" + protocol.getTitle();
             restTemplate.put(url, requestBody, new Object[]{});
 
@@ -123,8 +123,8 @@ public class UpdateService {
         if (attribute.getValue() == null) return;
 
         try {
-            ObjectNode contactToUpdateJSON = ServiceUtils.convertToJSON(usiFactorToMLFactor.convert(attribute), "factor");
-            HttpEntity<ObjectNode> requestBody = new HttpEntity<>(contactToUpdateJSON, headers);
+            ObjectNode json = ServiceUtils.convertToJSON(usiFactorToMLFactor.convert(attribute), "factor");
+            HttpEntity<ObjectNode> requestBody = new HttpEntity<>(json, headers);
             String url = mlProperties.getUrl() + studyID + "/factors?name=" + attribute.getValue();
             restTemplate.put(url, requestBody, new Object[]{});
 
@@ -138,9 +138,31 @@ public class UpdateService {
         if (attribute.getValue() == null) return;
 
         try {
-            ObjectNode contactToUpdateJSON = ServiceUtils.convertToJSON(usiDescriptorToMLDescriptor.convert(attribute), "studyDesignDescriptor");
-            HttpEntity<ObjectNode> requestBody = new HttpEntity<>(contactToUpdateJSON, headers);
+            ObjectNode json = ServiceUtils.convertToJSON(usiDescriptorToMLDescriptor.convert(attribute), "studyDesignDescriptor");
+            HttpEntity<ObjectNode> requestBody = new HttpEntity<>(json, headers);
             String url = mlProperties.getUrl() + studyID + "/descriptors?term=" + attribute.getValue();
+            restTemplate.put(url, requestBody, new Object[]{});
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateTitle(String studyID, String title) {
+        String url = mlProperties.getUrl() + studyID + "/title";
+        ObjectNode titleJson = ServiceUtils.convertToJSON(title, "title");
+        update(url, titleJson);
+    }
+
+    public void updateDescription(String studyID, String description) {
+        String url = mlProperties.getUrl() + studyID + "/description";
+        ObjectNode descriptionJson = ServiceUtils.convertToJSON(description, "description");
+        update(url, descriptionJson);
+    }
+
+    public void update(String url, ObjectNode content) {
+        try {
+            HttpEntity<ObjectNode> requestBody = new HttpEntity<>(content, headers);
             restTemplate.put(url, requestBody, new Object[]{});
 
         } catch (Exception e) {
