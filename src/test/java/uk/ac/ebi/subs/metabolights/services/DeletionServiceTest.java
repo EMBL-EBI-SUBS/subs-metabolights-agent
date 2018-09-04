@@ -5,11 +5,9 @@ import org.junit.Test;
 import uk.ac.ebi.subs.data.component.Attribute;
 import uk.ac.ebi.subs.data.component.Publication;
 import uk.ac.ebi.subs.data.submittable.Protocol;
-import uk.ac.ebi.subs.metabolights.converters.MLFactorToUSIFactor;
-import uk.ac.ebi.subs.metabolights.converters.MLProtocolToUSIProtocol;
-import uk.ac.ebi.subs.metabolights.converters.MLPublicationToUSIPublication;
-import uk.ac.ebi.subs.metabolights.converters.Utilities;
+import uk.ac.ebi.subs.metabolights.converters.*;
 import uk.ac.ebi.subs.metabolights.model.Factor;
+import uk.ac.ebi.subs.metabolights.model.OntologyModel;
 
 import java.util.UUID;
 
@@ -57,11 +55,24 @@ public class DeletionServiceTest {
         Attribute attribute = Utilities.generateSingleUSIAttribute();
         String newName =  attribute.getValue() + " - " + UUID.randomUUID().toString();
         attribute.setValue(newName);
-        Factor factor = this.postService.add("MTBLS2", attribute);
+        Factor factor = this.postService.addFactor("MTBLS2", attribute);
         System.out.println(newName);
 
         MLFactorToUSIFactor mlFactorToUSIFactor = new MLFactorToUSIFactor();
         this.deletionService.deleteFactor("MTBLS2", mlFactorToUSIFactor.convert(factor));
+        System.out.println("deleted - " +  newName);
+    }
+
+    @Test
+    public void deleteDescriptor(){
+        Attribute attribute = Utilities.generateSingleUSIAttribute();
+        String newName =  attribute.getValue() + " - " + UUID.randomUUID().toString();
+        attribute.setValue(newName);
+        OntologyModel descriptor = this.postService.addDescriptor("MTBLS2", attribute);
+        System.out.println(newName);
+
+        MLDescriptorToUSIDescriptor mlDescriptorToUSIDescriptor = new MLDescriptorToUSIDescriptor();
+        this.deletionService.deleteDescriptor("MTBLS2", mlDescriptorToUSIDescriptor.convert(descriptor));
         System.out.println("deleted - " +  newName);
     }
 }

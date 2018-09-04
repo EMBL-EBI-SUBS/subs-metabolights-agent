@@ -102,4 +102,17 @@ public class DeletionService {
             e.printStackTrace();
         }
     }
+
+    public void deleteDescriptor(String studyID, Attribute attribute) {
+        if (attribute == null) return;
+        if (attribute.getValue() == null) return;
+
+        try {
+            String url = mlProperties.getUrl() + studyID + "/descriptors?term=" + attribute.getValue();
+            HttpEntity<?> request = new HttpEntity<Object>(headers);
+            restTemplate.exchange(url, HttpMethod.DELETE, request, Void.class, 1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

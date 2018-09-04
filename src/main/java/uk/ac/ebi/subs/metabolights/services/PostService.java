@@ -12,10 +12,7 @@ import org.springframework.web.client.RestTemplate;
 import uk.ac.ebi.subs.data.component.Attribute;
 import uk.ac.ebi.subs.data.component.Contact;
 import uk.ac.ebi.subs.data.component.Publication;
-import uk.ac.ebi.subs.metabolights.converters.USIContactsToMLContacts;
-import uk.ac.ebi.subs.metabolights.converters.USIFactorToMLFactor;
-import uk.ac.ebi.subs.metabolights.converters.USIProtocolToMLProtocol;
-import uk.ac.ebi.subs.metabolights.converters.USIPublicationToMLPublication;
+import uk.ac.ebi.subs.metabolights.converters.*;
 import uk.ac.ebi.subs.metabolights.validator.schema.custom.JsonAsTextPlainHttpMessageConverter;
 
 import java.util.List;
@@ -30,6 +27,7 @@ public class PostService {
     private USIPublicationToMLPublication usiPublicationToMLPublication;
     private USIProtocolToMLProtocol usiProtocolToMLProtocol;
     private USIFactorToMLFactor usiFactorToMLFactor;
+    private USIDescriptorToMLDescriptor usiDescriptorToMLDescriptor;
 
     private RestTemplate restTemplate;
 
@@ -53,6 +51,7 @@ public class PostService {
         usiPublicationToMLPublication = new USIPublicationToMLPublication();
         usiProtocolToMLProtocol = new USIProtocolToMLProtocol();
         usiFactorToMLFactor = new USIFactorToMLFactor();
+        usiDescriptorToMLDescriptor = new USIDescriptorToMLDescriptor();
         
         mlProperties = new MLProperties();
 
@@ -105,20 +104,35 @@ public class PostService {
         return addedProtocol;
     }
 
-    public uk.ac.ebi.subs.metabolights.model.Factor add(String studyID, Attribute attribute) {
+    public uk.ac.ebi.subs.metabolights.model.Factor addFactor(String studyID, Attribute attribute) {
         uk.ac.ebi.subs.metabolights.model.Factor addedFactor = null;
         if (attribute == null) return addedFactor;
         try {
             ObjectNode json = ServiceUtils.convertToJSON(usiFactorToMLFactor.convert(attribute), "factor");
-            System.out.println("JSON = " + json);
             HttpEntity<ObjectNode> requestBody = new HttpEntity<>(json, headers);
 
             String url = mlProperties.getUrl() + studyID + "/factors";
             addedFactor = restTemplate.postForObject(url, requestBody, uk.ac.ebi.subs.metabolights.model.Factor.class);
-            System.out.println(addedFactor);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return addedFactor;
+    }
+
+    public uk.ac.ebi.subs.metabolights.model.OntologyModel addDescriptor(String studyID, Attribute attribute) {
+        uk.ac.ebi.subs.metabolights.model.OntologyModel addedDescriptor = null;
+        if (attribute == null) return addedDescriptor;
+        try {
+            ObjectNode json = ServiceUtils.convertToJSON(usiDescriptorToMLDescriptor.convert(attribute), "studyDesignDescriptor");
+            System.out.println("JSON = " + json);
+            HttpEntity<ObjectNode> requestBody = new HttpEntity<>(json, headers);
+
+            String url = mlProperties.getUrl() + studyID + "/descriptors";
+            addedDescriptor = restTemplate.postForObject(url, requestBody, uk.ac.ebi.subs.metabolights.model.OntologyModel.class);
+            System.out.println(addedDescriptor);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return addedDescriptor;
     }
 }
