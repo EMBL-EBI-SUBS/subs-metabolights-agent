@@ -2,13 +2,12 @@ package uk.ac.ebi.subs.metabolights.services;
 
 import org.junit.Before;
 import org.junit.Test;
+import uk.ac.ebi.subs.data.component.Attribute;
 import uk.ac.ebi.subs.data.component.Contact;
 import uk.ac.ebi.subs.data.component.Publication;
 import uk.ac.ebi.subs.data.submittable.Protocol;
-import uk.ac.ebi.subs.metabolights.converters.MLContactsToUSIContacts;
-import uk.ac.ebi.subs.metabolights.converters.MLProtocolToUSIProtocol;
-import uk.ac.ebi.subs.metabolights.converters.MLPublicationToUSIPublication;
-import uk.ac.ebi.subs.metabolights.converters.Utilities;
+import uk.ac.ebi.subs.metabolights.converters.*;
+import uk.ac.ebi.subs.metabolights.model.Factor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,5 +57,19 @@ public class UpdateServiceTest {
 
         MLProtocolToUSIProtocol converter = new MLProtocolToUSIProtocol();
         this.updateService.updateProtocol("MTBLS2", converter.convert(modified));
+    }
+
+    public void updateFactor(){
+        Attribute attribute = Utilities.generateSingleUSIAttribute();
+        String newName =  attribute.getValue() + " - " + UUID.randomUUID().toString();
+        attribute.setValue(newName);
+        Factor factor = this.postService.add("MTBLS2", attribute);
+        System.out.println(newName);
+
+        factor.getFactorType().setTermAccession("Modified url");
+
+        MLFactorToUSIFactor mlFactorToUSIFactor = new MLFactorToUSIFactor();
+        this.updateService.updateFactor("MTBLS2", mlFactorToUSIFactor.convert(factor));
+        System.out.println("deleted - " +  newName);
     }
 }

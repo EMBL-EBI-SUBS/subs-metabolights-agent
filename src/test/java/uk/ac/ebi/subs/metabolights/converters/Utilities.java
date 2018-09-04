@@ -7,6 +7,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.apache.commons.io.IOUtils;
 import uk.ac.ebi.subs.data.component.*;
 import uk.ac.ebi.subs.data.submittable.*;
+import uk.ac.ebi.subs.metabolights.model.Factor;
 import uk.ac.ebi.subs.processing.SubmissionEnvelope;
 import uk.ac.ebi.subs.validator.model.Submittable;
 
@@ -265,6 +266,16 @@ public class Utilities {
         SubmissionEnvelope submissionEnvelope = getUSISubmisisonFromDisc();
         List<uk.ac.ebi.subs.data.submittable.Study> studies = submissionEnvelope.getStudies();
         return new Submittable<>(studies.get(0),submissionEnvelope.getSubmission().getId());
+    }
+
+    public static Attribute generateSingleUSIAttribute(){
+        Attribute usiAttribute_1 = new Attribute();
+        usiAttribute_1.setValue("Test_attribute");
+        Term term = new Term();
+        term.setUrl("http://purl.obolibrary.org/obo/UO_0000036");
+        usiAttribute_1.setTerms(Arrays.asList(term));
+        usiAttribute_1.setUnits("year");
+        return usiAttribute_1;
     }
 
 
