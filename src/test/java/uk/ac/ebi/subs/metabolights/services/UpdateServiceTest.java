@@ -8,6 +8,7 @@ import uk.ac.ebi.subs.data.component.Publication;
 import uk.ac.ebi.subs.data.submittable.Protocol;
 import uk.ac.ebi.subs.metabolights.converters.*;
 import uk.ac.ebi.subs.metabolights.model.Factor;
+import uk.ac.ebi.subs.metabolights.model.OntologyModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,13 +64,27 @@ public class UpdateServiceTest {
         Attribute attribute = Utilities.generateSingleUSIAttribute();
         String newName =  attribute.getValue() + " - " + UUID.randomUUID().toString();
         attribute.setValue(newName);
-        Factor factor = this.postService.add("MTBLS2", attribute);
+        Factor factor = this.postService.addFactor("MTBLS2", attribute);
         System.out.println(newName);
 
         factor.getFactorType().setTermAccession("Modified url");
 
         MLFactorToUSIFactor mlFactorToUSIFactor = new MLFactorToUSIFactor();
         this.updateService.updateFactor("MTBLS2", mlFactorToUSIFactor.convert(factor));
+        System.out.println("deleted - " +  newName);
+    }
+    
+    public void updateDescriptor(){
+        Attribute attribute = Utilities.generateSingleUSIAttribute();
+        String newName =  attribute.getValue() + " - " + UUID.randomUUID().toString();
+        attribute.setValue(newName);
+        OntologyModel descriptor = this.postService.addDescriptor("MTBLS2", attribute);
+        System.out.println(newName);
+
+        descriptor.setTermAccession("Modified url");
+
+        MLDescriptorToUSIDescriptor mlDescriptorToUSIDescriptor = new MLDescriptorToUSIDescriptor();
+        this.updateService.updateDescriptor("MTBLS2", mlDescriptorToUSIDescriptor.convert(descriptor));
         System.out.println("deleted - " +  newName);
     }
 }
