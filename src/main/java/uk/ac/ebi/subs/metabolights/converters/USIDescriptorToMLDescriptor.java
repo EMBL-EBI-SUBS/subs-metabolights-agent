@@ -4,6 +4,8 @@ import org.springframework.core.convert.converter.Converter;
 import uk.ac.ebi.subs.data.component.Attribute;
 import uk.ac.ebi.subs.metabolights.model.OntologyModel;
 
+import java.util.ArrayList;
+
 public class USIDescriptorToMLDescriptor implements Converter<Attribute, OntologyModel> {
     @Override
     public OntologyModel convert(Attribute source) {
@@ -14,6 +16,7 @@ public class USIDescriptorToMLDescriptor implements Converter<Attribute, Ontolog
                 descriptor.setTermAccession(source.getTerms().get(0).getUrl());
             }
         }
+        descriptor.setComments(new ArrayList<>());
         return descriptor;
     }
 }
