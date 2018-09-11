@@ -21,11 +21,13 @@ import org.springframework.web.client.RestTemplate;
 import uk.ac.ebi.subs.data.component.Attribute;
 import uk.ac.ebi.subs.data.component.Contact;
 import uk.ac.ebi.subs.data.submittable.Protocol;
+import uk.ac.ebi.subs.data.submittable.Sample;
 import uk.ac.ebi.subs.metabolights.converters.*;
 import uk.ac.ebi.subs.metabolights.model.Publication;
 import uk.ac.ebi.subs.metabolights.model.Study;
 import uk.ac.ebi.subs.metabolights.validator.schema.custom.JsonAsTextPlainHttpMessageConverter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -47,6 +49,7 @@ public class UpdateService {
     private USIProtocolToMLProtocol usiProtocolToMLProtocol;
     private USIFactorToMLFactor usiFactorToMLFactor;
     private USIDescriptorToMLDescriptor usiDescriptorToMLDescriptor;
+    private USISampleToMLSample usiSampleToMLSample;
 
 
     public UpdateService() {
@@ -65,6 +68,7 @@ public class UpdateService {
         usiProtocolToMLProtocol = new USIProtocolToMLProtocol();
         usiFactorToMLFactor = new USIFactorToMLFactor();
         usiDescriptorToMLDescriptor = new USIDescriptorToMLDescriptor();
+        usiSampleToMLSample = new USISampleToMLSample();
         mlProperties = new MLProperties();
 
         headers = new HttpHeaders();
@@ -169,6 +173,24 @@ public class UpdateService {
             e.printStackTrace();
         }
     }
+
+    public void updateSample(String studyID, Sample sample) {
+        try {
+
+            List<uk.ac.ebi.subs.metabolights.model.Sample> samples = new ArrayList<>();
+            samples.add(usiSampleToMLSample.convert(sample));
+            JSONObject json = ServiceUtils.convertToJSON(samples, "samples");
+            System.out.println("JSON = " + json);
+
+            HttpEntity<JSONObject> requestBody = new HttpEntity<>(json, headers);
+            String url = mlProperties.getUrl() + studyID + "/samples?name=" + sample.getAlias();
+            restTemplate.put(url, requestBody, new Object[]{});
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
 
 }
