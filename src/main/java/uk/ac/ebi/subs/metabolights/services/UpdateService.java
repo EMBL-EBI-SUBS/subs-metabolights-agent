@@ -175,6 +175,11 @@ public class UpdateService {
     }
 
     public void updateSample(String studyID, Sample sample) {
+        String url = mlProperties.getUrl() + studyID + "/samples?name=" + sample.getAlias();
+        update(studyID,sample,url);
+    }
+
+    private void update(String studyID, Sample sample, String url){
         try {
 
             List<uk.ac.ebi.subs.metabolights.model.Sample> samples = new ArrayList<>();
@@ -183,7 +188,6 @@ public class UpdateService {
             System.out.println("JSON = " + json);
 
             HttpEntity<JSONObject> requestBody = new HttpEntity<>(json, headers);
-            String url = mlProperties.getUrl() + studyID + "/samples?name=" + sample.getAlias();
             restTemplate.put(url, requestBody, new Object[]{});
 
         } catch (Exception e) {
@@ -191,6 +195,10 @@ public class UpdateService {
         }
     }
 
-
-
+    public void markForDeletion(String studyID, Sample sample) {
+        String newName = "__TO_BE_DELETED__" + sample.getAlias();
+        String url = mlProperties.getUrl() + studyID + "/samples?name=" + sample.getAlias();
+        sample.setAlias(newName);
+        update(studyID,sample,url);
+    }
 }
