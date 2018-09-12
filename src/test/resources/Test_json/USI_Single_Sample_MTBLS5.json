@@ -1,0 +1,54 @@
+{
+  "id": null,
+  "accession": null,
+  "alias": "OCC 1.5xChemo 24hr A",
+  "team": null,
+  "title": "intracellular",
+  "description": null,
+  "attributes": {
+    "Organism": [
+      {
+        "value": "Synechocystis sp. PCC 6803",
+        "units": null,
+        "terms": [
+          {
+            "url": "http://purl.bioontology.org/ontology/NCBITAXON/9606"
+          }
+        ]
+      }
+    ],
+    "CarbonDioxide_Quantity_after_initiation": [
+      {
+        "value": "",
+        "units": null,
+        "terms": [{
+          "url" : "http://purl.obolibrary.org/obo/XCO_0000012"
+        }]
+      }
+    ],
+    "Organism part": [
+      {
+        "value": "whole organism",
+        "units": null,
+        "terms": [
+          {
+            "url": "http://purl.obolibrary.org/obo/BTO_0003804"
+          }
+        ]
+      }
+    ],
+    "CarbonDioxide_Quantity_after_01d": [
+      {
+        "value": "",
+        "units": null,
+        "terms": [{
+          "url" : "http://purl.obolibrary.org/obo/XCO_0000012"
+          }]
+      }
+    ]
+  },
+  "sampleRelationships": [],
+  "taxonId": null,
+  "taxon": "Homo sapiens",
+  "releaseDate": null
+}
