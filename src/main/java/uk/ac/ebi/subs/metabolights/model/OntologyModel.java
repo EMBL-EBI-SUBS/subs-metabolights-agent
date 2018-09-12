@@ -40,5 +40,6 @@ public class OntologyModel {
         setTermAccession("");
         setComments(new ArrayList<>());
         setAnnotationValue("");
+       // setTermSource(new TermSource());
     }
 }

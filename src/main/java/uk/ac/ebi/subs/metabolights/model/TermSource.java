@@ -22,6 +22,7 @@ package uk.ac.ebi.subs.metabolights.model;
 
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,4 +35,12 @@ public class TermSource {
     private String version;
     private String file;
     private String name;
+
+    public TermSource(){
+        setComments(new ArrayList<>());
+        setDescription("");
+        setFile("");
+        setName("");
+        setVersion("");
+    }
 }
