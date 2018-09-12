@@ -1,5 +1,6 @@
 package uk.ac.ebi.subs.metabolights.services;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.json.JSONObject;
@@ -37,7 +38,7 @@ public class PostService {
 
     private MLProperties mlProperties;
 
-    private  HttpHeaders headers;
+    private HttpHeaders headers;
 
 
     public PostService() {
@@ -57,7 +58,7 @@ public class PostService {
         usiFactorToMLFactor = new USIFactorToMLFactor();
         usiDescriptorToMLDescriptor = new USIDescriptorToMLDescriptor();
         usiSampleToMLSample = new USISampleToMLSample();
-        
+
         mlProperties = new MLProperties();
 
         headers = new HttpHeaders();
@@ -100,7 +101,7 @@ public class PostService {
         try {
             ObjectNode json = ServiceUtils.convertToJSON(usiProtocolToMLProtocol.convert(protocol), "protocol");
             HttpEntity<ObjectNode> requestBody = new HttpEntity<>(json, headers);
-           
+
             String url = mlProperties.getUrl() + studyID + "/protocols";
             addedProtocol = restTemplate.postForObject(url, requestBody, uk.ac.ebi.subs.metabolights.model.Protocol.class);
         } catch (Exception e) {
@@ -141,8 +142,8 @@ public class PostService {
         return addedDescriptor;
     }
 
-    public Sample addSample(String studyID, uk.ac.ebi.subs.data.submittable.Sample sample){
-        Sample addedSample = null;
+    public void addSample(String studyID, uk.ac.ebi.subs.data.submittable.Sample sample) {
+        //Sample addedSample = null;
         try {
             List<Sample> samples = new ArrayList<>();
             samples.add(usiSampleToMLSample.convert(sample));
@@ -151,12 +152,14 @@ public class PostService {
             HttpEntity<JSONObject> requestBody = new HttpEntity<>(json, headers);
 
             String url = mlProperties.getUrl() + studyID + "/samples";
-            addedSample = restTemplate.postForObject(url, requestBody, Sample.class);
-            System.out.println(addedSample);
+            //addedSample = restTemplate.postForObject(url, requestBody, ObjectNode.class);
+
+            JsonNode result = restTemplate.postForObject(url, requestBody, ObjectNode.class);
+            String warnings = result.path("warnings").asText();
+            System.out.println(warnings);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return addedSample;
-
     }
 }
