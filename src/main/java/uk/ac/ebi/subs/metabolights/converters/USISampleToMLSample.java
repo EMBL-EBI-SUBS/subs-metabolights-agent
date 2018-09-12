@@ -56,28 +56,24 @@ public class USISampleToMLSample implements Converter<uk.ac.ebi.subs.data.submit
         List<SampleFactorValue> mlSampleFactorValues = new ArrayList<SampleFactorValue>();
 
         for (Map.Entry<String, Collection<Attribute>> entry : usiAttributes.entrySet()) {
-            if (!entry.getKey().toLowerCase().equals("organism") || !entry.getKey().toLowerCase().equals("organism part")) {
+            if (!entry.getKey().toLowerCase().equals("organism") && !entry.getKey().toLowerCase().equals("organism part")) {
                 if (entry.getValue().size() > 0) {
                     Attribute attribute = entry.getValue().iterator().next();
-
                     SampleFactorValue sampleFactorValue = new SampleFactorValue();
-                    SampleFactorCategory sampleFactorCategory = new SampleFactorCategory();
-                    sampleFactorCategory.setFactorType(new OntologyModel());
-                    sampleFactorValue.setCategory(sampleFactorCategory);
-                    sampleFactorValue.setUnit(new OntologyModel());
-                   // sampleFactorValue.setValue(new OntologyModel());
                     OntologyModel model = new OntologyModel();
                     model.setAnnotationValue(attribute.getValue());
-                   // FactorValue value = new FactorValue(model);
-                    //value.setAnnotationValue(model);
-                    //sampleFactorValue.getValue().setAnnotationValue(attribute.getValue());
+
+                    sampleFactorValue.getCategory().setFactorName(entry.getKey());
+                    sampleFactorValue.getCategory().getFactorType().setAnnotationValue(entry.getKey());
+
+
                     sampleFactorValue.setValue(model);
                     String url = "";
                     if (attribute.getTerms().size() > 0) {
                         url = attribute.getTerms().iterator().next().getUrl();
                         ((OntologyModel)sampleFactorValue.getValue()).setTermAccession(url);
                     }
-                    sampleFactorValue.getUnit().setAnnotationValue(attribute.getUnits());
+                    sampleFactorValue.getUnit().setAnnotationValue(attribute.getUnits() == null ? "" : attribute.getUnits());
                     mlSampleFactorValues.add(sampleFactorValue);
                 }
             }
@@ -90,7 +86,6 @@ public class USISampleToMLSample implements Converter<uk.ac.ebi.subs.data.submit
     private List<Source> convertToMLSampleSource(Map<String, Collection<Attribute>> usiAttributes, String title) {
         List<Source> sampleSource = new ArrayList<>();
         Source source = new Source();
-        source.setCharacteristics(new ArrayList<SampleSourceOntologyModel>());
         source.setName(title);
         //todo check for multiple derivesFrom entries. Only one entry in the List is assumed
         for (Map.Entry<String, Collection<Attribute>> entry : usiAttributes.entrySet()) {
@@ -99,24 +94,26 @@ public class USISampleToMLSample implements Converter<uk.ac.ebi.subs.data.submit
                     Attribute attribute = entry.getValue().iterator().next();
 
                     SampleSourceOntologyModel sampleSourceOntologyModel = new SampleSourceOntologyModel();
-                    sampleSourceOntologyModel.setCategory(new OntologyModel());
-                    sampleSourceOntologyModel.setUnit(new OntologyModel());
-                    sampleSourceOntologyModel.setValue(new OntologyModel());
-
+                   
                     sampleSourceOntologyModel.getCategory().setAnnotationValue(entry.getKey());
                     String url = "";
                     if (attribute.getTerms().size() > 0) {
                         url = attribute.getTerms().iterator().next().getUrl();
                         sampleSourceOntologyModel.getValue().setTermAccession(url);
                     }
-                    sampleSourceOntologyModel.getValue().setAnnotationValue(attribute.getValue());
-                    sampleSourceOntologyModel.getUnit().setAnnotationValue(attribute.getUnits());
+                    sampleSourceOntologyModel.getValue().
+                            setAnnotationValue(
+                                    attribute.getValue() == null ? "" : attribute.getValue());
+                    sampleSourceOntologyModel.getUnit().
+                            setAnnotationValue(
+                                    attribute.getUnits() == null ? "" : attribute.getUnits());
 
                     source.getCharacteristics().add(sampleSourceOntologyModel);
                 }
             }
 
         }
+        sampleSource.add(source);
         return sampleSource;
     }
 }
