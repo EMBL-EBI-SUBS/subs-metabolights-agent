@@ -227,7 +227,7 @@ public class Utilities {
     public static uk.ac.ebi.subs.data.submittable.Sample getUSISampleFromDisc() {
         uk.ac.ebi.subs.data.submittable.Sample sample;
         try {
-            String result = IOUtils.toString(WSUtils.class.getClassLoader().getResourceAsStream("Test_json/USI_Single_Sample.json"));
+            String result = IOUtils.toString(WSUtils.class.getClassLoader().getResourceAsStream("Test_json/USI_Single_Sample_MTBLS5.json"));
             try {
                 mapper.registerModule(new JavaTimeModule());
                 sample = mapper.readValue(result, uk.ac.ebi.subs.data.submittable.Sample.class);

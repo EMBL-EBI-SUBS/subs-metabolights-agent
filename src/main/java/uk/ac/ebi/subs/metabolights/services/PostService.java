@@ -1,7 +1,9 @@
 package uk.ac.ebi.subs.metabolights.services;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
@@ -13,8 +15,10 @@ import uk.ac.ebi.subs.data.component.Attribute;
 import uk.ac.ebi.subs.data.component.Contact;
 import uk.ac.ebi.subs.data.component.Publication;
 import uk.ac.ebi.subs.metabolights.converters.*;
+import uk.ac.ebi.subs.metabolights.model.Sample;
 import uk.ac.ebi.subs.metabolights.validator.schema.custom.JsonAsTextPlainHttpMessageConverter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -28,12 +32,13 @@ public class PostService {
     private USIProtocolToMLProtocol usiProtocolToMLProtocol;
     private USIFactorToMLFactor usiFactorToMLFactor;
     private USIDescriptorToMLDescriptor usiDescriptorToMLDescriptor;
+    private USISampleToMLSample usiSampleToMLSample;
 
     private RestTemplate restTemplate;
 
     private MLProperties mlProperties;
 
-    private  HttpHeaders headers;
+    private HttpHeaders headers;
 
 
     public PostService() {
@@ -52,7 +57,8 @@ public class PostService {
         usiProtocolToMLProtocol = new USIProtocolToMLProtocol();
         usiFactorToMLFactor = new USIFactorToMLFactor();
         usiDescriptorToMLDescriptor = new USIDescriptorToMLDescriptor();
-        
+        usiSampleToMLSample = new USISampleToMLSample();
+
         mlProperties = new MLProperties();
 
         headers = new HttpHeaders();
@@ -95,7 +101,7 @@ public class PostService {
         try {
             ObjectNode json = ServiceUtils.convertToJSON(usiProtocolToMLProtocol.convert(protocol), "protocol");
             HttpEntity<ObjectNode> requestBody = new HttpEntity<>(json, headers);
-           
+
             String url = mlProperties.getUrl() + studyID + "/protocols";
             addedProtocol = restTemplate.postForObject(url, requestBody, uk.ac.ebi.subs.metabolights.model.Protocol.class);
         } catch (Exception e) {
@@ -134,5 +140,26 @@ public class PostService {
             e.printStackTrace();
         }
         return addedDescriptor;
+    }
+
+    public void addSample(String studyID, uk.ac.ebi.subs.data.submittable.Sample sample) {
+        //Sample addedSample = null;
+        try {
+            List<Sample> samples = new ArrayList<>();
+            samples.add(usiSampleToMLSample.convert(sample));
+            JSONObject json = ServiceUtils.convertToJSON(samples, "samples");
+            System.out.println("JSON = " + json);
+            HttpEntity<JSONObject> requestBody = new HttpEntity<>(json, headers);
+
+            String url = mlProperties.getUrl() + studyID + "/samples";
+            //addedSample = restTemplate.postForObject(url, requestBody, ObjectNode.class);
+
+            JsonNode result = restTemplate.postForObject(url, requestBody, ObjectNode.class);
+            String warnings = result.path("warnings").asText();
+            System.out.println(warnings);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -34,12 +34,21 @@ public class USISampleToMLSampleTest {
     }
 
     @Test
-    public void testMLToUSISample() throws JsonProcessingException {
+    public void testUSIToMLSample() throws JsonProcessingException {
         Sample usiSample = Utilities.getUSISampleFromDisc();
         USISampleToMLSample usiSampleToMLSample = new USISampleToMLSample();
 
         uk.ac.ebi.subs.metabolights.model.Sample mlSample = usiSampleToMLSample.convert(usiSample);
        assertEquals(usiSample.getTaxon(), "Homo sapiens");
+    }
+
+    @Test
+    public void testMLToUSISample() throws JsonProcessingException {
+        uk.ac.ebi.subs.metabolights.model.Sample mlSample = Utilities.getMLSampleFromDisc();
+        MLSampleToUSISample mlSampleToUSISample = new MLSampleToUSISample();
+
+        Sample converted = mlSampleToUSISample.convert(mlSample);
+        assertEquals(converted.getTaxonId(),  "9606");
     }
 
 }
