@@ -23,6 +23,7 @@ package uk.ac.ebi.subs.metabolights.model;
 
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,4 +35,11 @@ public class OntologyModel {
     private String termAccession;
     private List<Comment> comments;
     private String annotationValue;
+
+    public OntologyModel(){
+        setTermAccession("");
+        setComments(new ArrayList<>());
+        setAnnotationValue("");
+       // setTermSource(new TermSource());
+    }
 }

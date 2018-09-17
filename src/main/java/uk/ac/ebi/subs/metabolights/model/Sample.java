@@ -23,6 +23,7 @@ package uk.ac.ebi.subs.metabolights.model;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -36,6 +37,11 @@ public class Sample {
       private List<Object> characteristics;
       private String name;
       private List<SampleFactorValue> factorValues;
+
+      public Sample(){
+            setComments(new ArrayList<>());
+            setCharacteristics(new ArrayList<>());
+      }
 
 }
 

@@ -2,6 +2,7 @@ package uk.ac.ebi.subs.metabolights.model;
 
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,4 +14,11 @@ public class SampleSourceOntologyModel {
     private OntologyModel category;
     private OntologyModel unit;
     private OntologyModel value;
+
+    public SampleSourceOntologyModel(){
+        setComments(new ArrayList<>());
+        setCategory(new OntologyModel());
+        setUnit(new OntologyModel());
+        setValue(new OntologyModel());
+    }
 }

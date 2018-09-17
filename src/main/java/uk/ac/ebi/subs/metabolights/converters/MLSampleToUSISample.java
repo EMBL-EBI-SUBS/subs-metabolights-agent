@@ -31,10 +31,18 @@ public class MLSampleToUSISample implements Converter<uk.ac.ebi.subs.metabolight
             if (mlTaxonObject.getCharacteristics().size() > 0) {
                 if (mlTaxonObject.getCharacteristics().get(0).getValue() != null) {
                     String ncbi_taxon_url = mlTaxonObject.getCharacteristics().get(0).getValue().getTermAccession();
-                    if (ncbi_taxon_url != null && ncbi_taxon_url.contains("NCBITaxon_")) {
-                        String[] values = ncbi_taxon_url.split("NCBITaxon_");
-                        if (values.length == 2) {
-                            sample.setTaxonId(Long.parseLong(values[1]));
+                    if (ncbi_taxon_url != null) {
+                       if(ncbi_taxon_url.contains("NCBITaxon_"))  {
+                            String[] values = ncbi_taxon_url.split("NCBITaxon_");
+                            if (values.length == 2) {
+                                sample.setTaxonId(Long.parseLong(values[1]));
+                            }
+                        }
+                        if(ncbi_taxon_url.contains("NCBITAXON")){
+                            String[] values = ncbi_taxon_url.split("NCBITAXON/");
+                            if (values.length ==2) {
+                                sample.setTaxonId(Long.parseLong(values[1]));
+                            }
                         }
                     }
                     //todo set taxon object by checking the organism name attribute

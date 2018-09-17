@@ -115,4 +115,14 @@ public class DeletionService {
             e.printStackTrace();
         }
     }
+
+    public void deleteMarkedSamples(String studyID) {
+        try {
+            String url = mlProperties.getUrl() + studyID + "/samples";
+            HttpEntity<?> request = new HttpEntity<Object>(headers);
+            restTemplate.exchange(url, HttpMethod.DELETE, request, Void.class, 1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

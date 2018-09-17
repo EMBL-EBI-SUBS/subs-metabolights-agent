@@ -23,6 +23,7 @@ package uk.ac.ebi.subs.metabolights.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -33,4 +34,10 @@ public class Source {
     private List<Comment> comments;
     private List<SampleSourceOntologyModel> characteristics;
     private String name;
+
+    public Source(){
+        setComments(new ArrayList<>());
+        setCharacteristics(new ArrayList<>());
+        setName("");
+    }
 }
