@@ -25,7 +25,7 @@ public class QueueListener {
     private RabbitMessagingTemplate rabbitMessagingTemplate;
 
     @Autowired
-    MetaboLightsStudyProcessor samplesProcessor;
+    MetaboLightsStudyProcessor studyProcessor;
 
     @Autowired
     ProcessingCertificateGenerator certificatesGenerator;
@@ -38,27 +38,18 @@ public class QueueListener {
 
     @RabbitListener(queues = Queues.METABOLIGHTS_AGENT)
     public void handleMetabolightsSubmission(SubmissionEnvelope envelope) {
-        Submission submission = envelope.getSubmission();
-        submission.setId("test-0");
-
-        List<ProcessingCertificate> certificatesCompleted = new ArrayList<>();
-        ProcessingCertificateEnvelope certificateEnvelopeCompleted = new ProcessingCertificateEnvelope(
-                submission.getId(),
-                certificatesCompleted
-        );
-        rabbitMessagingTemplate.convertAndSend(Exchanges.SUBMISSIONS, Topics.EVENT_SUBMISSION_AGENT_RESULTS, certificateEnvelopeCompleted);
-
-
-        // Process samples
-// //       List<ProcessingCertificate> certificatesCompleted = MetaboLightsStudyProcessor.processSamples(envelope);
+       // Submission submission = envelope.getSubmission();
 //        List<ProcessingCertificate> certificatesCompleted = new ArrayList<>();
 //        ProcessingCertificateEnvelope certificateEnvelopeCompleted = new ProcessingCertificateEnvelope(
 //                submission.getId(),
 //                certificatesCompleted
 //        );
-//        rabbitMessagingTemplate.convertAndSend(Exchanges.SUBMISSIONS, Topics.EVENT_SUBMISSION_AGENT_RESULTS, certificateEnvelopeCompleted);
 
-        logger.info("Processed submission {}", submission.getId());
+        ProcessingCertificateEnvelope processingCertificateEnvelope = studyProcessor.processStudyInSubmission(envelope);
+
+
+        rabbitMessagingTemplate.convertAndSend(Exchanges.SUBMISSIONS, Topics.EVENT_SUBMISSION_AGENT_RESULTS, processingCertificateEnvelope);
+        logger.info("Processed submission {}", envelope.getSubmission().getId());
     }
 
     @RabbitListener(queues = Queues.METABOLIGHTS_SAMPLES_UPDATED)
