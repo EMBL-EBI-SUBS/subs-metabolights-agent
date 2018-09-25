@@ -5,8 +5,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import uk.ac.ebi.subs.metabolights.model.Study;
 
@@ -18,12 +20,8 @@ import static org.junit.Assert.*;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class FetchServiceTest {
 
+    @Autowired
     private FetchService fetchService;
-
-    @Before
-    public void setUp(){
-        this.fetchService = new FetchService();
-    }
 
     @Test
     public void getStudy() {
@@ -38,7 +36,8 @@ public class FetchServiceTest {
         }
         assertTrue(!mlStudy.getDescription().isEmpty());
     }
-    
+
+    @Test
     public void createNewStudyAndGetAccession() {
         String accession = this.fetchService.createNewStudyAndGetAccession();
         assertTrue(accession.contains("MTBLS"));
