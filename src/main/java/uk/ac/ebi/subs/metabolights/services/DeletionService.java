@@ -6,6 +6,7 @@ import org.omg.CORBA.Object;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -33,6 +34,9 @@ public class DeletionService {
 
     private MLProperties mlProperties;
 
+    @Value("${metabolights.apiKey}")
+    private String apiKey;
+
     private HttpHeaders headers;
 
 
@@ -58,7 +62,7 @@ public class DeletionService {
         mlProperties = new MLProperties();
 
         headers = new HttpHeaders();
-        headers.set("user_token", mlProperties.getApiKey());
+        headers.set("user_token", this.apiKey);
     }
 
 

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -40,6 +41,9 @@ public class PostService {
 
     private HttpHeaders headers;
 
+    @Value("${metabolights.apiKey}")
+    private String apiKey;
+
 
     public PostService() {
         this.restTemplate = new RestTemplate();
@@ -62,7 +66,7 @@ public class PostService {
         mlProperties = new MLProperties();
 
         headers = new HttpHeaders();
-        headers.set("user_token", mlProperties.getApiKey());
+        headers.set("user_token", this.apiKey);
     }
 
 
