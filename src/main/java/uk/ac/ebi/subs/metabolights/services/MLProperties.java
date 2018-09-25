@@ -1,33 +1,18 @@
 package uk.ac.ebi.subs.metabolights.services;
 
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
+import lombok.Data;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
-@Configuration
-@ConfigurationProperties(prefix = "metabolights")
+@Data
 public class MLProperties {
 
-    private String apiKey = "";
+    @Value("${metabolights.apiKey}")
+    private String apiKey;
 
-    private String url = "http://ves-ebi-8d:5000/mtbls/ws/studies/";
+    private String url = "http://ves-ebi-90:5000/metabolights/ws/studies/";
 
-    public String getApiKey() {
-        return apiKey;
-    }
-
-    public void setApiKey(String apiKey) {
-        this.apiKey = apiKey;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
 
 }
