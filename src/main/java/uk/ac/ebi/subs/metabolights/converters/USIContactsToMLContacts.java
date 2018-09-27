@@ -1,6 +1,7 @@
 package uk.ac.ebi.subs.metabolights.converters;
 
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.stereotype.Service;
 import uk.ac.ebi.subs.data.component.Contact;
 import uk.ac.ebi.subs.metabolights.model.OntologyModel;
 
@@ -11,6 +12,7 @@ import java.util.List;
 /**
  * Created by kalai on 13/12/2017.
  */
+@Service
 public class USIContactsToMLContacts implements Converter<Contact, uk.ac.ebi.subs.metabolights.model.Contact> {
     @Override
     public uk.ac.ebi.subs.metabolights.model.Contact convert(Contact source) {
