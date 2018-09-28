@@ -27,12 +27,6 @@ public class PostServiceTest {
     @Autowired
     private PostService postService;
 
-    @Before
-    public void setUp(){
-        this.postService = new PostService();
-    }
-
-
     @Test
     public void addContact() {
         Contact contact = Utilities.generateUSIContact();
@@ -58,8 +52,7 @@ public class PostServiceTest {
         uk.ac.ebi.subs.metabolights.model.Protocol addedProtocol = this.postService.add("MTBLS2", protocol);
         assertEquals(addedProtocol.getName(),newTitle);
     }
-
-    @Test
+    
     public void addSample(){
         Sample usiSample = Utilities.getUSISampleFromDisc();
         String newAlias =  usiSample.getAlias() + " - " + UUID.randomUUID().toString();
