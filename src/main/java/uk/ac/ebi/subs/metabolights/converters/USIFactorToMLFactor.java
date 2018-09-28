@@ -1,12 +1,14 @@
 package uk.ac.ebi.subs.metabolights.converters;
 
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.stereotype.Service;
 import uk.ac.ebi.subs.data.component.Attribute;
 import uk.ac.ebi.subs.metabolights.model.Factor;
 import uk.ac.ebi.subs.metabolights.model.OntologyModel;
 
 import java.util.ArrayList;
 
+@Service
 public class USIFactorToMLFactor implements Converter<Attribute, Factor> {
     @Override
     public Factor convert(Attribute source) {

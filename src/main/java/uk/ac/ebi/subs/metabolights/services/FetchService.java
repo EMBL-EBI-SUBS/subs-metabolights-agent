@@ -4,11 +4,10 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
@@ -23,11 +22,12 @@ import java.util.List;
 public class FetchService {
     private static final Logger logger = LoggerFactory.getLogger(FetchService.class);
 
-    private static final String METABOLIGHTS_API = "http://ves-ebi-90:5000/metabolights/ws/studies/";
-
     private RestTemplate restTemplate;
 
     private MLProperties mlProperties;
+
+    @Value("${metabolights.apiKey}")
+    private String apiKey;
 
 
     public FetchService() {
@@ -58,10 +58,10 @@ public class FetchService {
     public String createNewStudyAndGetAccession() {
         String accession;
         try {
-            String endPoint = METABOLIGHTS_API + "create_study";
+            String endPoint = mlProperties.getUrl() + "create_study";
 
             HttpHeaders headers = new HttpHeaders();
-            headers.set("user_token", mlProperties.getApiKey());
+            headers.set("user_token", this.apiKey);
 
             HttpEntity<String> entity = new HttpEntity<>("parameters", headers);
             JsonNode result = restTemplate.postForObject(endPoint, entity, ObjectNode.class);

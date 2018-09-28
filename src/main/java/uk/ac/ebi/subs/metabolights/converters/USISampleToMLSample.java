@@ -1,6 +1,7 @@
 package uk.ac.ebi.subs.metabolights.converters;
 
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.stereotype.Service;
 import uk.ac.ebi.subs.data.component.Attribute;
 import uk.ac.ebi.subs.data.component.Term;
 import uk.ac.ebi.subs.metabolights.model.*;
@@ -10,6 +11,7 @@ import java.util.*;
 /**
  * Created by kalai on 11/01/2018.
  */
+@Service
 public class USISampleToMLSample implements Converter<uk.ac.ebi.subs.data.submittable.Sample, Sample> {
 
     private String ncbiBaseUrl = "http://purl.obolibrary.org/obo/NCBITaxon_";

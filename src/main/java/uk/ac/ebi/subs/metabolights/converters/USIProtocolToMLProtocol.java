@@ -1,6 +1,7 @@
 package uk.ac.ebi.subs.metabolights.converters;
 
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.stereotype.Service;
 import uk.ac.ebi.subs.data.component.Attribute;
 import uk.ac.ebi.subs.data.submittable.Protocol;
 import uk.ac.ebi.subs.metabolights.model.OntologyModel;
@@ -11,6 +12,7 @@ import java.util.*;
 /**
  * Created by kalai on 01/02/2018.
  */
+@Service
 public class USIProtocolToMLProtocol implements Converter<Protocol, uk.ac.ebi.subs.metabolights.model.Protocol> {
     @Override
     public uk.ac.ebi.subs.metabolights.model.Protocol convert(Protocol source) {
