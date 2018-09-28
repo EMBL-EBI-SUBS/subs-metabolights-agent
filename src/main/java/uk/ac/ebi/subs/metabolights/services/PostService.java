@@ -44,9 +44,7 @@ public class PostService {
 
     private RestTemplate restTemplate;
 
-    private MLProperties mlProperties = new MLProperties();;
-
-   // private HttpHeaders headers;
+    private MLProperties mlProperties;
 
     @Value("${metabolights.apiKey}")
     private String apiKey;
@@ -71,9 +69,6 @@ public class PostService {
         usiSampleToMLSample = new USISampleToMLSample();
 
         mlProperties = new MLProperties();
-//
-//        headers = new HttpHeaders();
-//        headers.set("user_token", this.apiKey);
     }
 
 
