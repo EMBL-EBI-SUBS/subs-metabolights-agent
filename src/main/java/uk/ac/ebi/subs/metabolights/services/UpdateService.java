@@ -1,30 +1,26 @@
 package uk.ac.ebi.subs.metabolights.services;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import org.json.JSONArray;
-import org.json.JSONException;
+
 import org.json.JSONObject;
 import org.omg.CORBA.Object;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestClientException;
+
 import org.springframework.web.client.RestTemplate;
 import uk.ac.ebi.subs.data.component.Attribute;
 import uk.ac.ebi.subs.data.component.Contact;
 import uk.ac.ebi.subs.data.submittable.Protocol;
 import uk.ac.ebi.subs.data.submittable.Sample;
 import uk.ac.ebi.subs.metabolights.converters.*;
-import uk.ac.ebi.subs.metabolights.model.Publication;
-import uk.ac.ebi.subs.metabolights.model.Study;
 import uk.ac.ebi.subs.metabolights.validator.schema.custom.JsonAsTextPlainHttpMessageConverter;
 
 import java.util.ArrayList;
@@ -39,10 +35,11 @@ public class UpdateService {
 
     private MLProperties mlProperties;
 
-    private HttpHeaders headers;
+//    @Autowired
+//    private FetchService fetchService;
 
-    @Autowired
-    private FetchService fetchService;
+    @Value("${metabolights.apiKey}")
+    private String apiKey;
 
     private USIContactsToMLContacts usiContactsToMLContacts;
     private USIPublicationToMLPublication usiPublicationToMLPublication;
@@ -70,10 +67,7 @@ public class UpdateService {
         usiDescriptorToMLDescriptor = new USIDescriptorToMLDescriptor();
         usiSampleToMLSample = new USISampleToMLSample();
         mlProperties = new MLProperties();
-
-        headers = new HttpHeaders();
-        headers.set("user_token", mlProperties.getApiKey());
-    }
+   }
 
     public void updateContact(String studyID, Contact contact) {
         if (contact == null) return;
@@ -81,6 +75,8 @@ public class UpdateService {
 
         try {
             ObjectNode json = ServiceUtils.convertToJSON(usiContactsToMLContacts.convert(contact), "contact");
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("user_token", this.apiKey);
             HttpEntity<ObjectNode> requestBody = new HttpEntity<>(json, headers);
             String url = mlProperties.getUrl() + studyID + "/contacts?email=" + contact.getEmail();
             restTemplate.put(url, requestBody, new Object[]{});
@@ -97,6 +93,8 @@ public class UpdateService {
 
         try {
             ObjectNode json = ServiceUtils.convertToJSON(usiPublicationToMLPublication.convert(publication), "publication");
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("user_token", this.apiKey);
             HttpEntity<ObjectNode> requestBody = new HttpEntity<>(json, headers);
             String url = mlProperties.getUrl() + studyID + "/publications?title=" + publication.getArticleTitle();
             restTemplate.put(url, requestBody, new Object[]{});
@@ -113,6 +111,8 @@ public class UpdateService {
 
         try {
             ObjectNode json = ServiceUtils.convertToJSON(usiProtocolToMLProtocol.convert(protocol), "protocol");
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("user_token", this.apiKey);
             HttpEntity<ObjectNode> requestBody = new HttpEntity<>(json, headers);
             String url = mlProperties.getUrl() + studyID + "/protocols?name=" + protocol.getTitle();
             restTemplate.put(url, requestBody, new Object[]{});
@@ -128,6 +128,8 @@ public class UpdateService {
 
         try {
             ObjectNode json = ServiceUtils.convertToJSON(usiFactorToMLFactor.convert(attribute), "factor");
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("user_token", this.apiKey);
             HttpEntity<ObjectNode> requestBody = new HttpEntity<>(json, headers);
             String url = mlProperties.getUrl() + studyID + "/factors?name=" + attribute.getValue();
             restTemplate.put(url, requestBody, new Object[]{});
@@ -143,6 +145,8 @@ public class UpdateService {
 
         try {
             ObjectNode json = ServiceUtils.convertToJSON(usiDescriptorToMLDescriptor.convert(attribute), "studyDesignDescriptor");
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("user_token", this.apiKey);
             HttpEntity<ObjectNode> requestBody = new HttpEntity<>(json, headers);
             String url = mlProperties.getUrl() + studyID + "/descriptors?term=" + attribute.getValue();
             restTemplate.put(url, requestBody, new Object[]{});
@@ -166,6 +170,8 @@ public class UpdateService {
 
     public void update(String url, ObjectNode content) {
         try {
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("user_token", this.apiKey);
             HttpEntity<ObjectNode> requestBody = new HttpEntity<>(content, headers);
             restTemplate.put(url, requestBody, new Object[]{});
 
@@ -185,7 +191,8 @@ public class UpdateService {
             List<uk.ac.ebi.subs.metabolights.model.Sample> samples = new ArrayList<>();
             samples.add(usiSampleToMLSample.convert(sample));
             JSONObject json = ServiceUtils.convertToJSON(samples, "samples");
-            System.out.println("JSON = " + json);
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("user_token", this.apiKey);
 
             HttpEntity<JSONObject> requestBody = new HttpEntity<>(json, headers);
             restTemplate.put(url, requestBody, new Object[]{});

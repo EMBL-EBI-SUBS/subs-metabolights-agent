@@ -1,7 +1,12 @@
 package uk.ac.ebi.subs.metabolights.services;
 
-import org.junit.Before;
+
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import uk.ac.ebi.subs.data.component.Contact;
 import uk.ac.ebi.subs.data.component.Publication;
 import uk.ac.ebi.subs.data.submittable.Protocol;
@@ -13,16 +18,14 @@ import java.util.UUID;
 
 import static org.junit.Assert.*;
 
+@SpringBootTest(classes = {
+        PostService.class} )
+@EnableAutoConfiguration
+@RunWith(SpringJUnit4ClassRunner.class)
 public class PostServiceTest {
 
-
+    @Autowired
     private PostService postService;
-
-    @Before
-    public void setUp(){
-        this.postService = new PostService();
-    }
-
 
     @Test
     public void addContact() {
@@ -49,8 +52,7 @@ public class PostServiceTest {
         uk.ac.ebi.subs.metabolights.model.Protocol addedProtocol = this.postService.add("MTBLS2", protocol);
         assertEquals(addedProtocol.getName(),newTitle);
     }
-
-    @Test
+    
     public void addSample(){
         Sample usiSample = Utilities.getUSISampleFromDisc();
         String newAlias =  usiSample.getAlias() + " - " + UUID.randomUUID().toString();

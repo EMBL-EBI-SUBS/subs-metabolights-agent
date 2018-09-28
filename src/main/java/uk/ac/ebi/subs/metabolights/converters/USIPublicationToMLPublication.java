@@ -1,6 +1,7 @@
 package uk.ac.ebi.subs.metabolights.converters;
 
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.stereotype.Service;
 import uk.ac.ebi.subs.data.component.Publication;
 import uk.ac.ebi.subs.metabolights.model.OntologyModel;
 
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 /**
  * Created by kalai on 13/12/2017.
  */
+@Service
 public class USIPublicationToMLPublication implements Converter<Publication, uk.ac.ebi.subs.metabolights.model.Publication> {
     @Override
     public uk.ac.ebi.subs.metabolights.model.Publication convert(Publication source) {

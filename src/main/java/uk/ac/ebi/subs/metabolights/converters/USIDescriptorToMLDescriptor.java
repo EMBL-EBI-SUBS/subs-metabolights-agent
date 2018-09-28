@@ -1,11 +1,13 @@
 package uk.ac.ebi.subs.metabolights.converters;
 
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.stereotype.Service;
 import uk.ac.ebi.subs.data.component.Attribute;
 import uk.ac.ebi.subs.metabolights.model.OntologyModel;
 
 import java.util.ArrayList;
 
+@Service
 public class USIDescriptorToMLDescriptor implements Converter<Attribute, OntologyModel> {
     @Override
     public OntologyModel convert(Attribute source) {
