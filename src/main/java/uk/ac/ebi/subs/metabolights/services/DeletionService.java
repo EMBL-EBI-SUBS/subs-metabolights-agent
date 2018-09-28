@@ -1,16 +1,13 @@
 package uk.ac.ebi.subs.metabolights.services;
 
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.omg.CORBA.Object;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -21,9 +18,7 @@ import uk.ac.ebi.subs.metabolights.converters.USIProtocolToMLProtocol;
 import uk.ac.ebi.subs.metabolights.converters.USIPublicationToMLPublication;
 import uk.ac.ebi.subs.metabolights.validator.schema.custom.JsonAsTextPlainHttpMessageConverter;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class DeletionService {
@@ -36,8 +31,6 @@ public class DeletionService {
 
     @Value("${metabolights.apiKey}")
     private String apiKey;
-
-    private HttpHeaders headers;
 
 
     private USIContactsToMLContacts usiContactsToMLContacts;
@@ -60,9 +53,6 @@ public class DeletionService {
         usiPublicationToMLPublication = new USIPublicationToMLPublication();
         usiProtocolToMLProtocol = new USIProtocolToMLProtocol();
         mlProperties = new MLProperties();
-
-        headers = new HttpHeaders();
-        headers.set("user_token", this.apiKey);
     }
 
 
@@ -72,6 +62,8 @@ public class DeletionService {
 
         try {
             String url = mlProperties.getUrl() + studyID + "/publications?title=" + publication.getArticleTitle();
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("user_token", this.apiKey);
             HttpEntity<?> request = new HttpEntity<Object>(headers);
             restTemplate.exchange(url, HttpMethod.DELETE, request, Void.class, 1);
 
@@ -85,9 +77,11 @@ public class DeletionService {
         if (protocol.getTitle() == null) return;
 
         try {
-             String url = mlProperties.getUrl() + studyID + "/protocols?name=" + protocol.getTitle();
-             HttpEntity<?> request = new HttpEntity<Object>(headers);
-             restTemplate.exchange(url, HttpMethod.DELETE, request, Void.class, 1);
+            String url = mlProperties.getUrl() + studyID + "/protocols?name=" + protocol.getTitle();
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("user_token", this.apiKey);
+            HttpEntity<?> request = new HttpEntity<Object>(headers);
+            restTemplate.exchange(url, HttpMethod.DELETE, request, Void.class, 1);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -100,6 +94,8 @@ public class DeletionService {
 
         try {
             String url = mlProperties.getUrl() + studyID + "/factors?name=" + attribute.getValue();
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("user_token", this.apiKey);
             HttpEntity<?> request = new HttpEntity<Object>(headers);
             restTemplate.exchange(url, HttpMethod.DELETE, request, Void.class, 1);
         } catch (Exception e) {
@@ -113,6 +109,8 @@ public class DeletionService {
 
         try {
             String url = mlProperties.getUrl() + studyID + "/descriptors?term=" + attribute.getValue();
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("user_token", this.apiKey);
             HttpEntity<?> request = new HttpEntity<Object>(headers);
             restTemplate.exchange(url, HttpMethod.DELETE, request, Void.class, 1);
         } catch (Exception e) {
@@ -123,6 +121,8 @@ public class DeletionService {
     public void deleteMarkedSamples(String studyID) {
         try {
             String url = mlProperties.getUrl() + studyID + "/samples";
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("user_token", this.apiKey);
             HttpEntity<?> request = new HttpEntity<Object>(headers);
             restTemplate.exchange(url, HttpMethod.DELETE, request, Void.class, 1);
         } catch (Exception e) {
