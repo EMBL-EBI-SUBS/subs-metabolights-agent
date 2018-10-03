@@ -39,10 +39,10 @@ repositories {
 
 dependencies {
 
-    compile("uk.ac.ebi.subs:subs-processing-model:2.4.0-SNAPSHOT")
-    compile("uk.ac.ebi.subs:subs-data-model:2.7.0-SNAPSHOT")
+    compile("uk.ac.ebi.subs:subs-processing-model:2.5.0-SNAPSHOT")
+    compile("uk.ac.ebi.subs:subs-data-model:2.8.0-SNAPSHOT")
     compile("uk.ac.ebi.subs:subs-messaging:0.4.0-SNAPSHOT")
-    compile("uk.ac.ebi.subs:validator-common:2.10.1-SNAPSHOT"){
+    compile("uk.ac.ebi.subs:validator-common:3.3.0-SNAPSHOT"){
         exclude group: 'org.springframework.boot', module :'spring-boot-starter-data-mongodb'
     }
     compile group: 'org.springframework.boot', name: 'spring-boot-starter'
