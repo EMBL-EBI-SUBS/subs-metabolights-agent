@@ -11,6 +11,7 @@ import uk.ac.ebi.subs.validator.model.Submittable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class ValidationTestUtils {
 
@@ -172,6 +173,14 @@ public class ValidationTestUtils {
         protocols.add(new Submittable<>(protocol,"1"));
 
         return protocols;
+    }
+
+    public static Submittable<Project> getProjectWithContactsAndPublications() {
+        Project project = new Project();
+        project.setContacts(generateContacts());
+        project.setPublications(generatePublications());
+        Submittable<Project> submittableProject = new Submittable<>(project,String.valueOf(UUID.randomUUID()));
+        return submittableProject;
     }
 
     public static Project getProjectWithContacts() {
