@@ -154,14 +154,40 @@ public class Utilities {
 
 
     public static uk.ac.ebi.subs.metabolights.model.Study getMLStudyFromDisc() {
+        return loadStudy("MTBLS2_isa.json");
+    }
+
+    public static Study getSimpleUSIStudyFromDisc() {
+        return loadUSIStudy("study.json");
+    }
+
+    public static uk.ac.ebi.subs.metabolights.model.Study loadStudy(String name) {
         uk.ac.ebi.subs.metabolights.model.Study study = new uk.ac.ebi.subs.metabolights.model.Study();
         try {
-            String result = IOUtils.toString(WSUtils.class.getClassLoader().getResourceAsStream("Test_json/MTBLS2_isa.json"));
+            String result = IOUtils.toString(WSUtils.class.getClassLoader().getResourceAsStream("Test_json/" + name));
             uk.ac.ebi.subs.metabolights.model.Project project = new uk.ac.ebi.subs.metabolights.model.Project();
             try {
                 mapper.configure(DeserializationFeature.UNWRAP_ROOT_VALUE, true);
                 project = mapper.readValue(result, uk.ac.ebi.subs.metabolights.model.Project.class);
                 study = project.getStudies().get(0);
+                return study;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return study;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static Study loadUSIStudy(String name) {
+        Study study = new Study();
+        try {
+            String result = IOUtils.toString(WSUtils.class.getClassLoader().getResourceAsStream("Test_json/" + name));
+            try {
+                //mapper.configure(DeserializationFeature.UNWRAP_ROOT_VALUE, true);
+                study = mapper.readValue(result, Study.class);
                 return study;
             } catch (IOException e) {
                 e.printStackTrace();
