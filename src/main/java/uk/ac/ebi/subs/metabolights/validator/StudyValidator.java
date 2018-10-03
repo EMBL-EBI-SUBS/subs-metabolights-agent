@@ -20,8 +20,12 @@ import java.util.List;
 @Service
 public class StudyValidator {
     public static final Logger logger = LoggerFactory.getLogger(StudyValidator.class);
-    @Autowired
+
     private ProtocolValidator protocolValidator;
+
+    public StudyValidator(){
+        this.protocolValidator = new ProtocolValidator();
+    }
 
 
     public List<SingleValidationResult> validate(StudyValidationMessageEnvelope envelope) {
