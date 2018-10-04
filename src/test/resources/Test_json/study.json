@@ -59,7 +59,11 @@
           }
         ]
       }
-    ]
+    ],
+    "studyType":[
+      {
+        "value": "Metabolomics_LCMS"
+      }]
   },
   "protocolRefs": [
     {
@@ -70,6 +74,5 @@
   "projectRef": {
     "alias": "alias-521584",
     "team": "subs.api-tester-team-1"
-  },
-  "studyType": "Metabolomics_LCMS"
+  }
 }

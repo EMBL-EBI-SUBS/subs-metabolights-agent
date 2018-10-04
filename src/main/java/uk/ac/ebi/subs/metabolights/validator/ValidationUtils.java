@@ -1,13 +1,18 @@
 package uk.ac.ebi.subs.metabolights.validator;
 
+import uk.ac.ebi.subs.data.component.Attribute;
+import uk.ac.ebi.subs.data.submittable.Study;
 import uk.ac.ebi.subs.data.submittable.Submittable;
+import uk.ac.ebi.subs.metabolights.model.StudyDataType;
 import uk.ac.ebi.subs.validator.data.SingleValidationResult;
 import uk.ac.ebi.subs.validator.data.SingleValidationResultsEnvelope;
 import uk.ac.ebi.subs.validator.data.structures.SingleValidationResultStatus;
 import uk.ac.ebi.subs.validator.data.structures.ValidationAuthor;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 public class ValidationUtils {
 
@@ -89,5 +94,17 @@ public class ValidationUtils {
 
         validationResult.setValidationStatus(SingleValidationResultStatus.Pass);
         return validationResult;
+    }
+
+    public static StudyDataType getStudyDataType(Study study){
+        Map<String, Collection<Attribute>> attributes = study.getAttributes();
+        if(attributes.containsKey("studyType")){
+           for(StudyDataType studyDataType : StudyDataType.values()){
+               if(attributes.get("studyType").iterator().next().getValue().equals(studyDataType.name())){
+                   return studyDataType;
+               }
+           }
+        }
+        return null;
     }
 }

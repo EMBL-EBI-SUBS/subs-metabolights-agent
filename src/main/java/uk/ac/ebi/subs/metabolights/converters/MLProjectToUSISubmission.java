@@ -53,7 +53,6 @@ public class MLProjectToUSISubmission implements Converter<uk.ac.ebi.subs.metabo
             List<Sample> samples = convertSamples(mlStudy.getSamples(), team);
 
             Study usiStudy = mlStudyToUSIStudy.convert(mlStudy);
-            usiStudy.setStudyType(getStudyDataTypeFrom(source));
             addStudyMetadata(usiStudy, team, usiProject, protocols);
             usiStudies.add(usiStudy);
 
@@ -104,26 +103,6 @@ public class MLProjectToUSISubmission implements Converter<uk.ac.ebi.subs.metabo
         }
         usiStudy.setProtocolRefs(protocolRefs);
         return usiStudy;
-    }
-
-    private StudyDataType getStudyDataTypeFrom(uk.ac.ebi.subs.metabolights.model.Project project) {
-        if (project.getStudies() != null && project.getStudies().size() > 0) {
-            if (project.getStudies().get(0).getAssays() != null && project.getStudies().get(0).getAssays().size() > 0) {
-                if (project.getStudies().get(0).getAssays().get(0) != null) {
-                    if (project.getStudies().get(0).getAssays().get(0).getTechnologyType() != null) {
-                        if (project.getStudies().get(0).getAssays().get(0).getTechnologyType().getAnnotationValue() != null) {
-                            if (project.getStudies().get(0).getAssays().get(0).getTechnologyType().getAnnotationValue().equalsIgnoreCase("mass spectrometry")) {
-                                return StudyDataType.Metabolomics_LCMS; //todo fix the specific return of LCMS, GCMS, IMAGING MS, based on protocols
-                            }  else if(project.getStudies().get(0).getAssays().get(0).getTechnologyType().getAnnotationValue().equalsIgnoreCase("NMR spectroscopy")){
-                                return StudyDataType.Metabolomics_NMR;
-                            }
-
-                        }
-                    }
-                }
-            }
-        }
-        return null;
     }
 
     private List<Protocol> convertProtocols(List<uk.ac.ebi.subs.metabolights.model.Protocol> mlStudyProtocols, Team team) {
