@@ -2,12 +2,12 @@ package uk.ac.ebi.subs.metabolights.validator;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uk.ac.ebi.subs.data.component.Contact;
 import uk.ac.ebi.subs.data.component.Publication;
 import uk.ac.ebi.subs.data.submittable.Project;
 import uk.ac.ebi.subs.data.submittable.Protocol;
+import uk.ac.ebi.subs.metabolights.model.StudyDataType;
 import uk.ac.ebi.subs.validator.data.SingleValidationResult;
 import uk.ac.ebi.subs.validator.data.StudyValidationMessageEnvelope;
 import uk.ac.ebi.subs.validator.data.structures.SingleValidationResultStatus;
@@ -29,9 +29,8 @@ public class StudyValidator {
 
     public List<SingleValidationResult> validate(StudyValidationMessageEnvelope envelope) {
         List<SingleValidationResult> validationResults = new ArrayList<>();
-
         validationResults.addAll(validateContacts(envelope.getProject().getBaseSubmittable()));
-        validationResults.addAll(validateProtocols(envelope.getProtocols(),envelope.getEntityToValidate().getStudyType()));
+        validationResults.addAll(validateProtocols(envelope.getProtocols(),ValidationUtils.getStudyDataType(envelope.getEntityToValidate())));
         //todo validate publications
         return validationResults;
     }

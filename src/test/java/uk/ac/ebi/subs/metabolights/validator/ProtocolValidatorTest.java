@@ -3,12 +3,10 @@ package uk.ac.ebi.subs.metabolights.validator;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import uk.ac.ebi.subs.data.component.StudyDataType;
 import uk.ac.ebi.subs.data.submittable.Protocol;
+import uk.ac.ebi.subs.metabolights.model.StudyDataType;
 import uk.ac.ebi.subs.validator.data.SingleValidationResult;
 import uk.ac.ebi.subs.validator.model.Submittable;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
