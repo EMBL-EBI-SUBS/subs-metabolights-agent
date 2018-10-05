@@ -180,4 +180,28 @@ public class PostService {
             e.printStackTrace();
         }
     }
+
+    public void addContacts(String studyID, List<Contact> contacts){
+        for(Contact contact : contacts){
+            add(studyID,contact);
+        }
+    }
+
+    public void addPublications(String studyID, List<Publication> publications){
+        for(Publication publication : publications){
+            add(studyID,publication);
+        }
+    }
+
+    public void addStudyDesignDescriptors(String studyID, List<Attribute> descriptors){
+        for(Attribute attribute : descriptors){
+            addDescriptor(studyID,attribute);
+        }
+    }
+
+    public void addStudyFactors(String studyID, List<Attribute> factors){
+        for(Attribute attribute : factors){
+            addFactor(studyID,attribute);
+        }
+    }
 }
