@@ -8,9 +8,12 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.amqp.rabbit.core.RabbitMessagingTemplate;
 import uk.ac.ebi.subs.data.Submission;
 import uk.ac.ebi.subs.data.status.ProcessingStatusEnum;
+import uk.ac.ebi.subs.data.submittable.Project;
 import uk.ac.ebi.subs.data.submittable.Study;
 import uk.ac.ebi.subs.metabolights.converters.Utilities;
 import uk.ac.ebi.subs.metabolights.services.FetchService;
+import uk.ac.ebi.subs.metabolights.validator.ValidationTestUtils;
+import uk.ac.ebi.subs.metabolights.validator.ValidationUtils;
 import uk.ac.ebi.subs.processing.ProcessingCertificateEnvelope;
 import uk.ac.ebi.subs.processing.SubmissionEnvelope;
 
@@ -45,7 +48,9 @@ public class MetaboLightsStudyProcessorTest {
         submission.setId("test-0");
         submissionEnvelope.setSubmission(submission);
         Study study = new Study();
+        Project project = ValidationTestUtils.getProjectWithContactsAndPublications().getBaseSubmittable();
         submissionEnvelope.getStudies().add(study);
+        submissionEnvelope.getProjects().add(project);
         ProcessingCertificateEnvelope processingCertificateEnvelope = metaboLightsStudyProcessor.processStudyInSubmission(submissionEnvelope);
         assertEquals(ProcessingStatusEnum.Processing, processingCertificateEnvelope.getProcessingCertificates().get(0).getProcessingStatus());
     }
