@@ -17,6 +17,8 @@ import uk.ac.ebi.subs.data.submittable.Submittable;
 import uk.ac.ebi.subs.messaging.Exchanges;
 import uk.ac.ebi.subs.messaging.Topics;
 import uk.ac.ebi.subs.metabolights.services.FetchService;
+import uk.ac.ebi.subs.metabolights.services.PostService;
+import uk.ac.ebi.subs.metabolights.services.UpdateService;
 import uk.ac.ebi.subs.processing.ProcessingCertificate;
 import uk.ac.ebi.subs.processing.ProcessingCertificateEnvelope;
 import uk.ac.ebi.subs.processing.SubmissionEnvelope;
@@ -37,13 +39,17 @@ public class MetaboLightsStudyProcessor {
 
     private RabbitMessagingTemplate rabbitMessagingTemplate;
 
-    //todo Autowire? - call python API services for CRUD operations
-
     @Autowired
     ProcessingCertificateGenerator certificatesGenerator;
 
     @Autowired
     FetchService fetchService;
+
+    @Autowired
+    PostService postService;
+
+    @Autowired
+    UpdateService updateService;
 
     @Autowired
     public MetaboLightsStudyProcessor(RabbitMessagingTemplate rabbitMessagingTemplate, MessageConverter messageConverter, FetchService fetchService) {
@@ -82,15 +88,26 @@ public class MetaboLightsStudyProcessor {
     ProcessingCertificateEnvelope processStudyInSubmission(SubmissionEnvelope submissionEnvelope) {
         List<ProcessingCertificate> processingCertificateList = new ArrayList<>();
         if (submissionEnvelope.getStudies() != null && submissionEnvelope.getStudies().size() > 0) {
+            //todo handle many studies in one project
             for (Study study : submissionEnvelope.getStudies()) {
                 ProcessingCertificate processingCertificate = new ProcessingCertificate();
                 processingCertificate.setArchive(Archive.Metabolights);
-                if(!study.isAccessioned()){
+                if (!study.isAccessioned()) {
                     String accession = this.fetchService.createNewStudyAndGetAccession();
                     study.setAccession(accession);
+
+                    //todo convert from USI to ML study and submit it to ML
+                    updateTitleAndDescription(study);
+                    submitFactorsAndDescriptors(study);
+
+                    if (submissionEnvelope.getProjects() != null && submissionEnvelope.getProjects().size() > 0) {
+                       submitContacts(accession,submissionEnvelope.getProjects().get(0));
+                    }
+
+
                     processingCertificate.setAccession(accession);
                     processingCertificate.setProcessingStatus(ProcessingStatusEnum.Processing);
-                } else{
+                } else {
                     processingCertificate.setAccession(study.getAccession());
                 }
 
@@ -98,6 +115,22 @@ public class MetaboLightsStudyProcessor {
             }
         }
         return new ProcessingCertificateEnvelope(submissionEnvelope.getSubmission().getId(), processingCertificateList);
+    }
+
+    private void submitFactorsAndDescriptors(Study study) {
+        this.postService.addStudyDesignDescriptors(study.getAccession(), (List<Attribute>) study.getAttributes().get("factors"));
+        this.postService.addStudyFactors(study.getAccession(), (List<Attribute>) study.getAttributes().get("studyDesignDescriptors"));
+    }
+
+    private void updateTitleAndDescription(Study study) {
+        this.updateService.updateTitle(study.getAccession(), study.getTitle());
+        this.updateService.updateDescription(study.getAccession(), study.getDescription());
+    }
+
+    private void submitContacts(String studyID, Project project) {
+        //todo create new or update. keep track of submissions
+        this.postService.addContacts(studyID, project.getContacts());
+        this.postService.addPublications(studyID, project.getPublications());
     }
 
 
