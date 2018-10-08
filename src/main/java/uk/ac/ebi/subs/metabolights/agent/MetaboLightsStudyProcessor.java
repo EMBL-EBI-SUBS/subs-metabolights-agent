@@ -52,10 +52,10 @@ public class MetaboLightsStudyProcessor {
     UpdateService updateService;
 
     @Autowired
-    public MetaboLightsStudyProcessor(RabbitMessagingTemplate rabbitMessagingTemplate, MessageConverter messageConverter, FetchService fetchService) {
+    public MetaboLightsStudyProcessor(RabbitMessagingTemplate rabbitMessagingTemplate, MessageConverter messageConverter) {
         this.rabbitMessagingTemplate = rabbitMessagingTemplate;
         this.rabbitMessagingTemplate.setMessageConverter(messageConverter);
-        this.fetchService = fetchService;
+        //  this.fetchService = fetchService;
     }
 
     protected List<ProcessingCertificate> processSamples(SubmissionEnvelope envelope) {
