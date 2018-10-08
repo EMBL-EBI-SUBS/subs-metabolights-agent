@@ -123,14 +123,22 @@ public class MetaboLightsStudyProcessor {
     }
 
     private void updateTitleAndDescription(Study study) {
-        this.updateService.updateTitle(study.getAccession(), study.getTitle());
-        this.updateService.updateDescription(study.getAccession(), study.getDescription());
+        if (study.getTitle() != null && !study.getTitle().isEmpty()) {
+            this.updateService.updateTitle(study.getAccession(), study.getTitle());
+        }
+        if (study.getDescription() != null && !study.getDescription().isEmpty()) {
+            this.updateService.updateDescription(study.getAccession(), study.getDescription());
+        }
     }
 
     private void submitContacts(String studyID, Project project) {
         //todo create new or update. keep track of submissions
-        this.postService.addContacts(studyID, project.getContacts());
-        this.postService.addPublications(studyID, project.getPublications());
+        if(project.getContacts()!=null && !project.getContacts().isEmpty()){
+            this.postService.addContacts(studyID, project.getContacts());
+        }
+        if(project.getPublications()!=null && !project.getPublications().isEmpty()){
+            this.postService.addPublications(studyID, project.getPublications());
+        }
     }
 
 
