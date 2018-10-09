@@ -114,7 +114,7 @@ public class ProjectToSubmissionTest {
                 studyDescriptorAttributes.add(mlDescriptorToUSIDescriptor.convert(descriptor));
             }
         }
-        usiStudy.getAttributes().put("studyDesignDescriptors", studyDescriptorAttributes);
+        usiStudy.getAttributes().put(StudyAttributes.STUDY_DESCRIPTORS, studyDescriptorAttributes);
 
         //factors
         List<Attribute> studyFactorAttributes = new ArrayList<>();
@@ -123,7 +123,7 @@ public class ProjectToSubmissionTest {
                 studyFactorAttributes.add(mlFactorToUSIFactor.convert(factor));
             }
         }
-        usiStudy.getAttributes().put("factors", studyFactorAttributes);
+        usiStudy.getAttributes().put(StudyAttributes.STUDY_FACTORS, studyFactorAttributes);
 
 
 //        as = new Assay();

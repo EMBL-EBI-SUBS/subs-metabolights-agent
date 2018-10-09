@@ -5,6 +5,7 @@ import uk.ac.ebi.subs.data.component.*;
 import uk.ac.ebi.subs.data.submittable.AssayData;
 import uk.ac.ebi.subs.data.submittable.Project;
 import uk.ac.ebi.subs.data.submittable.Protocol;
+import uk.ac.ebi.subs.metabolights.model.StudyAttributes;
 import uk.ac.ebi.subs.validator.model.Submittable;
 
 import java.util.*;
@@ -239,8 +240,8 @@ public class ValidationTestUtils {
 
     public static Map<String, Collection<Attribute>> getStudyAttributes() {
         Map<String, Collection<Attribute>> usiAttributes = new HashMap<>();
-        usiAttributes.put("factors", Arrays.asList(generateStudyFactorAttribute()));
-        usiAttributes.put("studyDesignDescriptors", Arrays.asList(generateStudyDescriptorAttribute()));
+        usiAttributes.put(StudyAttributes.STUDY_FACTORS, Arrays.asList(generateStudyFactorAttribute()));
+        usiAttributes.put(StudyAttributes.STUDY_DESCRIPTORS, Arrays.asList(generateStudyDescriptorAttribute()));
         return usiAttributes;
     }
 
