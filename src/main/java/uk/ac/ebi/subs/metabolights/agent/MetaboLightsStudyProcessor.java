@@ -91,20 +91,81 @@ public class MetaboLightsStudyProcessor {
         if (submissionEnvelope.getStudies() != null && submissionEnvelope.getStudies().size() > 0) {
             //todo handle many studies in one project
             for (Study study : submissionEnvelope.getStudies()) {
-                ProcessingCertificate processingCertificate = new ProcessingCertificate();
-                processingCertificate.setArchive(Archive.Metabolights);
+                ProcessingCertificate processingCertificate = getNewCertificate();
                 if (!study.isAccessioned()) {
-                    String accession = this.fetchService.createNewStudyAndGetAccession();
+//                    String accession = this.fetchService.createNewStudyAndGetAccession();
+                    String accession = "MTBLS_DEV2017";
                     study.setAccession(accession);
 
-                    //todo convert from USI to ML study and submit it to ML
-                    updateTitleAndDescription(study);
-                    submitFactorsAndDescriptors(study);
-
-                    if (submissionEnvelope.getProjects() != null && submissionEnvelope.getProjects().size() > 0) {
-                        submitContacts(accession, submissionEnvelope.getProjects().get(0));
+                    if (study.getTitle() != null && !study.getTitle().isEmpty()) {
+                        try {
+                            this.updateService.updateTitle(study.getAccession(), study.getTitle());
+                        } catch (Exception e) {
+                            ProcessingCertificate certificate = getNewCertificate();
+                            certificate.setAccession(accession);
+                            certificate.setMessage("Error saving title : " + e.getMessage());
+                            processingCertificateList.add(certificate);
+                        }
                     }
 
+                    if (study.getDescription() != null && !study.getDescription().isEmpty()) {
+                        try {
+                            this.updateService.updateDescription(study.getAccession(), study.getDescription());
+                        } catch (Exception e) {
+                            ProcessingCertificate certificate = getNewCertificate();
+                            certificate.setAccession(accession);
+                            certificate.setMessage("Error saving description : " + e.getMessage());
+                            processingCertificateList.add(certificate);
+                        }
+                    }
+
+                    if (isPresent(study, StudyAttributes.STUDY_FACTORS)) {
+                        try {
+                            this.postService.addStudyDesignDescriptors(study.getAccession(), (List<Attribute>) study.getAttributes().get(StudyAttributes.STUDY_FACTORS));
+                        } catch (Exception e) {
+                            ProcessingCertificate certificate = getNewCertificate();
+                            certificate.setAccession(accession);
+                            certificate.setMessage("Error saving factors : " + e.getMessage());
+                            processingCertificateList.add(certificate);
+                        }
+                    }
+
+                    if (isPresent(study, StudyAttributes.STUDY_DESCRIPTORS)) {
+                        try {
+                            this.postService.addStudyFactors(study.getAccession(), (List<Attribute>) study.getAttributes().get(StudyAttributes.STUDY_DESCRIPTORS));
+                        } catch (Exception e) {
+                            ProcessingCertificate certificate = getNewCertificate();
+                            certificate.setAccession(accession);
+                            certificate.setMessage("Error saving descriptors : " + e.getMessage());
+                            processingCertificateList.add(certificate);
+                        }
+                    }
+
+                    if (submissionEnvelope.getProjects() != null && submissionEnvelope.getProjects().size() > 0) {
+                         //todo handle multiple projects
+                        if (submissionEnvelope.getProjects().get(0).getContacts() != null && !submissionEnvelope.getProjects().get(0).getContacts().isEmpty()) {
+                            try {
+                                //todo create new or update. keep track of submissions
+                                this.postService.addContacts(accession, submissionEnvelope.getProjects().get(0).getContacts());
+                            } catch (Exception e) {
+                                ProcessingCertificate certificate = getNewCertificate();
+                                certificate.setAccession(accession);
+                                certificate.setMessage("Error saving contacts : " + e.getMessage());
+                                processingCertificateList.add(certificate);
+                            }
+                        }
+
+                        if (submissionEnvelope.getProjects().get(0).getPublications() != null && !submissionEnvelope.getProjects().get(0).getPublications().isEmpty()) {
+                            try {
+                                this.postService.addPublications(accession, submissionEnvelope.getProjects().get(0).getPublications());
+                            } catch (Exception e) {
+                                ProcessingCertificate certificate = getNewCertificate();
+                                certificate.setAccession(accession);
+                                certificate.setMessage("Error saving Publications : " + e.getMessage());
+                                processingCertificateList.add(certificate);
+                            }
+                        }
+                    }
 
                     processingCertificate.setAccession(accession);
                     processingCertificate.setProcessingStatus(ProcessingStatusEnum.Processing);
@@ -118,36 +179,14 @@ public class MetaboLightsStudyProcessor {
         return new ProcessingCertificateEnvelope(submissionEnvelope.getSubmission().getId(), processingCertificateList);
     }
 
-    private void submitFactorsAndDescriptors(Study study) {
-        if (isPresent(study, StudyAttributes.STUDY_FACTORS)) {
-            this.postService.addStudyDesignDescriptors(study.getAccession(), (List<Attribute>) study.getAttributes().get(StudyAttributes.STUDY_FACTORS));
-        }
-        if (isPresent(study, StudyAttributes.STUDY_DESCRIPTORS)) {
-            this.postService.addStudyFactors(study.getAccession(), (List<Attribute>) study.getAttributes().get(StudyAttributes.STUDY_DESCRIPTORS));
-        }
-    }
-
-    private void updateTitleAndDescription(Study study) {
-        if (study.getTitle() != null && !study.getTitle().isEmpty()) {
-            this.updateService.updateTitle(study.getAccession(), study.getTitle());
-        }
-        if (study.getDescription() != null && !study.getDescription().isEmpty()) {
-            this.updateService.updateDescription(study.getAccession(), study.getDescription());
-        }
-    }
-
-    private void submitContacts(String studyID, Project project) {
-        //todo create new or update. keep track of submissions
-        if (project.getContacts() != null && !project.getContacts().isEmpty()) {
-            this.postService.addContacts(studyID, project.getContacts());
-        }
-        if (project.getPublications() != null && !project.getPublications().isEmpty()) {
-            this.postService.addPublications(studyID, project.getPublications());
-        }
-    }
-
     private boolean isPresent(Study study, String attribute) {
         return study.getAttributes().get(attribute) != null && !study.getAttributes().get(attribute).isEmpty();
+    }
+
+    private ProcessingCertificate getNewCertificate() {
+        ProcessingCertificate processingCertificate = new ProcessingCertificate();
+        processingCertificate.setArchive(Archive.Metabolights);
+        return processingCertificate;
     }
 
 
