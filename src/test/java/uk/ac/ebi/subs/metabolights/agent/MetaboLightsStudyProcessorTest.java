@@ -86,6 +86,7 @@ public class MetaboLightsStudyProcessorTest {
         Study study = new Study();
         study.setTitle("This is test title");
         study.setDescription("This is test description");
+        study.setAttributes(ValidationTestUtils.getStudyAttributes());
         Project project = ValidationTestUtils.getProjectWithContactsAndPublications().getBaseSubmittable();
         submissionEnvelope.getStudies().add(study);
         submissionEnvelope.getProjects().add(project);
