@@ -50,7 +50,12 @@ public class FetchService {
             }
 
         } catch (RestClientException e) {
+            logger.error(e.getMessage());
             throw new RestClientException(e.getMessage(), e);
+        }
+        catch (Exception e) {
+            logger.error(e.getMessage());
+            throw e;
         }
         return null;
     }
@@ -69,7 +74,11 @@ public class FetchService {
             return accession;
 
         } catch (RestClientException e) {
+            logger.error(e.getMessage());
             throw new RestClientException(e.getMessage(), e);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw e;
         }
     }
 
