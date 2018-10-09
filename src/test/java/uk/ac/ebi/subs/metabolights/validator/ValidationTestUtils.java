@@ -20,7 +20,9 @@ public class ValidationTestUtils {
         contact1.setFax("+11123");
         contact1.setEmail("test@abc.com");
         contact1.setFirstName("Alice");
+        contact1.setMiddleInitials("");
         contact1.setLastName("Bob");
+        contact1.setPhone("12345");
 
         Contact contact2 = new Contact();
         contact2.setAddress("Hinxton");
@@ -28,7 +30,9 @@ public class ValidationTestUtils {
         contact2.setFax("+11123");
         contact2.setEmail("");
         contact2.setFirstName("Alex");
+        contact1.setMiddleInitials("");
         contact2.setLastName("Ben");
+        contact1.setPhone("56879");
 
         contacts.add(contact1);
         contacts.add(contact2);
@@ -197,6 +201,8 @@ public class ValidationTestUtils {
         Publication publication = new Publication();
         publication.setArticleTitle("This is a metabolomics test study");
         publication.setPubmedId("12345");
+        publication.setPubmedId("12345-12345");
+        publication.setAuthors("Bob, Bill, Jam");
         publications.add(publication);
         return publications;
     }
