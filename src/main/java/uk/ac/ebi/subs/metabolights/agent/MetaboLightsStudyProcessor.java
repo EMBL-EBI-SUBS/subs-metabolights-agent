@@ -121,7 +121,7 @@ public class MetaboLightsStudyProcessor {
 
                     if (isPresent(study, StudyAttributes.STUDY_FACTORS)) {
                         try {
-                            this.postService.addStudyDesignDescriptors(study.getAccession(), (List<Attribute>) study.getAttributes().get(StudyAttributes.STUDY_FACTORS));
+                            this.postService.addStudyFactors(study.getAccession(), (List<Attribute>) study.getAttributes().get(StudyAttributes.STUDY_FACTORS));
                         } catch (Exception e) {
                             ProcessingCertificate certificate = getNewCertificate();
                             certificate.setAccession(accession);
@@ -132,7 +132,7 @@ public class MetaboLightsStudyProcessor {
 
                     if (isPresent(study, StudyAttributes.STUDY_DESCRIPTORS)) {
                         try {
-                            this.postService.addStudyFactors(study.getAccession(), (List<Attribute>) study.getAttributes().get(StudyAttributes.STUDY_DESCRIPTORS));
+                            this.postService.addStudyDesignDescriptors(study.getAccession(), (List<Attribute>) study.getAttributes().get(StudyAttributes.STUDY_DESCRIPTORS));
                         } catch (Exception e) {
                             ProcessingCertificate certificate = getNewCertificate();
                             certificate.setAccession(accession);
@@ -188,6 +188,4 @@ public class MetaboLightsStudyProcessor {
         processingCertificate.setArchive(Archive.Metabolights);
         return processingCertificate;
     }
-
-
 }
