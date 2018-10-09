@@ -35,9 +35,6 @@ public class UpdateService {
 
     private MLProperties mlProperties;
 
-//    @Autowired
-//    private FetchService fetchService;
-
     @Value("${metabolights.apiKey}")
     private String apiKey;
 
@@ -177,15 +174,17 @@ public class UpdateService {
 
         } catch (Exception e) {
             e.printStackTrace();
+            logger.error(e.getMessage());
+            throw e;
         }
     }
 
     public void updateSample(String studyID, Sample sample) {
         String url = mlProperties.getUrl() + studyID + "/samples?name=" + sample.getAlias();
-        update(studyID,sample,url);
+        update(sample,url);
     }
 
-    private void update(String studyID, Sample sample, String url){
+    private void update(Sample sample, String url){
         try {
 
             List<uk.ac.ebi.subs.metabolights.model.Sample> samples = new ArrayList<>();
@@ -206,6 +205,6 @@ public class UpdateService {
         String newName = "__TO_BE_DELETED__" + sample.getAlias();
         String url = mlProperties.getUrl() + studyID + "/samples?name=" + sample.getAlias();
         sample.setAlias(newName);
-        update(studyID,sample,url);
+        update(sample,url);
     }
 }
