@@ -5,6 +5,7 @@ import uk.ac.ebi.subs.data.component.Attribute;
 import uk.ac.ebi.subs.metabolights.model.Factor;
 import uk.ac.ebi.subs.metabolights.model.OntologyModel;
 import uk.ac.ebi.subs.metabolights.model.Study;
+import uk.ac.ebi.subs.metabolights.model.StudyAttributes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,8 +28,8 @@ public class MLStudyToUSIStudy  implements Converter<Study, uk.ac.ebi.subs.data.
         usiStudy.setAlias(source.getIdentifier());
         //todo mtbls id is set as alias.
 
-        usiStudy.getAttributes().put("studyDesignDescriptors", convertStudyDescriptors(source.getStudyDesignDescriptors()));
-        usiStudy.getAttributes().put("factors", convertSampleFactors(source.getFactors()));
+        usiStudy.getAttributes().put(StudyAttributes.STUDY_DESCRIPTORS, convertStudyDescriptors(source.getStudyDesignDescriptors()));
+        usiStudy.getAttributes().put(StudyAttributes.STUDY_FACTORS, convertSampleFactors(source.getFactors()));
 
         return usiStudy;
     }

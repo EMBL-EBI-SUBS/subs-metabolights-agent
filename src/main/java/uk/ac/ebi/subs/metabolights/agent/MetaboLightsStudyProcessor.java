@@ -16,6 +16,7 @@ import uk.ac.ebi.subs.data.submittable.Study;
 import uk.ac.ebi.subs.data.submittable.Submittable;
 import uk.ac.ebi.subs.messaging.Exchanges;
 import uk.ac.ebi.subs.messaging.Topics;
+import uk.ac.ebi.subs.metabolights.model.StudyAttributes;
 import uk.ac.ebi.subs.metabolights.services.FetchService;
 import uk.ac.ebi.subs.metabolights.services.PostService;
 import uk.ac.ebi.subs.metabolights.services.UpdateService;
@@ -118,11 +119,11 @@ public class MetaboLightsStudyProcessor {
     }
 
     private void submitFactorsAndDescriptors(Study study) {
-        if (isPresent(study, "factors")) {
-            this.postService.addStudyDesignDescriptors(study.getAccession(), (List<Attribute>) study.getAttributes().get("factors"));
+        if (isPresent(study, StudyAttributes.STUDY_FACTORS)) {
+            this.postService.addStudyDesignDescriptors(study.getAccession(), (List<Attribute>) study.getAttributes().get(StudyAttributes.STUDY_FACTORS));
         }
-        if (isPresent(study, "studyDesignDescriptors")) {
-            this.postService.addStudyFactors(study.getAccession(), (List<Attribute>) study.getAttributes().get("studyDesignDescriptors"));
+        if (isPresent(study, StudyAttributes.STUDY_DESCRIPTORS)) {
+            this.postService.addStudyFactors(study.getAccession(), (List<Attribute>) study.getAttributes().get(StudyAttributes.STUDY_DESCRIPTORS));
         }
     }
 

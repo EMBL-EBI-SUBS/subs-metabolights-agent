@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import uk.ac.ebi.subs.data.component.Attribute;
 import uk.ac.ebi.subs.data.submittable.Sample;
 import uk.ac.ebi.subs.data.submittable.Study;
+import uk.ac.ebi.subs.metabolights.model.StudyAttributes;
 import uk.ac.ebi.subs.validator.data.AssayValidationMessageEnvelope;
 import uk.ac.ebi.subs.validator.data.SingleValidationResult;
 import uk.ac.ebi.subs.validator.data.structures.SingleValidationResultStatus;
@@ -39,8 +40,8 @@ public class AssayValidator {
     public Map<String, Collection<Attribute>> getFactorsFrom(Submittable<Study> study) {
         Map<String, Collection<Attribute>> factors = new HashMap<>();
         if (study.getAttributes() != null && !study.getAttributes().isEmpty()) {
-            if (study.getAttributes().containsKey("factors")) {
-                factors.put("factors", study.getAttributes().get("factors"));
+            if (study.getAttributes().containsKey(StudyAttributes.STUDY_FACTORS)) {
+                factors.put(StudyAttributes.STUDY_FACTORS, study.getAttributes().get(StudyAttributes.STUDY_FACTORS));
             }
         }
         return factors;
