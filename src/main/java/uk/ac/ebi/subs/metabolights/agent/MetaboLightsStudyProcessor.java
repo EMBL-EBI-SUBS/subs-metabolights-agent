@@ -101,7 +101,7 @@ public class MetaboLightsStudyProcessor {
                     submitFactorsAndDescriptors(study);
 
                     if (submissionEnvelope.getProjects() != null && submissionEnvelope.getProjects().size() > 0) {
-                       submitContacts(accession,submissionEnvelope.getProjects().get(0));
+                        submitContacts(accession, submissionEnvelope.getProjects().get(0));
                     }
 
 
@@ -137,12 +137,16 @@ public class MetaboLightsStudyProcessor {
 
     private void submitContacts(String studyID, Project project) {
         //todo create new or update. keep track of submissions
-        if(project.getContacts()!=null && !project.getContacts().isEmpty()){
+        if (project.getContacts() != null && !project.getContacts().isEmpty()) {
             this.postService.addContacts(studyID, project.getContacts());
         }
-        if(project.getPublications()!=null && !project.getPublications().isEmpty()){
+        if (project.getPublications() != null && !project.getPublications().isEmpty()) {
             this.postService.addPublications(studyID, project.getPublications());
         }
+    }
+
+    private boolean isPresent(Study study, String attribute) {
+        return study.getAttributes().get(attribute) != null && !study.getAttributes().get(attribute).isEmpty();
     }
 
 
