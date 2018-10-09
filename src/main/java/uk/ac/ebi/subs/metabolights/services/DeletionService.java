@@ -69,6 +69,8 @@ public class DeletionService {
 
         } catch (Exception e) {
             e.printStackTrace();
+            logger.error(e.getMessage());
+            throw e;
         }
     }
 
@@ -85,6 +87,8 @@ public class DeletionService {
 
         } catch (Exception e) {
             e.printStackTrace();
+            logger.error(e.getMessage());
+            throw e;
         }
     }
 
@@ -100,6 +104,8 @@ public class DeletionService {
             restTemplate.exchange(url, HttpMethod.DELETE, request, Void.class, 1);
         } catch (Exception e) {
             e.printStackTrace();
+            logger.error(e.getMessage());
+            throw e;
         }
     }
 
@@ -115,6 +121,8 @@ public class DeletionService {
             restTemplate.exchange(url, HttpMethod.DELETE, request, Void.class, 1);
         } catch (Exception e) {
             e.printStackTrace();
+            logger.error(e.getMessage());
+            throw e;
         }
     }
 
@@ -127,6 +135,8 @@ public class DeletionService {
             restTemplate.exchange(url, HttpMethod.DELETE, request, Void.class, 1);
         } catch (Exception e) {
             e.printStackTrace();
+            logger.error(e.getMessage());
+            throw e;
         }
     }
 }

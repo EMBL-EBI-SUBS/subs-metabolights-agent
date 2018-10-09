@@ -80,6 +80,8 @@ public class UpdateService {
 
         } catch (Exception e) {
             e.printStackTrace();
+            logger.error(e.getMessage());
+            throw e;
         }
 
     }
@@ -98,6 +100,8 @@ public class UpdateService {
 
         } catch (Exception e) {
             e.printStackTrace();
+            logger.error(e.getMessage());
+            throw e;
         }
 
     }
@@ -116,6 +120,8 @@ public class UpdateService {
 
         } catch (Exception e) {
             e.printStackTrace();
+            logger.error(e.getMessage());
+            throw e;
         }
     }
 
@@ -133,6 +139,8 @@ public class UpdateService {
 
         } catch (Exception e) {
             e.printStackTrace();
+            logger.error(e.getMessage());
+            throw e;
         }
     }
 
@@ -150,6 +158,8 @@ public class UpdateService {
 
         } catch (Exception e) {
             e.printStackTrace();
+            logger.error(e.getMessage());
+            throw e;
         }
     }
 
