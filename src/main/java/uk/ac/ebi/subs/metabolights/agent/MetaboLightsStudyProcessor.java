@@ -118,8 +118,12 @@ public class MetaboLightsStudyProcessor {
     }
 
     private void submitFactorsAndDescriptors(Study study) {
-        this.postService.addStudyDesignDescriptors(study.getAccession(), (List<Attribute>) study.getAttributes().get("factors"));
-        this.postService.addStudyFactors(study.getAccession(), (List<Attribute>) study.getAttributes().get("studyDesignDescriptors"));
+        if (isPresent(study, "factors")) {
+            this.postService.addStudyDesignDescriptors(study.getAccession(), (List<Attribute>) study.getAttributes().get("factors"));
+        }
+        if (isPresent(study, "studyDesignDescriptors")) {
+            this.postService.addStudyFactors(study.getAccession(), (List<Attribute>) study.getAttributes().get("studyDesignDescriptors"));
+        }
     }
 
     private void updateTitleAndDescription(Study study) {
