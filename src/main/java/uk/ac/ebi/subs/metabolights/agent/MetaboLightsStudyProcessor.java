@@ -13,9 +13,7 @@ import uk.ac.ebi.subs.data.status.ProcessingStatusEnum;
 import uk.ac.ebi.subs.data.submittable.Project;
 import uk.ac.ebi.subs.data.submittable.Sample;
 import uk.ac.ebi.subs.data.submittable.Study;
-import uk.ac.ebi.subs.data.submittable.Submittable;
-import uk.ac.ebi.subs.messaging.Exchanges;
-import uk.ac.ebi.subs.messaging.Topics;
+
 import uk.ac.ebi.subs.metabolights.model.StudyAttributes;
 import uk.ac.ebi.subs.metabolights.services.FetchService;
 import uk.ac.ebi.subs.metabolights.services.PostService;
@@ -23,15 +21,9 @@ import uk.ac.ebi.subs.metabolights.services.UpdateService;
 import uk.ac.ebi.subs.processing.ProcessingCertificate;
 import uk.ac.ebi.subs.processing.ProcessingCertificateEnvelope;
 import uk.ac.ebi.subs.processing.SubmissionEnvelope;
-import uk.ac.ebi.subs.processing.UpdatedSamplesEnvelope;
-import uk.ac.ebi.subs.validator.data.SingleValidationResult;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @Component
@@ -56,7 +48,6 @@ public class MetaboLightsStudyProcessor {
     public MetaboLightsStudyProcessor(RabbitMessagingTemplate rabbitMessagingTemplate, MessageConverter messageConverter) {
         this.rabbitMessagingTemplate = rabbitMessagingTemplate;
         this.rabbitMessagingTemplate.setMessageConverter(messageConverter);
-        //  this.fetchService = fetchService;
     }
 
     protected List<ProcessingCertificate> processSamples(SubmissionEnvelope envelope) {
@@ -89,12 +80,12 @@ public class MetaboLightsStudyProcessor {
     ProcessingCertificateEnvelope processStudy(SubmissionEnvelope submissionEnvelope) {
         List<ProcessingCertificate> processingCertificateList = new ArrayList<>();
         for (Study study : submissionEnvelope.getStudies()) {
+            //todo handle many studies in one project
             if (!study.isAccessioned()) {
                 return createNewMetaboLightsStudy(study, submissionEnvelope);
             } else {
-                //todo use update service
+                processingCertificateList.addAll(processMetaData(true, study, submissionEnvelope));
             }
-
         }
         return new ProcessingCertificateEnvelope(submissionEnvelope.getSubmission().getId(), processingCertificateList);
     }
@@ -102,97 +93,146 @@ public class MetaboLightsStudyProcessor {
     ProcessingCertificateEnvelope createNewMetaboLightsStudy(Study study, SubmissionEnvelope submissionEnvelope) {
         List<ProcessingCertificate> processingCertificateList = new ArrayList<>();
         ProcessingCertificate processingCertificate = getNewCertificate();
-        String accession = this.fetchService.createNewStudyAndGetAccession();
-        study.setAccession(accession);
+        try {
+            String accession = this.fetchService.createNewStudyAndGetAccession();
+            study.setAccession(accession);
+            processingCertificate.setAccession(accession);
+            processingCertificate.setMessage("Study successfully accessioned");
+            processingCertificate.setProcessingStatus(ProcessingStatusEnum.Processing);
+        } catch (Exception e) {
+            processingCertificate.setMessage("Error creating new study : " + e.getMessage());
+            processingCertificateList.add(processingCertificate);
+            return new ProcessingCertificateEnvelope(submissionEnvelope.getSubmission().getId(), processingCertificateList);
+        }
+        processingCertificateList.addAll(processMetaData(false, study, submissionEnvelope));
+        return new ProcessingCertificateEnvelope(submissionEnvelope.getSubmission().getId(), processingCertificateList);
+    }
 
+    List<ProcessingCertificate> processMetaData(boolean update, Study study, SubmissionEnvelope submissionEnvelope) {
+        List<ProcessingCertificate> processingCertificateList = new ArrayList<>();
+        update(processingCertificateList, processTitle(study));
+        update(processingCertificateList, processDescription(study));
+        update(processingCertificateList, processStudyFactors(study, update));
+        update(processingCertificateList, processStudyDescriptors(study, update));
+
+        if (submissionEnvelope.getProjects() != null && submissionEnvelope.getProjects().size() > 0) {
+            //todo handle multiple projects
+            update(processingCertificateList, processContacts(study, submissionEnvelope.getProjects().get(0), update));
+            update(processingCertificateList, processPublications(study, submissionEnvelope.getProjects().get(0), update));
+        }
+        return processingCertificateList;
+    }
+
+    ProcessingCertificate processTitle(Study study) {
+        ProcessingCertificate certificate = null;
         if (study.getTitle() != null && !study.getTitle().isEmpty()) {
             try {
                 this.updateService.updateTitle(study.getAccession(), study.getTitle());
             } catch (Exception e) {
-                ProcessingCertificate certificate = getNewCertificate();
-                certificate.setAccession(accession);
+                certificate = getNewCertificate();
+                certificate.setAccession(study.getAccession());
                 certificate.setMessage("Error saving title : " + e.getMessage());
-                processingCertificateList.add(certificate);
             }
         }
+        return certificate;
+    }
 
+    ProcessingCertificate processDescription(Study study) {
+        ProcessingCertificate certificate = null;
         if (study.getDescription() != null && !study.getDescription().isEmpty()) {
             try {
                 this.updateService.updateDescription(study.getAccession(), study.getDescription());
             } catch (Exception e) {
-                ProcessingCertificate certificate = getNewCertificate();
-                certificate.setAccession(accession);
+                certificate = getNewCertificate();
+                certificate.setAccession(study.getAccession());
                 certificate.setMessage("Error saving description : " + e.getMessage());
-                processingCertificateList.add(certificate);
             }
         }
-
-        if (isPresent(study, StudyAttributes.STUDY_FACTORS)) {
-            try {
-                this.postService.addStudyFactors(study.getAccession(), (List<Attribute>) study.getAttributes().get(StudyAttributes.STUDY_FACTORS));
-            } catch (Exception e) {
-                ProcessingCertificate certificate = getNewCertificate();
-                certificate.setAccession(accession);
-                certificate.setMessage("Error saving factors : " + e.getMessage());
-                processingCertificateList.add(certificate);
-            }
-        }
-
-        if (isPresent(study, StudyAttributes.STUDY_DESCRIPTORS)) {
-            try {
-                this.postService.addStudyDesignDescriptors(study.getAccession(), (List<Attribute>) study.getAttributes().get(StudyAttributes.STUDY_DESCRIPTORS));
-            } catch (Exception e) {
-                ProcessingCertificate certificate = getNewCertificate();
-                certificate.setAccession(accession);
-                certificate.setMessage("Error saving descriptors : " + e.getMessage());
-                processingCertificateList.add(certificate);
-            }
-        }
-
-        if (submissionEnvelope.getProjects() != null && submissionEnvelope.getProjects().size() > 0) {
-            //todo handle multiple projects
-            if (submissionEnvelope.getProjects().get(0).getContacts() != null && !submissionEnvelope.getProjects().get(0).getContacts().isEmpty()) {
-                try {
-                    //todo create new or update. keep track of submissions
-                    this.postService.addContacts(accession, submissionEnvelope.getProjects().get(0).getContacts());
-                } catch (Exception e) {
-                    ProcessingCertificate certificate = getNewCertificate();
-                    certificate.setAccession(accession);
-                    certificate.setMessage("Error saving contacts : " + e.getMessage());
-                    processingCertificateList.add(certificate);
-                }
-            }
-
-            if (submissionEnvelope.getProjects().get(0).getPublications() != null && !submissionEnvelope.getProjects().get(0).getPublications().isEmpty()) {
-                try {
-                    this.postService.addPublications(accession, submissionEnvelope.getProjects().get(0).getPublications());
-                } catch (Exception e) {
-                    ProcessingCertificate certificate = getNewCertificate();
-                    certificate.setAccession(accession);
-                    certificate.setMessage("Error saving Publications : " + e.getMessage());
-                    processingCertificateList.add(certificate);
-                }
-            }
-        }
-        return new ProcessingCertificateEnvelope(submissionEnvelope.getSubmission().getId(), processingCertificateList);
+        return certificate;
     }
 
-    ProcessingCertificateEnvelope processStudyInSubmission(SubmissionEnvelope submissionEnvelope) {
-        List<ProcessingCertificate> processingCertificateList = new ArrayList<>();
-        if (submissionEnvelope.getStudies() != null && submissionEnvelope.getStudies().size() > 0) {
-            //todo handle many studies in one project
-            for (Study study : submissionEnvelope.getStudies()) {
-                ProcessingCertificate processingCertificate = getNewCertificate();
-                processingCertificate.setAccession(study.getAccession());
-                //todo implement put methods when the study is already accessioned
-                processingCertificateList.add(processingCertificate);
+    ProcessingCertificate processStudyFactors(Study study, boolean update) {
+        ProcessingCertificate certificate = null;
+        if (isPresent(study, StudyAttributes.STUDY_FACTORS)) {
+            try {
+                if (update) {
+                    this.updateService.updateStudyFactors(study.getAccession(), (List<Attribute>) study.getAttributes().get(StudyAttributes.STUDY_FACTORS));
+                } else {
+                    this.postService.addStudyFactors(study.getAccession(), (List<Attribute>) study.getAttributes().get(StudyAttributes.STUDY_FACTORS));
+                }
+            } catch (Exception e) {
+                certificate = getNewCertificate();
+                certificate.setAccession(study.getAccession());
+                certificate.setMessage("Error saving factors : " + e.getMessage());
             }
         }
-        return new ProcessingCertificateEnvelope(submissionEnvelope.getSubmission().getId(), processingCertificateList);
+        return certificate;
+    }
+
+    ProcessingCertificate processStudyDescriptors(Study study, boolean update) {
+        ProcessingCertificate certificate = null;
+        if (isPresent(study, StudyAttributes.STUDY_DESCRIPTORS)) {
+            try {
+                if (update) {
+                    this.updateService.updateStudyDesignDescriptors(study.getAccession(), (List<Attribute>) study.getAttributes().get(StudyAttributes.STUDY_DESCRIPTORS));
+                } else {
+                    this.postService.addStudyDesignDescriptors(study.getAccession(), (List<Attribute>) study.getAttributes().get(StudyAttributes.STUDY_DESCRIPTORS));
+                }
+            } catch (Exception e) {
+                certificate = getNewCertificate();
+                certificate.setAccession(study.getAccession());
+                certificate.setMessage("Error saving descriptors : " + e.getMessage());
+            }
+        }
+        return certificate;
+    }
+
+    ProcessingCertificate processContacts(Study study, Project project, boolean update) {
+        ProcessingCertificate certificate = null;
+        try {
+            //todo create new or update. keep track of submissions
+            if (update) {
+                this.updateService.updateContacts(study.getAccession(), project.getContacts());
+            } else {
+                this.postService.addContacts(study.getAccession(), project.getContacts());
+            }
+        } catch (Exception e) {
+            certificate = getNewCertificate();
+            certificate.setAccession(study.getAccession());
+            certificate.setMessage("Error saving contacts : " + e.getMessage());
+        }
+        return certificate;
+    }
+
+    ProcessingCertificate processPublications(Study study, Project project, boolean update) {
+        ProcessingCertificate certificate = null;
+        try {
+            //todo create new or update. keep track of submissions
+            if (update) {
+                this.updateService.updatePublications(study.getAccession(), project.getPublications());
+            } else {
+                this.postService.addPublications(study.getAccession(), project.getPublications());
+            }
+        } catch (Exception e) {
+            certificate = getNewCertificate();
+            certificate.setAccession(study.getAccession());
+            certificate.setMessage("Error saving publications : " + e.getMessage());
+        }
+        return certificate;
     }
 
     private boolean isPresent(Study study, String attribute) {
         return study.getAttributes().get(attribute) != null && !study.getAttributes().get(attribute).isEmpty();
+    }
+
+    private void update(List<ProcessingCertificate> processingCertificateList, ProcessingCertificate certificate) {
+        if (hasValue(certificate)) {
+            processingCertificateList.add(certificate);
+        }
+    }
+
+    private boolean hasValue(ProcessingCertificate processingCertificate) {
+        return processingCertificate != null;
     }
 
     private ProcessingCertificate getNewCertificate() {
