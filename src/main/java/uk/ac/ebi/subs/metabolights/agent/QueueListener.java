@@ -45,7 +45,7 @@ public class QueueListener {
 //                certificatesCompleted
 //        );
 
-        ProcessingCertificateEnvelope processingCertificateEnvelope = studyProcessor.processStudyInSubmission(envelope);
+        ProcessingCertificateEnvelope processingCertificateEnvelope = studyProcessor.processStudy(envelope);
 
 
         rabbitMessagingTemplate.convertAndSend(Exchanges.SUBMISSIONS, Topics.EVENT_SUBMISSION_AGENT_RESULTS, processingCertificateEnvelope);
