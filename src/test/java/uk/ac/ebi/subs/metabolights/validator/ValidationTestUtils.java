@@ -18,7 +18,7 @@ public class ValidationTestUtils {
         contact1.setAddress("Hinxton");
         contact1.setAffiliation("EMBL-EBI");
         contact1.setFax("+11123");
-        contact1.setEmail("test@abc.com");
+        contact1.setEmail("test-" + UUID.randomUUID() +"@abc.com");
         contact1.setFirstName("Alice");
         contact1.setMiddleInitials("");
         contact1.setLastName("Bob");
@@ -30,9 +30,9 @@ public class ValidationTestUtils {
         contact2.setFax("+11123");
         contact2.setEmail("");
         contact2.setFirstName("Alex");
-        contact1.setMiddleInitials("");
+        contact2.setMiddleInitials("");
         contact2.setLastName("Ben");
-        contact1.setPhone("56879");
+        contact2.setPhone("56879");
 
         contacts.add(contact1);
         contacts.add(contact2);
