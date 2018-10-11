@@ -199,9 +199,9 @@ public class ValidationTestUtils {
     public static List<Publication> generatePublications() {
         List<Publication> publications = new ArrayList<>();
         Publication publication = new Publication();
-        publication.setArticleTitle("This is a metabolomics test study");
+        publication.setArticleTitle("This is a metabolomics test study - " + UUID.randomUUID());
         publication.setPubmedId("12345");
-        publication.setPubmedId("12345-12345");
+        publication.setDoi("12345-12345");
         publication.setAuthors("Bob, Bill, Jam");
         publications.add(publication);
         return publications;
