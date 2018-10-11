@@ -42,13 +42,14 @@ public class MetaboLightsStudyProcessorTest {
         submission.setId("test-0");
         submissionEnvelope.setSubmission(submission);
         Study study = new Study();
+        study.setAccession("MTBLS_DEV2016");
         study.setTitle("This is test title");
         study.setDescription("This is test description");
         study.setAttributes(ValidationTestUtils.getStudyAttributes());
         Project project = ValidationTestUtils.getProjectWithContactsAndPublications().getBaseSubmittable();
         submissionEnvelope.getStudies().add(study);
         submissionEnvelope.getProjects().add(project);
-        ProcessingCertificateEnvelope processingCertificateEnvelope = metaboLightsStudyProcessor.processStudyInSubmission(submissionEnvelope);
+        ProcessingCertificateEnvelope processingCertificateEnvelope = metaboLightsStudyProcessor.processStudy(submissionEnvelope);
         assertEquals(ProcessingStatusEnum.Processing, processingCertificateEnvelope.getProcessingCertificates().get(0).getProcessingStatus());
     }
 }
