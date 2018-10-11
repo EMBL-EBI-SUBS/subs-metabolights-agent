@@ -231,7 +231,7 @@ public class ValidationTestUtils {
 
     public static Attribute generateStudyFactorAttribute() {
         Attribute attribute = new Attribute();
-        attribute.setValue("Test factor");
+        attribute.setValue("Test factor - " + UUID.randomUUID());
         Term term = new Term();
         term.setUrl("http://purl.obolibrary.org/obo/UO_0000036");
         attribute.setTerms(Arrays.asList(term));
@@ -240,7 +240,7 @@ public class ValidationTestUtils {
 
     public static Attribute generateStudyDescriptorAttribute() {
         Attribute attribute = new Attribute();
-        attribute.setValue("Test descriptor");
+        attribute.setValue("Test descriptor" + UUID.randomUUID());
         return attribute;
     }
 
