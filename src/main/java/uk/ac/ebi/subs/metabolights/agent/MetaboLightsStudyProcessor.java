@@ -94,7 +94,7 @@ public class MetaboLightsStudyProcessor {
                 ProcessingCertificate processingCertificate = getNewCertificate();
                 if (!study.isAccessioned()) {
 //                    String accession = this.fetchService.createNewStudyAndGetAccession();
-                    String accession = "MTBLS_DEV2017";
+                    String accession = "MTBLS_DEV2016";
                     study.setAccession(accession);
 
                     if (study.getTitle() != null && !study.getTitle().isEmpty()) {
@@ -169,8 +169,10 @@ public class MetaboLightsStudyProcessor {
 
                     processingCertificate.setAccession(accession);
                     processingCertificate.setProcessingStatus(ProcessingStatusEnum.Processing);
+                    processingCertificate.setMessage("Study is accessioned");
                 } else {
                     processingCertificate.setAccession(study.getAccession());
+                    //todo implement put methods when the study is already accessioned
                 }
 
                 processingCertificateList.add(processingCertificate);
