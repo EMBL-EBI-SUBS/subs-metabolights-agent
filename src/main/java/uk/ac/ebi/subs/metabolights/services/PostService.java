@@ -3,6 +3,7 @@ package uk.ac.ebi.subs.metabolights.services;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -84,6 +85,8 @@ public class PostService {
             addedContact = restTemplate.postForObject(url, requestBody, uk.ac.ebi.subs.metabolights.model.Contact.class);
         } catch (Exception e) {
             e.printStackTrace();
+            logger.error(e.getMessage());
+            throw e;
         }
         return addedContact;
     }
@@ -101,6 +104,8 @@ public class PostService {
             addedpublication = restTemplate.postForObject(url, requestBody, uk.ac.ebi.subs.metabolights.model.Publication.class);
         } catch (Exception e) {
             e.printStackTrace();
+            logger.error(e.getMessage());
+            throw e;
         }
         return addedpublication;
     }
@@ -118,6 +123,8 @@ public class PostService {
             addedProtocol = restTemplate.postForObject(url, requestBody, uk.ac.ebi.subs.metabolights.model.Protocol.class);
         } catch (Exception e) {
             e.printStackTrace();
+            logger.error(e.getMessage());
+            throw e;
         }
         return addedProtocol;
     }
@@ -135,6 +142,8 @@ public class PostService {
             addedFactor = restTemplate.postForObject(url, requestBody, uk.ac.ebi.subs.metabolights.model.Factor.class);
         } catch (Exception e) {
             e.printStackTrace();
+            logger.error(e.getMessage());
+            throw e;
         }
         return addedFactor;
     }
@@ -154,6 +163,8 @@ public class PostService {
             System.out.println(addedDescriptor);
         } catch (Exception e) {
             e.printStackTrace();
+            logger.error(e.getMessage());
+            throw e;
         }
         return addedDescriptor;
     }
@@ -166,7 +177,6 @@ public class PostService {
             headers.set("user_token", this.apiKey);
             samples.add(usiSampleToMLSample.convert(sample));
             JSONObject json = ServiceUtils.convertToJSON(samples, "samples");
-            System.out.println("JSON = " + json);
             HttpEntity<JSONObject> requestBody = new HttpEntity<>(json, headers);
 
             String url = mlProperties.getUrl() + studyID + "/samples";
@@ -174,10 +184,36 @@ public class PostService {
 
             JsonNode result = restTemplate.postForObject(url, requestBody, ObjectNode.class);
             String warnings = result.path("warnings").asText();
-            System.out.println(warnings);
-
-        } catch (Exception e) {
+        } catch (JSONException e) {
+            logger.error(e.getMessage());
+         } catch (Exception e) {
             e.printStackTrace();
+            logger.error(e.getMessage());
+            throw e;
+        }
+    }
+
+    public void addContacts(String studyID, List<Contact> contacts) {
+        for (Contact contact : contacts) {
+            add(studyID, contact);
+        }
+    }
+
+    public void addPublications(String studyID, List<Publication> publications) {
+        for (Publication publication : publications) {
+            add(studyID, publication);
+        }
+    }
+
+    public void addStudyDesignDescriptors(String studyID, List<Attribute> descriptors) {
+        for (Attribute attribute : descriptors) {
+            addDescriptor(studyID, attribute);
+        }
+    }
+
+    public void addStudyFactors(String studyID, List<Attribute> factors) {
+        for (Attribute attribute : factors) {
+            addFactor(studyID, attribute);
         }
     }
 }

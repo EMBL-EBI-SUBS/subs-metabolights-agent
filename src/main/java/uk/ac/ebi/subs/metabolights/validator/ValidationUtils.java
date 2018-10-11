@@ -3,6 +3,7 @@ package uk.ac.ebi.subs.metabolights.validator;
 import uk.ac.ebi.subs.data.component.Attribute;
 import uk.ac.ebi.subs.data.submittable.Study;
 import uk.ac.ebi.subs.data.submittable.Submittable;
+import uk.ac.ebi.subs.metabolights.model.StudyAttributes;
 import uk.ac.ebi.subs.metabolights.model.StudyDataType;
 import uk.ac.ebi.subs.validator.data.SingleValidationResult;
 import uk.ac.ebi.subs.validator.data.SingleValidationResultsEnvelope;
@@ -98,9 +99,9 @@ public class ValidationUtils {
 
     public static StudyDataType getStudyDataType(Study study){
         Map<String, Collection<Attribute>> attributes = study.getAttributes();
-        if(attributes.containsKey("studyType")){
+        if(attributes.containsKey(StudyAttributes.STUDY_TYPE)){
            for(StudyDataType studyDataType : StudyDataType.values()){
-               if(attributes.get("studyType").iterator().next().getValue().equals(studyDataType.name())){
+               if(attributes.get(StudyAttributes.STUDY_TYPE).iterator().next().getValue().equals(studyDataType.name())){
                    return studyDataType;
                }
            }

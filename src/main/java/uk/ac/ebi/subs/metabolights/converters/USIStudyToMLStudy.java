@@ -5,6 +5,7 @@ import uk.ac.ebi.subs.data.component.Attribute;
 import uk.ac.ebi.subs.metabolights.model.Factor;
 import uk.ac.ebi.subs.metabolights.model.OntologyModel;
 import uk.ac.ebi.subs.metabolights.model.Study;
+import uk.ac.ebi.subs.metabolights.model.StudyAttributes;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -35,7 +36,7 @@ public class USIStudyToMLStudy implements Converter<uk.ac.ebi.subs.data.submitta
     private List<OntologyModel> convertDescriptors(Map<String, Collection<Attribute>> attributes) {
         List<OntologyModel> studyDesignDescriptors = new ArrayList<>();
         for (Map.Entry<String, Collection<Attribute>> entry : attributes.entrySet()) {
-            if (entry.getKey().equals("studyDesignDescriptors")) {
+            if (entry.getKey().equals(StudyAttributes.STUDY_DESCRIPTORS)) {
                 for (Attribute attribute : entry.getValue()) {
                     studyDesignDescriptors.add(usiDescriptorToMLDescriptor.convert(attribute));
                 }
@@ -48,7 +49,7 @@ public class USIStudyToMLStudy implements Converter<uk.ac.ebi.subs.data.submitta
     private List<Factor> convertFactors(Map<String, Collection<Attribute>> attributes) {
         List<Factor> factors = new ArrayList<>();
         for (Map.Entry<String, Collection<Attribute>> entry : attributes.entrySet()) {
-            if (entry.getKey().equals("factors")) {
+            if (entry.getKey().equals(StudyAttributes.STUDY_FACTORS)) {
                 for (Attribute attribute : entry.getValue()) {
                     factors.add(usiFactorToMLFactor.convert(attribute));
                 }
