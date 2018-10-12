@@ -135,6 +135,8 @@ public class MetaboLightsStudyProcessor {
                 certificate.setAccession(study.getAccession());
                 certificate.setMessage("Error saving title : " + e.getMessage());
             }
+        } else {
+            return newCertificateWithWarning(study.getAccession(), "title");
         }
         return certificate;
     }
@@ -149,6 +151,8 @@ public class MetaboLightsStudyProcessor {
                 certificate.setAccession(study.getAccession());
                 certificate.setMessage("Error saving description : " + e.getMessage());
             }
+        } else {
+            return newCertificateWithWarning(study.getAccession(), "description");
         }
         return certificate;
     }
@@ -156,35 +160,37 @@ public class MetaboLightsStudyProcessor {
     ProcessingCertificate processStudyFactors(Study study, boolean update) {
         ProcessingCertificate certificate = null;
         if (isPresent(study, StudyAttributes.STUDY_FACTORS)) {
-            try {
-                if (update) {
-                    this.updateService.updateStudyFactors(study.getAccession(), (List<Attribute>) study.getAttributes().get(StudyAttributes.STUDY_FACTORS));
-                } else {
-                    this.postService.addStudyFactors(study.getAccession(), (List<Attribute>) study.getAttributes().get(StudyAttributes.STUDY_FACTORS));
-                }
-            } catch (Exception e) {
-                certificate = getNewCertificate();
-                certificate.setAccession(study.getAccession());
-                certificate.setMessage("Error saving factors : " + e.getMessage());
+            return newCertificateWithWarning(study.getAccession(), "factors");
+        }
+        try {
+            if (update) {
+                this.updateService.updateStudyFactors(study.getAccession(), (List<Attribute>) study.getAttributes().get(StudyAttributes.STUDY_FACTORS));
+            } else {
+                this.postService.addStudyFactors(study.getAccession(), (List<Attribute>) study.getAttributes().get(StudyAttributes.STUDY_FACTORS));
             }
+        } catch (Exception e) {
+            certificate = getNewCertificate();
+            certificate.setAccession(study.getAccession());
+            certificate.setMessage("Error saving factors : " + e.getMessage());
         }
         return certificate;
     }
 
     ProcessingCertificate processStudyDescriptors(Study study, boolean update) {
         ProcessingCertificate certificate = null;
-        if (isPresent(study, StudyAttributes.STUDY_DESCRIPTORS)) {
-            try {
-                if (update) {
-                    this.updateService.updateStudyDesignDescriptors(study.getAccession(), (List<Attribute>) study.getAttributes().get(StudyAttributes.STUDY_DESCRIPTORS));
-                } else {
-                    this.postService.addStudyDesignDescriptors(study.getAccession(), (List<Attribute>) study.getAttributes().get(StudyAttributes.STUDY_DESCRIPTORS));
-                }
-            } catch (Exception e) {
-                certificate = getNewCertificate();
-                certificate.setAccession(study.getAccession());
-                certificate.setMessage("Error saving descriptors : " + e.getMessage());
+        if (!isPresent(study, StudyAttributes.STUDY_DESCRIPTORS)) {
+            return newCertificateWithWarning(study.getAccession(), "descriptors");
+        }
+        try {
+            if (update) {
+                this.updateService.updateStudyDesignDescriptors(study.getAccession(), (List<Attribute>) study.getAttributes().get(StudyAttributes.STUDY_DESCRIPTORS));
+            } else {
+                this.postService.addStudyDesignDescriptors(study.getAccession(), (List<Attribute>) study.getAttributes().get(StudyAttributes.STUDY_DESCRIPTORS));
             }
+        } catch (Exception e) {
+            certificate = getNewCertificate();
+            certificate.setAccession(study.getAccession());
+            certificate.setMessage("Error saving descriptors : " + e.getMessage());
         }
         return certificate;
     }
