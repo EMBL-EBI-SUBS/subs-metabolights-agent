@@ -41,11 +41,12 @@ public class MockMetaboLightsStudyProcessorTest {
         submission.setId("test-0");
         submissionEnvelope.setSubmission(submission);
         Study study = new Study();
+        study.setAccession("MTBLS_DEV122");
         Project project = ValidationTestUtils.getProjectWithContactsAndPublications().getBaseSubmittable();
         submissionEnvelope.getStudies().add(study);
         submissionEnvelope.getProjects().add(project);
-        ProcessingCertificateEnvelope processingCertificateEnvelope = metaboLightsStudyProcessorMock.processStudyInSubmission(submissionEnvelope);
-        assertEquals(processingCertificateEnvelope.getProcessingCertificates().size(), 3);
+        ProcessingCertificateEnvelope processingCertificateEnvelope = metaboLightsStudyProcessorMock.processStudy(submissionEnvelope);
+        assertEquals(processingCertificateEnvelope.getProcessingCertificates().size(), 2);
     }
 
 

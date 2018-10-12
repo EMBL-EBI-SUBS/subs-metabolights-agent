@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import uk.ac.ebi.subs.data.component.Attribute;
 import uk.ac.ebi.subs.data.component.Contact;
+import uk.ac.ebi.subs.data.component.Publication;
 import uk.ac.ebi.subs.data.submittable.Protocol;
 import uk.ac.ebi.subs.data.submittable.Sample;
 import uk.ac.ebi.subs.metabolights.converters.*;
@@ -216,5 +217,35 @@ public class UpdateService {
         String url = mlProperties.getUrl() + studyID + "/samples?name=" + sample.getAlias();
         sample.setAlias(newName);
         update(sample,url);
+    }
+
+    public void updateContacts(String studyID, List<Contact> contacts) {
+        for (Contact contact : contacts) {
+            updateContact(studyID, contact);
+        }
+    }
+
+    public void updatePublications(String studyID, List<Publication> publications) {
+        for (Publication publication : publications) {
+            updatePublication(studyID, publication);
+        }
+    }
+
+    public void updateStudyDesignDescriptors(String studyID, List<Attribute> descriptors) {
+        for (Attribute attribute : descriptors) {
+            updateDescriptor(studyID, attribute);
+        }
+    }
+
+    public void updateStudyFactors(String studyID, List<Attribute> factors) {
+        for (Attribute attribute : factors) {
+            updateFactor(studyID, attribute);
+        }
+    }
+
+    public void updateStudyProtocols(String studyID, List<Protocol> protocols) {
+        for (Protocol protocol : protocols) {
+            updateProtocol(studyID, protocol);
+        }
     }
 }

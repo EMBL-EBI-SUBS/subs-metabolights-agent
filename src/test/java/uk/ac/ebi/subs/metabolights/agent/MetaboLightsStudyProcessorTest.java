@@ -48,7 +48,8 @@ public class MetaboLightsStudyProcessorTest {
         Project project = ValidationTestUtils.getProjectWithContactsAndPublications().getBaseSubmittable();
         submissionEnvelope.getStudies().add(study);
         submissionEnvelope.getProjects().add(project);
-        ProcessingCertificateEnvelope processingCertificateEnvelope = metaboLightsStudyProcessor.processStudyInSubmission(submissionEnvelope);
+        submissionEnvelope.getProtocols().addAll(ValidationTestUtils.generateUSIProtocols());
+        ProcessingCertificateEnvelope processingCertificateEnvelope = metaboLightsStudyProcessor.processStudy(submissionEnvelope);
         assertEquals(ProcessingStatusEnum.Processing, processingCertificateEnvelope.getProcessingCertificates().get(0).getProcessingStatus());
     }
 }
