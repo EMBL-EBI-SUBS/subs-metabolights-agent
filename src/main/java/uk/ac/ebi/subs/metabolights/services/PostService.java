@@ -17,6 +17,7 @@ import org.springframework.web.client.RestTemplate;
 import uk.ac.ebi.subs.data.component.Attribute;
 import uk.ac.ebi.subs.data.component.Contact;
 import uk.ac.ebi.subs.data.component.Publication;
+import uk.ac.ebi.subs.data.submittable.Protocol;
 import uk.ac.ebi.subs.metabolights.converters.*;
 import uk.ac.ebi.subs.metabolights.model.Sample;
 import uk.ac.ebi.subs.metabolights.validator.schema.custom.JsonAsTextPlainHttpMessageConverter;
@@ -214,6 +215,12 @@ public class PostService {
     public void addStudyFactors(String studyID, List<Attribute> factors) {
         for (Attribute attribute : factors) {
             addFactor(studyID, attribute);
+        }
+    }
+
+    public void addStudyProtocols(String studyID, List<Protocol> protocols) {
+        for (Protocol protocol : protocols) {
+            add(studyID, protocol);
         }
     }
 }

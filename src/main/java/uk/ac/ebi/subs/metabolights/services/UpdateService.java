@@ -242,4 +242,10 @@ public class UpdateService {
             updateFactor(studyID, attribute);
         }
     }
+
+    public void updateStudyProtocols(String studyID, List<Protocol> protocols) {
+        for (Protocol protocol : protocols) {
+            updateProtocol(studyID, protocol);
+        }
+    }
 }
