@@ -43,7 +43,7 @@ public class ValidationTestUtils {
         List<Submittable<Protocol>> protocols = new ArrayList<>();
         Protocol protocol = new Protocol();
         protocol.setTitle("Sample collection");
-        protocol.setDescription("");
+        protocol.setDescription("This is sample description - " + UUID.randomUUID());
 
         protocols.add(new Submittable<>(protocol, "1"));
         return protocols;
