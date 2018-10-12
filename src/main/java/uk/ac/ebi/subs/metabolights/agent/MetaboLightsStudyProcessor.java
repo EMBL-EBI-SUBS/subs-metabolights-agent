@@ -159,7 +159,7 @@ public class MetaboLightsStudyProcessor {
 
     ProcessingCertificate processStudyFactors(Study study, boolean update) {
         ProcessingCertificate certificate = null;
-        if (isPresent(study, StudyAttributes.STUDY_FACTORS)) {
+        if (!isPresent(study, StudyAttributes.STUDY_FACTORS)) {
             return newCertificateWithWarning(study.getAccession(), "factors");
         }
         try {
