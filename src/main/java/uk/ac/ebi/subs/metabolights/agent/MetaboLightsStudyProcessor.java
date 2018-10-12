@@ -11,6 +11,7 @@ import uk.ac.ebi.subs.data.component.Archive;
 import uk.ac.ebi.subs.data.component.Attribute;
 import uk.ac.ebi.subs.data.status.ProcessingStatusEnum;
 import uk.ac.ebi.subs.data.submittable.Project;
+import uk.ac.ebi.subs.data.submittable.Protocol;
 import uk.ac.ebi.subs.data.submittable.Sample;
 import uk.ac.ebi.subs.data.submittable.Study;
 
@@ -114,6 +115,7 @@ public class MetaboLightsStudyProcessor {
         update(processingCertificateList, processDescription(study));
         update(processingCertificateList, processStudyFactors(study, update));
         update(processingCertificateList, processStudyDescriptors(study, update));
+        update(processingCertificateList, processProtocols(study, submissionEnvelope.getProtocols(), update));
 
         if (submissionEnvelope.getProjects() != null && submissionEnvelope.getProjects().size() > 0) {
             //todo handle multiple projects
@@ -217,6 +219,23 @@ public class MetaboLightsStudyProcessor {
             certificate = getNewCertificate();
             certificate.setAccession(study.getAccession());
             certificate.setMessage("Error saving publications : " + e.getMessage());
+        }
+        return certificate;
+    }
+
+    ProcessingCertificate processProtocols(Study study, List<Protocol> protocols, boolean update) {
+        ProcessingCertificate certificate = null;
+        try {
+            //todo create new or update. keep track of submissions
+            if (update) {
+                this.updateService.updateStudyProtocols(study.getAccession(), protocols);
+            } else {
+                this.postService.addStudyProtocols(study.getAccession(), protocols);
+            }
+        } catch (Exception e) {
+            certificate = getNewCertificate();
+            certificate.setAccession(study.getAccession());
+            certificate.setMessage("Error saving protocols : " + e.getMessage());
         }
         return certificate;
     }
