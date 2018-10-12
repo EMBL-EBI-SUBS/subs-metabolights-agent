@@ -191,6 +191,9 @@ public class MetaboLightsStudyProcessor {
 
     ProcessingCertificate processContacts(Study study, Project project, boolean update) {
         ProcessingCertificate certificate = null;
+        if (project.getContacts() == null || project.getContacts().isEmpty()) {
+            return newCertificateWithWarning(study.getAccession(), "contacts");
+        }
         try {
             //todo create new or update. keep track of submissions
             if (update) {
@@ -208,6 +211,9 @@ public class MetaboLightsStudyProcessor {
 
     ProcessingCertificate processPublications(Study study, Project project, boolean update) {
         ProcessingCertificate certificate = null;
+        if (project.getPublications() == null || project.getPublications().isEmpty()) {
+            return newCertificateWithWarning(study.getAccession(), "publications");
+        }
         try {
             //todo create new or update. keep track of submissions
             if (update) {
@@ -225,6 +231,9 @@ public class MetaboLightsStudyProcessor {
 
     ProcessingCertificate processProtocols(Study study, List<Protocol> protocols, boolean update) {
         ProcessingCertificate certificate = null;
+        if (protocols == null || protocols.isEmpty()) {
+            return newCertificateWithWarning(study.getAccession(), "protocols");
+        }
         try {
             //todo create new or update. keep track of submissions
             if (update) {
@@ -257,6 +266,13 @@ public class MetaboLightsStudyProcessor {
     private ProcessingCertificate getNewCertificate() {
         ProcessingCertificate processingCertificate = new ProcessingCertificate();
         processingCertificate.setArchive(Archive.Metabolights);
+        return processingCertificate;
+    }
+
+    private ProcessingCertificate newCertificateWithWarning(String accession, String object) {
+        ProcessingCertificate processingCertificate = getNewCertificate();
+        processingCertificate.setAccession(accession);
+        processingCertificate.setMessage("No Study " + object + " found");
         return processingCertificate;
     }
 }
