@@ -28,7 +28,7 @@ public class ValidationTestUtils {
         contact2.setAddress("Hinxton");
         contact2.setAffiliation("EMBL-EBI");
         contact2.setFax("+11123");
-        contact2.setEmail("");
+        contact2.setEmail("test-" + UUID.randomUUID() +"@abc.com");
         contact2.setFirstName("Alex");
         contact2.setMiddleInitials("");
         contact2.setLastName("Ben");
@@ -43,9 +43,18 @@ public class ValidationTestUtils {
         List<Submittable<Protocol>> protocols = new ArrayList<>();
         Protocol protocol = new Protocol();
         protocol.setTitle("Sample collection");
-        protocol.setDescription("");
+        protocol.setDescription("This is sample description - " + UUID.randomUUID());
 
         protocols.add(new Submittable<>(protocol, "1"));
+        return protocols;
+    }
+
+    public static List<Protocol> generateUSIProtocols() {
+        List<Protocol> protocols = new ArrayList<>();
+        Protocol protocol = new Protocol();
+        protocol.setTitle("Sample collection");
+        protocol.setDescription("This is sample description - " + UUID.randomUUID());
+        protocols.add(protocol);
         return protocols;
     }
 
@@ -232,15 +241,12 @@ public class ValidationTestUtils {
     public static Attribute generateStudyFactorAttribute() {
         Attribute attribute = new Attribute();
         attribute.setValue("Test factor - " + UUID.randomUUID());
-        Term term = new Term();
-        term.setUrl("http://purl.obolibrary.org/obo/UO_0000036");
-        attribute.setTerms(Arrays.asList(term));
         return attribute;
     }
 
     public static Attribute generateStudyDescriptorAttribute() {
         Attribute attribute = new Attribute();
-        attribute.setValue("Test descriptor" + UUID.randomUUID());
+        attribute.setValue("Test descriptor - " + UUID.randomUUID());
         return attribute;
     }
 
