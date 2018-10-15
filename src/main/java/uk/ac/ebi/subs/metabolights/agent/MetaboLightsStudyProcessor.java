@@ -366,6 +366,15 @@ public class MetaboLightsStudyProcessor {
         return false;
     }
 
+    private boolean alreadyHas(List<uk.ac.ebi.subs.metabolights.model.Contact> mlContacts, Contact usiContact) {
+        for (uk.ac.ebi.subs.metabolights.model.Contact mlContact : mlContacts) {
+            if (mlContact.getEmail().equalsIgnoreCase(usiContact.getEmail())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private boolean hasValue(ProcessingCertificate processingCertificate) {
         return processingCertificate != null;
     }
