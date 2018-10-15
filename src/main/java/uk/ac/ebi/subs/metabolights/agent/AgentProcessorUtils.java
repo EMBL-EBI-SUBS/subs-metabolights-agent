@@ -3,6 +3,7 @@ package uk.ac.ebi.subs.metabolights.agent;
 import uk.ac.ebi.subs.data.component.Contact;
 import uk.ac.ebi.subs.data.component.Publication;
 import uk.ac.ebi.subs.data.submittable.Protocol;
+import uk.ac.ebi.subs.data.submittable.Study;
 import uk.ac.ebi.subs.metabolights.model.Factor;
 import uk.ac.ebi.subs.metabolights.model.OntologyModel;
 
@@ -57,6 +58,10 @@ public class AgentProcessorUtils {
             }
         }
         return false;
+    }
+
+    public static boolean isPresent(Study study, String attribute) {
+        return study.getAttributes().get(attribute) != null && !study.getAttributes().get(attribute).isEmpty();
     }
 
 }

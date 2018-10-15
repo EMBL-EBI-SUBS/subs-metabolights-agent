@@ -164,7 +164,7 @@ public class MetaboLightsStudyProcessor {
 
     ProcessingCertificate processStudyFactors(Study study, boolean update) {
         ProcessingCertificate certificate = null;
-        if (!isPresent(study, StudyAttributes.STUDY_FACTORS)) {
+        if (!AgentProcessorUtils.isPresent(study, StudyAttributes.STUDY_FACTORS)) {
             return newCertificateWithWarning(study.getAccession(), "factors");
         }
         try {
@@ -183,7 +183,7 @@ public class MetaboLightsStudyProcessor {
 
     ProcessingCertificate processStudyFactors(Study study, uk.ac.ebi.subs.metabolights.model.Study mlStudy) {
         ProcessingCertificate certificate = null;
-        if (!isPresent(study, StudyAttributes.STUDY_FACTORS)) {
+        if (!AgentProcessorUtils.isPresent(study, StudyAttributes.STUDY_FACTORS)) {
             return newCertificateWithWarning(study.getAccession(), "factors");
         }
         try {
@@ -208,7 +208,7 @@ public class MetaboLightsStudyProcessor {
 
     ProcessingCertificate processStudyDescriptors(Study study, boolean update) {
         ProcessingCertificate certificate = null;
-        if (!isPresent(study, StudyAttributes.STUDY_DESCRIPTORS)) {
+        if (!AgentProcessorUtils.isPresent(study, StudyAttributes.STUDY_DESCRIPTORS)) {
             return newCertificateWithWarning(study.getAccession(), "descriptors");
         }
         try {
@@ -227,7 +227,7 @@ public class MetaboLightsStudyProcessor {
 
     ProcessingCertificate processStudyDescriptors(Study study, uk.ac.ebi.subs.metabolights.model.Study mlStudy) {
         ProcessingCertificate certificate = null;
-        if (!isPresent(study, StudyAttributes.STUDY_DESCRIPTORS)) {
+        if (!AgentProcessorUtils.isPresent(study, StudyAttributes.STUDY_DESCRIPTORS)) {
             return newCertificateWithWarning(study.getAccession(), "descriptors");
         }
         try {
@@ -384,11 +384,6 @@ public class MetaboLightsStudyProcessor {
             certificate.setMessage("Error saving protocols : " + e.getMessage());
         }
         return certificate;
-    }
-
-
-    private boolean isPresent(Study study, String attribute) {
-        return study.getAttributes().get(attribute) != null && !study.getAttributes().get(attribute).isEmpty();
     }
 
     private void update(List<ProcessingCertificate> processingCertificateList, ProcessingCertificate certificate) {
