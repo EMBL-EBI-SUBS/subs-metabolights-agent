@@ -292,6 +292,19 @@ public class MetaboLightsStudyProcessor {
         }
     }
 
+    private boolean containsValue(List entries) {
+        return entries != null && entries.size() > 0;
+    }
+
+    private boolean alreadyPresent(List<Factor> factors, String factorAttributeName) {
+        for (Factor factor : factors) {
+            if (factor.getFactorName().equalsIgnoreCase(factorAttributeName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private boolean hasValue(ProcessingCertificate processingCertificate) {
         return processingCertificate != null;
     }
