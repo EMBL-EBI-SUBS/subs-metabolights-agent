@@ -437,6 +437,15 @@ public class MetaboLightsStudyProcessor {
         return false;
     }
 
+    private boolean alreadyHas(List<uk.ac.ebi.subs.metabolights.model.Protocol> mlProtocols, Protocol usiProtocol) {
+        for (uk.ac.ebi.subs.metabolights.model.Protocol mlProtocol : mlProtocols) {
+            if (mlProtocol.getName().equalsIgnoreCase(usiProtocol.getTitle())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private boolean hasValue(ProcessingCertificate processingCertificate) {
         return processingCertificate != null;
     }
