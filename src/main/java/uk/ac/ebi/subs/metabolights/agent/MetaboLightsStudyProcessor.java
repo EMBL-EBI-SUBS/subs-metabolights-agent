@@ -173,10 +173,12 @@ public class MetaboLightsStudyProcessor {
                 this.postService.addStudyFactors(study.getAccession(), (List<Attribute>) study.getAttributes().get(StudyAttributes.STUDY_FACTORS));
             } else {
                 for (Attribute factorAttribute : study.getAttributes().get(StudyAttributes.STUDY_FACTORS)) {
-                    if (AgentProcessorUtils.alreadyPresent(mlStudy.getFactors(), factorAttribute.getValue())) {
-                        this.updateService.updateFactor(study.getAccession(), factorAttribute);
-                    } else {
-                        this.postService.addFactor(study.getAccession(), factorAttribute);
+                    if (AgentProcessorUtils.isValid(factorAttribute.getValue())) {
+                        if (AgentProcessorUtils.alreadyPresent(mlStudy.getFactors(), factorAttribute.getValue())) {
+                            this.updateService.updateFactor(study.getAccession(), factorAttribute);
+                        } else {
+                            this.postService.addFactor(study.getAccession(), factorAttribute);
+                        }
                     }
                 }
             }
@@ -198,10 +200,12 @@ public class MetaboLightsStudyProcessor {
                 this.postService.addStudyDesignDescriptors(study.getAccession(), (List<Attribute>) study.getAttributes().get(StudyAttributes.STUDY_DESCRIPTORS));
             } else {
                 for (Attribute descriptorAttribute : study.getAttributes().get(StudyAttributes.STUDY_DESCRIPTORS)) {
-                    if (AgentProcessorUtils.alreadyHas(mlStudy.getStudyDesignDescriptors(), descriptorAttribute.getValue())) {
-                        this.updateService.updateDescriptor(study.getAccession(), descriptorAttribute);
-                    } else {
-                        this.postService.addDescriptor(study.getAccession(), descriptorAttribute);
+                    if (AgentProcessorUtils.isValid(descriptorAttribute.getValue())) {
+                        if (AgentProcessorUtils.alreadyHas(mlStudy.getStudyDesignDescriptors(), descriptorAttribute.getValue())) {
+                            this.updateService.updateDescriptor(study.getAccession(), descriptorAttribute);
+                        } else {
+                            this.postService.addDescriptor(study.getAccession(), descriptorAttribute);
+                        }
                     }
                 }
             }
@@ -223,10 +227,12 @@ public class MetaboLightsStudyProcessor {
                 this.postService.addContacts(study.getAccession(), project.getContacts());
             } else {
                 for (Contact contact : project.getContacts()) {
-                    if (AgentProcessorUtils.alreadyHas(mlStudy.getPeople(), contact)) {
-                        this.updateService.updateContact(study.getAccession(), contact);
-                    } else {
-                        this.postService.add(study.getAccession(), contact);
+                    if (AgentProcessorUtils.isValid(contact.getEmail())) {
+                        if (AgentProcessorUtils.alreadyHas(mlStudy.getPeople(), contact)) {
+                            this.updateService.updateContact(study.getAccession(), contact);
+                        } else {
+                            this.postService.add(study.getAccession(), contact);
+                        }
                     }
                 }
             }
@@ -248,10 +254,12 @@ public class MetaboLightsStudyProcessor {
                 this.postService.addPublications(study.getAccession(), project.getPublications());
             } else {
                 for (Publication publication : project.getPublications()) {
-                    if (AgentProcessorUtils.alreadyHas(mlStudy.getPublications(), publication)) {
-                        this.updateService.updatePublication(study.getAccession(), publication);
-                    } else {
-                        this.postService.add(study.getAccession(), publication);
+                    if (AgentProcessorUtils.isValid(publication.getArticleTitle())) {
+                        if (AgentProcessorUtils.alreadyHas(mlStudy.getPublications(), publication)) {
+                            this.updateService.updatePublication(study.getAccession(), publication);
+                        } else {
+                            this.postService.add(study.getAccession(), publication);
+                        }
                     }
                 }
             }
@@ -273,10 +281,12 @@ public class MetaboLightsStudyProcessor {
                 this.postService.addStudyProtocols(study.getAccession(), protocols);
             } else {
                 for (Protocol protocol : protocols) {
-                    if (AgentProcessorUtils.alreadyHas(mlStudy.getProtocols(), protocol)) {
-                        this.updateService.updateProtocol(study.getAccession(), protocol);
-                    } else {
-                        this.postService.add(study.getAccession(), protocol);
+                    if (AgentProcessorUtils.isValid(protocol.getTitle())) {
+                        if (AgentProcessorUtils.alreadyHas(mlStudy.getProtocols(), protocol)) {
+                            this.updateService.updateProtocol(study.getAccession(), protocol);
+                        } else {
+                            this.postService.add(study.getAccession(), protocol);
+                        }
                     }
                 }
             }

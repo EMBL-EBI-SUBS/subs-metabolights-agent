@@ -17,8 +17,10 @@ public class AgentProcessorUtils {
 
     public static boolean alreadyPresent(List<Factor> factors, String factorAttributeName) {
         for (Factor factor : factors) {
-            if (factor.getFactorName().equalsIgnoreCase(factorAttributeName)) {
-                return true;
+            if (isValid(factor.getFactorName())) {
+                if (factor.getFactorName().equalsIgnoreCase(factorAttributeName)) {
+                    return true;
+                }
             }
         }
         return false;
@@ -26,8 +28,10 @@ public class AgentProcessorUtils {
 
     public static boolean alreadyHas(List<OntologyModel> descriptors, String descriptorAttributeName) {
         for (OntologyModel descriptor : descriptors) {
-            if (descriptor.getAnnotationValue().equalsIgnoreCase(descriptorAttributeName)) {
-                return true;
+            if (isValid(descriptor.getAnnotationValue())) {
+                if (descriptor.getAnnotationValue().equalsIgnoreCase(descriptorAttributeName)) {
+                    return true;
+                }
             }
         }
         return false;
@@ -35,8 +39,10 @@ public class AgentProcessorUtils {
 
     public static boolean alreadyHas(List<uk.ac.ebi.subs.metabolights.model.Contact> mlContacts, Contact usiContact) {
         for (uk.ac.ebi.subs.metabolights.model.Contact mlContact : mlContacts) {
-            if (mlContact.getEmail().equalsIgnoreCase(usiContact.getEmail())) {
-                return true;
+            if (isValid(mlContact.getEmail())) {
+                if (mlContact.getEmail().equalsIgnoreCase(usiContact.getEmail())) {
+                    return true;
+                }
             }
         }
         return false;
@@ -44,8 +50,10 @@ public class AgentProcessorUtils {
 
     public static boolean alreadyHas(List<uk.ac.ebi.subs.metabolights.model.Publication> mlPublications, Publication usiPublication) {
         for (uk.ac.ebi.subs.metabolights.model.Publication mlPublication : mlPublications) {
-            if (mlPublication.getTitle().equalsIgnoreCase(usiPublication.getArticleTitle())) {
-                return true;
+            if (isValid(mlPublication.getTitle())) {
+                if (mlPublication.getTitle().equalsIgnoreCase(usiPublication.getArticleTitle())) {
+                    return true;
+                }
             }
         }
         return false;
@@ -53,15 +61,21 @@ public class AgentProcessorUtils {
 
     public static boolean alreadyHas(List<uk.ac.ebi.subs.metabolights.model.Protocol> mlProtocols, Protocol usiProtocol) {
         for (uk.ac.ebi.subs.metabolights.model.Protocol mlProtocol : mlProtocols) {
-            if (mlProtocol.getName().equalsIgnoreCase(usiProtocol.getTitle())) {
-                return true;
+            if (isValid(mlProtocol.getName())) {
+                if (mlProtocol.getName().equalsIgnoreCase(usiProtocol.getTitle())) {
+                    return true;
+                }
             }
         }
         return false;
     }
 
-    public static boolean isPresent(Study study, String attribute) {
-        return study.getAttributes().get(attribute) != null && !study.getAttributes().get(attribute).isEmpty();
+    public static boolean isPresent(Study study, String attributeType) {
+        return study.getAttributes().get(attributeType) != null && !study.getAttributes().get(attributeType).isEmpty();
+    }
+
+    public static boolean isValid(String object) {
+        return object != null && !object.isEmpty();
     }
 
 }
