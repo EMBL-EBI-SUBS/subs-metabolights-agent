@@ -187,11 +187,11 @@ public class MetaboLightsStudyProcessor {
             return newCertificateWithWarning(study.getAccession(), "factors");
         }
         try {
-            if (!containsValue(mlStudy.getFactors())) {
+            if (!AgentProcessorUtils.containsValue(mlStudy.getFactors())) {
                 this.postService.addStudyFactors(study.getAccession(), (List<Attribute>) study.getAttributes().get(StudyAttributes.STUDY_FACTORS));
             } else {
                 for (Attribute factorAttribute : study.getAttributes().get(StudyAttributes.STUDY_FACTORS)) {
-                    if (alreadyPresent(mlStudy.getFactors(), factorAttribute.getValue())) {
+                    if (AgentProcessorUtils.alreadyPresent(mlStudy.getFactors(), factorAttribute.getValue())) {
                         this.updateService.updateFactor(study.getAccession(), factorAttribute);
                     } else {
                         this.postService.addFactor(study.getAccession(), factorAttribute);
@@ -231,11 +231,11 @@ public class MetaboLightsStudyProcessor {
             return newCertificateWithWarning(study.getAccession(), "descriptors");
         }
         try {
-            if (!containsValue(mlStudy.getStudyDesignDescriptors())) {
+            if (!AgentProcessorUtils.containsValue(mlStudy.getStudyDesignDescriptors())) {
                 this.postService.addStudyDesignDescriptors(study.getAccession(), (List<Attribute>) study.getAttributes().get(StudyAttributes.STUDY_DESCRIPTORS));
             } else {
                 for (Attribute descriptorAttribute : study.getAttributes().get(StudyAttributes.STUDY_DESCRIPTORS)) {
-                    if (alreadyHas(mlStudy.getStudyDesignDescriptors(), descriptorAttribute.getValue())) {
+                    if (AgentProcessorUtils.alreadyHas(mlStudy.getStudyDesignDescriptors(), descriptorAttribute.getValue())) {
                         this.updateService.updateDescriptor(study.getAccession(), descriptorAttribute);
                     } else {
                         this.postService.addDescriptor(study.getAccession(), descriptorAttribute);
@@ -272,15 +272,15 @@ public class MetaboLightsStudyProcessor {
 
     ProcessingCertificate processContacts(Study study, Project project, uk.ac.ebi.subs.metabolights.model.Study mlStudy) {
         ProcessingCertificate certificate = null;
-        if (project.getContacts() == null || project.getContacts().isEmpty()) {
+        if (!AgentProcessorUtils.containsValue(project.getContacts())) {
             return newCertificateWithWarning(study.getAccession(), "contacts");
         }
         try {
-            if (!containsValue(mlStudy.getPeople())) {
+            if (!AgentProcessorUtils.containsValue(mlStudy.getPeople())) {
                 this.postService.addContacts(study.getAccession(), project.getContacts());
             } else {
                 for (Contact contact : project.getContacts()) {
-                    if (alreadyHas(mlStudy.getPeople(), contact)) {
+                    if (AgentProcessorUtils.alreadyHas(mlStudy.getPeople(), contact)) {
                         this.updateService.updateContact(study.getAccession(), contact);
                     } else {
                         this.postService.add(study.getAccession(), contact);
@@ -318,15 +318,15 @@ public class MetaboLightsStudyProcessor {
 
     ProcessingCertificate processPublications(Study study, Project project, uk.ac.ebi.subs.metabolights.model.Study mlStudy) {
         ProcessingCertificate certificate = null;
-        if (project.getPublications() == null || project.getPublications().isEmpty()) {
+        if (!AgentProcessorUtils.containsValue(project.getPublications())) {
             return newCertificateWithWarning(study.getAccession(), "publications");
         }
         try {
-            if (!containsValue(mlStudy.getPublications())) {
+            if (!AgentProcessorUtils.containsValue(mlStudy.getPublications())) {
                 this.postService.addPublications(study.getAccession(), project.getPublications());
             } else {
                 for (Publication publication : project.getPublications()) {
-                    if (alreadyHas(mlStudy.getPublications(), publication)) {
+                    if (AgentProcessorUtils.alreadyHas(mlStudy.getPublications(), publication)) {
                         this.updateService.updatePublication(study.getAccession(), publication);
                     } else {
                         this.postService.add(study.getAccession(), publication);
@@ -363,15 +363,15 @@ public class MetaboLightsStudyProcessor {
 
     ProcessingCertificate processProtocols(Study study, List<Protocol> protocols, uk.ac.ebi.subs.metabolights.model.Study mlStudy) {
         ProcessingCertificate certificate = null;
-        if (protocols == null || protocols.isEmpty()) {
+        if (!AgentProcessorUtils.containsValue(protocols)) {
             return newCertificateWithWarning(study.getAccession(), "protocols");
         }
         try {
-            if (!containsValue(mlStudy.getProtocols())) {
+            if (!AgentProcessorUtils.containsValue(mlStudy.getProtocols())) {
                 this.postService.addStudyProtocols(study.getAccession(), protocols);
             } else {
                 for (Protocol protocol : protocols) {
-                    if (alreadyHas(mlStudy.getProtocols(), protocol)) {
+                    if (AgentProcessorUtils.alreadyHas(mlStudy.getProtocols(), protocol)) {
                         this.updateService.updateProtocol(study.getAccession(), protocol);
                     } else {
                         this.postService.add(study.getAccession(), protocol);
@@ -395,55 +395,6 @@ public class MetaboLightsStudyProcessor {
         if (hasValue(certificate)) {
             processingCertificateList.add(certificate);
         }
-    }
-
-    private boolean containsValue(List entries) {
-        return entries != null && entries.size() > 0;
-    }
-
-    private boolean alreadyPresent(List<Factor> factors, String factorAttributeName) {
-        for (Factor factor : factors) {
-            if (factor.getFactorName().equalsIgnoreCase(factorAttributeName)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private boolean alreadyHas(List<OntologyModel> descriptors, String descriptorAttributeName) {
-        for (OntologyModel descriptor : descriptors) {
-            if (descriptor.getAnnotationValue().equalsIgnoreCase(descriptorAttributeName)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private boolean alreadyHas(List<uk.ac.ebi.subs.metabolights.model.Contact> mlContacts, Contact usiContact) {
-        for (uk.ac.ebi.subs.metabolights.model.Contact mlContact : mlContacts) {
-            if (mlContact.getEmail().equalsIgnoreCase(usiContact.getEmail())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private boolean alreadyHas(List<uk.ac.ebi.subs.metabolights.model.Publication> mlPublications, Publication usiPublication) {
-        for (uk.ac.ebi.subs.metabolights.model.Publication mlPublication : mlPublications) {
-            if (mlPublication.getTitle().equalsIgnoreCase(usiPublication.getArticleTitle())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private boolean alreadyHas(List<uk.ac.ebi.subs.metabolights.model.Protocol> mlProtocols, Protocol usiProtocol) {
-        for (uk.ac.ebi.subs.metabolights.model.Protocol mlProtocol : mlProtocols) {
-            if (mlProtocol.getName().equalsIgnoreCase(usiProtocol.getTitle())) {
-                return true;
-            }
-        }
-        return false;
     }
 
     private boolean hasValue(ProcessingCertificate processingCertificate) {
