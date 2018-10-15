@@ -16,6 +16,7 @@ import uk.ac.ebi.subs.data.submittable.Sample;
 import uk.ac.ebi.subs.data.submittable.Study;
 
 import uk.ac.ebi.subs.metabolights.model.Factor;
+import uk.ac.ebi.subs.metabolights.model.OntologyModel;
 import uk.ac.ebi.subs.metabolights.model.StudyAttributes;
 import uk.ac.ebi.subs.metabolights.services.FetchService;
 import uk.ac.ebi.subs.metabolights.services.PostService;
@@ -218,6 +219,31 @@ public class MetaboLightsStudyProcessor {
             certificate = getNewCertificate();
             certificate.setAccession(study.getAccession());
             certificate.setMessage("Error saving descriptors : " + e.getMessage());
+        }
+        return certificate;
+    }
+
+    ProcessingCertificate processStudyDescriptors(Study study, uk.ac.ebi.subs.metabolights.model.Study mlStudy) {
+        ProcessingCertificate certificate = null;
+        if (!isPresent(study, StudyAttributes.STUDY_DESCRIPTORS)) {
+            return newCertificateWithWarning(study.getAccession(), "descriptors");
+        }
+        try {
+            if (!containsValue(mlStudy.getStudyDesignDescriptors())) {
+                this.postService.addStudyDesignDescriptors(study.getAccession(), (List<Attribute>) study.getAttributes().get(StudyAttributes.STUDY_DESCRIPTORS));
+            } else {
+                for (Attribute descriptorAttribute : study.getAttributes().get(StudyAttributes.STUDY_DESCRIPTORS)) {
+                    if (alreadyHas(mlStudy.getStudyDesignDescriptors(), descriptorAttribute.getValue())) {
+                        this.updateService.updateDescriptor(study.getAccession(), descriptorAttribute);
+                    } else {
+                        this.postService.addDescriptor(study.getAccession(), descriptorAttribute);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            certificate = getNewCertificate();
+            certificate.setAccession(study.getAccession());
+            certificate.setMessage("Error saving factors : " + e.getMessage());
         }
         return certificate;
     }
