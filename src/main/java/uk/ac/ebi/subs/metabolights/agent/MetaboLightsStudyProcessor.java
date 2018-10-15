@@ -402,6 +402,15 @@ public class MetaboLightsStudyProcessor {
         return false;
     }
 
+    private boolean alreadyHas(List<uk.ac.ebi.subs.metabolights.model.Publication> mlPublications, Publication usiPublication) {
+        for (uk.ac.ebi.subs.metabolights.model.Publication mlPublication : mlPublications) {
+            if (mlPublication.getTitle().equalsIgnoreCase(usiPublication.getArticleTitle())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private boolean hasValue(ProcessingCertificate processingCertificate) {
         return processingCertificate != null;
     }
