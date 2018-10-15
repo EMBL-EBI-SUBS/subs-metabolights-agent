@@ -10,6 +10,7 @@ import uk.ac.ebi.subs.data.Submission;
 import uk.ac.ebi.subs.data.component.Archive;
 import uk.ac.ebi.subs.data.component.Attribute;
 import uk.ac.ebi.subs.data.component.Contact;
+import uk.ac.ebi.subs.data.component.Publication;
 import uk.ac.ebi.subs.data.status.ProcessingStatusEnum;
 import uk.ac.ebi.subs.data.submittable.Project;
 import uk.ac.ebi.subs.data.submittable.Protocol;
@@ -305,6 +306,32 @@ public class MetaboLightsStudyProcessor {
                 this.updateService.updatePublications(study.getAccession(), project.getPublications());
             } else {
                 this.postService.addPublications(study.getAccession(), project.getPublications());
+            }
+        } catch (Exception e) {
+            certificate = getNewCertificate();
+            certificate.setAccession(study.getAccession());
+            certificate.setMessage("Error saving publications : " + e.getMessage());
+        }
+        return certificate;
+    }
+
+
+    ProcessingCertificate processPublications(Study study, Project project, uk.ac.ebi.subs.metabolights.model.Study mlStudy) {
+        ProcessingCertificate certificate = null;
+        if (project.getPublications() == null || project.getPublications().isEmpty()) {
+            return newCertificateWithWarning(study.getAccession(), "publications");
+        }
+        try {
+            if (!containsValue(mlStudy.getPublications())) {
+                this.postService.addPublications(study.getAccession(), project.getPublications());
+            } else {
+                for (Publication publication : project.getPublications()) {
+                    if (alreadyHas(mlStudy.getPublications(), publication)) {
+                        this.updateService.updatePublication(study.getAccession(), publication);
+                    } else {
+                        this.postService.add(study.getAccession(), publication);
+                    }
+                }
             }
         } catch (Exception e) {
             certificate = getNewCertificate();
