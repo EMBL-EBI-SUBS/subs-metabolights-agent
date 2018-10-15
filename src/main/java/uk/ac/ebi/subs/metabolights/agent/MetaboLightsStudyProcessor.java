@@ -15,6 +15,7 @@ import uk.ac.ebi.subs.data.submittable.Protocol;
 import uk.ac.ebi.subs.data.submittable.Sample;
 import uk.ac.ebi.subs.data.submittable.Study;
 
+import uk.ac.ebi.subs.metabolights.model.Factor;
 import uk.ac.ebi.subs.metabolights.model.StudyAttributes;
 import uk.ac.ebi.subs.metabolights.services.FetchService;
 import uk.ac.ebi.subs.metabolights.services.PostService;
@@ -111,6 +112,7 @@ public class MetaboLightsStudyProcessor {
 
     List<ProcessingCertificate> processMetaData(boolean update, Study study, SubmissionEnvelope submissionEnvelope) {
         List<ProcessingCertificate> processingCertificateList = new ArrayList<>();
+        uk.ac.ebi.subs.metabolights.model.Study existingMetaboLightsStudy = this.fetchService.getStudy(study.getAccession());
         update(processingCertificateList, processTitle(study));
         update(processingCertificateList, processDescription(study));
         update(processingCertificateList, processStudyFactors(study, update));
@@ -167,6 +169,31 @@ public class MetaboLightsStudyProcessor {
                 this.updateService.updateStudyFactors(study.getAccession(), (List<Attribute>) study.getAttributes().get(StudyAttributes.STUDY_FACTORS));
             } else {
                 this.postService.addStudyFactors(study.getAccession(), (List<Attribute>) study.getAttributes().get(StudyAttributes.STUDY_FACTORS));
+            }
+        } catch (Exception e) {
+            certificate = getNewCertificate();
+            certificate.setAccession(study.getAccession());
+            certificate.setMessage("Error saving factors : " + e.getMessage());
+        }
+        return certificate;
+    }
+
+    ProcessingCertificate processStudyFactors(Study study, uk.ac.ebi.subs.metabolights.model.Study mlStudy) {
+        ProcessingCertificate certificate = null;
+        if (!isPresent(study, StudyAttributes.STUDY_FACTORS)) {
+            return newCertificateWithWarning(study.getAccession(), "factors");
+        }
+        try {
+            if (!containsValue(mlStudy.getFactors())) {
+                this.postService.addStudyFactors(study.getAccession(), (List<Attribute>) study.getAttributes().get(StudyAttributes.STUDY_FACTORS));
+            } else {
+                for (Attribute factorAttribute : study.getAttributes().get(StudyAttributes.STUDY_FACTORS)) {
+                    if (alreadyPresent(mlStudy.getFactors(), factorAttribute.getValue())) {
+                        this.updateService.updateFactor(study.getAccession(), factorAttribute);
+                    } else {
+                        this.postService.addFactor(study.getAccession(), factorAttribute);
+                    }
+                }
             }
         } catch (Exception e) {
             certificate = getNewCertificate();
