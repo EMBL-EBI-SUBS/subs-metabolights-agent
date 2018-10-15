@@ -361,6 +361,32 @@ public class MetaboLightsStudyProcessor {
         return certificate;
     }
 
+    ProcessingCertificate processProtocols(Study study, List<Protocol> protocols, uk.ac.ebi.subs.metabolights.model.Study mlStudy) {
+        ProcessingCertificate certificate = null;
+        if (protocols == null || protocols.isEmpty()) {
+            return newCertificateWithWarning(study.getAccession(), "protocols");
+        }
+        try {
+            if (!containsValue(mlStudy.getProtocols())) {
+                this.postService.addStudyProtocols(study.getAccession(), protocols);
+            } else {
+                for (Protocol protocol : protocols) {
+                    if (alreadyHas(mlStudy.getProtocols(), protocol)) {
+                        this.updateService.updateProtocol(study.getAccession(), protocol);
+                    } else {
+                        this.postService.add(study.getAccession(), protocol);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            certificate = getNewCertificate();
+            certificate.setAccession(study.getAccession());
+            certificate.setMessage("Error saving protocols : " + e.getMessage());
+        }
+        return certificate;
+    }
+
+
     private boolean isPresent(Study study, String attribute) {
         return study.getAttributes().get(attribute) != null && !study.getAttributes().get(attribute).isEmpty();
     }
