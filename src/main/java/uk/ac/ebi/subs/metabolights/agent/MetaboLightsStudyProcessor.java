@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import uk.ac.ebi.subs.data.Submission;
 import uk.ac.ebi.subs.data.component.Archive;
 import uk.ac.ebi.subs.data.component.Attribute;
+import uk.ac.ebi.subs.data.component.Contact;
 import uk.ac.ebi.subs.data.status.ProcessingStatusEnum;
 import uk.ac.ebi.subs.data.submittable.Project;
 import uk.ac.ebi.subs.data.submittable.Protocol;
@@ -259,6 +260,31 @@ public class MetaboLightsStudyProcessor {
                 this.updateService.updateContacts(study.getAccession(), project.getContacts());
             } else {
                 this.postService.addContacts(study.getAccession(), project.getContacts());
+            }
+        } catch (Exception e) {
+            certificate = getNewCertificate();
+            certificate.setAccession(study.getAccession());
+            certificate.setMessage("Error saving contacts : " + e.getMessage());
+        }
+        return certificate;
+    }
+
+    ProcessingCertificate processContacts(Study study, Project project, uk.ac.ebi.subs.metabolights.model.Study mlStudy) {
+        ProcessingCertificate certificate = null;
+        if (project.getContacts() == null || project.getContacts().isEmpty()) {
+            return newCertificateWithWarning(study.getAccession(), "contacts");
+        }
+        try {
+            if (!containsValue(mlStudy.getPeople())) {
+                this.postService.addContacts(study.getAccession(), project.getContacts());
+            } else {
+                for (Contact contact : project.getContacts()) {
+                    if (alreadyHas(mlStudy.getPeople(), contact)) {
+                        this.updateService.updateContact(study.getAccession(), contact);
+                    } else {
+                        this.postService.add(study.getAccession(), contact);
+                    }
+                }
             }
         } catch (Exception e) {
             certificate = getNewCertificate();
