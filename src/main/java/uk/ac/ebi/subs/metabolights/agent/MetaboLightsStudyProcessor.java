@@ -331,6 +331,15 @@ public class MetaboLightsStudyProcessor {
         return false;
     }
 
+    private boolean alreadyHas(List<OntologyModel> descriptors, String descriptorAttributeName) {
+        for (OntologyModel descriptor : descriptors) {
+            if (descriptor.getAnnotationValue().equalsIgnoreCase(descriptorAttributeName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private boolean hasValue(ProcessingCertificate processingCertificate) {
         return processingCertificate != null;
     }
