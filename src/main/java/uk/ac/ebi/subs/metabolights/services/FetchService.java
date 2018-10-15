@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
@@ -42,7 +44,14 @@ public class FetchService {
 
         try {
             String localUrl = mlProperties.getUrl() + accession;
-            Investigation investigation = restTemplate.getForObject(localUrl, Investigation.class);
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("user_token", this.apiKey);
+
+            HttpEntity<String> entity = new HttpEntity<>("parameters", headers);
+            ResponseEntity<Investigation> response = restTemplate.exchange(
+                    localUrl, HttpMethod.GET, entity, Investigation.class);
+            Investigation investigation = response.getBody();
+
             Project project = investigation.getIsaInvestigation();
 
             if (project != null) {

@@ -9,12 +9,16 @@ import org.springframework.stereotype.Component;
 import uk.ac.ebi.subs.data.Submission;
 import uk.ac.ebi.subs.data.component.Archive;
 import uk.ac.ebi.subs.data.component.Attribute;
+import uk.ac.ebi.subs.data.component.Contact;
+import uk.ac.ebi.subs.data.component.Publication;
 import uk.ac.ebi.subs.data.status.ProcessingStatusEnum;
 import uk.ac.ebi.subs.data.submittable.Project;
 import uk.ac.ebi.subs.data.submittable.Protocol;
 import uk.ac.ebi.subs.data.submittable.Sample;
 import uk.ac.ebi.subs.data.submittable.Study;
 
+import uk.ac.ebi.subs.metabolights.model.Factor;
+import uk.ac.ebi.subs.metabolights.model.OntologyModel;
 import uk.ac.ebi.subs.metabolights.model.StudyAttributes;
 import uk.ac.ebi.subs.metabolights.services.FetchService;
 import uk.ac.ebi.subs.metabolights.services.PostService;
@@ -111,16 +115,17 @@ public class MetaboLightsStudyProcessor {
 
     List<ProcessingCertificate> processMetaData(boolean update, Study study, SubmissionEnvelope submissionEnvelope) {
         List<ProcessingCertificate> processingCertificateList = new ArrayList<>();
+        uk.ac.ebi.subs.metabolights.model.Study existingMetaboLightsStudy = this.fetchService.getStudy(study.getAccession());
         update(processingCertificateList, processTitle(study));
         update(processingCertificateList, processDescription(study));
-        update(processingCertificateList, processStudyFactors(study, update));
-        update(processingCertificateList, processStudyDescriptors(study, update));
-        update(processingCertificateList, processProtocols(study, submissionEnvelope.getProtocols(), update));
+        update(processingCertificateList, processStudyFactors(study, existingMetaboLightsStudy));
+        update(processingCertificateList, processStudyDescriptors(study, existingMetaboLightsStudy));
+        update(processingCertificateList, processProtocols(study, submissionEnvelope.getProtocols(), existingMetaboLightsStudy));
 
         if (submissionEnvelope.getProjects() != null && submissionEnvelope.getProjects().size() > 0) {
             //todo handle multiple projects
-            update(processingCertificateList, processContacts(study, submissionEnvelope.getProjects().get(0), update));
-            update(processingCertificateList, processPublications(study, submissionEnvelope.getProjects().get(0), update));
+            update(processingCertificateList, processContacts(study, submissionEnvelope.getProjects().get(0), existingMetaboLightsStudy));
+            update(processingCertificateList, processPublications(study, submissionEnvelope.getProjects().get(0), existingMetaboLightsStudy));
         }
         return processingCertificateList;
     }
@@ -157,16 +162,25 @@ public class MetaboLightsStudyProcessor {
         return certificate;
     }
 
-    ProcessingCertificate processStudyFactors(Study study, boolean update) {
+
+    ProcessingCertificate processStudyFactors(Study study, uk.ac.ebi.subs.metabolights.model.Study mlStudy) {
         ProcessingCertificate certificate = null;
-        if (!isPresent(study, StudyAttributes.STUDY_FACTORS)) {
+        if (!AgentProcessorUtils.isPresent(study, StudyAttributes.STUDY_FACTORS)) {
             return newCertificateWithWarning(study.getAccession(), "factors");
         }
         try {
-            if (update) {
-                this.updateService.updateStudyFactors(study.getAccession(), (List<Attribute>) study.getAttributes().get(StudyAttributes.STUDY_FACTORS));
-            } else {
+            if (!AgentProcessorUtils.containsValue(mlStudy.getFactors())) {
                 this.postService.addStudyFactors(study.getAccession(), (List<Attribute>) study.getAttributes().get(StudyAttributes.STUDY_FACTORS));
+            } else {
+                for (Attribute factorAttribute : study.getAttributes().get(StudyAttributes.STUDY_FACTORS)) {
+                    if (AgentProcessorUtils.isValid(factorAttribute.getValue())) {
+                        if (AgentProcessorUtils.alreadyPresent(mlStudy.getFactors(), factorAttribute.getValue())) {
+                            this.updateService.updateFactor(study.getAccession(), factorAttribute);
+                        } else {
+                            this.postService.addFactor(study.getAccession(), factorAttribute);
+                        }
+                    }
+                }
             }
         } catch (Exception e) {
             certificate = getNewCertificate();
@@ -176,36 +190,51 @@ public class MetaboLightsStudyProcessor {
         return certificate;
     }
 
-    ProcessingCertificate processStudyDescriptors(Study study, boolean update) {
+    ProcessingCertificate processStudyDescriptors(Study study, uk.ac.ebi.subs.metabolights.model.Study mlStudy) {
         ProcessingCertificate certificate = null;
-        if (!isPresent(study, StudyAttributes.STUDY_DESCRIPTORS)) {
+        if (!AgentProcessorUtils.isPresent(study, StudyAttributes.STUDY_DESCRIPTORS)) {
             return newCertificateWithWarning(study.getAccession(), "descriptors");
         }
         try {
-            if (update) {
-                this.updateService.updateStudyDesignDescriptors(study.getAccession(), (List<Attribute>) study.getAttributes().get(StudyAttributes.STUDY_DESCRIPTORS));
-            } else {
+            if (!AgentProcessorUtils.containsValue(mlStudy.getStudyDesignDescriptors())) {
                 this.postService.addStudyDesignDescriptors(study.getAccession(), (List<Attribute>) study.getAttributes().get(StudyAttributes.STUDY_DESCRIPTORS));
+            } else {
+                for (Attribute descriptorAttribute : study.getAttributes().get(StudyAttributes.STUDY_DESCRIPTORS)) {
+                    if (AgentProcessorUtils.isValid(descriptorAttribute.getValue())) {
+                        if (AgentProcessorUtils.alreadyHas(mlStudy.getStudyDesignDescriptors(), descriptorAttribute.getValue())) {
+                            this.updateService.updateDescriptor(study.getAccession(), descriptorAttribute);
+                        } else {
+                            this.postService.addDescriptor(study.getAccession(), descriptorAttribute);
+                        }
+                    }
+                }
             }
         } catch (Exception e) {
             certificate = getNewCertificate();
             certificate.setAccession(study.getAccession());
-            certificate.setMessage("Error saving descriptors : " + e.getMessage());
+            certificate.setMessage("Error saving factors : " + e.getMessage());
         }
         return certificate;
     }
 
-    ProcessingCertificate processContacts(Study study, Project project, boolean update) {
+    ProcessingCertificate processContacts(Study study, Project project, uk.ac.ebi.subs.metabolights.model.Study mlStudy) {
         ProcessingCertificate certificate = null;
-        if (project.getContacts() == null || project.getContacts().isEmpty()) {
+        if (!AgentProcessorUtils.containsValue(project.getContacts())) {
             return newCertificateWithWarning(study.getAccession(), "contacts");
         }
         try {
-            //todo create new or update. keep track of submissions
-            if (update) {
-                this.updateService.updateContacts(study.getAccession(), project.getContacts());
-            } else {
+            if (!AgentProcessorUtils.containsValue(mlStudy.getPeople())) {
                 this.postService.addContacts(study.getAccession(), project.getContacts());
+            } else {
+                for (Contact contact : project.getContacts()) {
+                    if (AgentProcessorUtils.isValid(contact.getEmail())) {
+                        if (AgentProcessorUtils.alreadyHas(mlStudy.getPeople(), contact)) {
+                            this.updateService.updateContact(study.getAccession(), contact);
+                        } else {
+                            this.postService.add(study.getAccession(), contact);
+                        }
+                    }
+                }
             }
         } catch (Exception e) {
             certificate = getNewCertificate();
@@ -215,17 +244,24 @@ public class MetaboLightsStudyProcessor {
         return certificate;
     }
 
-    ProcessingCertificate processPublications(Study study, Project project, boolean update) {
+    ProcessingCertificate processPublications(Study study, Project project, uk.ac.ebi.subs.metabolights.model.Study mlStudy) {
         ProcessingCertificate certificate = null;
-        if (project.getPublications() == null || project.getPublications().isEmpty()) {
+        if (!AgentProcessorUtils.containsValue(project.getPublications())) {
             return newCertificateWithWarning(study.getAccession(), "publications");
         }
         try {
-            //todo create new or update. keep track of submissions
-            if (update) {
-                this.updateService.updatePublications(study.getAccession(), project.getPublications());
-            } else {
+            if (!AgentProcessorUtils.containsValue(mlStudy.getPublications())) {
                 this.postService.addPublications(study.getAccession(), project.getPublications());
+            } else {
+                for (Publication publication : project.getPublications()) {
+                    if (AgentProcessorUtils.isValid(publication.getArticleTitle())) {
+                        if (AgentProcessorUtils.alreadyHas(mlStudy.getPublications(), publication)) {
+                            this.updateService.updatePublication(study.getAccession(), publication);
+                        } else {
+                            this.postService.add(study.getAccession(), publication);
+                        }
+                    }
+                }
             }
         } catch (Exception e) {
             certificate = getNewCertificate();
@@ -235,17 +271,24 @@ public class MetaboLightsStudyProcessor {
         return certificate;
     }
 
-    ProcessingCertificate processProtocols(Study study, List<Protocol> protocols, boolean update) {
+    ProcessingCertificate processProtocols(Study study, List<Protocol> protocols, uk.ac.ebi.subs.metabolights.model.Study mlStudy) {
         ProcessingCertificate certificate = null;
-        if (protocols == null || protocols.isEmpty()) {
+        if (!AgentProcessorUtils.containsValue(protocols)) {
             return newCertificateWithWarning(study.getAccession(), "protocols");
         }
         try {
-            //todo create new or update. keep track of submissions
-            if (update) {
-                this.updateService.updateStudyProtocols(study.getAccession(), protocols);
-            } else {
+            if (!AgentProcessorUtils.containsValue(mlStudy.getProtocols())) {
                 this.postService.addStudyProtocols(study.getAccession(), protocols);
+            } else {
+                for (Protocol protocol : protocols) {
+                    if (AgentProcessorUtils.isValid(protocol.getTitle())) {
+                        if (AgentProcessorUtils.alreadyHas(mlStudy.getProtocols(), protocol)) {
+                            this.updateService.updateProtocol(study.getAccession(), protocol);
+                        } else {
+                            this.postService.add(study.getAccession(), protocol);
+                        }
+                    }
+                }
             }
         } catch (Exception e) {
             certificate = getNewCertificate();
@@ -253,10 +296,6 @@ public class MetaboLightsStudyProcessor {
             certificate.setMessage("Error saving protocols : " + e.getMessage());
         }
         return certificate;
-    }
-
-    private boolean isPresent(Study study, String attribute) {
-        return study.getAttributes().get(attribute) != null && !study.getAttributes().get(attribute).isEmpty();
     }
 
     private void update(List<ProcessingCertificate> processingCertificateList, ProcessingCertificate certificate) {
