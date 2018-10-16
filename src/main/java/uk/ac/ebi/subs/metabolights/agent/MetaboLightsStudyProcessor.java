@@ -109,11 +109,11 @@ public class MetaboLightsStudyProcessor {
             processingCertificateList.add(processingCertificate);
             return new ProcessingCertificateEnvelope(submissionEnvelope.getSubmission().getId(), processingCertificateList);
         }
-        processingCertificateList.addAll(processMetaData(false, study, submissionEnvelope));
+        processingCertificateList.addAll(processMetaData(study, submissionEnvelope));
         return new ProcessingCertificateEnvelope(submissionEnvelope.getSubmission().getId(), processingCertificateList);
     }
 
-    List<ProcessingCertificate> processMetaData(boolean update, Study study, SubmissionEnvelope submissionEnvelope) {
+    List<ProcessingCertificate> processMetaData(Study study, SubmissionEnvelope submissionEnvelope) {
         List<ProcessingCertificate> processingCertificateList = new ArrayList<>();
         uk.ac.ebi.subs.metabolights.model.Study existingMetaboLightsStudy = this.fetchService.getStudy(study.getAccession());
         update(processingCertificateList, processTitle(study));
