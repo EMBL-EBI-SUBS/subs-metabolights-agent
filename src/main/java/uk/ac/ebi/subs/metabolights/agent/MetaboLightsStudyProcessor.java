@@ -324,13 +324,6 @@ public class MetaboLightsStudyProcessor {
         return processingCertificate;
     }
 
-    private ProcessingCertificate newCertificateWithWarning(String accession, String object) {
-        ProcessingCertificate processingCertificate = getNewCertificate();
-        processingCertificate.setAccession(accession);
-        processingCertificate.setMessage("No Study " + object + " found");
-        return processingCertificate;
-    }
-
     private String getWarningMessage(String object) {
         return "No Study " + object + " found";
     }
