@@ -17,8 +17,6 @@ import uk.ac.ebi.subs.data.submittable.Protocol;
 import uk.ac.ebi.subs.data.submittable.Sample;
 import uk.ac.ebi.subs.data.submittable.Study;
 
-import uk.ac.ebi.subs.metabolights.model.Factor;
-import uk.ac.ebi.subs.metabolights.model.OntologyModel;
 import uk.ac.ebi.subs.metabolights.model.StudyAttributes;
 import uk.ac.ebi.subs.metabolights.services.FetchService;
 import uk.ac.ebi.subs.metabolights.services.PostService;
@@ -89,7 +87,7 @@ public class MetaboLightsStudyProcessor {
             if (!study.isAccessioned()) {
                 return createNewMetaboLightsStudy(study, submissionEnvelope);
             } else {
-                processingCertificateList.addAll(processMetaData(true, study, submissionEnvelope));
+                processingCertificateList.addAll(processMetaData(study, submissionEnvelope));
             }
         }
         return new ProcessingCertificateEnvelope(submissionEnvelope.getSubmission().getId(), processingCertificateList);
@@ -131,17 +129,18 @@ public class MetaboLightsStudyProcessor {
     }
 
     ProcessingCertificate processTitle(Study study) {
-        ProcessingCertificate certificate = null;
+        ProcessingCertificate certificate = getNewCertificate();
+        certificate.setAccession(study.getAccession());
         if (study.getTitle() != null && !study.getTitle().isEmpty()) {
             try {
                 this.updateService.updateTitle(study.getAccession(), study.getTitle());
+                certificate.setMessage(getSuccessMessage("title"));
+                certificate.setProcessingStatus(ProcessingStatusEnum.Submitted);
             } catch (Exception e) {
-                certificate = getNewCertificate();
-                certificate.setAccession(study.getAccession());
                 certificate.setMessage("Error saving title : " + e.getMessage());
             }
         } else {
-            return newCertificateWithWarning(study.getAccession(), "title");
+            certificate.setMessage(getWarningMessage("title"));
         }
         return certificate;
     }
@@ -319,5 +318,13 @@ public class MetaboLightsStudyProcessor {
         processingCertificate.setAccession(accession);
         processingCertificate.setMessage("No Study " + object + " found");
         return processingCertificate;
+    }
+
+    private String getWarningMessage(String object){
+        return "No Study " + object + " found";
+    }
+
+    private String getSuccessMessage(String object){
+        return "Study " + object + " submitted successfully";
     }
 }
