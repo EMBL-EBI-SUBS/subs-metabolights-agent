@@ -45,6 +45,7 @@ public class UpdateService {
     private USIFactorToMLFactor usiFactorToMLFactor;
     private USIDescriptorToMLDescriptor usiDescriptorToMLDescriptor;
     private USISampleToMLSample usiSampleToMLSample;
+    private HttpHeaders headers;
 
 
     public UpdateService() {
@@ -65,7 +66,9 @@ public class UpdateService {
         usiDescriptorToMLDescriptor = new USIDescriptorToMLDescriptor();
         usiSampleToMLSample = new USISampleToMLSample();
         mlProperties = new MLProperties();
-   }
+        headers = new HttpHeaders();
+        headers.set("save_audit_copy", "false");
+    }
 
     public void updateContact(String studyID, Contact contact) {
         if (contact == null) return;
@@ -73,7 +76,6 @@ public class UpdateService {
 
         try {
             ObjectNode json = ServiceUtils.convertToJSON(usiContactsToMLContacts.convert(contact), "contact");
-            HttpHeaders headers = new HttpHeaders();
             headers.set("user_token", this.apiKey);
             HttpEntity<ObjectNode> requestBody = new HttpEntity<>(json, headers);
             String url = mlProperties.getUrl() + studyID + "/contacts?email=" + contact.getEmail();
@@ -93,7 +95,6 @@ public class UpdateService {
 
         try {
             ObjectNode json = ServiceUtils.convertToJSON(usiPublicationToMLPublication.convert(publication), "publication");
-            HttpHeaders headers = new HttpHeaders();
             headers.set("user_token", this.apiKey);
             HttpEntity<ObjectNode> requestBody = new HttpEntity<>(json, headers);
             String url = mlProperties.getUrl() + studyID + "/publications?title=" + publication.getArticleTitle();
@@ -113,7 +114,6 @@ public class UpdateService {
 
         try {
             ObjectNode json = ServiceUtils.convertToJSON(usiProtocolToMLProtocol.convert(protocol), "protocol");
-            HttpHeaders headers = new HttpHeaders();
             headers.set("user_token", this.apiKey);
             HttpEntity<ObjectNode> requestBody = new HttpEntity<>(json, headers);
             String url = mlProperties.getUrl() + studyID + "/protocols?name=" + protocol.getTitle();
@@ -132,7 +132,6 @@ public class UpdateService {
 
         try {
             ObjectNode json = ServiceUtils.convertToJSON(usiFactorToMLFactor.convert(attribute), "factor");
-            HttpHeaders headers = new HttpHeaders();
             headers.set("user_token", this.apiKey);
             HttpEntity<ObjectNode> requestBody = new HttpEntity<>(json, headers);
             String url = mlProperties.getUrl() + studyID + "/factors?name=" + attribute.getValue();
@@ -151,7 +150,6 @@ public class UpdateService {
 
         try {
             ObjectNode json = ServiceUtils.convertToJSON(usiDescriptorToMLDescriptor.convert(attribute), "studyDesignDescriptor");
-            HttpHeaders headers = new HttpHeaders();
             headers.set("user_token", this.apiKey);
             HttpEntity<ObjectNode> requestBody = new HttpEntity<>(json, headers);
             String url = mlProperties.getUrl() + studyID + "/descriptors?term=" + attribute.getValue();
@@ -178,11 +176,11 @@ public class UpdateService {
 
     public void update(String url, ObjectNode content) {
         try {
-            HttpHeaders headers = new HttpHeaders();
             headers.set("user_token", this.apiKey);
+            //todo save audit false
             HttpEntity<ObjectNode> requestBody = new HttpEntity<>(content, headers);
             restTemplate.put(url, requestBody, new Object[]{});
-
+            //todo  check for 200 status
         } catch (Exception e) {
             e.printStackTrace();
             logger.error(e.getMessage());
@@ -192,16 +190,15 @@ public class UpdateService {
 
     public void updateSample(String studyID, Sample sample) {
         String url = mlProperties.getUrl() + studyID + "/samples?name=" + sample.getAlias();
-        update(sample,url);
+        update(sample, url);
     }
 
-    private void update(Sample sample, String url){
+    private void update(Sample sample, String url) {
         try {
 
             List<uk.ac.ebi.subs.metabolights.model.Sample> samples = new ArrayList<>();
             samples.add(usiSampleToMLSample.convert(sample));
             JSONObject json = ServiceUtils.convertToJSON(samples, "samples");
-            HttpHeaders headers = new HttpHeaders();
             headers.set("user_token", this.apiKey);
 
             HttpEntity<JSONObject> requestBody = new HttpEntity<>(json, headers);
@@ -216,7 +213,7 @@ public class UpdateService {
         String newName = "__TO_BE_DELETED__" + sample.getAlias();
         String url = mlProperties.getUrl() + studyID + "/samples?name=" + sample.getAlias();
         sample.setAlias(newName);
-        update(sample,url);
+        update(sample, url);
     }
 
     public void updateContacts(String studyID, List<Contact> contacts) {

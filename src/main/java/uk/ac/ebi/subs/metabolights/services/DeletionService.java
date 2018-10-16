@@ -37,6 +37,8 @@ public class DeletionService {
     private USIPublicationToMLPublication usiPublicationToMLPublication;
     private USIProtocolToMLProtocol usiProtocolToMLProtocol;
 
+    private HttpHeaders headers;
+
 
     public DeletionService() {
         this.restTemplate = new RestTemplate();
@@ -53,6 +55,8 @@ public class DeletionService {
         usiPublicationToMLPublication = new USIPublicationToMLPublication();
         usiProtocolToMLProtocol = new USIProtocolToMLProtocol();
         mlProperties = new MLProperties();
+        headers = new HttpHeaders();
+        headers.set("save_audit_copy", "false");
     }
 
 
@@ -62,7 +66,6 @@ public class DeletionService {
 
         try {
             String url = mlProperties.getUrl() + studyID + "/publications?title=" + publication.getArticleTitle();
-            HttpHeaders headers = new HttpHeaders();
             headers.set("user_token", this.apiKey);
             HttpEntity<?> request = new HttpEntity<Object>(headers);
             restTemplate.exchange(url, HttpMethod.DELETE, request, Void.class, 1);
@@ -80,7 +83,6 @@ public class DeletionService {
 
         try {
             String url = mlProperties.getUrl() + studyID + "/protocols?name=" + protocol.getTitle();
-            HttpHeaders headers = new HttpHeaders();
             headers.set("user_token", this.apiKey);
             HttpEntity<?> request = new HttpEntity<Object>(headers);
             restTemplate.exchange(url, HttpMethod.DELETE, request, Void.class, 1);
@@ -98,7 +100,6 @@ public class DeletionService {
 
         try {
             String url = mlProperties.getUrl() + studyID + "/factors?name=" + attribute.getValue();
-            HttpHeaders headers = new HttpHeaders();
             headers.set("user_token", this.apiKey);
             HttpEntity<?> request = new HttpEntity<Object>(headers);
             restTemplate.exchange(url, HttpMethod.DELETE, request, Void.class, 1);
@@ -115,7 +116,6 @@ public class DeletionService {
 
         try {
             String url = mlProperties.getUrl() + studyID + "/descriptors?term=" + attribute.getValue();
-            HttpHeaders headers = new HttpHeaders();
             headers.set("user_token", this.apiKey);
             HttpEntity<?> request = new HttpEntity<Object>(headers);
             restTemplate.exchange(url, HttpMethod.DELETE, request, Void.class, 1);
@@ -129,7 +129,6 @@ public class DeletionService {
     public void deleteMarkedSamples(String studyID) {
         try {
             String url = mlProperties.getUrl() + studyID + "/samples";
-            HttpHeaders headers = new HttpHeaders();
             headers.set("user_token", this.apiKey);
             HttpEntity<?> request = new HttpEntity<Object>(headers);
             restTemplate.exchange(url, HttpMethod.DELETE, request, Void.class, 1);

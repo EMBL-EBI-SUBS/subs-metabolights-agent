@@ -51,6 +51,8 @@ public class PostService {
     @Value("${metabolights.apiKey}")
     private String apiKey;
 
+    private HttpHeaders headers;
+
 
     public PostService() {
         this.restTemplate = new RestTemplate();
@@ -71,13 +73,14 @@ public class PostService {
         usiSampleToMLSample = new USISampleToMLSample();
 
         mlProperties = new MLProperties();
+        headers = new HttpHeaders();
+        headers.set("save_audit_copy", "false");
     }
 
 
     public uk.ac.ebi.subs.metabolights.model.Contact add(String studyID, Contact contact) {
         uk.ac.ebi.subs.metabolights.model.Contact addedContact = null;
         if (contact == null) return addedContact;
-        HttpHeaders headers = new HttpHeaders();
         headers.set("user_token", this.apiKey);
         try {
             ObjectNode contactsJSON = ServiceUtils.convertToJSON(usiContactsToMLContacts.convert(contact), "contact");
@@ -95,7 +98,6 @@ public class PostService {
     public uk.ac.ebi.subs.metabolights.model.Publication add(String studyID, Publication publication) {
         uk.ac.ebi.subs.metabolights.model.Publication addedpublication = null;
         if (publication == null) return addedpublication;
-        HttpHeaders headers = new HttpHeaders();
         headers.set("user_token", this.apiKey);
         try {
             ObjectNode json = ServiceUtils.convertToJSON(usiPublicationToMLPublication.convert(publication), "publication");
@@ -114,7 +116,6 @@ public class PostService {
     public uk.ac.ebi.subs.metabolights.model.Protocol add(String studyID, uk.ac.ebi.subs.data.submittable.Protocol protocol) {
         uk.ac.ebi.subs.metabolights.model.Protocol addedProtocol = null;
         if (protocol == null) return addedProtocol;
-        HttpHeaders headers = new HttpHeaders();
         headers.set("user_token", this.apiKey);
         try {
             ObjectNode json = ServiceUtils.convertToJSON(usiProtocolToMLProtocol.convert(protocol), "protocol");
@@ -133,7 +134,6 @@ public class PostService {
     public uk.ac.ebi.subs.metabolights.model.Factor addFactor(String studyID, Attribute attribute) {
         uk.ac.ebi.subs.metabolights.model.Factor addedFactor = null;
         if (attribute == null) return addedFactor;
-        HttpHeaders headers = new HttpHeaders();
         headers.set("user_token", this.apiKey);
         try {
             ObjectNode json = ServiceUtils.convertToJSON(usiFactorToMLFactor.convert(attribute), "factor");
@@ -152,7 +152,6 @@ public class PostService {
     public uk.ac.ebi.subs.metabolights.model.OntologyModel addDescriptor(String studyID, Attribute attribute) {
         uk.ac.ebi.subs.metabolights.model.OntologyModel addedDescriptor = null;
         if (attribute == null) return addedDescriptor;
-        HttpHeaders headers = new HttpHeaders();
         headers.set("user_token", this.apiKey);
         try {
             ObjectNode json = ServiceUtils.convertToJSON(usiDescriptorToMLDescriptor.convert(attribute), "studyDesignDescriptor");
@@ -174,7 +173,6 @@ public class PostService {
         //Sample addedSample = null;
         try {
             List<Sample> samples = new ArrayList<>();
-            HttpHeaders headers = new HttpHeaders();
             headers.set("user_token", this.apiKey);
             samples.add(usiSampleToMLSample.convert(sample));
             JSONObject json = ServiceUtils.convertToJSON(samples, "samples");
