@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -86,7 +88,9 @@ public class PostService {
             ObjectNode contactsJSON = ServiceUtils.convertToJSON(usiContactsToMLContacts.convert(contact), "contact");
             HttpEntity<ObjectNode> requestBody = new HttpEntity<>(contactsJSON, headers);
             String url = mlProperties.getUrl() + studyID + "/contacts";
-            addedContact = restTemplate.postForObject(url, requestBody, uk.ac.ebi.subs.metabolights.model.Contact.class);
+            ResponseEntity<uk.ac.ebi.subs.metabolights.model.Contact> response = restTemplate.exchange(
+                    url, HttpMethod.POST, requestBody, uk.ac.ebi.subs.metabolights.model.Contact.class);
+            addedContact = response.getBody();
         } catch (Exception e) {
             e.printStackTrace();
             logger.error(e.getMessage());
