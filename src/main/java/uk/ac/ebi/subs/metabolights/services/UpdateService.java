@@ -215,34 +215,4 @@ public class UpdateService {
         sample.setAlias(newName);
         update(sample, url);
     }
-
-    public void updateContacts(String studyID, List<Contact> contacts) {
-        for (Contact contact : contacts) {
-            updateContact(studyID, contact);
-        }
-    }
-
-    public void updatePublications(String studyID, List<Publication> publications) {
-        for (Publication publication : publications) {
-            updatePublication(studyID, publication);
-        }
-    }
-
-    public void updateStudyDesignDescriptors(String studyID, List<Attribute> descriptors) {
-        for (Attribute attribute : descriptors) {
-            updateDescriptor(studyID, attribute);
-        }
-    }
-
-    public void updateStudyFactors(String studyID, List<Attribute> factors) {
-        for (Attribute attribute : factors) {
-            updateFactor(studyID, attribute);
-        }
-    }
-
-    public void updateStudyProtocols(String studyID, List<Protocol> protocols) {
-        for (Protocol protocol : protocols) {
-            updateProtocol(studyID, protocol);
-        }
-    }
 }
