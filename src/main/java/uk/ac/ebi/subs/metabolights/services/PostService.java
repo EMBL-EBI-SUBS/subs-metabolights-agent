@@ -148,7 +148,9 @@ public class PostService {
             HttpEntity<ObjectNode> requestBody = new HttpEntity<>(json, headers);
 
             String url = mlProperties.getUrl() + studyID + "/factors";
-            addedFactor = restTemplate.postForObject(url, requestBody, uk.ac.ebi.subs.metabolights.model.Factor.class);
+            ResponseEntity<uk.ac.ebi.subs.metabolights.model.Factor> response = restTemplate.exchange(
+                    url, HttpMethod.POST, requestBody, uk.ac.ebi.subs.metabolights.model.Factor.class);
+            addedFactor = response.getBody();
         } catch (Exception e) {
             e.printStackTrace();
             logger.error(e.getMessage());
@@ -167,8 +169,9 @@ public class PostService {
             HttpEntity<ObjectNode> requestBody = new HttpEntity<>(json, headers);
 
             String url = mlProperties.getUrl() + studyID + "/descriptors";
-            addedDescriptor = restTemplate.postForObject(url, requestBody, uk.ac.ebi.subs.metabolights.model.OntologyModel.class);
-            System.out.println(addedDescriptor);
+            ResponseEntity<uk.ac.ebi.subs.metabolights.model.OntologyModel> response = restTemplate.exchange(
+                    url, HttpMethod.POST, requestBody, uk.ac.ebi.subs.metabolights.model.OntologyModel.class);
+            addedDescriptor = response.getBody();
         } catch (Exception e) {
             e.printStackTrace();
             logger.error(e.getMessage());
