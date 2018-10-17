@@ -108,7 +108,9 @@ public class PostService {
             HttpEntity<ObjectNode> requestBody = new HttpEntity<>(json, headers);
 
             String url = mlProperties.getUrl() + studyID + "/publications";
-            addedpublication = restTemplate.postForObject(url, requestBody, uk.ac.ebi.subs.metabolights.model.Publication.class);
+            ResponseEntity<uk.ac.ebi.subs.metabolights.model.Publication> response = restTemplate.exchange(
+                    url, HttpMethod.POST, requestBody, uk.ac.ebi.subs.metabolights.model.Publication.class);
+            addedpublication = response.getBody();
         } catch (Exception e) {
             e.printStackTrace();
             logger.error(e.getMessage());
