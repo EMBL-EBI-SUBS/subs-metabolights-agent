@@ -128,7 +128,9 @@ public class PostService {
             HttpEntity<ObjectNode> requestBody = new HttpEntity<>(json, headers);
 
             String url = mlProperties.getUrl() + studyID + "/protocols";
-            addedProtocol = restTemplate.postForObject(url, requestBody, uk.ac.ebi.subs.metabolights.model.Protocol.class);
+            ResponseEntity<uk.ac.ebi.subs.metabolights.model.Protocol> response = restTemplate.exchange(
+                    url, HttpMethod.POST, requestBody, uk.ac.ebi.subs.metabolights.model.Protocol.class);
+            addedProtocol = response.getBody();
         } catch (Exception e) {
             e.printStackTrace();
             logger.error(e.getMessage());
