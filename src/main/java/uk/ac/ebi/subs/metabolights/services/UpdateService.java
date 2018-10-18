@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Service;
 
@@ -79,7 +80,9 @@ public class UpdateService {
             headers.set("user_token", this.apiKey);
             HttpEntity<ObjectNode> requestBody = new HttpEntity<>(json, headers);
             String url = mlProperties.getUrl() + studyID + "/contacts?email=" + contact.getEmail();
-            restTemplate.put(url, requestBody, new Object[]{});
+            // restTemplate.put(url, requestBody, new Object[]{});
+            restTemplate.exchange(
+                    url, HttpMethod.PUT, requestBody, uk.ac.ebi.subs.metabolights.model.Contact.class);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -98,7 +101,9 @@ public class UpdateService {
             headers.set("user_token", this.apiKey);
             HttpEntity<ObjectNode> requestBody = new HttpEntity<>(json, headers);
             String url = mlProperties.getUrl() + studyID + "/publications?title=" + publication.getArticleTitle();
-            restTemplate.put(url, requestBody, new Object[]{});
+            // restTemplate.put(url, requestBody, new Object[]{});
+            restTemplate.exchange(
+                    url, HttpMethod.PUT, requestBody, uk.ac.ebi.subs.metabolights.model.Publication.class);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -117,7 +122,9 @@ public class UpdateService {
             headers.set("user_token", this.apiKey);
             HttpEntity<ObjectNode> requestBody = new HttpEntity<>(json, headers);
             String url = mlProperties.getUrl() + studyID + "/protocols?name=" + protocol.getTitle();
-            restTemplate.put(url, requestBody, new Object[]{});
+            // restTemplate.put(url, requestBody, new Object[]{});
+            restTemplate.exchange(
+                    url, HttpMethod.PUT, requestBody, uk.ac.ebi.subs.metabolights.model.Protocol.class);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -135,7 +142,9 @@ public class UpdateService {
             headers.set("user_token", this.apiKey);
             HttpEntity<ObjectNode> requestBody = new HttpEntity<>(json, headers);
             String url = mlProperties.getUrl() + studyID + "/factors?name=" + attribute.getValue();
-            restTemplate.put(url, requestBody, new Object[]{});
+            //  restTemplate.put(url, requestBody, new Object[]{});
+            restTemplate.exchange(
+                    url, HttpMethod.PUT, requestBody, uk.ac.ebi.subs.metabolights.model.Factor.class);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -153,7 +162,9 @@ public class UpdateService {
             headers.set("user_token", this.apiKey);
             HttpEntity<ObjectNode> requestBody = new HttpEntity<>(json, headers);
             String url = mlProperties.getUrl() + studyID + "/descriptors?term=" + attribute.getValue();
-            restTemplate.put(url, requestBody, new Object[]{});
+//            restTemplate.put(url, requestBody, new Object[]{});
+            restTemplate.exchange(
+                    url, HttpMethod.PUT, requestBody, uk.ac.ebi.subs.metabolights.model.OntologyModel.class);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -177,10 +188,10 @@ public class UpdateService {
     public void update(String url, ObjectNode content) {
         try {
             headers.set("user_token", this.apiKey);
-            //todo save audit false
             HttpEntity<ObjectNode> requestBody = new HttpEntity<>(content, headers);
             restTemplate.put(url, requestBody, new Object[]{});
-            //todo  check for 200 status
+//            restTemplate.exchange(
+//                    url, HttpMethod.PUT, requestBody, java.lang.Object.class);
         } catch (Exception e) {
             e.printStackTrace();
             logger.error(e.getMessage());
@@ -202,7 +213,9 @@ public class UpdateService {
             headers.set("user_token", this.apiKey);
 
             HttpEntity<JSONObject> requestBody = new HttpEntity<>(json, headers);
-            restTemplate.put(url, requestBody, new Object[]{});
+            // restTemplate.put(url, requestBody, new Object[]{});
+            restTemplate.exchange(
+                    url, HttpMethod.PUT, requestBody, java.lang.Object.class);
 
         } catch (Exception e) {
             e.printStackTrace();
