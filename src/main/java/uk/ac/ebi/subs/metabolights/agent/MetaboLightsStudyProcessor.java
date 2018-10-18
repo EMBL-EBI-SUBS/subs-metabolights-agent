@@ -102,6 +102,7 @@ public class MetaboLightsStudyProcessor {
             processingCertificate.setAccession(accession);
             processingCertificate.setMessage("Study successfully accessioned");
             processingCertificate.setProcessingStatus(ProcessingStatusEnum.Processing);
+            processingCertificateList.add(processingCertificate);
         } catch (Exception e) {
             processingCertificate.setMessage("Error creating new study : " + e.getMessage());
             processingCertificateList.add(processingCertificate);
