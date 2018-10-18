@@ -16,6 +16,8 @@ import uk.ac.ebi.subs.data.submittable.Protocol;
 import uk.ac.ebi.subs.metabolights.converters.USIContactsToMLContacts;
 import uk.ac.ebi.subs.metabolights.converters.USIProtocolToMLProtocol;
 import uk.ac.ebi.subs.metabolights.converters.USIPublicationToMLPublication;
+import uk.ac.ebi.subs.metabolights.model.Contact;
+import uk.ac.ebi.subs.metabolights.model.Publication;
 import uk.ac.ebi.subs.metabolights.validator.schema.custom.JsonAsTextPlainHttpMessageConverter;
 
 import java.util.List;
@@ -60,12 +62,29 @@ public class DeletionService {
     }
 
 
-    public void deletePublication(String studyID, uk.ac.ebi.subs.data.component.Publication publication) {
+    public void deletePublication(String studyID, Publication publication) {
         if (publication == null) return;
-        if (publication.getArticleTitle() == null) return;
+        if (publication.getTitle() == null) return;
 
         try {
-            String url = mlProperties.getUrl() + studyID + "/publications?title=" + publication.getArticleTitle();
+            String url = mlProperties.getUrl() + studyID + "/publications?title=" + publication.getTitle();
+            headers.set("user_token", this.apiKey);
+            HttpEntity<?> request = new HttpEntity<Object>(headers);
+            restTemplate.exchange(url, HttpMethod.DELETE, request, Void.class, 1);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.error(e.getMessage());
+            throw e;
+        }
+    }
+
+    public void deleteContact(String studyID, Contact contact) {
+        if (contact == null) return;
+        if (contact.getEmail() == null) return;
+
+        try {
+            String url = mlProperties.getUrl() + studyID + "/contacts?email=" + contact.getEmail();
             headers.set("user_token", this.apiKey);
             HttpEntity<?> request = new HttpEntity<Object>(headers);
             restTemplate.exchange(url, HttpMethod.DELETE, request, Void.class, 1);

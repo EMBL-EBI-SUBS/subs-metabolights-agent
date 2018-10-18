@@ -18,6 +18,7 @@ import uk.ac.ebi.subs.data.submittable.Sample;
 import uk.ac.ebi.subs.data.submittable.Study;
 
 import uk.ac.ebi.subs.metabolights.model.StudyAttributes;
+import uk.ac.ebi.subs.metabolights.services.DeletionService;
 import uk.ac.ebi.subs.metabolights.services.FetchService;
 import uk.ac.ebi.subs.metabolights.services.PostService;
 import uk.ac.ebi.subs.metabolights.services.UpdateService;
@@ -46,6 +47,9 @@ public class MetaboLightsStudyProcessor {
 
     @Autowired
     UpdateService updateService;
+
+    @Autowired
+    DeletionService deletionService;
 
     @Autowired
     public MetaboLightsStudyProcessor(RabbitMessagingTemplate rabbitMessagingTemplate, MessageConverter messageConverter) {
@@ -87,7 +91,7 @@ public class MetaboLightsStudyProcessor {
             if (!study.isAccessioned()) {
                 return createNewMetaboLightsStudy(study, submissionEnvelope);
             } else {
-                processingCertificateList.addAll(processMetaData(study, submissionEnvelope));
+                processingCertificateList.addAll(processMetaData(study, submissionEnvelope, false));
             }
         }
         return new ProcessingCertificateEnvelope(submissionEnvelope.getSubmission().getId(), processingCertificateList);
@@ -101,19 +105,29 @@ public class MetaboLightsStudyProcessor {
             study.setAccession(accession);
             processingCertificate.setAccession(accession);
             processingCertificate.setMessage("Study successfully accessioned");
-            processingCertificate.setProcessingStatus(ProcessingStatusEnum.Processing);
         } catch (Exception e) {
             processingCertificate.setMessage("Error creating new study : " + e.getMessage());
             processingCertificateList.add(processingCertificate);
             return new ProcessingCertificateEnvelope(submissionEnvelope.getSubmission().getId(), processingCertificateList);
         }
-        processingCertificateList.addAll(processMetaData(study, submissionEnvelope));
+        processingCertificateList.addAll(processMetaData(study, submissionEnvelope, true));
+        processingCertificate.setProcessingStatus(ProcessingStatusEnum.Submitted);
+        processingCertificateList.add(processingCertificate);
         return new ProcessingCertificateEnvelope(submissionEnvelope.getSubmission().getId(), processingCertificateList);
     }
 
-    List<ProcessingCertificate> processMetaData(Study study, SubmissionEnvelope submissionEnvelope) {
+    List<ProcessingCertificate> processMetaData(Study study, SubmissionEnvelope submissionEnvelope, boolean isNewSubmission) {
         List<ProcessingCertificate> processingCertificateList = new ArrayList<>();
-        uk.ac.ebi.subs.metabolights.model.Study existingMetaboLightsStudy = this.fetchService.getStudy(study.getAccession());
+        uk.ac.ebi.subs.metabolights.model.Study existingMetaboLightsStudy = getStudyBy(study.getAccession(), isNewSubmission);
+
+        if (existingMetaboLightsStudy == null) {
+            ProcessingCertificate certificate = getNewCertificate();
+            certificate.setAccession(study.getAccession());
+            certificate.setMessage("Something went wrong while trying to access the existing metabolights study");
+            processingCertificateList.add(certificate);
+            return processingCertificateList;
+        }
+
         update(processingCertificateList, processTitle(study));
         update(processingCertificateList, processDescription(study));
         update(processingCertificateList, processStudyFactors(study, existingMetaboLightsStudy));
@@ -126,6 +140,48 @@ public class MetaboLightsStudyProcessor {
             update(processingCertificateList, processPublications(study, submissionEnvelope.getProjects().get(0), existingMetaboLightsStudy));
         }
         return processingCertificateList;
+    }
+
+
+    private uk.ac.ebi.subs.metabolights.model.Study getStudyBy(String accession, boolean isNewSubmission) {
+        try {
+            uk.ac.ebi.subs.metabolights.model.Study existingMetaboLightsStudy = this.fetchService.getStudy(accession);
+            if (isNewSubmission) {
+                resetDummyValuesIn(existingMetaboLightsStudy);
+                existingMetaboLightsStudy = this.fetchService.getStudy(accession);
+                return existingMetaboLightsStudy;
+            } else {
+                return existingMetaboLightsStudy;
+            }
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return null;
+        }
+    }
+
+    private void resetDummyValuesIn(uk.ac.ebi.subs.metabolights.model.Study existingMetaboLightsStudy) {
+        resetContacts(existingMetaboLightsStudy);
+        resetPublications(existingMetaboLightsStudy);
+    }
+
+    private void resetContacts(uk.ac.ebi.subs.metabolights.model.Study existingMetaboLightsStudy) {
+        if (existingMetaboLightsStudy.getPeople() != null && existingMetaboLightsStudy.getPeople().size() == 1) {
+            try {
+                this.deletionService.deleteContact(existingMetaboLightsStudy.getIdentifier(), existingMetaboLightsStudy.getPeople().get(0));
+            } catch (Exception e) {
+                logger.error(e.getMessage());
+            }
+        }
+    }
+
+    private void resetPublications(uk.ac.ebi.subs.metabolights.model.Study existingMetaboLightsStudy) {
+        if (existingMetaboLightsStudy.getPublications() != null && existingMetaboLightsStudy.getPublications().size() == 1) {
+            try {
+                this.deletionService.deletePublication(existingMetaboLightsStudy.getIdentifier(), existingMetaboLightsStudy.getPublications().get(0));
+            } catch (Exception e) {
+                logger.error(e.getMessage());
+            }
+        }
     }
 
     ProcessingCertificate processTitle(Study study) {
