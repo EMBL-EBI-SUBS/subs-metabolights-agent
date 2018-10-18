@@ -101,14 +101,14 @@ public class MetaboLightsStudyProcessor {
             study.setAccession(accession);
             processingCertificate.setAccession(accession);
             processingCertificate.setMessage("Study successfully accessioned");
-            processingCertificate.setProcessingStatus(ProcessingStatusEnum.Processing);
-            processingCertificateList.add(processingCertificate);
         } catch (Exception e) {
             processingCertificate.setMessage("Error creating new study : " + e.getMessage());
             processingCertificateList.add(processingCertificate);
             return new ProcessingCertificateEnvelope(submissionEnvelope.getSubmission().getId(), processingCertificateList);
         }
         processingCertificateList.addAll(processMetaData(study, submissionEnvelope));
+        processingCertificate.setProcessingStatus(ProcessingStatusEnum.Submitted);
+        processingCertificateList.add(processingCertificate);
         return new ProcessingCertificateEnvelope(submissionEnvelope.getSubmission().getId(), processingCertificateList);
     }
 
