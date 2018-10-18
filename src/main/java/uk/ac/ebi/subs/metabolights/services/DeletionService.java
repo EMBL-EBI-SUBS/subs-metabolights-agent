@@ -56,7 +56,7 @@ public class DeletionService {
         usiProtocolToMLProtocol = new USIProtocolToMLProtocol();
         mlProperties = new MLProperties();
         headers = new HttpHeaders();
-      //  headers.set("save_audit_copy", "false");
+        headers.set("save_audit_copy", "false");
     }
 
 
