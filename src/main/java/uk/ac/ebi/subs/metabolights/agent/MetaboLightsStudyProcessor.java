@@ -17,6 +17,7 @@ import uk.ac.ebi.subs.data.submittable.Protocol;
 import uk.ac.ebi.subs.data.submittable.Sample;
 import uk.ac.ebi.subs.data.submittable.Study;
 
+import uk.ac.ebi.subs.metabolights.model.SampleMap;
 import uk.ac.ebi.subs.metabolights.model.StudyAttributes;
 import uk.ac.ebi.subs.metabolights.services.DeletionService;
 import uk.ac.ebi.subs.metabolights.services.FetchService;
@@ -139,9 +140,14 @@ public class MetaboLightsStudyProcessor {
             update(processingCertificateList, processContacts(study, submissionEnvelope.getProjects().get(0), existingMetaboLightsStudy));
             update(processingCertificateList, processPublications(study, submissionEnvelope.getProjects().get(0), existingMetaboLightsStudy));
         }
+
+        //todo process samples
+
+     //   update(processingCertificateList, processSamples(study, submissionEnvelope.getSamples(), existingMetaboLightsStudy));
+
+        //todo process assays
         return processingCertificateList;
     }
-
 
     private uk.ac.ebi.subs.metabolights.model.Study getStudyBy(String accession, boolean isNewSubmission) {
         try {
@@ -363,6 +369,20 @@ public class MetaboLightsStudyProcessor {
         }
         return certificate;
     }
+
+    private ProcessingCertificate processSamples(Study study, List<Sample> samples, uk.ac.ebi.subs.metabolights.model.Study existingMetaboLightsStudy) {
+        ProcessingCertificate certificate = getNewCertificate();
+        certificate.setAccession(study.getAccession());
+        /*
+        * For each usi sample convert to ML sample model
+        * From the ML sample model assign values to the ML sample spreadsheet model
+        * Add all rows to list of Samples, convert to JSON and send it over to ML
+        *
+        * */
+        SampleMap sampleMap = new SampleMap();
+        return certificate;
+    }
+
 
     private void update(List<ProcessingCertificate> processingCertificateList, ProcessingCertificate certificate) {
         if (hasValue(certificate)) {
