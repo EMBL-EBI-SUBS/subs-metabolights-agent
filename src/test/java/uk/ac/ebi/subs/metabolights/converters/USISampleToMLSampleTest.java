@@ -11,21 +11,20 @@ import static org.junit.Assert.assertEquals;
  * Created by kalai on 01/02/2018.
  */
 public class USISampleToMLSampleTest {
-    ObjectMapper mapper = new ObjectMapper();
 
     @Test
-    public void convert() throws Exception {
+    public void convert() {
         Sample usiSample = Utilities.generateUsiSample();
         USISampleToMLSample sampleConverter = new USISampleToMLSample();
         MLSampleToUSISample mlSampleToUSISample = new MLSampleToUSISample();
         uk.ac.ebi.subs.metabolights.model.Sample mlSample = sampleConverter.convert(usiSample);
 
         Sample convertedUSI = mlSampleToUSISample.convert(mlSample);
-        assertEquals(convertedUSI.getAlias(),"This is an USI alias");
+        assertEquals(convertedUSI.getAlias(), "This is an USI alias");
     }
 
     @Test
-    public void testWSSample() throws JsonProcessingException {
+    public void testWSSample() {
         uk.ac.ebi.subs.metabolights.model.Sample mlSample = Utilities.getMLSampleFromDisc();
         MLSampleToUSISample mlSampleToUSISample = new MLSampleToUSISample();
 
@@ -34,7 +33,7 @@ public class USISampleToMLSampleTest {
     }
 
     @Test
-    public void testUSIToMLSample() throws JsonProcessingException {
+    public void testUSIToMLSample() {
         Sample usiSample = Utilities.getUSISampleFromDisc();
         USISampleToMLSample usiSampleToMLSample = new USISampleToMLSample();
 
@@ -43,12 +42,12 @@ public class USISampleToMLSampleTest {
     }
 
     @Test
-    public void testMLToUSISample() throws JsonProcessingException {
+    public void testMLToUSISample() {
         uk.ac.ebi.subs.metabolights.model.Sample mlSample = Utilities.getMLSampleFromDisc();
         MLSampleToUSISample mlSampleToUSISample = new MLSampleToUSISample();
 
         Sample converted = mlSampleToUSISample.convert(mlSample);
-        assertEquals(converted.getTaxonId(),  "9606");
+        assertEquals(converted.getTaxonId().toString(), "9606");
     }
 
 }
