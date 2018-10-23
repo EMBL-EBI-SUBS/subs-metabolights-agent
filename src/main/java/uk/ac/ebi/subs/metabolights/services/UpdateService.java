@@ -23,6 +23,8 @@ import uk.ac.ebi.subs.data.component.Publication;
 import uk.ac.ebi.subs.data.submittable.Protocol;
 import uk.ac.ebi.subs.data.submittable.Sample;
 import uk.ac.ebi.subs.metabolights.converters.*;
+import uk.ac.ebi.subs.metabolights.model.SampleMap;
+import uk.ac.ebi.subs.metabolights.model.SampleRows;
 import uk.ac.ebi.subs.metabolights.validator.schema.custom.JsonAsTextPlainHttpMessageConverter;
 
 import java.util.ArrayList;
@@ -220,6 +222,30 @@ public class UpdateService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void update(List<Sample> samples, String studyID) {
+        try {
+            //todo get sample filename for the study 
+            List<uk.ac.ebi.subs.metabolights.model.Sample> mlSamples = new ArrayList<>();
+            SampleRows sampleRows = new SampleRows();
+            for (Sample sample : samples) {
+                SampleMap sampleMap = new SampleMap(usiSampleToMLSample.convert(sample));
+                sampleRows.add(sampleMap);
+            }
+            String url = mlProperties.getUrl() + studyID + "/samples/" + "todo-insert-sample-file-name";
+
+            JSONObject json = ServiceUtils.convertToJSON(sampleRows, "samples");
+            headers.set("user_token", this.apiKey);
+
+            HttpEntity<JSONObject> requestBody = new HttpEntity<>(json, headers);
+            restTemplate.exchange(
+                    url, HttpMethod.PUT, requestBody, java.lang.Object.class);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     public void markForDeletion(String studyID, Sample sample) {
