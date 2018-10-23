@@ -1,10 +1,9 @@
 package uk.ac.ebi.subs.metabolights.model;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Created by kalai on 22/10/2018.
  */
-public class SampleRows {
-    public List<SampleMap> samples;
+public class SampleRows extends ArrayList<SampleMap> {
 }
