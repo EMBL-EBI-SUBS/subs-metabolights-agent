@@ -39,7 +39,7 @@ public class USISampleToMLSampleTest {
         USISampleToMLSample usiSampleToMLSample = new USISampleToMLSample();
 
         uk.ac.ebi.subs.metabolights.model.Sample mlSample = usiSampleToMLSample.convert(usiSample);
-       assertEquals(usiSample.getTaxon(), "Homo sapiens");
+        assertEquals(mlSample.getDerivesFrom().get(0).getCharacteristics().get(0).getValue().getAnnotationValue(), "Synechocystis sp. PCC 6803");
     }
 
     @Test
