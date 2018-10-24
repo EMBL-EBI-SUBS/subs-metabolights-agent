@@ -16,6 +16,7 @@ import org.springframework.web.client.RestTemplate;
 import uk.ac.ebi.subs.metabolights.model.Investigation;
 import uk.ac.ebi.subs.metabolights.model.Project;
 import uk.ac.ebi.subs.metabolights.model.Study;
+import uk.ac.ebi.subs.metabolights.model.StudyFiles;
 import uk.ac.ebi.subs.metabolights.validator.schema.custom.JsonAsTextPlainHttpMessageConverter;
 
 import java.util.List;
@@ -39,17 +40,13 @@ public class FetchService {
         this.restTemplate.setMessageConverters(messageConverters);
         mlProperties = new MLProperties();
     }
-    
+
     public Study getStudy(String accession) {
 
         try {
             String localUrl = mlProperties.getUrl() + accession;
-            HttpHeaders headers = new HttpHeaders();
-            headers.set("user_token", this.apiKey);
-
-            HttpEntity<String> entity = new HttpEntity<>("parameters", headers);
             ResponseEntity<Investigation> response = restTemplate.exchange(
-                    localUrl, HttpMethod.GET, entity, Investigation.class);
+                    localUrl, HttpMethod.GET, getHttpEntity(), Investigation.class);
             Investigation investigation = response.getBody();
 
             Project project = investigation.getIsaInvestigation();
@@ -61,8 +58,7 @@ public class FetchService {
         } catch (RestClientException e) {
             logger.error(e.getMessage());
             throw new RestClientException(e.getMessage(), e);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             logger.error(e.getMessage());
             throw e;
         }
@@ -73,12 +69,7 @@ public class FetchService {
         String accession;
         try {
             String endPoint = mlProperties.getUrl() + "create_study";
-
-            HttpHeaders headers = new HttpHeaders();
-            headers.set("user_token", this.apiKey);
-
-            HttpEntity<String> entity = new HttpEntity<>("parameters", headers);
-            JsonNode result = restTemplate.postForObject(endPoint, entity, ObjectNode.class);
+            JsonNode result = restTemplate.postForObject(endPoint, getHttpEntity(), ObjectNode.class);
             accession = result.path("new_study").asText();
             return accession;
 
@@ -89,6 +80,14 @@ public class FetchService {
             logger.error(e.getMessage());
             throw e;
         }
+    }
+
+    private HttpEntity<String> getHttpEntity() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("user_token", this.apiKey);
+
+        HttpEntity<String> entity = new HttpEntity<>("parameters", headers);
+        return entity;
     }
 
 }
