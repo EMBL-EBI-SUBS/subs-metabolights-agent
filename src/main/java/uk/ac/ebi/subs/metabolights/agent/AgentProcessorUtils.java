@@ -6,6 +6,8 @@ import uk.ac.ebi.subs.data.submittable.Protocol;
 import uk.ac.ebi.subs.data.submittable.Study;
 import uk.ac.ebi.subs.metabolights.model.Factor;
 import uk.ac.ebi.subs.metabolights.model.OntologyModel;
+import uk.ac.ebi.subs.metabolights.model.StudyFile;
+import uk.ac.ebi.subs.metabolights.model.StudyFiles;
 
 import java.util.List;
 
@@ -76,6 +78,24 @@ public class AgentProcessorUtils {
 
     public static boolean isValid(String object) {
         return object != null && !object.isEmpty();
+    }
+
+    public static String getFileName(StudyFiles studyFiles, String prefix) {
+        for (StudyFile studyFile : studyFiles.getStudyFiles()) {
+            if (studyFile.getFile().toLowerCase().startsWith(prefix)) {
+                return studyFile.getFile();
+            }
+        }
+        return "";
+    }
+
+    public static String getSampleFileName(StudyFiles studyFiles) {
+        return getFileName(studyFiles, "s_");
+    }
+
+    public static String getAssayFileName(StudyFiles studyFiles) {
+        //todo some cases have multiple a_ files
+        return getFileName(studyFiles, "a_");
     }
 
 }
