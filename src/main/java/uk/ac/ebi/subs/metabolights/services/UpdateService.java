@@ -224,16 +224,15 @@ public class UpdateService {
         }
     }
 
-    private void update(List<Sample> samples, String studyID) {
+    private void update(List<Sample> samples, String studyID, String sampleFileName) {
         try {
-            //todo get sample filename for the study 
             List<uk.ac.ebi.subs.metabolights.model.Sample> mlSamples = new ArrayList<>();
             SampleRows sampleRows = new SampleRows();
             for (Sample sample : samples) {
                 SampleMap sampleMap = new SampleMap(usiSampleToMLSample.convert(sample));
                 sampleRows.add(sampleMap);
             }
-            String url = mlProperties.getUrl() + studyID + "/samples/" + "todo-insert-sample-file-name";
+            String url = mlProperties.getUrl() + studyID + "/samples/" + sampleFileName;
 
             JSONObject json = ServiceUtils.convertToJSON(sampleRows, "samples");
             headers.set("user_token", this.apiKey);

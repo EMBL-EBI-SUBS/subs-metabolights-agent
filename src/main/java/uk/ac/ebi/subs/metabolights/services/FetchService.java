@@ -19,6 +19,7 @@ import uk.ac.ebi.subs.metabolights.model.Study;
 import uk.ac.ebi.subs.metabolights.model.StudyFiles;
 import uk.ac.ebi.subs.metabolights.validator.schema.custom.JsonAsTextPlainHttpMessageConverter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -91,12 +92,9 @@ public class FetchService {
             StudyFiles studyFiles = response.getBody();
             return studyFiles;
 
-        } catch (RestClientException e) {
-            logger.error(e.getMessage());
-            throw new RestClientException(e.getMessage(), e);
         } catch (Exception e) {
             logger.error(e.getMessage());
-            throw e;
+            return new StudyFiles();
         }
     }
 
