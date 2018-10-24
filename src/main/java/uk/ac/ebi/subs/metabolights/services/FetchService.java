@@ -82,6 +82,24 @@ public class FetchService {
         }
     }
 
+    public StudyFiles getStudyFiles(String accession) {
+        try {
+            String localUrl = mlProperties.getUrl() + accession + "/isa-tab/study_files";
+
+            ResponseEntity<StudyFiles> response = restTemplate.exchange(
+                    localUrl, HttpMethod.GET, getHttpEntity(), StudyFiles.class);
+            StudyFiles studyFiles = response.getBody();
+            return studyFiles;
+
+        } catch (RestClientException e) {
+            logger.error(e.getMessage());
+            throw new RestClientException(e.getMessage(), e);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw e;
+        }
+    }
+
     private HttpEntity<String> getHttpEntity() {
         HttpHeaders headers = new HttpHeaders();
         headers.set("user_token", this.apiKey);
