@@ -22,6 +22,8 @@ import uk.ac.ebi.subs.data.component.Publication;
 import uk.ac.ebi.subs.data.submittable.Protocol;
 import uk.ac.ebi.subs.metabolights.converters.*;
 import uk.ac.ebi.subs.metabolights.model.Sample;
+import uk.ac.ebi.subs.metabolights.model.SampleMap;
+import uk.ac.ebi.subs.metabolights.model.SampleRows;
 import uk.ac.ebi.subs.metabolights.validator.schema.custom.JsonAsTextPlainHttpMessageConverter;
 
 import java.util.ArrayList;
@@ -201,6 +203,29 @@ public class PostService {
             logger.error(e.getMessage());
             throw e;
         }
+    }
+
+    private void addSamples(List<uk.ac.ebi.subs.data.submittable.Sample> samples, String studyID, String sampleFileName) {
+        try {
+            List<uk.ac.ebi.subs.metabolights.model.Sample> mlSamples = new ArrayList<>();
+            SampleRows sampleRows = new SampleRows();
+            for (uk.ac.ebi.subs.data.submittable.Sample sample : samples) {
+                SampleMap sampleMap = new SampleMap(usiSampleToMLSample.convert(sample));
+                sampleRows.add(sampleMap);
+            }
+            String url = mlProperties.getUrl() + studyID + "/samples/" + sampleFileName;
+
+            JSONObject json = ServiceUtils.convertToJSON(sampleRows, "samples");
+            headers.set("user_token", this.apiKey);
+
+            HttpEntity<JSONObject> requestBody = new HttpEntity<>(json, headers);
+            restTemplate.exchange(
+                    url, HttpMethod.POST, requestBody, java.lang.Object.class);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     public void addContacts(String studyID, List<Contact> contacts) {
