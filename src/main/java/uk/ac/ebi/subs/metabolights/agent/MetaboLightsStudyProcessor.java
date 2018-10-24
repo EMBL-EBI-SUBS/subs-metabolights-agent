@@ -19,6 +19,7 @@ import uk.ac.ebi.subs.data.submittable.Study;
 
 import uk.ac.ebi.subs.metabolights.model.SampleMap;
 import uk.ac.ebi.subs.metabolights.model.StudyAttributes;
+import uk.ac.ebi.subs.metabolights.model.StudyFiles;
 import uk.ac.ebi.subs.metabolights.services.DeletionService;
 import uk.ac.ebi.subs.metabolights.services.FetchService;
 import uk.ac.ebi.subs.metabolights.services.PostService;
@@ -141,11 +142,13 @@ public class MetaboLightsStudyProcessor {
             update(processingCertificateList, processPublications(study, submissionEnvelope.getProjects().get(0), existingMetaboLightsStudy));
         }
 
-        //todo process samples
-
-     //   update(processingCertificateList, processSamples(study, submissionEnvelope.getSamples(), existingMetaboLightsStudy));
+        StudyFiles studyFiles = this.fetchService.getStudyFiles(study.getAccession());
+        String sampleFileName = AgentProcessorUtils.getSampleFileName(studyFiles);
 
         //todo process assays
+        update(processingCertificateList, processSamples(study, submissionEnvelope.getSamples(), sampleFileName, isNewSubmission));
+        //todo process samples
+
         return processingCertificateList;
     }
 
@@ -370,17 +373,37 @@ public class MetaboLightsStudyProcessor {
         return certificate;
     }
 
-    private ProcessingCertificate processSamples(Study study, List<Sample> samples, uk.ac.ebi.subs.metabolights.model.Study existingMetaboLightsStudy) {
+    private ProcessingCertificate processSamples(Study study, List<Sample> samples, String sampleFileToUpdate, boolean isNewSubmission) {
         ProcessingCertificate certificate = getNewCertificate();
         certificate.setAccession(study.getAccession());
-        /*
-        * For each usi sample convert to ML sample model
-        * From the ML sample model assign values to the ML sample spreadsheet model
-        * Add all rows to list of Samples, convert to JSON and send it over to ML
-        *
-        * */
-        SampleMap sampleMap = new SampleMap();
+        if (!AgentProcessorUtils.containsValue(samples)) {
+            certificate.setMessage(getWarningMessage("samples"));
+            return certificate;
+        }
+        if (sampleFileToUpdate.isEmpty()) {
+            certificate.setMessage("Something went wrong while trying to access the existing metabolights study files. Unable to update samples");
+            return certificate;
+        }
+        if (isNewSubmission) {
+            try {
+                deleteDefaultRow(study.getAccession(), sampleFileToUpdate);
+                this.postService.addSamples(samples, study.getAccession(), sampleFileToUpdate);
+            } catch (Exception e) {
+                certificate.setMessage("Error saving protocols : " + e.getMessage());
+            }
+        } else {
+            // todo get all sample rows, cross check our names, add new ones, update exisiting ones
+        }
         return certificate;
+    }
+
+    private void deleteDefaultRow(String accession, String sampleFileToUpdate) throws Exception {
+        /*
+         * Sample file have default one row. Remove it using index 0
+         */
+        List<Integer> sampleRowsToDelete = new ArrayList<>();
+        sampleRowsToDelete.add(new Integer(0));
+        this.deletionService.deleteSampleRows(accession, sampleFileToUpdate, sampleRowsToDelete);
     }
 
 
