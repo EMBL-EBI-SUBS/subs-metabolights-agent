@@ -11,12 +11,16 @@ import java.util.LinkedHashMap;
 public class SampleMap extends LinkedHashMap {
 
     public SampleMap(Sample sample) {
+        super();
         process(sample);
     }
 
     private void process(Sample sample) {
         put(SampleSpreadSheetConstants.PROTOCOL_REF, "Sample collection");
         put(SampleSpreadSheetConstants.SAMPLE_NAME, sample.getName());
+        /*
+        Set organism and organism part information
+         */
         if (sample.getDerivesFrom().size() > 0) {
             for (Source source : sample.getDerivesFrom()) {
                 put(SampleSpreadSheetConstants.SOURCE_NAME, source.getName());
@@ -32,8 +36,22 @@ public class SampleMap extends LinkedHashMap {
                             put(SampleSpreadSheetConstants.ORGANISM_PART_TERM_SOURCE_REF, sourceOntologyModel.getValue().getTermSource().getFile());
                             put(SampleSpreadSheetConstants.ORGANISM_PART_TERM_ACCESSION_NUMBER, sourceOntologyModel.getValue().getTermAccession());
                         }
+                        if (sourceOntologyModel.getCategory().getAnnotationValue().equalsIgnoreCase("variant")) {
+                            put(SampleSpreadSheetConstants.VARIANT, sourceOntologyModel.getValue().getAnnotationValue());
+                            put(SampleSpreadSheetConstants.VARIANT_TERM_SOURCE_REF, sourceOntologyModel.getValue().getTermSource().getFile());
+                            put(SampleSpreadSheetConstants.VARIANT_TERM_ACCESSION_NUMBER, sourceOntologyModel.getValue().getTermAccession());
+                        }
                     }
                 }
+            }
+        }
+      /*
+        Set factor information
+         */
+        if (sample.getFactorValues().size() > 0) {
+            for (SampleFactorValue sampleFactorValue : sample.getFactorValues()) {
+                OntologyModel model = (OntologyModel) sampleFactorValue.getValue();
+                put("Factor Value[" + sampleFactorValue.getCategory().getFactorName() + "]", model.getAnnotationValue());
             }
         }
     }
