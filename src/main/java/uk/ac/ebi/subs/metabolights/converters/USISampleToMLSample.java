@@ -52,7 +52,7 @@ public class USISampleToMLSample implements Converter<uk.ac.ebi.subs.data.submit
         List<SampleFactorValue> mlSampleFactorValues = new ArrayList<SampleFactorValue>();
 
         for (Map.Entry<String, Collection<Attribute>> entry : usiAttributes.entrySet()) {
-            if (!entry.getKey().toLowerCase().equals("organism") && !entry.getKey().toLowerCase().equals("organism part")) {
+            if (!entry.getKey().toLowerCase().equals("organism") && !entry.getKey().toLowerCase().equals("organism part") && !entry.getKey().toLowerCase().equals("variant")) {
                 if (entry.getValue().size() > 0) {
                     Attribute attribute = entry.getValue().iterator().next();
                     SampleFactorValue sampleFactorValue = new SampleFactorValue();
@@ -85,7 +85,7 @@ public class USISampleToMLSample implements Converter<uk.ac.ebi.subs.data.submit
         source.setName(title);
         //todo check for multiple derivesFrom entries. Only one entry in the List is assumed
         for (Map.Entry<String, Collection<Attribute>> entry : usiAttributes.entrySet()) {
-            if (entry.getKey().toLowerCase().equals("organism") || entry.getKey().toLowerCase().equals("organism part")) {
+            if (entry.getKey().toLowerCase().equals("organism") || entry.getKey().toLowerCase().equals("organism part") || entry.getKey().toLowerCase().equals("variant")) {
                 if (entry.getValue().size() > 0) {
                     Attribute attribute = entry.getValue().iterator().next();
 
