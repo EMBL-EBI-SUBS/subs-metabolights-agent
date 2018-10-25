@@ -215,7 +215,8 @@ public class PostService {
             }
             String url = mlProperties.getUrl() + studyID + "/samples/" + sampleFileName;
 
-            JSONObject json = ServiceUtils.convertToJSON(sampleRows, "samples");
+            JSONObject json = ServiceUtils.convertToJSON(sampleRows, "data");
+            System.out.println("sample json = " + json);
             headers.set("user_token", this.apiKey);
 
             HttpEntity<JSONObject> requestBody = new HttpEntity<>(json, headers);
