@@ -14,6 +14,11 @@ import uk.ac.ebi.subs.data.Submission;
 import uk.ac.ebi.subs.data.status.ProcessingStatusEnum;
 import uk.ac.ebi.subs.data.submittable.Project;
 import uk.ac.ebi.subs.data.submittable.Study;
+import uk.ac.ebi.subs.metabolights.converters.USISampleToMLSample;
+import uk.ac.ebi.subs.metabolights.converters.Utilities;
+import uk.ac.ebi.subs.metabolights.model.Sample;
+import uk.ac.ebi.subs.metabolights.model.SampleMap;
+import uk.ac.ebi.subs.metabolights.model.StudyAttributes;
 import uk.ac.ebi.subs.metabolights.validator.ValidationTestUtils;
 import uk.ac.ebi.subs.processing.ProcessingCertificateEnvelope;
 import uk.ac.ebi.subs.processing.SubmissionEnvelope;
@@ -49,6 +54,11 @@ public class MetaboLightsStudyProcessorTest {
         submissionEnvelope.getStudies().add(study);
         submissionEnvelope.getProjects().add(project);
         submissionEnvelope.getProtocols().addAll(ValidationTestUtils.generateUSIProtocols());
+
+        submissionEnvelope.getSamples().add(Utilities.getUSISampleFromDisc());
+        submissionEnvelope.getStudies().get(0).getAttributes().remove(StudyAttributes.STUDY_FACTORS);
+        submissionEnvelope.getStudies().get(0).getAttributes().put(StudyAttributes.STUDY_FACTORS, ValidationTestUtils.getStudyFactorsMatchingSampleTestFile());
+
         ProcessingCertificateEnvelope processingCertificateEnvelope = metaboLightsStudyProcessor.processStudy(submissionEnvelope);
         assertEquals(8, processingCertificateEnvelope.getProcessingCertificates().size());
     }
@@ -70,5 +80,14 @@ public class MetaboLightsStudyProcessorTest {
         submissionEnvelope.getProtocols().addAll(ValidationTestUtils.generateUSIProtocols());
         ProcessingCertificateEnvelope processingCertificateEnvelope = metaboLightsStudyProcessor.processStudy(submissionEnvelope);
         assertEquals(7, processingCertificateEnvelope.getProcessingCertificates().size());
+    }
+
+    @Test
+    public void testSampleMap() {
+        USISampleToMLSample mlSample = new USISampleToMLSample();
+        Sample convert = mlSample.convert(Utilities.getUSISampleFromDisc());
+        SampleMap sampleMap = new SampleMap(convert);
+        System.out.println(sampleMap.toString());
+        assertTrue(sampleMap != null);
     }
 }
