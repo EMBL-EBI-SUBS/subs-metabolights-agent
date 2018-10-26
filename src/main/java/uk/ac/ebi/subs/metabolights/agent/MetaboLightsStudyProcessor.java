@@ -120,7 +120,12 @@ public class MetaboLightsStudyProcessor {
 
     List<ProcessingCertificate> processMetaData(Study study, SubmissionEnvelope submissionEnvelope, boolean isNewSubmission) {
         List<ProcessingCertificate> processingCertificateList = new ArrayList<>();
-        uk.ac.ebi.subs.metabolights.model.Study existingMetaboLightsStudy = getStudyBy(study.getAccession(), isNewSubmission);
+
+        uk.ac.ebi.subs.metabolights.model.Study existingMetaboLightsStudy = getStudyBy(study.getAccession());
+        StudyFiles studyFiles = this.fetchService.getStudyFiles(study.getAccession());
+        String sampleFileName = AgentProcessorUtils.getSampleFileName(studyFiles);
+
+        resetDummyValuesIn(existingMetaboLightsStudy, isNewSubmission, sampleFileName);
 
         if (existingMetaboLightsStudy == null) {
             ProcessingCertificate certificate = getNewCertificate();
@@ -142,35 +147,38 @@ public class MetaboLightsStudyProcessor {
             update(processingCertificateList, processPublications(study, submissionEnvelope.getProjects().get(0), existingMetaboLightsStudy));
         }
 
-        StudyFiles studyFiles = this.fetchService.getStudyFiles(study.getAccession());
-        String sampleFileName = AgentProcessorUtils.getSampleFileName(studyFiles);
+
+        update(processingCertificateList, processSamples(study, submissionEnvelope.getSamples(), sampleFileName, isNewSubmission));
 
         //todo process assays
-        update(processingCertificateList, processSamples(study, submissionEnvelope.getSamples(), sampleFileName, isNewSubmission));
-        //todo process samples
 
         return processingCertificateList;
     }
 
-    private uk.ac.ebi.subs.metabolights.model.Study getStudyBy(String accession, boolean isNewSubmission) {
+    private uk.ac.ebi.subs.metabolights.model.Study getStudyBy(String accession) {
         try {
             uk.ac.ebi.subs.metabolights.model.Study existingMetaboLightsStudy = this.fetchService.getStudy(accession);
-            if (isNewSubmission) {
-                resetDummyValuesIn(existingMetaboLightsStudy);
-                existingMetaboLightsStudy = this.fetchService.getStudy(accession);
-                return existingMetaboLightsStudy;
-            } else {
-                return existingMetaboLightsStudy;
-            }
+            return existingMetaboLightsStudy;
         } catch (Exception e) {
             logger.error(e.getMessage());
             return null;
         }
     }
 
-    private void resetDummyValuesIn(uk.ac.ebi.subs.metabolights.model.Study existingMetaboLightsStudy) {
-        resetContacts(existingMetaboLightsStudy);
-        resetPublications(existingMetaboLightsStudy);
+    private uk.ac.ebi.subs.metabolights.model.Study resetDummyValuesIn(uk.ac.ebi.subs.metabolights.model.Study existingMetaboLightsStudy, boolean isNewSubmission, String sampleFileName) {
+        if (isNewSubmission) {
+            resetContacts(existingMetaboLightsStudy);
+            resetPublications(existingMetaboLightsStudy);
+            deleteDefaultRow(existingMetaboLightsStudy.getIdentifier(), sampleFileName);
+            //todo delete default rows in assay sheet and MAF sheet 
+            try {
+                return this.fetchService.getStudy(existingMetaboLightsStudy.getIdentifier());
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            } 
+        }
+        return existingMetaboLightsStudy;
     }
 
     private void resetContacts(uk.ac.ebi.subs.metabolights.model.Study existingMetaboLightsStudy) {
@@ -386,7 +394,6 @@ public class MetaboLightsStudyProcessor {
         }
         if (isNewSubmission) {
             try {
-                deleteDefaultRow(study.getAccession(), sampleFileToUpdate);
                 this.postService.addSamples(samples, study.getAccession(), sampleFileToUpdate);
             } catch (Exception e) {
                 certificate.setMessage("Error saving protocols : " + e.getMessage());
@@ -397,13 +404,17 @@ public class MetaboLightsStudyProcessor {
         return certificate;
     }
 
-    private void deleteDefaultRow(String accession, String sampleFileToUpdate) throws Exception {
+    private void deleteDefaultRow(String accession, String sampleFileToUpdate) {
         /*
          * Sample file have default one row. Remove it using index 0
          */
         List<Integer> sampleRowsToDelete = new ArrayList<>();
         sampleRowsToDelete.add(new Integer(0));
-        this.deletionService.deleteSampleRows(accession, sampleFileToUpdate, sampleRowsToDelete);
+        try {
+            this.deletionService.deleteSampleRows(accession, sampleFileToUpdate, sampleRowsToDelete);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+        }
     }
 
 
