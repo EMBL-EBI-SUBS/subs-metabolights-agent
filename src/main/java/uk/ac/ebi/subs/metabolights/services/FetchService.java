@@ -106,7 +106,7 @@ public class FetchService {
         } catch (Exception e) {
             logger.error(e.getMessage());
             e.printStackTrace();
-            return null;
+            throw e;
         }
     }
 

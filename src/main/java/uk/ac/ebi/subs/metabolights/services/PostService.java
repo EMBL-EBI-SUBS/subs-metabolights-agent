@@ -206,6 +206,9 @@ public class PostService {
     }
 
     public void addSamples(List<uk.ac.ebi.subs.data.submittable.Sample> samples, String studyID, String sampleFileName) {
+        if(samples == null || samples.size() == 0){
+            return;
+        }
         try {
             List<uk.ac.ebi.subs.metabolights.model.Sample> mlSamples = new ArrayList<>();
             SampleRows sampleRows = new SampleRows();

@@ -201,30 +201,10 @@ public class UpdateService {
         }
     }
 
-    public void updateSample(String studyID, Sample sample) {
-        String url = mlProperties.getUrl() + studyID + "/samples?name=" + sample.getAlias();
-        update(sample, url);
-    }
-
-    private void update(Sample sample, String url) {
-        try {
-
-            List<uk.ac.ebi.subs.metabolights.model.Sample> samples = new ArrayList<>();
-            samples.add(usiSampleToMLSample.convert(sample));
-            JSONObject json = ServiceUtils.convertToJSON(samples, "samples");
-            headers.set("user_token", this.apiKey);
-
-            HttpEntity<JSONObject> requestBody = new HttpEntity<>(json, headers);
-            // restTemplate.put(url, requestBody, new Object[]{});
-            restTemplate.exchange(
-                    url, HttpMethod.PUT, requestBody, java.lang.Object.class);
-
-        } catch (Exception e) {
-            e.printStackTrace();
+    public void updateSamples(List<Sample> samples, String studyID, String sampleFileName) {
+        if (samples == null || samples.size() == 0) {
+            return;
         }
-    }
-
-    private void update(List<Sample> samples, String studyID, String sampleFileName) {
         try {
             List<uk.ac.ebi.subs.metabolights.model.Sample> mlSamples = new ArrayList<>();
             SampleRows sampleRows = new SampleRows();
@@ -234,23 +214,16 @@ public class UpdateService {
             }
             String url = mlProperties.getUrl() + studyID + "/samples/" + sampleFileName;
 
-            JSONObject json = ServiceUtils.convertToJSON(sampleRows, "samples");
+            JSONObject json = ServiceUtils.convertToJSON(sampleRows, "data");
             headers.set("user_token", this.apiKey);
 
             HttpEntity<JSONObject> requestBody = new HttpEntity<>(json, headers);
-            restTemplate.exchange(
-                    url, HttpMethod.PUT, requestBody, java.lang.Object.class);
+            restTemplate.put(url, requestBody, new Object[]{});
+
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-    }
-
-    public void markForDeletion(String studyID, Sample sample) {
-        String newName = "__TO_BE_DELETED__" + sample.getAlias();
-        String url = mlProperties.getUrl() + studyID + "/samples?name=" + sample.getAlias();
-        sample.setAlias(newName);
-        update(sample, url);
     }
 }
