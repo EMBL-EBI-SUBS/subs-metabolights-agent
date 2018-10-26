@@ -38,6 +38,7 @@ public class USISampleToMLSample implements Converter<uk.ac.ebi.subs.data.submit
         sample.setFactorValues(convertToMLSampleAttributes(source.getAttributes()));
         // set derives from source information
         sample.setDerivesFrom(convertToMLSampleSource(source.getAttributes(), source.getTitle()));
+        sample.setComments(convertIndexInfoToComments(source.getAttributes()));
         return sample;
     }
 
@@ -111,5 +112,22 @@ public class USISampleToMLSample implements Converter<uk.ac.ebi.subs.data.submit
         }
         sampleSource.add(source);
         return sampleSource;
+    }
+
+    private List<Comment> convertIndexInfoToComments(Map<String, Collection<Attribute>> usiAttributes) {
+        List<Comment> comments = new ArrayList<>();
+        for (Map.Entry<String, Collection<Attribute>> entry : usiAttributes.entrySet()) {
+            if (entry.getKey().equalsIgnoreCase(SampleSpreadSheetConstants.ROW_INDEX)) {
+                if (entry.getValue().size() > 0) {
+                    Attribute attribute = entry.getValue().iterator().next();
+                    Comment comment = new Comment();
+                    comment.setName(SampleSpreadSheetConstants.ROW_INDEX);
+                    comment.setValue(attribute.getValue());
+                    comments.add(comment);
+                }
+            }
+
+        }
+        return comments;
     }
 }
