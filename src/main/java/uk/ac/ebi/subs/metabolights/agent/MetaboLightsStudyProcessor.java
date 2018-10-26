@@ -17,7 +17,7 @@ import uk.ac.ebi.subs.data.submittable.Protocol;
 import uk.ac.ebi.subs.data.submittable.Sample;
 import uk.ac.ebi.subs.data.submittable.Study;
 
-import uk.ac.ebi.subs.metabolights.model.StudyAttributes;
+import uk.ac.ebi.subs.metabolights.model.*;
 import uk.ac.ebi.subs.metabolights.services.DeletionService;
 import uk.ac.ebi.subs.metabolights.services.FetchService;
 import uk.ac.ebi.subs.metabolights.services.PostService;
@@ -26,8 +26,7 @@ import uk.ac.ebi.subs.processing.ProcessingCertificate;
 import uk.ac.ebi.subs.processing.ProcessingCertificateEnvelope;
 import uk.ac.ebi.subs.processing.SubmissionEnvelope;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Component
@@ -118,7 +117,12 @@ public class MetaboLightsStudyProcessor {
 
     List<ProcessingCertificate> processMetaData(Study study, SubmissionEnvelope submissionEnvelope, boolean isNewSubmission) {
         List<ProcessingCertificate> processingCertificateList = new ArrayList<>();
-        uk.ac.ebi.subs.metabolights.model.Study existingMetaboLightsStudy = getStudyBy(study.getAccession(), isNewSubmission);
+
+        uk.ac.ebi.subs.metabolights.model.Study existingMetaboLightsStudy = getStudyBy(study.getAccession());
+        StudyFiles studyFiles = this.fetchService.getStudyFiles(study.getAccession());
+        String sampleFileName = AgentProcessorUtils.getSampleFileName(studyFiles);
+
+        resetDummyValuesIn(existingMetaboLightsStudy, isNewSubmission, sampleFileName);
 
         if (existingMetaboLightsStudy == null) {
             ProcessingCertificate certificate = getNewCertificate();
@@ -135,33 +139,43 @@ public class MetaboLightsStudyProcessor {
         update(processingCertificateList, processProtocols(study, submissionEnvelope.getProtocols(), existingMetaboLightsStudy));
 
         if (submissionEnvelope.getProjects() != null && submissionEnvelope.getProjects().size() > 0) {
-            //todo handle multiple projects
+//            //todo handle multiple projects
             update(processingCertificateList, processContacts(study, submissionEnvelope.getProjects().get(0), existingMetaboLightsStudy));
             update(processingCertificateList, processPublications(study, submissionEnvelope.getProjects().get(0), existingMetaboLightsStudy));
         }
+
+
+        update(processingCertificateList, processSamples(study, submissionEnvelope.getSamples(), sampleFileName, isNewSubmission));
+
+        //todo process assays
+
         return processingCertificateList;
     }
 
-
-    private uk.ac.ebi.subs.metabolights.model.Study getStudyBy(String accession, boolean isNewSubmission) {
+    private uk.ac.ebi.subs.metabolights.model.Study getStudyBy(String accession) {
         try {
             uk.ac.ebi.subs.metabolights.model.Study existingMetaboLightsStudy = this.fetchService.getStudy(accession);
-            if (isNewSubmission) {
-                resetDummyValuesIn(existingMetaboLightsStudy);
-                existingMetaboLightsStudy = this.fetchService.getStudy(accession);
-                return existingMetaboLightsStudy;
-            } else {
-                return existingMetaboLightsStudy;
-            }
+            return existingMetaboLightsStudy;
         } catch (Exception e) {
             logger.error(e.getMessage());
             return null;
         }
     }
 
-    private void resetDummyValuesIn(uk.ac.ebi.subs.metabolights.model.Study existingMetaboLightsStudy) {
-        resetContacts(existingMetaboLightsStudy);
-        resetPublications(existingMetaboLightsStudy);
+    private uk.ac.ebi.subs.metabolights.model.Study resetDummyValuesIn(uk.ac.ebi.subs.metabolights.model.Study existingMetaboLightsStudy, boolean isNewSubmission, String sampleFileName) {
+        if (isNewSubmission) {
+            resetContacts(existingMetaboLightsStudy);
+            resetPublications(existingMetaboLightsStudy);
+            deleteDefaultRow(existingMetaboLightsStudy.getIdentifier(), sampleFileName);
+            //todo delete default rows in assay sheet and MAF sheet 
+            try {
+                return this.fetchService.getStudy(existingMetaboLightsStudy.getIdentifier());
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+        return existingMetaboLightsStudy;
     }
 
     private void resetContacts(uk.ac.ebi.subs.metabolights.model.Study existingMetaboLightsStudy) {
@@ -363,6 +377,51 @@ public class MetaboLightsStudyProcessor {
         }
         return certificate;
     }
+
+    private ProcessingCertificate processSamples(Study study, List<Sample> samples, String sampleFileToUpdate, boolean isNewSubmission) {
+        ProcessingCertificate certificate = getNewCertificate();
+        certificate.setAccession(study.getAccession());
+        if (!AgentProcessorUtils.containsValue(samples)) {
+            certificate.setMessage(getWarningMessage("samples"));
+            return certificate;
+        }
+        if (sampleFileToUpdate.isEmpty()) {
+            certificate.setMessage("Something went wrong while trying to access the existing metabolights study files. Unable to update samples");
+            return certificate;
+        }
+        if (isNewSubmission) {
+            try {
+                this.postService.addSamples(samples, study.getAccession(), sampleFileToUpdate);
+            } catch (Exception e) {
+                certificate.setMessage("Error saving samples : " + e.getMessage());
+            }
+        } else {
+            try {
+                MetaboLightsTable sampleTable = this.fetchService.getSampleTable(study.getAccession(), sampleFileToUpdate);
+                Map<String, List<Sample>> samplesToAddAndUpdate = AgentProcessorUtils.getSamplesToAddAndUpdate(samples, sampleTable);
+                this.updateService.updateSamples(samplesToAddAndUpdate.get("update"), study.getAccession(), sampleFileToUpdate);
+                this.postService.addSamples(samplesToAddAndUpdate.get("add"), study.getAccession(), sampleFileToUpdate);
+
+            } catch (Exception e) {
+                certificate.setMessage("Error saving samples : " + e.getMessage());
+            }
+        }
+        return certificate;
+    }
+
+    private void deleteDefaultRow(String accession, String sampleFileToUpdate) {
+        /*
+         * Sample file have default one row. Remove it using index 0
+         */
+        List<Integer> sampleRowsToDelete = new ArrayList<>();
+        sampleRowsToDelete.add(new Integer(0));
+        try {
+            this.deletionService.deleteSampleRows(accession, sampleFileToUpdate, sampleRowsToDelete);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+        }
+    }
+
 
     private void update(List<ProcessingCertificate> processingCertificateList, ProcessingCertificate certificate) {
         if (hasValue(certificate)) {

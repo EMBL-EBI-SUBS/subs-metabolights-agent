@@ -29,21 +29,16 @@ public class USISampleToMLSample implements Converter<uk.ac.ebi.subs.data.submit
 
         // set taxon and title
 //        Source mlTaxonObject = getTaxonObject();
-////        mlTaxonObject.getCharacteristics().get(0).getValue().setTerm_accession(ncbiBaseUrl + source.getTaxonId());
-//        if (mlTaxonObject.getCharacteristics().get(0).getValue() == null) {
-//            OntologyModel ontologyModel = new OntologyModel();
-//            ontologyModel.setTermAccession(ncbiBaseUrl + source.getTaxonId());
-//            ontologyModel.setAnnotationValue(source.getTaxon());
-//            mlTaxonObject.getCharacteristics().get(0).setValue(ontologyModel);
-//        } else {
+//        mlTaxonObject.setName(source.getTitle());
+//        if(source.getTaxonId() != null){
 //            mlTaxonObject.getCharacteristics().get(0).getValue().setTermAccession(ncbiBaseUrl + source.getTaxonId());
 //        }
-//        mlTaxonObject.setName(source.getTitle());
 
         //set attributes (Factor values)
         sample.setFactorValues(convertToMLSampleAttributes(source.getAttributes()));
         // set derives from source information
         sample.setDerivesFrom(convertToMLSampleSource(source.getAttributes(), source.getTitle()));
+        sample.setComments(convertIndexInfoToComments(source.getAttributes()));
         return sample;
     }
 
@@ -58,7 +53,7 @@ public class USISampleToMLSample implements Converter<uk.ac.ebi.subs.data.submit
         List<SampleFactorValue> mlSampleFactorValues = new ArrayList<SampleFactorValue>();
 
         for (Map.Entry<String, Collection<Attribute>> entry : usiAttributes.entrySet()) {
-            if (!entry.getKey().toLowerCase().equals("organism") && !entry.getKey().toLowerCase().equals("organism part")) {
+            if (!entry.getKey().toLowerCase().equals("organism") && !entry.getKey().toLowerCase().equals("organism part") && !entry.getKey().toLowerCase().equals("variant")) {
                 if (entry.getValue().size() > 0) {
                     Attribute attribute = entry.getValue().iterator().next();
                     SampleFactorValue sampleFactorValue = new SampleFactorValue();
@@ -73,7 +68,7 @@ public class USISampleToMLSample implements Converter<uk.ac.ebi.subs.data.submit
                     String url = "";
                     if (attribute.getTerms().size() > 0) {
                         url = attribute.getTerms().iterator().next().getUrl();
-                        ((OntologyModel)sampleFactorValue.getValue()).setTermAccession(url);
+                        ((OntologyModel) sampleFactorValue.getValue()).setTermAccession(url);
                     }
                     sampleFactorValue.getUnit().setAnnotationValue(attribute.getUnits() == null ? "" : attribute.getUnits());
                     mlSampleFactorValues.add(sampleFactorValue);
@@ -91,12 +86,12 @@ public class USISampleToMLSample implements Converter<uk.ac.ebi.subs.data.submit
         source.setName(title);
         //todo check for multiple derivesFrom entries. Only one entry in the List is assumed
         for (Map.Entry<String, Collection<Attribute>> entry : usiAttributes.entrySet()) {
-            if (entry.getKey().toLowerCase().equals("organism") || entry.getKey().toLowerCase().equals("organism part")) {
+            if (entry.getKey().toLowerCase().equals("organism") || entry.getKey().toLowerCase().equals("organism part") || entry.getKey().toLowerCase().equals("variant")) {
                 if (entry.getValue().size() > 0) {
                     Attribute attribute = entry.getValue().iterator().next();
 
                     SampleSourceOntologyModel sampleSourceOntologyModel = new SampleSourceOntologyModel();
-                   
+
                     sampleSourceOntologyModel.getCategory().setAnnotationValue(entry.getKey());
                     String url = "";
                     if (attribute.getTerms().size() > 0) {
@@ -117,5 +112,22 @@ public class USISampleToMLSample implements Converter<uk.ac.ebi.subs.data.submit
         }
         sampleSource.add(source);
         return sampleSource;
+    }
+
+    private List<Comment> convertIndexInfoToComments(Map<String, Collection<Attribute>> usiAttributes) {
+        List<Comment> comments = new ArrayList<>();
+        for (Map.Entry<String, Collection<Attribute>> entry : usiAttributes.entrySet()) {
+            if (entry.getKey().equalsIgnoreCase(SampleSpreadSheetConstants.ROW_INDEX)) {
+                if (entry.getValue().size() > 0) {
+                    Attribute attribute = entry.getValue().iterator().next();
+                    Comment comment = new Comment();
+                    comment.setName(SampleSpreadSheetConstants.ROW_INDEX);
+                    comment.setValue(attribute.getValue());
+                    comments.add(comment);
+                }
+            }
+
+        }
+        return comments;
     }
 }

@@ -41,6 +41,8 @@ public class Sample {
       public Sample(){
             setComments(new ArrayList<>());
             setCharacteristics(new ArrayList<>());
+            setFactorValues(new ArrayList<>());
+            setDerivesFrom(new ArrayList<>());
       }
 
 }

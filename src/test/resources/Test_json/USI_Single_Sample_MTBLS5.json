@@ -17,9 +17,20 @@
         ]
       }
     ],
+    "Variant": [
+      {
+        "value": "Synechocystis sp. PCC 6803.WT.none",
+        "units": null,
+        "terms": [
+          {
+            "url": "http://purl.bioontology.org/ontology/NCBITAXON/9606"
+          }
+        ]
+      }
+    ],
     "CarbonDioxide_Quantity_after_initiation": [
       {
-        "value": "",
+        "value": "10",
         "units": null,
         "terms": [{
           "url" : "http://purl.obolibrary.org/obo/XCO_0000012"
@@ -39,7 +50,7 @@
     ],
     "CarbonDioxide_Quantity_after_01d": [
       {
-        "value": "",
+        "value": "20",
         "units": null,
         "terms": [{
           "url" : "http://purl.obolibrary.org/obo/XCO_0000012"
