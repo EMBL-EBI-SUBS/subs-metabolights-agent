@@ -18,6 +18,7 @@ public class SampleSpreadSheetConstants {
     public static final String ORGANISM_PART_TERM_ACCESSION_NUMBER = "Term Accession Number.2";
     public static final String PROTOCOL_REF = "Protocol REF";
     public static final String SAMPLE_NAME = "Sample Name";
+    public static final String ROW_INDEX = "index";
 }
 
 
