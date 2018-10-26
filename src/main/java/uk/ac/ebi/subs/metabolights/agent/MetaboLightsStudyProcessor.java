@@ -17,9 +17,7 @@ import uk.ac.ebi.subs.data.submittable.Protocol;
 import uk.ac.ebi.subs.data.submittable.Sample;
 import uk.ac.ebi.subs.data.submittable.Study;
 
-import uk.ac.ebi.subs.metabolights.model.SampleMap;
-import uk.ac.ebi.subs.metabolights.model.StudyAttributes;
-import uk.ac.ebi.subs.metabolights.model.StudyFiles;
+import uk.ac.ebi.subs.metabolights.model.*;
 import uk.ac.ebi.subs.metabolights.services.DeletionService;
 import uk.ac.ebi.subs.metabolights.services.FetchService;
 import uk.ac.ebi.subs.metabolights.services.PostService;
@@ -28,8 +26,7 @@ import uk.ac.ebi.subs.processing.ProcessingCertificate;
 import uk.ac.ebi.subs.processing.ProcessingCertificateEnvelope;
 import uk.ac.ebi.subs.processing.SubmissionEnvelope;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Component
@@ -142,7 +139,7 @@ public class MetaboLightsStudyProcessor {
         update(processingCertificateList, processProtocols(study, submissionEnvelope.getProtocols(), existingMetaboLightsStudy));
 
         if (submissionEnvelope.getProjects() != null && submissionEnvelope.getProjects().size() > 0) {
-            //todo handle multiple projects
+//            //todo handle multiple projects
             update(processingCertificateList, processContacts(study, submissionEnvelope.getProjects().get(0), existingMetaboLightsStudy));
             update(processingCertificateList, processPublications(study, submissionEnvelope.getProjects().get(0), existingMetaboLightsStudy));
         }
@@ -176,7 +173,7 @@ public class MetaboLightsStudyProcessor {
             } catch (Exception e) {
                 e.printStackTrace();
                 return null;
-            } 
+            }
         }
         return existingMetaboLightsStudy;
     }
@@ -396,10 +393,18 @@ public class MetaboLightsStudyProcessor {
             try {
                 this.postService.addSamples(samples, study.getAccession(), sampleFileToUpdate);
             } catch (Exception e) {
-                certificate.setMessage("Error saving protocols : " + e.getMessage());
+                certificate.setMessage("Error saving samples : " + e.getMessage());
             }
         } else {
-            // todo get all sample rows, cross check our names, add new ones, update exisiting ones
+            try {
+                MetaboLightsTable sampleTable = this.fetchService.getSampleTable(study.getAccession(), sampleFileToUpdate);
+                Map<String, List<Sample>> samplesToAddAndUpdate = AgentProcessorUtils.getSamplesToAddAndUpdate(samples, sampleTable);
+                this.updateService.updateSamples(samplesToAddAndUpdate.get("update"), study.getAccession(), sampleFileToUpdate);
+                this.postService.addSamples(samplesToAddAndUpdate.get("add"), study.getAccession(), sampleFileToUpdate);
+
+            } catch (Exception e) {
+                certificate.setMessage("Error saving samples : " + e.getMessage());
+            }
         }
         return certificate;
     }
