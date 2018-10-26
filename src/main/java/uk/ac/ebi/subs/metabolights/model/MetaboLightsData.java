@@ -4,6 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 @lombok.Data
-public class Data {
+public class MetaboLightsData {
     private List<Map<String, String>> rows;
 }
