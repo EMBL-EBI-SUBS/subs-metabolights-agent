@@ -18,7 +18,7 @@ public class ValidationTestUtils {
         contact1.setAddress("Hinxton");
         contact1.setAffiliation("EMBL-EBI");
         contact1.setFax("+11123");
-        contact1.setEmail("test-" + UUID.randomUUID() +"@abc.com");
+        contact1.setEmail("test-" + UUID.randomUUID() + "@abc.com");
         contact1.setFirstName("Alice");
         contact1.setMiddleInitials("");
         contact1.setLastName("Bob");
@@ -28,7 +28,7 @@ public class ValidationTestUtils {
         contact2.setAddress("Hinxton");
         contact2.setAffiliation("EMBL-EBI");
         contact2.setFax("+11123");
-        contact2.setEmail("test-" + UUID.randomUUID() +"@abc.com");
+        contact2.setEmail("test-" + UUID.randomUUID() + "@abc.com");
         contact2.setFirstName("Alex");
         contact2.setMiddleInitials("");
         contact2.setLastName("Ben");
@@ -255,6 +255,18 @@ public class ValidationTestUtils {
         usiAttributes.put(StudyAttributes.STUDY_FACTORS, Arrays.asList(generateStudyFactorAttribute()));
         usiAttributes.put(StudyAttributes.STUDY_DESCRIPTORS, Arrays.asList(generateStudyDescriptorAttribute()));
         return usiAttributes;
+    }
+
+    public static List<Attribute> getStudyFactorsMatchingSampleTestFile() {
+        List<Attribute> factors = new ArrayList<>();
+        Attribute attribute = new Attribute();
+        attribute.setValue("CarbonDioxide_Quantity_after_initiation");
+        factors.add(attribute);
+
+        attribute = new Attribute();
+        attribute.setValue("CarbonDioxide_Quantity_after_01d");
+        factors.add(attribute);
+        return factors;
     }
 
 

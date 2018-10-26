@@ -24,10 +24,26 @@ public class ServiceUtils {
         return jsonObject;
     }
 
-    public static ObjectNode convertToJSON(Object object, String name){
+    public static ObjectNode convertToJSON(Object object, String name) {
         ObjectNode root = objectMapper.createObjectNode();
         JsonNode jsonNode = objectMapper.valueToTree(object);
         root.set(name, jsonNode);
         return root;
+    }
+
+    public static String getAsConcatenatedString(List<Integer> sampleRowsToDelete) {
+        if (sampleRowsToDelete.size() == 1) {
+            return sampleRowsToDelete.get(0).toString();
+        } else {
+            String concatenatedRows = "";
+            for (int i = 0; i < sampleRowsToDelete.size(); i++) {
+                if (i != sampleRowsToDelete.size() - 1) {
+                    concatenatedRows += sampleRowsToDelete.get(i) + ",";
+                } else {
+                    concatenatedRows += sampleRowsToDelete.get(i);
+                }
+            }
+            return concatenatedRows;
+        }
     }
 }
