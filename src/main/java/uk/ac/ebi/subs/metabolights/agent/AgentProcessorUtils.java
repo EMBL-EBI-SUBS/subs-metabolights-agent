@@ -1,15 +1,14 @@
 package uk.ac.ebi.subs.metabolights.agent;
 
+import uk.ac.ebi.subs.data.component.Attribute;
 import uk.ac.ebi.subs.data.component.Contact;
 import uk.ac.ebi.subs.data.component.Publication;
 import uk.ac.ebi.subs.data.submittable.Protocol;
+import uk.ac.ebi.subs.data.submittable.Sample;
 import uk.ac.ebi.subs.data.submittable.Study;
-import uk.ac.ebi.subs.metabolights.model.Factor;
-import uk.ac.ebi.subs.metabolights.model.OntologyModel;
-import uk.ac.ebi.subs.metabolights.model.StudyFile;
-import uk.ac.ebi.subs.metabolights.model.StudyFiles;
+import uk.ac.ebi.subs.metabolights.model.*;
 
-import java.util.List;
+import java.util.*;
 
 public class AgentProcessorUtils {
 
@@ -97,5 +96,54 @@ public class AgentProcessorUtils {
         //todo some cases have multiple a_ files
         return getFileName(studyFiles, "a_");
     }
+
+
+    public static Map<String, List<Sample>> getSamplesToAddAndUpdate(List<Sample> samples, MetaboLightsTable sampleTable) throws Exception {
+
+        List<Sample> samplesToUpdate = new ArrayList<>();
+        List<Sample> samplesToAdd = new ArrayList<>();
+
+        if (sampleTable.getData().getRows() != null && sampleTable.getData().getRows().size() > 0) {
+            for (Sample sample : samples) {
+                if (!sample.getAlias().isEmpty()) {
+                    Map<Boolean, String> mappingResult = findMatch(sample.getAlias(), sampleTable);
+                    for (Map.Entry<Boolean, String> result : mappingResult.entrySet()) {
+                        if (result.getKey().booleanValue()) {
+                        /*
+                        index to be updated must be set in the samples
+                         */
+                            Attribute attribute = new Attribute();
+                            attribute.setValue(result.getValue());
+                            sample.getAttributes().put(SampleSpreadSheetConstants.ROW_INDEX, Arrays.asList(attribute));
+                            samplesToUpdate.add(sample);
+                        } else {
+                            samplesToAdd.add(sample);
+                        }
+                    }
+                }
+            }
+        }
+        Map<String, List<Sample>> seggregatedSamples = new HashMap<>();
+        seggregatedSamples.put("add", samplesToAdd);
+        seggregatedSamples.put("update", samplesToUpdate);
+        return seggregatedSamples;
+    }
+
+    private static Map<Boolean, String> findMatch(String sampleName, MetaboLightsTable sampleTable) {
+        Map<Boolean, String> mappingResult = new HashMap<>();
+        for (Map<String, String> row : sampleTable.getData().getRows()) {
+            for (Map.Entry<String, String> cell : row.entrySet()) {
+                if (cell.getKey().equalsIgnoreCase(SampleSpreadSheetConstants.SAMPLE_NAME)) {
+                    if (cell.getValue().equalsIgnoreCase(sampleName)) {
+                        mappingResult.put(Boolean.TRUE, row.get(SampleSpreadSheetConstants.ROW_INDEX));
+                        return mappingResult;
+                    }
+                }
+            }
+        }
+        mappingResult.put(Boolean.FALSE, "");
+        return mappingResult;
+    }
+
 
 }
