@@ -54,5 +54,11 @@ public class SampleMap extends LinkedHashMap {
                 put("Factor Value[" + sampleFactorValue.getCategory().getFactorName() + "]", model.getAnnotationValue());
             }
         }
+        if (sample.getComments().size() > 0) {
+            if (sample.getComments().get(0).getValue() != null || !sample.getComments().get(0).getValue().isEmpty()) {
+                put(SampleSpreadSheetConstants.ROW_INDEX, sample.getComments().get(0).getValue());
+            }
+
+        }
     }
 }
