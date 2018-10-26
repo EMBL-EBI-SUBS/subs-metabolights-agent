@@ -13,10 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
-import uk.ac.ebi.subs.metabolights.model.Investigation;
-import uk.ac.ebi.subs.metabolights.model.Project;
-import uk.ac.ebi.subs.metabolights.model.Study;
-import uk.ac.ebi.subs.metabolights.model.StudyFiles;
+import uk.ac.ebi.subs.metabolights.model.*;
 import uk.ac.ebi.subs.metabolights.validator.schema.custom.JsonAsTextPlainHttpMessageConverter;
 
 import java.util.ArrayList;
@@ -95,6 +92,21 @@ public class FetchService {
         } catch (Exception e) {
             logger.error(e.getMessage());
             return new StudyFiles();
+        }
+    }
+
+    public MetaboLightsTable getSampleTable(String accession, String sampleFileName) {
+        try {
+            String localUrl = mlProperties.getUrl() + accession + "/samples/" +  sampleFileName;
+
+            ResponseEntity<MetaboLightsTable> response = restTemplate.exchange(
+                    localUrl, HttpMethod.GET, getHttpEntity(), MetaboLightsTable.class);
+           return response.getBody();
+
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            e.printStackTrace();
+            return null;
         }
     }
 
