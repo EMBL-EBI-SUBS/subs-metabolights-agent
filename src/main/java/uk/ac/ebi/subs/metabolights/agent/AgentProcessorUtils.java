@@ -27,6 +27,17 @@ public class AgentProcessorUtils {
         return false;
     }
 
+    public static boolean alreadyPresent(List<Attribute> factorAttributes, Factor factor) {
+        for (Attribute attribute : factorAttributes) {
+            if (isValid(attribute.getValue())) {
+                if (attribute.getValue().equalsIgnoreCase(factor.getFactorName())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public static boolean alreadyHas(List<OntologyModel> descriptors, String descriptorAttributeName) {
         for (OntologyModel descriptor : descriptors) {
             if (isValid(descriptor.getAnnotationValue())) {

@@ -80,7 +80,7 @@ public class DeletionServiceTest {
         System.out.println(newName);
 
         MLDescriptorToUSIDescriptor mlDescriptorToUSIDescriptor = new MLDescriptorToUSIDescriptor();
-        this.deletionService.deleteDescriptor("MTBLS2", mlDescriptorToUSIDescriptor.convert(descriptor));
+        this.deletionService.deleteDescriptor("MTBLS2", mlDescriptorToUSIDescriptor.convert(descriptor).getValue());
         System.out.println("deleted - " +  newName);
         //TODO assert method
     }
