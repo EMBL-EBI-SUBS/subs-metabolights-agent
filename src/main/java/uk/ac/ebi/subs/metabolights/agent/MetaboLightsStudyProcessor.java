@@ -290,6 +290,14 @@ public class MetaboLightsStudyProcessor {
                         }
                     }
                 }
+                for (OntologyModel descriptor : mlStudy.getStudyDesignDescriptors()) {
+                    /*
+                     Delete study descriptors not present in USI attributes
+                     */
+                    if (!AgentProcessorUtils.alreadyPresent((List) study.getAttributes().get(StudyAttributes.STUDY_DESCRIPTORS), descriptor)) {
+                        this.deletionService.deleteDescriptor(study.getId(), descriptor.getAnnotationValue());
+                    }
+                }
             }
             certificate.setMessage(getSuccessMessage("descriptors"));
             certificate.setProcessingStatus(ProcessingStatusEnum.Submitted);
