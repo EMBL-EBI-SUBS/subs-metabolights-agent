@@ -38,6 +38,17 @@ public class AgentProcessorUtils {
         return false;
     }
 
+    public static boolean alreadyPresent(List<Attribute> descriptorAttributes, OntologyModel descriptor) {
+        for (Attribute attribute : descriptorAttributes) {
+            if (isValid(attribute.getValue())) {
+                if (attribute.getValue().equalsIgnoreCase(descriptor.getAnnotationValue())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public static boolean alreadyHas(List<OntologyModel> descriptors, String descriptorAttributeName) {
         for (OntologyModel descriptor : descriptors) {
             if (isValid(descriptor.getAnnotationValue())) {
@@ -60,10 +71,32 @@ public class AgentProcessorUtils {
         return false;
     }
 
+    public static boolean alreadyHas(List<Contact> usiContacts, uk.ac.ebi.subs.metabolights.model.Contact mlContact) {
+        for (Contact usiContact : usiContacts) {
+            if (isValid(usiContact.getEmail())) {
+                if (usiContact.getEmail().equalsIgnoreCase(mlContact.getEmail())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public static boolean alreadyHas(List<uk.ac.ebi.subs.metabolights.model.Publication> mlPublications, Publication usiPublication) {
         for (uk.ac.ebi.subs.metabolights.model.Publication mlPublication : mlPublications) {
             if (isValid(mlPublication.getTitle())) {
                 if (mlPublication.getTitle().equalsIgnoreCase(usiPublication.getArticleTitle())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public static boolean alreadyHas(List<Publication> usiPublications, uk.ac.ebi.subs.metabolights.model.Publication mlPublication) {
+        for (Publication publication : usiPublications) {
+            if (isValid(publication.getArticleTitle())) {
+                if (publication.getArticleTitle().equalsIgnoreCase(mlPublication.getTitle())) {
                     return true;
                 }
             }
