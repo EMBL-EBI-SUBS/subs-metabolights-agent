@@ -62,12 +62,11 @@ public class DeletionService {
     }
 
 
-    public void deletePublication(String studyID, Publication publication) {
-        if (publication == null) return;
-        if (publication.getTitle() == null) return;
+    public void deletePublication(String studyID, String title) {
+        if (title == null || title.isEmpty()) return;
 
         try {
-            String url = mlProperties.getUrl() + studyID + "/publications?title=" + publication.getTitle();
+            String url = mlProperties.getUrl() + studyID + "/publications?title=" + title;
             headers.set("user_token", this.apiKey);
             HttpEntity<?> request = new HttpEntity<Object>(headers);
             restTemplate.exchange(url, HttpMethod.DELETE, request, Void.class, 1);
@@ -79,12 +78,11 @@ public class DeletionService {
         }
     }
 
-    public void deleteContact(String studyID, Contact contact) {
-        if (contact == null) return;
-        if (contact.getEmail() == null) return;
+    public void deleteContact(String studyID, String email) {
+        if (email == null || email.isEmpty()) return;
 
         try {
-            String url = mlProperties.getUrl() + studyID + "/contacts?email=" + contact.getEmail();
+            String url = mlProperties.getUrl() + studyID + "/contacts?email=" + email;
             headers.set("user_token", this.apiKey);
             HttpEntity<?> request = new HttpEntity<Object>(headers);
             restTemplate.exchange(url, HttpMethod.DELETE, request, Void.class, 1);
