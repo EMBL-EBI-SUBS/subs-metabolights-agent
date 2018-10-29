@@ -66,7 +66,7 @@ public class DeletionServiceTest {
         System.out.println(newName);
 
         MLFactorToUSIFactor mlFactorToUSIFactor = new MLFactorToUSIFactor();
-        this.deletionService.deleteFactor("MTBLS2", mlFactorToUSIFactor.convert(factor));
+        this.deletionService.deleteFactor("MTBLS2", mlFactorToUSIFactor.convert(factor).getValue());
         System.out.println("deleted - " +  newName);
         //TODO assert method
     }

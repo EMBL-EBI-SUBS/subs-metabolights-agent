@@ -113,12 +113,11 @@ public class DeletionService {
         }
     }
 
-    public void deleteFactor(String studyID, Attribute attribute) {
-        if (attribute == null) return;
-        if (attribute.getValue() == null) return;
+    public void deleteFactor(String studyID, String factorName) {
+        if (factorName == null) return;
 
         try {
-            String url = mlProperties.getUrl() + studyID + "/factors?name=" + attribute.getValue();
+            String url = mlProperties.getUrl() + studyID + "/factors?name=" + factorName;
             headers.set("user_token", this.apiKey);
             HttpEntity<?> request = new HttpEntity<Object>(headers);
             restTemplate.exchange(url, HttpMethod.DELETE, request, Void.class, 1);
