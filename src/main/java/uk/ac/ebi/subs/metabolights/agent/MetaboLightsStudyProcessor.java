@@ -363,6 +363,11 @@ public class MetaboLightsStudyProcessor {
                         }
                     }
                 }
+                for (uk.ac.ebi.subs.metabolights.model.Publication publication : mlStudy.getPublications()) {
+                    if (!AgentProcessorUtils.alreadyHas(project.getPublications(), publication)) {
+                        this.deletionService.deletePublication(study.getId(), publication.getTitle());
+                    }
+                }
             }
             certificate.setMessage(getSuccessMessage("publications"));
             certificate.setProcessingStatus(ProcessingStatusEnum.Submitted);
