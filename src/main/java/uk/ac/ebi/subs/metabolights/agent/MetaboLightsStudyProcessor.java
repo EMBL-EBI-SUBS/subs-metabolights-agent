@@ -327,6 +327,13 @@ public class MetaboLightsStudyProcessor {
                         }
                     }
                 }
+
+                for (uk.ac.ebi.subs.metabolights.model.Contact contact : mlStudy.getPeople()) {
+                    if (!AgentProcessorUtils.alreadyHas(project.getContacts(), contact)) {
+                        this.deletionService.deleteDescriptor(study.getId(), contact.getEmail());
+                    }
+                }
+
             }
             certificate.setMessage(getSuccessMessage("contacts"));
             certificate.setProcessingStatus(ProcessingStatusEnum.Submitted);
