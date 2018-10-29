@@ -253,6 +253,14 @@ public class MetaboLightsStudyProcessor {
                         }
                     }
                 }
+                for (Factor factor : mlStudy.getFactors()) {
+                    /*
+                     Delete factors not present in USI attributes
+                     */
+                    if (!AgentProcessorUtils.alreadyPresent((List) study.getAttributes().get(StudyAttributes.STUDY_FACTORS), factor)) {
+                        this.deletionService.deleteFactor(study.getId(), factor.getFactorName());
+                    }
+                }
             }
             certificate.setMessage(getSuccessMessage("factors"));
             certificate.setProcessingStatus(ProcessingStatusEnum.Submitted);
