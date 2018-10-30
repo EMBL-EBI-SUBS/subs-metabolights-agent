@@ -38,7 +38,7 @@ public class DeletionServiceTest {
         System.out.println(newTitle);
 
         MLPublicationToUSIPublication converter = new MLPublicationToUSIPublication();
-        this.deletionService.deletePublication("MTBLS2", modified);
+        this.deletionService.deletePublication("MTBLS2", modified.getTitle());
         System.out.println("deleted - " +  newTitle);
         //TODO assert method
     }
