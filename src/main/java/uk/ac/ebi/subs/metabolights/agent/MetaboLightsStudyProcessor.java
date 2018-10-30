@@ -181,7 +181,7 @@ public class MetaboLightsStudyProcessor {
     private void resetContacts(uk.ac.ebi.subs.metabolights.model.Study existingMetaboLightsStudy) {
         if (existingMetaboLightsStudy.getPeople() != null && existingMetaboLightsStudy.getPeople().size() == 1) {
             try {
-                this.deletionService.deleteContact(existingMetaboLightsStudy.getIdentifier(), existingMetaboLightsStudy.getPeople().get(0));
+                this.deletionService.deleteContact(existingMetaboLightsStudy.getIdentifier(), existingMetaboLightsStudy.getPeople().get(0).getEmail());
             } catch (Exception e) {
                 logger.error(e.getMessage());
             }
@@ -191,7 +191,7 @@ public class MetaboLightsStudyProcessor {
     private void resetPublications(uk.ac.ebi.subs.metabolights.model.Study existingMetaboLightsStudy) {
         if (existingMetaboLightsStudy.getPublications() != null && existingMetaboLightsStudy.getPublications().size() == 1) {
             try {
-                this.deletionService.deletePublication(existingMetaboLightsStudy.getIdentifier(), existingMetaboLightsStudy.getPublications().get(0));
+                this.deletionService.deletePublication(existingMetaboLightsStudy.getIdentifier(), existingMetaboLightsStudy.getPublications().get(0).getTitle());
             } catch (Exception e) {
                 logger.error(e.getMessage());
             }
@@ -253,6 +253,14 @@ public class MetaboLightsStudyProcessor {
                         }
                     }
                 }
+                for (Factor factor : mlStudy.getFactors()) {
+                    /*
+                     Delete factors not present in USI attributes
+                     */
+                    if (!AgentProcessorUtils.alreadyPresent((List) study.getAttributes().get(StudyAttributes.STUDY_FACTORS), factor)) {
+                        this.deletionService.deleteFactor(study.getId(), factor.getFactorName());
+                    }
+                }
             }
             certificate.setMessage(getSuccessMessage("factors"));
             certificate.setProcessingStatus(ProcessingStatusEnum.Submitted);
@@ -280,6 +288,14 @@ public class MetaboLightsStudyProcessor {
                         } else {
                             this.postService.addDescriptor(study.getAccession(), descriptorAttribute);
                         }
+                    }
+                }
+                for (OntologyModel descriptor : mlStudy.getStudyDesignDescriptors()) {
+                    /*
+                     Delete study descriptors not present in USI attributes
+                     */
+                    if (!AgentProcessorUtils.alreadyPresent((List) study.getAttributes().get(StudyAttributes.STUDY_DESCRIPTORS), descriptor)) {
+                        this.deletionService.deleteDescriptor(study.getId(), descriptor.getAnnotationValue());
                     }
                 }
             }
@@ -311,6 +327,13 @@ public class MetaboLightsStudyProcessor {
                         }
                     }
                 }
+
+                for (uk.ac.ebi.subs.metabolights.model.Contact contact : mlStudy.getPeople()) {
+                    if (!AgentProcessorUtils.alreadyHas(project.getContacts(), contact)) {
+                        this.deletionService.deleteDescriptor(study.getId(), contact.getEmail());
+                    }
+                }
+
             }
             certificate.setMessage(getSuccessMessage("contacts"));
             certificate.setProcessingStatus(ProcessingStatusEnum.Submitted);
@@ -338,6 +361,11 @@ public class MetaboLightsStudyProcessor {
                         } else {
                             this.postService.add(study.getAccession(), publication);
                         }
+                    }
+                }
+                for (uk.ac.ebi.subs.metabolights.model.Publication publication : mlStudy.getPublications()) {
+                    if (!AgentProcessorUtils.alreadyHas(project.getPublications(), publication)) {
+                        this.deletionService.deletePublication(study.getId(), publication.getTitle());
                     }
                 }
             }
@@ -401,6 +429,13 @@ public class MetaboLightsStudyProcessor {
                 Map<String, List<Sample>> samplesToAddAndUpdate = AgentProcessorUtils.getSamplesToAddAndUpdate(samples, sampleTable);
                 this.updateService.updateSamples(samplesToAddAndUpdate.get("update"), study.getAccession(), sampleFileToUpdate);
                 this.postService.addSamples(samplesToAddAndUpdate.get("add"), study.getAccession(), sampleFileToUpdate);
+                /*
+                Delete sample rows not present in submission's sample list 
+                 */
+                List<Integer> sampleIndexesToDelete = AgentProcessorUtils.getSamplesIndexesToDelete(samples, sampleTable);
+                if (sampleIndexesToDelete.size() > 0) {
+                    this.deletionService.deleteSampleRows(study.getAccession(), sampleFileToUpdate, sampleIndexesToDelete);
+                }
 
             } catch (Exception e) {
                 certificate.setMessage("Error saving samples : " + e.getMessage());

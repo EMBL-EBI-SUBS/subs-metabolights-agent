@@ -27,6 +27,28 @@ public class AgentProcessorUtils {
         return false;
     }
 
+    public static boolean alreadyPresent(List<Attribute> factorAttributes, Factor factor) {
+        for (Attribute attribute : factorAttributes) {
+            if (isValid(attribute.getValue())) {
+                if (attribute.getValue().equalsIgnoreCase(factor.getFactorName())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public static boolean alreadyPresent(List<Attribute> descriptorAttributes, OntologyModel descriptor) {
+        for (Attribute attribute : descriptorAttributes) {
+            if (isValid(attribute.getValue())) {
+                if (attribute.getValue().equalsIgnoreCase(descriptor.getAnnotationValue())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public static boolean alreadyHas(List<OntologyModel> descriptors, String descriptorAttributeName) {
         for (OntologyModel descriptor : descriptors) {
             if (isValid(descriptor.getAnnotationValue())) {
@@ -49,10 +71,32 @@ public class AgentProcessorUtils {
         return false;
     }
 
+    public static boolean alreadyHas(List<Contact> usiContacts, uk.ac.ebi.subs.metabolights.model.Contact mlContact) {
+        for (Contact usiContact : usiContacts) {
+            if (isValid(usiContact.getEmail())) {
+                if (usiContact.getEmail().equalsIgnoreCase(mlContact.getEmail())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public static boolean alreadyHas(List<uk.ac.ebi.subs.metabolights.model.Publication> mlPublications, Publication usiPublication) {
         for (uk.ac.ebi.subs.metabolights.model.Publication mlPublication : mlPublications) {
             if (isValid(mlPublication.getTitle())) {
                 if (mlPublication.getTitle().equalsIgnoreCase(usiPublication.getArticleTitle())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public static boolean alreadyHas(List<Publication> usiPublications, uk.ac.ebi.subs.metabolights.model.Publication mlPublication) {
+        for (Publication publication : usiPublications) {
+            if (isValid(publication.getArticleTitle())) {
+                if (publication.getArticleTitle().equalsIgnoreCase(mlPublication.getTitle())) {
                     return true;
                 }
             }
@@ -127,6 +171,36 @@ public class AgentProcessorUtils {
         seggregatedSamples.put("add", samplesToAdd);
         seggregatedSamples.put("update", samplesToUpdate);
         return seggregatedSamples;
+    }
+
+    public static List<Integer> getSamplesIndexesToDelete(List<Sample> samples, MetaboLightsTable sampleTable) throws Exception {
+
+        List<Integer> rowsToDelete = new ArrayList<>();
+
+        if (sampleTable.getData().getRows() != null && sampleTable.getData().getRows().size() > 0) {
+            if (samples != null && samples.size() > 0) {
+                for (Map<String, String> row : sampleTable.getData().getRows()) {
+                    boolean isStillPresentInUsiSample = false;
+                    for (Map.Entry<String, String> cell : row.entrySet()) {
+                        if (cell.getKey().equalsIgnoreCase(SampleSpreadSheetConstants.SAMPLE_NAME)) {
+                            for (Sample sample : samples) {
+                                if (cell.getValue().equalsIgnoreCase(sample.getAlias())) {
+                                    isStillPresentInUsiSample = true;
+                                }
+                            }
+                        }
+                    }
+                    if (!isStillPresentInUsiSample) {
+                        if (row.containsKey(SampleSpreadSheetConstants.ROW_INDEX)) {
+                            if (!row.get(SampleSpreadSheetConstants.ROW_INDEX).isEmpty()) {
+                                rowsToDelete.add(new Integer(row.get(SampleSpreadSheetConstants.ROW_INDEX)));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return rowsToDelete;
     }
 
     private static Map<Boolean, String> findMatch(String sampleName, MetaboLightsTable sampleTable) {
