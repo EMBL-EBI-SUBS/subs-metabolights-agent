@@ -429,6 +429,13 @@ public class MetaboLightsStudyProcessor {
                 Map<String, List<Sample>> samplesToAddAndUpdate = AgentProcessorUtils.getSamplesToAddAndUpdate(samples, sampleTable);
                 this.updateService.updateSamples(samplesToAddAndUpdate.get("update"), study.getAccession(), sampleFileToUpdate);
                 this.postService.addSamples(samplesToAddAndUpdate.get("add"), study.getAccession(), sampleFileToUpdate);
+                /*
+                Delete sample rows not present in submission's sample list 
+                 */
+                List<Integer> sampleIndexesToDelete = AgentProcessorUtils.getSamplesIndexesToDelete(samples, sampleTable);
+                if (sampleIndexesToDelete.size() > 0) {
+                    this.deletionService.deleteSampleRows(study.getAccession(), sampleFileToUpdate, sampleIndexesToDelete);
+                }
 
             } catch (Exception e) {
                 certificate.setMessage("Error saving samples : " + e.getMessage());
