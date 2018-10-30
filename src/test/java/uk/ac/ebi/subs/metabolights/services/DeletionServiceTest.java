@@ -38,7 +38,7 @@ public class DeletionServiceTest {
         System.out.println(newTitle);
 
         MLPublicationToUSIPublication converter = new MLPublicationToUSIPublication();
-        this.deletionService.deletePublication("MTBLS2", modified);
+        this.deletionService.deletePublication("MTBLS2", modified.getTitle());
         System.out.println("deleted - " +  newTitle);
         //TODO assert method
     }
@@ -66,7 +66,7 @@ public class DeletionServiceTest {
         System.out.println(newName);
 
         MLFactorToUSIFactor mlFactorToUSIFactor = new MLFactorToUSIFactor();
-        this.deletionService.deleteFactor("MTBLS2", mlFactorToUSIFactor.convert(factor));
+        this.deletionService.deleteFactor("MTBLS2", mlFactorToUSIFactor.convert(factor).getValue());
         System.out.println("deleted - " +  newName);
         //TODO assert method
     }
@@ -80,7 +80,7 @@ public class DeletionServiceTest {
         System.out.println(newName);
 
         MLDescriptorToUSIDescriptor mlDescriptorToUSIDescriptor = new MLDescriptorToUSIDescriptor();
-        this.deletionService.deleteDescriptor("MTBLS2", mlDescriptorToUSIDescriptor.convert(descriptor));
+        this.deletionService.deleteDescriptor("MTBLS2", mlDescriptorToUSIDescriptor.convert(descriptor).getValue());
         System.out.println("deleted - " +  newName);
         //TODO assert method
     }
