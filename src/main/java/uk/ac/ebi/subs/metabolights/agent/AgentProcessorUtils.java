@@ -173,6 +173,36 @@ public class AgentProcessorUtils {
         return seggregatedSamples;
     }
 
+    public static List<Integer> getSamplesIndexesToDelete(List<Sample> samples, MetaboLightsTable sampleTable) throws Exception {
+
+        List<Integer> rowsToDelete = new ArrayList<>();
+
+        if (sampleTable.getData().getRows() != null && sampleTable.getData().getRows().size() > 0) {
+            if (samples != null && samples.size() > 0) {
+                for (Map<String, String> row : sampleTable.getData().getRows()) {
+                    boolean isStillPresentInUsiSample = false;
+                    for (Map.Entry<String, String> cell : row.entrySet()) {
+                        if (cell.getKey().equalsIgnoreCase(SampleSpreadSheetConstants.SAMPLE_NAME)) {
+                            for (Sample sample : samples) {
+                                if (cell.getValue().equalsIgnoreCase(sample.getAlias())) {
+                                    isStillPresentInUsiSample = true;
+                                }
+                            }
+                        }
+                    }
+                    if (!isStillPresentInUsiSample) {
+                        if (row.containsKey(SampleSpreadSheetConstants.ROW_INDEX)) {
+                            if (!row.get(SampleSpreadSheetConstants.ROW_INDEX).isEmpty()) {
+                                rowsToDelete.add(new Integer(row.get(SampleSpreadSheetConstants.ROW_INDEX)));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return rowsToDelete;
+    }
+
     private static Map<Boolean, String> findMatch(String sampleName, MetaboLightsTable sampleTable) {
         Map<Boolean, String> mappingResult = new HashMap<>();
         for (Map<String, String> row : sampleTable.getData().getRows()) {
