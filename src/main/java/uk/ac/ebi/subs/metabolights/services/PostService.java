@@ -198,7 +198,7 @@ public class PostService {
             String warnings = result.path("warnings").asText();
         } catch (JSONException e) {
             logger.error(e.getMessage());
-         } catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             logger.error(e.getMessage());
             throw e;
@@ -206,7 +206,7 @@ public class PostService {
     }
 
     public void addSamples(List<uk.ac.ebi.subs.data.submittable.Sample> samples, String studyID, String sampleFileName) {
-        if(samples == null || samples.size() == 0){
+        if (samples == null || samples.size() == 0) {
             return;
         }
         try {
@@ -216,21 +216,25 @@ public class PostService {
                 SampleMap sampleMap = new SampleMap(usiSampleToMLSample.convert(sample));
                 sampleRows.add(sampleMap);
             }
-            String url = mlProperties.getUrl() + studyID + "/samples/" + sampleFileName;
-
+            //  String url = mlProperties.getUrl() + studyID + "/samples/" + sampleFileName;
             JSONObject json = ServiceUtils.convertToJSON(sampleRows, "data");
-            System.out.println("sample json = " + json);
-            headers.set("user_token", this.apiKey);
+            updateRows(studyID, json, sampleFileName);
 
-            HttpEntity<JSONObject> requestBody = new HttpEntity<>(json, headers);
-            restTemplate.exchange(
-                    url, HttpMethod.POST, requestBody, java.lang.Object.class);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
+
+    private void updateRows(String studyID, JSONObject json, String fileName) throws Exception {
+        System.out.println("sample json = " + json);
+        headers.set("user_token", this.apiKey);
+        String url = mlProperties.getUrl() + studyID + "/" + fileName;
+        HttpEntity<JSONObject> requestBody = new HttpEntity<>(json, headers);
+        restTemplate.exchange(
+                url, HttpMethod.POST, requestBody, java.lang.Object.class);
+    }
+
 
     public void addContacts(String studyID, List<Contact> contacts) {
         for (Contact contact : contacts) {
