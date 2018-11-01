@@ -21,6 +21,7 @@ import uk.ac.ebi.subs.data.component.Contact;
 import uk.ac.ebi.subs.data.component.Publication;
 import uk.ac.ebi.subs.data.submittable.Protocol;
 import uk.ac.ebi.subs.metabolights.converters.*;
+import uk.ac.ebi.subs.metabolights.model.MetaboLightsTable;
 import uk.ac.ebi.subs.metabolights.model.Sample;
 import uk.ac.ebi.subs.metabolights.model.SampleMap;
 import uk.ac.ebi.subs.metabolights.model.SampleRows;
@@ -182,31 +183,8 @@ public class PostService {
         return addedDescriptor;
     }
 
-    public void addSample(String studyID, uk.ac.ebi.subs.data.submittable.Sample sample) {
-        //Sample addedSample = null;
-        try {
-            List<Sample> samples = new ArrayList<>();
-            headers.set("user_token", this.apiKey);
-            samples.add(usiSampleToMLSample.convert(sample));
-            JSONObject json = ServiceUtils.convertToJSON(samples, "samples");
-            HttpEntity<JSONObject> requestBody = new HttpEntity<>(json, headers);
-
-            String url = mlProperties.getUrl() + studyID + "/samples";
-            //addedSample = restTemplate.postForObject(url, requestBody, ObjectNode.class);
-
-            JsonNode result = restTemplate.postForObject(url, requestBody, ObjectNode.class);
-            String warnings = result.path("warnings").asText();
-        } catch (JSONException e) {
-            logger.error(e.getMessage());
-         } catch (Exception e) {
-            e.printStackTrace();
-            logger.error(e.getMessage());
-            throw e;
-        }
-    }
-
     public void addSamples(List<uk.ac.ebi.subs.data.submittable.Sample> samples, String studyID, String sampleFileName) {
-        if(samples == null || samples.size() == 0){
+        if (samples == null || samples.size() == 0) {
             return;
         }
         try {
@@ -216,21 +194,26 @@ public class PostService {
                 SampleMap sampleMap = new SampleMap(usiSampleToMLSample.convert(sample));
                 sampleRows.add(sampleMap);
             }
-            String url = mlProperties.getUrl() + studyID + "/samples/" + sampleFileName;
+            ObjectNode objectNode = ServiceUtils.convertToJSON(sampleRows, "data");
+            System.out.println("Sample rows to save: " + objectNode);
+            addRows(studyID, objectNode, sampleFileName);
 
-            JSONObject json = ServiceUtils.convertToJSON(sampleRows, "data");
-            System.out.println("sample json = " + json);
-            headers.set("user_token", this.apiKey);
-
-            HttpEntity<JSONObject> requestBody = new HttpEntity<>(json, headers);
-            restTemplate.exchange(
-                    url, HttpMethod.POST, requestBody, java.lang.Object.class);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
+
+    private void addRows(String studyID, ObjectNode json, String fileName) throws Exception {
+        System.out.println("json to update = " + json);
+        headers.set("user_token", this.apiKey);
+       // headers.set("Content-type", "application/json; charset=utf-8");
+        String url = mlProperties.getUrl() + studyID + "/addRows/" + fileName;
+        HttpEntity<ObjectNode> requestBody = new HttpEntity<>(json, headers);
+        restTemplate.exchange(
+                url, HttpMethod.POST, requestBody, MetaboLightsTable.class);
+    }
+
 
     public void addContacts(String studyID, List<Contact> contacts) {
         for (Contact contact : contacts) {

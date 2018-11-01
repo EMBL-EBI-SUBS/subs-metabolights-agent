@@ -258,7 +258,7 @@ public class MetaboLightsStudyProcessor {
                      Delete factors not present in USI attributes
                      */
                     if (!AgentProcessorUtils.alreadyPresent((List) study.getAttributes().get(StudyAttributes.STUDY_FACTORS), factor)) {
-                        this.deletionService.deleteFactor(study.getId(), factor.getFactorName());
+                        this.deletionService.deleteFactor(study.getAccession(), factor.getFactorName());
                     }
                 }
             }
@@ -417,6 +417,9 @@ public class MetaboLightsStudyProcessor {
             certificate.setMessage("Something went wrong while trying to access the existing metabolights study files. Unable to update samples");
             return certificate;
         }
+      //  this.postService.addSamples(samples, study.getAccession(), sampleFileToUpdate);
+     //   this.updateService.updateSamples(samples, study.getAccession(), sampleFileToUpdate);
+
         if (isNewSubmission) {
             try {
                 this.postService.addSamples(samples, study.getAccession(), sampleFileToUpdate);
@@ -425,16 +428,16 @@ public class MetaboLightsStudyProcessor {
             }
         } else {
             try {
-                MetaboLightsTable sampleTable = this.fetchService.getSampleTable(study.getAccession(), sampleFileToUpdate);
+                MetaboLightsTable sampleTable = this.fetchService.getMetaboLightsDataTable(study.getAccession(), sampleFileToUpdate);
                 Map<String, List<Sample>> samplesToAddAndUpdate = AgentProcessorUtils.getSamplesToAddAndUpdate(samples, sampleTable);
                 this.updateService.updateSamples(samplesToAddAndUpdate.get("update"), study.getAccession(), sampleFileToUpdate);
                 this.postService.addSamples(samplesToAddAndUpdate.get("add"), study.getAccession(), sampleFileToUpdate);
                 /*
-                Delete sample rows not present in submission's sample list 
+                Delete sample rows not present in submission's sample list
                  */
                 List<Integer> sampleIndexesToDelete = AgentProcessorUtils.getSamplesIndexesToDelete(samples, sampleTable);
                 if (sampleIndexesToDelete.size() > 0) {
-                    this.deletionService.deleteSampleRows(study.getAccession(), sampleFileToUpdate, sampleIndexesToDelete);
+                    this.deletionService.deleteTableRows(study.getAccession(), sampleFileToUpdate, sampleIndexesToDelete);
                 }
 
             } catch (Exception e) {
@@ -451,7 +454,7 @@ public class MetaboLightsStudyProcessor {
         List<Integer> sampleRowsToDelete = new ArrayList<>();
         sampleRowsToDelete.add(new Integer(0));
         try {
-            this.deletionService.deleteSampleRows(accession, sampleFileToUpdate, sampleRowsToDelete);
+            this.deletionService.deleteTableRows(accession, sampleFileToUpdate, sampleRowsToDelete);
         } catch (Exception e) {
             logger.error(e.getMessage());
         }

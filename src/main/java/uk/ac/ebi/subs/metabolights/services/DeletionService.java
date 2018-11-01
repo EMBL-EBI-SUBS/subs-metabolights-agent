@@ -165,4 +165,17 @@ public class DeletionService {
             throw e;
         }
     }
+
+    public void deleteTableRows(String studyID, String filename, List<Integer> rowIndices) {
+        try {
+            String url = mlProperties.getUrl() + studyID + "/deleteRows/" + filename + "?row_num=" + ServiceUtils.getAsConcatenatedString(rowIndices);
+            headers.set("user_token", this.apiKey);
+            HttpEntity<?> request = new HttpEntity<Object>(headers);
+            restTemplate.exchange(url, HttpMethod.DELETE, request, Void.class, 1);
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.error(e.getMessage());
+            throw e;
+        }
+    }
 }

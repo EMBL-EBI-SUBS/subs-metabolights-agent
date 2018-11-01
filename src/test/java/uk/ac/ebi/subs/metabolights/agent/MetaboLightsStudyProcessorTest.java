@@ -60,7 +60,7 @@ public class MetaboLightsStudyProcessorTest {
         submissionEnvelope.getStudies().get(0).getAttributes().put(StudyAttributes.STUDY_FACTORS, ValidationTestUtils.getStudyFactorsMatchingSampleTestFile());
 
         ProcessingCertificateEnvelope processingCertificateEnvelope = metaboLightsStudyProcessor.processStudy(submissionEnvelope);
-        assertEquals(8, processingCertificateEnvelope.getProcessingCertificates().size());
+        assertEquals(9, processingCertificateEnvelope.getProcessingCertificates().size());
     }
 
     @Test
