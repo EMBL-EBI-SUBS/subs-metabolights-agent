@@ -212,10 +212,9 @@ public class UpdateService {
                 SampleMap sampleMap = new SampleMap(usiSampleToMLSample.convert(sample));
                 sampleRows.add(sampleMap);
             }
-            //    String url = mlProperties.getUrl() + studyID + "/samples/" + sampleFileName;
 
-            JSONObject json = ServiceUtils.convertToJSON(sampleRows, "data");
-            updateRows(studyID, json, sampleFileName);
+//            JSONObject json = ServiceUtils.convertToJSON(sampleRows, "data");
+//            updateRows(studyID, json, sampleFileName);
 
         } catch (Exception e) {
             e.printStackTrace();
