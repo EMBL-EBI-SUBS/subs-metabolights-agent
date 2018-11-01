@@ -16,7 +16,7 @@ public class ServiceUtils {
     static final ObjectMapper objectMapper = new ObjectMapper();
 
 
-    public static JSONObject convertToJSON(List objectList, String name) throws JSONException {
+    public static JSONObject convertToJSONObject(List objectList, String name) throws JSONException {
         JSONObject jsonObject = new JSONObject();
         JsonNode listNode = objectMapper.valueToTree(objectList);
         org.json.JSONArray request = new org.json.JSONArray(listNode.toString());

@@ -212,18 +212,20 @@ public class UpdateService {
                 SampleMap sampleMap = new SampleMap(usiSampleToMLSample.convert(sample));
                 sampleRows.add(sampleMap);
             }
-            String url = mlProperties.getUrl() + studyID + "/samples/" + sampleFileName;
 
-            JSONObject json = ServiceUtils.convertToJSON(sampleRows, "data");
-            headers.set("user_token", this.apiKey);
-
-            HttpEntity<JSONObject> requestBody = new HttpEntity<>(json, headers);
-            restTemplate.put(url, requestBody, new Object[]{});
-
+//            JSONObject json = ServiceUtils.convertToJSON(sampleRows, "data");
+//            updateRows(studyID, json, sampleFileName);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
 
+    private void updateRows(String studyID, JSONObject json, String fileName) throws Exception {
+        String url = mlProperties.getUrl() + studyID + "/updateRows/" + fileName;
+        headers.set("user_token", this.apiKey);
+
+        HttpEntity<JSONObject> requestBody = new HttpEntity<>(json, headers);
+        restTemplate.put(url, requestBody, new Object[]{});
     }
 }

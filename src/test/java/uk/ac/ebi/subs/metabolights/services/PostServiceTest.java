@@ -52,16 +52,4 @@ public class PostServiceTest {
         uk.ac.ebi.subs.metabolights.model.Protocol addedProtocol = this.postService.add("MTBLS2", protocol);
         assertEquals(addedProtocol.getName(),newTitle);
     }
-    
-    public void addSample(){
-        Sample usiSample = Utilities.getUSISampleFromDisc();
-        String newAlias =  usiSample.getAlias() + " - " + UUID.randomUUID().toString();
-        usiSample.setAlias(newAlias);
-
-     //   USISampleToMLSample usiSampleToMLSample = new USISampleToMLSample();
-     //   uk.ac.ebi.subs.metabolights.model.Sample mlSample = usiSampleToMLSample.convert(usiSample);
-        this.postService.addSample("MTBLS2", usiSample);
-        //assertEquals(addedSample.getName(),newTitle);
-    }
-
 }
