@@ -213,19 +213,19 @@ public class UpdateService {
                 sampleRows.add(sampleMap);
             }
 
-//            JSONObject json = ServiceUtils.convertToJSON(sampleRows, "data");
-//            updateRows(studyID, json, sampleFileName);
+            ObjectNode json = ServiceUtils.convertToJSON(sampleRows, "data");
+            updateRows(studyID, json, sampleFileName);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void updateRows(String studyID, JSONObject json, String fileName) throws Exception {
-        String url = mlProperties.getUrl() + studyID + "/updateRows/" + fileName;
+    private void updateRows(String studyID, ObjectNode json, String fileName) throws Exception {
+        String url = mlProperties.getUrl() + studyID + "/rows/" + fileName;
         headers.set("user_token", this.apiKey);
 
-        HttpEntity<JSONObject> requestBody = new HttpEntity<>(json, headers);
+        HttpEntity<ObjectNode> requestBody = new HttpEntity<>(json, headers);
         restTemplate.put(url, requestBody, new Object[]{});
     }
 }
