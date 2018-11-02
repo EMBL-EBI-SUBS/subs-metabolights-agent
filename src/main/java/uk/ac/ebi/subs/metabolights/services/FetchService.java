@@ -66,7 +66,7 @@ public class FetchService {
     public String createNewStudyAndGetAccession() {
         String accession;
         try {
-            String endPoint = mlProperties.getUrl() + "create_study";
+            String endPoint = mlProperties.getUrl() + "create";
             JsonNode result = restTemplate.postForObject(endPoint, getHttpEntity(), ObjectNode.class);
             accession = result.path("new_study").asText();
             return accession;
@@ -82,7 +82,7 @@ public class FetchService {
 
     public StudyFiles getStudyFiles(String accession) {
         try {
-            String localUrl = mlProperties.getUrl() + accession + "/isa-tab/study_files";
+            String localUrl = mlProperties.getUrl() + accession + "/files";
 
             ResponseEntity<StudyFiles> response = restTemplate.exchange(
                     localUrl, HttpMethod.GET, getHttpEntity(), StudyFiles.class);
@@ -92,21 +92,6 @@ public class FetchService {
         } catch (Exception e) {
             logger.error(e.getMessage());
             return new StudyFiles();
-        }
-    }
-
-    public MetaboLightsTable getSampleTable(String accession, String sampleFileName) {
-        try {
-            String localUrl = mlProperties.getUrl() + accession + "/samples/" +  sampleFileName;
-
-            ResponseEntity<MetaboLightsTable> response = restTemplate.exchange(
-                    localUrl, HttpMethod.GET, getHttpEntity(), MetaboLightsTable.class);
-           return response.getBody();
-
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-            e.printStackTrace();
-            throw e;
         }
     }
 
