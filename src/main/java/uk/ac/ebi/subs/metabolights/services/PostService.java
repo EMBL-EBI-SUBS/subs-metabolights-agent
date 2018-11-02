@@ -208,7 +208,7 @@ public class PostService {
         System.out.println("json to update = " + json);
         headers.set("user_token", this.apiKey);
        // headers.set("Content-type", "application/json; charset=utf-8");
-        String url = mlProperties.getUrl() + studyID + "/addRows/" + fileName;
+        String url = mlProperties.getUrl() + studyID + "/rows/" + fileName;
         HttpEntity<ObjectNode> requestBody = new HttpEntity<>(json, headers);
         restTemplate.exchange(
                 url, HttpMethod.POST, requestBody, MetaboLightsTable.class);
