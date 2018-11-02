@@ -140,35 +140,9 @@ public class DeletionService {
         }
     }
 
-    public void deleteMarkedSamples(String studyID) {
-        try {
-            String url = mlProperties.getUrl() + studyID + "/samples";
-            headers.set("user_token", this.apiKey);
-            HttpEntity<?> request = new HttpEntity<Object>(headers);
-            restTemplate.exchange(url, HttpMethod.DELETE, request, Void.class, 1);
-        } catch (Exception e) {
-            e.printStackTrace();
-            logger.error(e.getMessage());
-            throw e;
-        }
-    }
-
-    public void deleteSampleRows(String studyID, String sampleFileName, List<Integer> sampleRows) {
-        try {
-            String url = mlProperties.getUrl() + studyID + "/samples/" + sampleFileName + "?row_num=" + ServiceUtils.getAsConcatenatedString(sampleRows);
-            headers.set("user_token", this.apiKey);
-            HttpEntity<?> request = new HttpEntity<Object>(headers);
-            restTemplate.exchange(url, HttpMethod.DELETE, request, Void.class, 1);
-        } catch (Exception e) {
-            e.printStackTrace();
-            logger.error(e.getMessage());
-            throw e;
-        }
-    }
-
     public void deleteTableRows(String studyID, String filename, List<Integer> rowIndices) {
         try {
-            String url = mlProperties.getUrl() + studyID + "/deleteRows/" + filename + "?row_num=" + ServiceUtils.getAsConcatenatedString(rowIndices);
+            String url = mlProperties.getUrl() + studyID + "/rows/" + filename + "?row_num=" + ServiceUtils.getAsConcatenatedString(rowIndices);
             headers.set("user_token", this.apiKey);
             HttpEntity<?> request = new HttpEntity<Object>(headers);
             restTemplate.exchange(url, HttpMethod.DELETE, request, Void.class, 1);
