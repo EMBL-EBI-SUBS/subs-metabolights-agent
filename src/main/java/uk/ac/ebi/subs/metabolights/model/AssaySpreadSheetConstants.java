@@ -56,6 +56,28 @@ public class AssaySpreadSheetConstants {
     public static final String NMR_SAMPLE_PROTOCOL_LABEL = "Label";
     public static final String NMR_SAMPLE_PROTOCOL_EXTRACT_NAME_TSR = "Term Source REF.3";
     public static final String NMR_SAMPLE_PROTOCOL_EXTRACT_NAME_TAN = "Term Accession Number.3";
-    
+
+    /*
+     Mass Spectrometry protocol specific for MS
+      */
+
+    public static final String MS_PROTOCOL_REF = "Protocol REF.2";
+    public static final String MS_PROTOCOL_SCAN_POLARITY = "Parameter Value[Scan polarity]";
+    public static final String MS_PROTOCOL_SCAN_MZ_RANGE = "Parameter Value[Scan m/z range]";
+    public static final String MS_PROTOCOL_INSTRUMENT = "Parameter Value[Instrument]";
+    public static final String MS_PROTOCOL_INSTRUMENT_TSR = "Term Source REF.2";
+    public static final String MS_PROTOCOL_INSTRUMENT_TAN= "Term Accession Number.2";
+    public static final String MS_PROTOCOL_ION_SOURCE = "Parameter Value[Ion source]";
+    public static final String MS_PROTOCOL_ION_SOURCE_TSR = "Term Source REF.3";
+    public static final String MS_PROTOCOL_ION_SOURCE_TAN = "Term Accession Number.3";
+    public static final String MS_PROTOCOL_MASS_ANALYZER = "Parameter Value[Mass analyzer]";
+    public static final String MS_PROTOCOL_MASS_ANALYZER_TSR = "Term Source REF.4";
+    public static final String MS_PROTOCOL_MASS_ANALYZER_TAN = "Term Accession Number.4";
+    public static final String MS_PROTOCOL_MS_ASSAY_NAME = "MS Assay Name";
+    public static final String MS_PROTOCOL_RAW_SPECTRAL_DATA_FILE = "Raw Spectral Data File";
+
+
+
+
 
 }
