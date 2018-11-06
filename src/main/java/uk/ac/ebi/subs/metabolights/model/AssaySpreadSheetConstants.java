@@ -36,6 +36,26 @@ public class AssaySpreadSheetConstants {
     public static final String CHROMATOGRAPHY_PROTOCOL_EXTRACT_NAME_TSR = "Term Source REF.1";
     public static final String CHROMATOGRAPHY_PROTOCOL_EXTRACT_NAME_TAN = "Term Accession Number.1";
 
+     /*
+     NMR sample protocol specific for NMR
+      */
+
+    public static final String NMR_SAMPLE_PROTOCOL_REF = "Protocol REF.1";
+    public static final String NMR_SAMPLE_PROTOCOL_TUBE_TYPE = "Parameter Value[NMR tube type]";
+    public static final String NMR_SAMPLE_PROTOCOL_TUBE_TYPE_TSR = "Term Source REF";
+    public static final String NMR_SAMPLE_PROTOCOL_TUBE_TYPE_TAN = "Term Accession Number";
+    public static final String NMR_SAMPLE_PROTOCOL_SOLVENT = "Parameter Value[Solvent]";
+    public static final String NMR_SAMPLE_PROTOCOL_SOLVENT_TSR = "Term Source REF.1";
+    public static final String NMR_SAMPLE_PROTOCOL_SOLVENT_TAN = "Term Accession Number.1";
+    public static final String NMR_SAMPLE_PROTOCOL_SAMPLE_PH = "Parameter Value[Sample pH]";
+    public static final String NMR_SAMPLE_PROTOCOL_TEMPERATURE = "Parameter Value[Temperature]";
+    public static final String NMR_SAMPLE_PROTOCOL_UNIT = "Unit";
+    public static final String NMR_SAMPLE_PROTOCOL_TEMPERATURE_UNIT_TSR = "Term Source REF.2";
+    public static final String NMR_SAMPLE_PROTOCOL_TEMPERATURE_UNIT_TAN = "Term Accession Number.2";
+    public static final String NMR_SAMPLE_PROTOCOL_EXTRACT_NAME = "Labeled Extract Name";
+    public static final String NMR_SAMPLE_PROTOCOL_LABEL = "Label";
+    public static final String NMR_SAMPLE_PROTOCOL_EXTRACT_NAME_TSR = "Term Source REF.3";
+    public static final String NMR_SAMPLE_PROTOCOL_EXTRACT_NAME_TAN = "Term Accession Number.3";
     
 
 }
