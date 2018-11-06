@@ -95,6 +95,13 @@ public class AssaySpreadSheetConstants {
     public static final String NMR_PROTOCOL_UNIT_TAN = "Term Accession Number.6";
     public static final String NMR_PROTOCOL_ACQUISITION_PM_DATA_FILE = "Acquisition Parameter Data File";
 
+     /*
+     Data transformation protocol common for NMR and MS
+      */
+
+    public static final String DATA_TRANSFORMATION_PROTOCOL_NORMALIZATION_NAME = "Normalization Name";
+    public static final String DATA_TRANSFORMATION_PROTOCOL_DERIVED_SPECTRAL_FILE = "Derived Spectral Data File";
+
 
 
 
