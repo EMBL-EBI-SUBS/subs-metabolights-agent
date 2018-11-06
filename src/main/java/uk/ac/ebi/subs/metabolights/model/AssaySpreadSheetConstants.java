@@ -66,7 +66,7 @@ public class AssaySpreadSheetConstants {
     public static final String MS_PROTOCOL_SCAN_MZ_RANGE = "Parameter Value[Scan m/z range]";
     public static final String MS_PROTOCOL_INSTRUMENT = "Parameter Value[Instrument]";
     public static final String MS_PROTOCOL_INSTRUMENT_TSR = "Term Source REF.2";
-    public static final String MS_PROTOCOL_INSTRUMENT_TAN= "Term Accession Number.2";
+    public static final String MS_PROTOCOL_INSTRUMENT_TAN = "Term Accession Number.2";
     public static final String MS_PROTOCOL_ION_SOURCE = "Parameter Value[Ion source]";
     public static final String MS_PROTOCOL_ION_SOURCE_TSR = "Term Source REF.3";
     public static final String MS_PROTOCOL_ION_SOURCE_TAN = "Term Accession Number.3";
@@ -85,7 +85,7 @@ public class AssaySpreadSheetConstants {
     public static final String NMR_PROTOCOL_INSTRUMENT_TSR = "Term Source REF.4";
     public static final String NMR_PROTOCOL_INSTRUMENT_TAN = "Term Accession Number.4";
     public static final String NMR_PROTOCOL_NMR_PROBE = "Parameter Value[NMR Probe]";
-    public static final String NMR_PROTOCOL_NMR_PROBE_TSR= "Term Source REF.5";
+    public static final String NMR_PROTOCOL_NMR_PROBE_TSR = "Term Source REF.5";
     public static final String NMR_PROTOCOL_NMR_PROBE_TAN = "Term Accession Number.5";
     public static final String NMR_PROTOCOL_NO_OF_TRANSIENTS = "Parameter Value[Number of transients]";
     public static final String NMR_PROTOCOL_PULSE_SEQ_NAME = "Parameter Value[Pulse sequence name]";
@@ -102,7 +102,12 @@ public class AssaySpreadSheetConstants {
     public static final String DATA_TRANSFORMATION_PROTOCOL_NORMALIZATION_NAME = "Normalization Name";
     public static final String DATA_TRANSFORMATION_PROTOCOL_DERIVED_SPECTRAL_FILE = "Derived Spectral Data File";
 
+      /*
+     Metabolite identification  protocol common for NMR and MS
+      */
 
+    public static final String METABOLITE_IDENTIFICATION_PROTOCOL_TRANSFORMATION_NAME = "Data Transformation Name";
+    public static final String METABOLITE_IDENTIFICATION_PROTOCOL_METABOLITE_ASSIGNMENT_FILE = "Metabolite Assignment File";
 
 
 }
