@@ -76,6 +76,24 @@ public class AssaySpreadSheetConstants {
     public static final String MS_PROTOCOL_MS_ASSAY_NAME = "MS Assay Name";
     public static final String MS_PROTOCOL_RAW_SPECTRAL_DATA_FILE = "Raw Spectral Data File";
 
+    /*
+     NMR spectroscopy protocol specific for NMR
+      */
+
+    public static final String NMR_PROTOCOL_REF = "Protocol REF.2";
+    public static final String NMR_PROTOCOL_INSTRUMENT = "Parameter Value[Instrument]";
+    public static final String NMR_PROTOCOL_INSTRUMENT_TSR = "Term Source REF.4";
+    public static final String NMR_PROTOCOL_INSTRUMENT_TAN = "Term Accession Number.4";
+    public static final String NMR_PROTOCOL_NMR_PROBE = "Parameter Value[NMR Probe]";
+    public static final String NMR_PROTOCOL_NMR_PROBE_TSR= "Term Source REF.5";
+    public static final String NMR_PROTOCOL_NMR_PROBE_TAN = "Term Accession Number.5";
+    public static final String NMR_PROTOCOL_NO_OF_TRANSIENTS = "Parameter Value[Number of transients]";
+    public static final String NMR_PROTOCOL_PULSE_SEQ_NAME = "Parameter Value[Pulse sequence name]";
+    public static final String NMR_PROTOCOL_MAGNETIC_FIELD_STRENGTH = "Parameter Value[Magnetic field strength]";
+    public static final String NMR_PROTOCOL_UNIT = "Unit.1";
+    public static final String NMR_PROTOCOL_UNIT_TSR = "Term Source REF.6";
+    public static final String NMR_PROTOCOL_UNIT_TAN = "Term Accession Number.6";
+    public static final String NMR_PROTOCOL_ACQUISITION_PM_DATA_FILE = "Acquisition Parameter Data File";
 
 
 
