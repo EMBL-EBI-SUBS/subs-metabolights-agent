@@ -422,7 +422,7 @@ public class MetaboLightsStudyProcessor {
 
         if (isNewSubmission) {
             try {
-                this.postService.addSamples(samples, study.getAccession(), sampleFileToUpdate);
+                this.postService.addSamples(samples, study.getAccession(), sampleFileToUpdate, null);
             } catch (Exception e) {
                 certificate.setMessage("Error saving samples : " + e.getMessage());
             }
@@ -430,8 +430,8 @@ public class MetaboLightsStudyProcessor {
             try {
                 MetaboLightsTable sampleTable = this.fetchService.getMetaboLightsDataTable(study.getAccession(), sampleFileToUpdate);
                 Map<String, List<Sample>> samplesToAddAndUpdate = AgentProcessorUtils.getSamplesToAddAndUpdate(samples, sampleTable);
-                this.updateService.updateSamples(samplesToAddAndUpdate.get("update"), study.getAccession(), sampleFileToUpdate);
-                this.postService.addSamples(samplesToAddAndUpdate.get("add"), study.getAccession(), sampleFileToUpdate);
+                this.updateService.updateSamples(samplesToAddAndUpdate.get("update"), study.getAccession(), sampleFileToUpdate, sampleTable.getHeader());
+                this.postService.addSamples(samplesToAddAndUpdate.get("add"), study.getAccession(), sampleFileToUpdate, sampleTable.getHeader());
                 /*
                 Delete sample rows not present in submission's sample list
                  */

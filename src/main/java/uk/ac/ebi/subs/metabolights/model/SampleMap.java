@@ -8,7 +8,7 @@ import java.util.LinkedHashMap;
  * Created by kalai on 22/10/2018.
  */
 
-public class SampleMap extends LinkedHashMap {
+public class SampleMap extends LinkedHashMap<String, String> {
 
     public SampleMap(Sample sample) {
         super();
