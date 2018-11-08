@@ -29,6 +29,7 @@ import uk.ac.ebi.subs.metabolights.validator.schema.custom.JsonAsTextPlainHttpMe
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class PostService {
@@ -183,15 +184,17 @@ public class PostService {
         return addedDescriptor;
     }
 
-    public void addSamples(List<uk.ac.ebi.subs.data.submittable.Sample> samples, String studyID, String sampleFileName) {
+    public void addSamples(List<uk.ac.ebi.subs.data.submittable.Sample> samples, String studyID, String sampleFileName, Map<String, String> existingSampleTableHeaders) {
         if (samples == null || samples.size() == 0) {
             return;
         }
         try {
-            List<uk.ac.ebi.subs.metabolights.model.Sample> mlSamples = new ArrayList<>();
             SampleRows sampleRows = new SampleRows();
             for (uk.ac.ebi.subs.data.submittable.Sample sample : samples) {
                 SampleMap sampleMap = new SampleMap(usiSampleToMLSample.convert(sample));
+                if (existingSampleTableHeaders != null) {
+                    ServiceUtils.fillEmptyValuesForMissingColumns(sampleMap, existingSampleTableHeaders);
+                }
                 sampleRows.add(sampleMap);
             }
             ObjectNode objectNode = ServiceUtils.convertToJSON(sampleRows, "data");
@@ -207,7 +210,7 @@ public class PostService {
     private void addRows(String studyID, ObjectNode json, String fileName) throws Exception {
         System.out.println("json to update = " + json);
         headers.set("user_token", this.apiKey);
-       // headers.set("Content-type", "application/json; charset=utf-8");
+        // headers.set("Content-type", "application/json; charset=utf-8");
         String url = mlProperties.getUrl() + studyID + "/rows/" + fileName;
         HttpEntity<ObjectNode> requestBody = new HttpEntity<>(json, headers);
         restTemplate.exchange(

@@ -8,8 +8,10 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.TextNode;
 import org.json.JSONException;
 import org.json.JSONObject;
+import uk.ac.ebi.subs.metabolights.model.SampleMap;
 
 import java.util.List;
+import java.util.Map;
 
 public class ServiceUtils {
 
@@ -44,6 +46,14 @@ public class ServiceUtils {
                 }
             }
             return concatenatedRows;
+        }
+    }
+
+    public static void fillEmptyValuesForMissingColumns(SampleMap sampleMap, Map<String, String> existingSampleTableHeaders) {
+        for (Map.Entry<String, String> entry : existingSampleTableHeaders.entrySet()) {
+            if (!sampleMap.containsKey(entry.getKey())) {
+                sampleMap.put(entry.getKey(), "");
+            }
         }
     }
 }

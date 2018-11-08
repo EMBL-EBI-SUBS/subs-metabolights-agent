@@ -29,6 +29,7 @@ import uk.ac.ebi.subs.metabolights.validator.schema.custom.JsonAsTextPlainHttpMe
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class UpdateService {
@@ -201,15 +202,15 @@ public class UpdateService {
         }
     }
 
-    public void updateSamples(List<Sample> samples, String studyID, String sampleFileName) {
+    public void updateSamples(List<Sample> samples, String studyID, String sampleFileName, Map<String, String> existingSampleTableHeaders) {
         if (samples == null || samples.size() == 0) {
             return;
         }
         try {
-            List<uk.ac.ebi.subs.metabolights.model.Sample> mlSamples = new ArrayList<>();
             SampleRows sampleRows = new SampleRows();
             for (Sample sample : samples) {
                 SampleMap sampleMap = new SampleMap(usiSampleToMLSample.convert(sample));
+                ServiceUtils.fillEmptyValuesForMissingColumns(sampleMap, existingSampleTableHeaders);
                 sampleRows.add(sampleMap);
             }
 
