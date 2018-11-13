@@ -80,6 +80,34 @@ public class FetchService {
         }
     }
 
+    public void cloneNMRTemplates(String toStudy) {
+        String fromStudy = "MTBLS122";
+        cloneTemplate(fromStudy, toStudy);
+    }
+
+    public void cloneLcmsTemplates(String toStudy) {
+        String fromStudy = "MTBLS121";
+        cloneTemplate(fromStudy, toStudy);
+    }
+
+    public void cloneGcmsTemplates(String toStudy) {
+        String fromStudy = "MTBLS130";
+        cloneTemplate(fromStudy, toStudy);
+    }
+
+    public void cloneTemplate(String fromStudy, String toStudy) {
+        String endpoint = mlProperties.getUrl() + "clone?study_id=" + fromStudy + "&to_study_id=" + toStudy;
+        try {
+            restTemplate.postForObject(endpoint, getHttpEntity(), ObjectNode.class);
+        } catch (RestClientException e) {
+            logger.error(e.getMessage());
+            throw new RestClientException(e.getMessage(), e);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw e;
+        }
+    }
+
     public StudyFiles getStudyFiles(String accession) {
         try {
             String localUrl = mlProperties.getUrl() + accession + "/files";
@@ -97,7 +125,7 @@ public class FetchService {
 
     public MetaboLightsTable getMetaboLightsDataTable(String accession, String fileName) {
         try {
-            String localUrl = mlProperties.getUrl() + accession + "/" +  fileName;
+            String localUrl = mlProperties.getUrl() + accession + "/" + fileName;
 
             ResponseEntity<MetaboLightsTable> response = restTemplate.exchange(
                     localUrl, HttpMethod.GET, getHttpEntity(), MetaboLightsTable.class);
