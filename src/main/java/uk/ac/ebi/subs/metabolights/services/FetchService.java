@@ -85,6 +85,16 @@ public class FetchService {
         cloneTemplate(fromStudy, toStudy);
     }
 
+    public void cloneLcmsTemplates(String toStudy) {
+        String fromStudy = "MTBLS121";
+        cloneTemplate(fromStudy, toStudy);
+    }
+
+    public void cloneGcmsTemplates(String toStudy) {
+        String fromStudy = "MTBLS130";
+        cloneTemplate(fromStudy, toStudy);
+    }
+
     public void cloneTemplate(String fromStudy, String toStudy) {
         String endpoint = mlProperties.getUrl() + "clone?study_id=" + fromStudy + "&to_study_id=" + toStudy;
         try {
