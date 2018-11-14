@@ -42,4 +42,11 @@ public class FetchServiceTest {
         String accession = this.fetchService.createNewStudyAndGetAccession();
         assertTrue(accession.contains("MTBLS"));
     }
+
+    @Test
+    public void createNewNMRStudy() {
+        String accession = this.fetchService.createNewStudyAndGetAccession();
+        this.fetchService.cloneNMRTemplates(accession);
+        assertTrue(accession.contains("MTBLS"));
+    }
 }
