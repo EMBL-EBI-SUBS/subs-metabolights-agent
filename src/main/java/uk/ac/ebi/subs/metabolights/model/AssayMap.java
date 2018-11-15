@@ -14,5 +14,10 @@ public class AssayMap extends LinkedHashMap<String, String> {
     }
 
     private void process(Assay assay) {
+        put(AssaySpreadSheetConstants.SAMPLE_NAME, "");
+
+        put(AssaySpreadSheetConstants.EXTRACTION_PROTOCOL_REF,"");
+        put(AssaySpreadSheetConstants.EXTRACTION_PROTOCOL_EXTRACTION_METHOD,"");
+        put(AssaySpreadSheetConstants.EXTRACTION_PROTOCOL_EXTRACT_NAME,"");
     }
 }
