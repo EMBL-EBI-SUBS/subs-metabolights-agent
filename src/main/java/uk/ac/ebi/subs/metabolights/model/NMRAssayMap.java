@@ -6,9 +6,9 @@ import java.util.LinkedHashMap;
  * Created by kalai on 22/10/2018.
  */
 
-public class AssayMap extends LinkedHashMap<String, String> {
+public class NMRAssayMap extends LinkedHashMap<String, String> {
 
-    public AssayMap(Assay assay) {
+    public NMRAssayMap(Assay assay) {
         super();
         process(assay);
     }
@@ -19,5 +19,7 @@ public class AssayMap extends LinkedHashMap<String, String> {
         put(AssaySpreadSheetConstants.EXTRACTION_PROTOCOL_REF,"");
         put(AssaySpreadSheetConstants.EXTRACTION_PROTOCOL_EXTRACTION_METHOD,"");
         put(AssaySpreadSheetConstants.EXTRACTION_PROTOCOL_EXTRACT_NAME,"");
+
+
     }
 }
