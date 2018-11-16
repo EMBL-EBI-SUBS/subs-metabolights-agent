@@ -102,6 +102,14 @@ public class AssaySpreadSheetConstants {
     public static final String DATA_TRANSFORMATION_PROTOCOL_NORMALIZATION_NAME = "Normalization Name";
     public static final String DATA_TRANSFORMATION_PROTOCOL_DERIVED_SPECTRAL_FILE = "Derived Spectral Data File";
 
+     /*
+    NMR assay protocol specific for NMR
+      */
+
+    public static final String NMR_ASSAY_PROTOCOL_REF = "Protocol REF.3";
+    public static final String NMR_ASSAY_PROTOCOL_NAME = "NMR Assay Name";
+    public static final String NMR_ASSAY_FID_FILE = "Free Induction Decay Data File";
+
       /*
      Metabolite identification  protocol common for NMR and MS
       */
