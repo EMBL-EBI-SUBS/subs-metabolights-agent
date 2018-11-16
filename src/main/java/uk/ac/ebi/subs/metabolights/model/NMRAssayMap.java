@@ -52,8 +52,15 @@ public class NMRAssayMap extends LinkedHashMap<String, String> {
         put(AssaySpreadSheetConstants.NMR_PROTOCOL_UNIT_TAN ,"");
         put(AssaySpreadSheetConstants.NMR_PROTOCOL_ACQUISITION_PM_DATA_FILE ,"");
 
-        
+        put(AssaySpreadSheetConstants.DATA_TRANSFORMATION_PROTOCOL_NORMALIZATION_NAME ,"");
+        put(AssaySpreadSheetConstants.DATA_TRANSFORMATION_PROTOCOL_DERIVED_SPECTRAL_FILE ,"");
 
+        put(AssaySpreadSheetConstants.NMR_ASSAY_PROTOCOL_REF ,"");
+        put(AssaySpreadSheetConstants.NMR_ASSAY_PROTOCOL_NAME ,"");
+        put(AssaySpreadSheetConstants.NMR_ASSAY_FID_FILE ,"");
+
+        put(AssaySpreadSheetConstants.METABOLITE_IDENTIFICATION_PROTOCOL_TRANSFORMATION_NAME ,"");
+        put(AssaySpreadSheetConstants.METABOLITE_IDENTIFICATION_PROTOCOL_METABOLITE_ASSIGNMENT_FILE ,"");
 
 
     }
