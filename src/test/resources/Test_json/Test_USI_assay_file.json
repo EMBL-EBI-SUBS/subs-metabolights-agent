@@ -169,7 +169,75 @@
         "accession": null,
         "team": "ML_test_team"
       },
-      "attributes": {}
+      "attributes": {
+        "Instrument": [
+          {
+            "value": "Bruker AVANCE DRX 700 MHz spectrometer",
+            "units": null,
+            "terms": [
+              {
+                "url": ""
+              }
+            ]
+          }
+        ],
+        "NMR Probe": [
+          {
+            "value": "5 mm PATXI 1H-13C/15N XYZ-GRD",
+            "units": null,
+            "terms": [
+              {
+                "url": ""
+              }
+            ]
+          }
+        ],
+        "Number of transients": [
+          {
+            "value": "128",
+            "units": null,
+            "terms": [
+              {
+                "url": ""
+              }
+            ]
+          }
+        ],
+        "Pulse sequence name": [
+          {
+            "value": "1D NOESY with presaturation (noesypr1d)",
+            "units": null,
+            "terms": [
+              {
+                "url": ""
+              }
+            ]
+          }
+        ],
+        "Magnetic field strength": [
+          {
+            "value": "16.4",
+            "units": "tesla",
+            "terms": [
+              {
+                "url": ""
+              }
+            ]
+          }
+        ],
+        "Acquisition Parameter Data File": [
+          {
+            "value": "acqus.txt",
+            "units": null,
+            "terms": [
+              {
+                "url": ""
+              }
+            ]
+          }
+        ]
+
+      }
     },
     {
       "protocolRef": {
