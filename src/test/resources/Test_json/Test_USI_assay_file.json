@@ -1,0 +1,166 @@
+{
+  "id": null,
+  "accession": null,
+  "alias": "a_mtbl2_metabolite profiling_mass spectrometry.txt",
+  "team": {
+    "name": "ML_test_team",
+    "description": null,
+    "profile": {}
+  },
+  "title": null,
+  "description": null,
+  "attributes": {
+    "technologyType": [
+      {
+        "value": "mass spectrometry",
+        "units": null,
+        "terms": [
+          {
+            "url": "http://purl.obolibrary.org/obo/OBI_0001478"
+          }
+        ]
+      }
+    ],
+    "measurementType": [
+      {
+        "value": "metabolite profiling",
+        "units": null,
+        "terms": [
+          {
+            "url": "http://purl.obolibrary.org/obo/OBI_0000366"
+          }
+        ]
+      }
+    ],
+    "technologyPlatform": [
+      {
+        "value": "micrOTOF-Q II ESI TOF (Bruker)",
+        "units": null,
+        "terms": []
+      }
+    ]
+  },
+  "studyRef": {
+    "alias": "MTBLS2",
+    "accession": "MTBLS2",
+    "team": "ML_test_team"
+  },
+  "sampleUses": [
+    {
+      "sampleRef": {
+        "alias": "Ex1-Col0-48h-Ag-1",
+        "accession": null,
+        "team": "ML_test_team"
+      },
+      "attributes": {}
+    }
+  ],
+  "protocolUses": [
+    {
+      "protocolRef": {
+        "alias": "Extraction",
+        "accession": null,
+        "team": "ML_test_team"
+      },
+      "attributes": {
+        "Extraction Method": [
+          {
+            "value": "N/A",
+            "units": null,
+            "terms": [
+              {
+                "url": ""
+              }
+            ]
+          }
+        ],
+        "Extract Name": [
+          {
+            "value": "N/A",
+            "units": null,
+            "terms": [
+              {
+                "url": ""
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "protocolRef": {
+        "alias": "NMR sample",
+        "accession": null,
+        "team": "ML_test_team"
+      },
+      "attributes": {}
+    },
+    {
+      "protocolRef": {
+        "alias": "NMR spectroscopy",
+        "accession": null,
+        "team": "ML_test_team"
+      },
+      "attributes": {}
+    },
+    {
+      "protocolRef": {
+        "alias": "NMR assay",
+        "accession": null,
+        "team": "ML_test_team"
+      },
+      "attributes": {}
+    },
+    {
+      "protocolRef": {
+        "alias": "Data transformation",
+        "accession": null,
+        "team": "ML_test_team"
+      },
+      "attributes": {
+        "Normalization Name": [
+          {
+            "value": "ADG_normalized_data.xlsx",
+            "units": null,
+            "terms": [
+              {
+                "url": ""
+              }
+            ]
+          }
+        ],
+        "Derived Spectral Data File": [
+          {
+            "value": "ADG10003u_007.nmrML",
+            "units": null,
+            "terms": [
+              {
+                "url": ""
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "protocolRef": {
+        "alias": "Metabolite identification",
+        "accession": null,
+        "team": "ML_test_team"
+      },
+      "attributes": {
+        "Data Transformation Name": [
+          {
+            "value": "ADG_transformed_data.xlsx",
+            "units": null,
+            "terms": [
+              {
+                "url": ""
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -22,6 +22,8 @@ public class USIAssayToMLNMRAssayTable implements Converter<uk.ac.ebi.subs.data.
         List<SampleUse> sampleUses =
                 source.getSampleUses();
 
+        //todo parse sample, protocol and attribute values to contruct a single row in NMR assay Table
+
         return null;
     }
 }
