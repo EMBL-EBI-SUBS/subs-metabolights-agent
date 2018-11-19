@@ -109,7 +109,30 @@
         "accession": null,
         "team": "ML_test_team"
       },
-      "attributes": {}
+      "attributes": {
+        "NMR Assay Name": [
+          {
+            "value": "ADG10003u_007",
+            "units": null,
+            "terms": [
+              {
+                "url": ""
+              }
+            ]
+          }
+        ],
+        "Free Induction Decay Data File": [
+          {
+            "value": "ADG10003u_007.zip",
+            "units": null,
+            "terms": [
+              {
+                "url": ""
+              }
+            ]
+          }
+        ]
+      }
     },
     {
       "protocolRef": {
