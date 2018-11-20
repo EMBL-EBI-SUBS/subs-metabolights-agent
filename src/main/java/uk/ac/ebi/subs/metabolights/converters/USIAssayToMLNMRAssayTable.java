@@ -43,7 +43,7 @@ public class USIAssayToMLNMRAssayTable implements Converter<uk.ac.ebi.subs.data.
         if (!protocolUses.isEmpty()) {
             for (ProtocolUse protocolUse : protocolUses) {
                 if (protocolUse.getProtocolRef().getAlias().equals("Extraction")) {
-                    //todo set extraction values
+                    parseExtraction(protocolUse, nmrAssayMap);
                 }
                 if (protocolUse.getProtocolRef().getAlias().equals("NMR sample")) {
                     //todo set extraction values
@@ -64,6 +64,22 @@ public class USIAssayToMLNMRAssayTable implements Converter<uk.ac.ebi.subs.data.
         }
     }
 
-    private void parseExtraction(ProtocolUse extraction) {
+    private void parseExtraction(ProtocolUse extraction, NMRAssayMap nmrAssayMap) {
+        nmrAssayMap.put(AssaySpreadSheetConstants.EXTRACTION_PROTOCOL_REF, "Extraction");
+
+        if (extraction.getAttributes().size() > 0) {
+            if (extraction.getAttributes().containsKey("Extraction Method")) {
+                Attribute extraction_method = extraction.getAttributes().get("Extraction Method").iterator().next();
+                if (extraction_method != null && extraction_method.getValue() != null) {
+                    nmrAssayMap.put(AssaySpreadSheetConstants.EXTRACTION_PROTOCOL_EXTRACTION_METHOD, extraction_method.getValue());
+                }
+            }
+            if (extraction.getAttributes().containsKey("Extract Name")) {
+                Attribute extract_name = extraction.getAttributes().get("Extract Name").iterator().next();
+                if (extract_name != null && extract_name.getValue() != null) {
+                    nmrAssayMap.put(AssaySpreadSheetConstants.EXTRACTION_PROTOCOL_EXTRACT_NAME, extract_name.getValue());
+                }
+            }
+        }
     }
 }
