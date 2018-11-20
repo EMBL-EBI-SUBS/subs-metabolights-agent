@@ -6,7 +6,9 @@ import uk.ac.ebi.subs.data.component.ProtocolUse;
 import uk.ac.ebi.subs.data.component.SampleUse;
 import uk.ac.ebi.subs.metabolights.model.Assay;
 import uk.ac.ebi.subs.metabolights.model.NMRAssayMap;
+import uk.ac.ebi.subs.metabolights.model.OntologyModel;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -25,5 +27,30 @@ public class USIAssayToMLNMRAssayTable implements Converter<uk.ac.ebi.subs.data.
         //todo parse sample, protocol and attribute values to contruct a single row in NMR assay Table
 
         return null;
+    }
+
+    private void parse(List<ProtocolUse> protocolUses) {
+        if (!protocolUses.isEmpty()) {
+            for (ProtocolUse protocolUse : protocolUses) {
+                if (protocolUse.getProtocolRef().getAlias().equals("Extraction")) {
+                    //todo set extraction values
+                }
+                if (protocolUse.getProtocolRef().getAlias().equals("NMR sample")) {
+                    //todo set extraction values
+                }
+                if (protocolUse.getProtocolRef().getAlias().equals("NMR spectroscopy")) {
+                    //todo set extraction values
+                }
+                if (protocolUse.getProtocolRef().getAlias().equals("NMR assay")) {
+                    //todo set extraction values
+                }
+                if (protocolUse.getProtocolRef().getAlias().equals("Data transformation")) {
+                    //todo set extraction values
+                }
+                if (protocolUse.getProtocolRef().getAlias().equals("Metabolite identification")) {
+                    //todo set extraction values
+                }
+            }
+        }
     }
 }
