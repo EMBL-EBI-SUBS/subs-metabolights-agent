@@ -29,6 +29,12 @@ public class USIAssayToMLNMRAssayTable implements Converter<uk.ac.ebi.subs.data.
         return null;
     }
 
+    private void parseSample(List<SampleUse> sampleUses) {
+        if (sampleUses.isEmpty() && sampleUses.size() == 1) {
+           //todo extract sample name
+        }
+    }
+
     private void parse(List<ProtocolUse> protocolUses) {
         if (!protocolUses.isEmpty()) {
             for (ProtocolUse protocolUse : protocolUses) {
