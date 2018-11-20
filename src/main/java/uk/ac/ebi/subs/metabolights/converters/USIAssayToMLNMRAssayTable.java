@@ -5,6 +5,7 @@ import uk.ac.ebi.subs.data.component.Attribute;
 import uk.ac.ebi.subs.data.component.ProtocolUse;
 import uk.ac.ebi.subs.data.component.SampleUse;
 import uk.ac.ebi.subs.metabolights.model.Assay;
+import uk.ac.ebi.subs.metabolights.model.AssaySpreadSheetConstants;
 import uk.ac.ebi.subs.metabolights.model.NMRAssayMap;
 import uk.ac.ebi.subs.metabolights.model.OntologyModel;
 
@@ -19,23 +20,26 @@ public class USIAssayToMLNMRAssayTable implements Converter<uk.ac.ebi.subs.data.
         Assay assay = new Assay();
         assay.setFilename(source.getAlias());
 
+        NMRAssayMap nmrAssayMap = new NMRAssayMap();
+
         Map<String, Collection<Attribute>> usiAssayAttributes = source.getAttributes();
         List<ProtocolUse> protocolUses = source.getProtocolUses();
         List<SampleUse> sampleUses =
                 source.getSampleUses();
+        parseSample(sampleUses, nmrAssayMap);
 
         //todo parse sample, protocol and attribute values to contruct a single row in NMR assay Table
 
         return null;
     }
 
-    private void parseSample(List<SampleUse> sampleUses) {
+    private void parseSample(List<SampleUse> sampleUses, NMRAssayMap nmrAssayMap) {
         if (sampleUses.isEmpty() && sampleUses.size() == 1) {
-           //todo extract sample name
+            nmrAssayMap.put(AssaySpreadSheetConstants.SAMPLE_NAME, sampleUses.get(0).getSampleRef().getAlias());
         }
     }
 
-    private void parse(List<ProtocolUse> protocolUses) {
+    private void parse(List<ProtocolUse> protocolUses, NMRAssayMap nmrAssayMap) {
         if (!protocolUses.isEmpty()) {
             for (ProtocolUse protocolUse : protocolUses) {
                 if (protocolUse.getProtocolRef().getAlias().equals("Extraction")) {
@@ -58,5 +62,8 @@ public class USIAssayToMLNMRAssayTable implements Converter<uk.ac.ebi.subs.data.
                 }
             }
         }
+    }
+
+    private void parseExtraction(ProtocolUse extraction) {
     }
 }

@@ -8,9 +8,9 @@ import java.util.LinkedHashMap;
 
 public class NMRAssayMap extends LinkedHashMap<String, String> {
 
-    public NMRAssayMap(Assay assay) {
-        super();
-        process(assay);
+    public NMRAssayMap() {
+//        super();
+//        process(assay);
     }
 
     private void process(Assay assay) {
