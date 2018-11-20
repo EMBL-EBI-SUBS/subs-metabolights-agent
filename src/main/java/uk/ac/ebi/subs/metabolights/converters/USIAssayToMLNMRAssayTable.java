@@ -58,7 +58,7 @@ public class USIAssayToMLNMRAssayTable implements Converter<uk.ac.ebi.subs.data.
                     //todo set extraction values
                 }
                 if (protocolUse.getProtocolRef().getAlias().equals("Metabolite identification")) {
-                    //todo set extraction values
+                    parseMetaboliteIdentification(protocolUse, nmrAssayMap);
                 }
             }
         }
@@ -78,6 +78,20 @@ public class USIAssayToMLNMRAssayTable implements Converter<uk.ac.ebi.subs.data.
                 Attribute extract_name = extraction.getAttributes().get("Extract Name").iterator().next();
                 if (extract_name != null && extract_name.getValue() != null) {
                     nmrAssayMap.put(AssaySpreadSheetConstants.EXTRACTION_PROTOCOL_EXTRACT_NAME, extract_name.getValue());
+                }
+            }
+        }
+    }
+
+    private void parseMetaboliteIdentification(ProtocolUse metaboliteIdentification, NMRAssayMap nmrAssayMap) {
+        nmrAssayMap.put(AssaySpreadSheetConstants.METABOLITE_IDENTIFICATION_PROTOCOL_TRANSFORMATION_NAME, "Metabolite identification");
+
+        if (metaboliteIdentification.getAttributes().size() > 0) {
+            if (metaboliteIdentification.getAttributes().containsKey("Data Transformation Name")) {
+                Attribute extraction_method = metaboliteIdentification.getAttributes().get("Data Transformation Name").iterator().next();
+                if (extraction_method != null && extraction_method.getValue() != null) {
+                    nmrAssayMap.put(AssaySpreadSheetConstants.METABOLITE_IDENTIFICATION_PROTOCOL_METABOLITE_ASSIGNMENT_FILE, "");
+
                 }
             }
         }
