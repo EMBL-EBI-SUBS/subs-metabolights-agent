@@ -55,7 +55,7 @@ public class USIAssayToMLNMRAssayTable implements Converter<uk.ac.ebi.subs.data.
                     //todo set extraction values
                 }
                 if (protocolUse.getProtocolRef().getAlias().equals("Data transformation")) {
-                    //todo set extraction values
+                    parseDataTransformation(protocolUse, nmrAssayMap);
                 }
                 if (protocolUse.getProtocolRef().getAlias().equals("Metabolite identification")) {
                     parseMetaboliteIdentification(protocolUse, nmrAssayMap);
@@ -83,13 +83,32 @@ public class USIAssayToMLNMRAssayTable implements Converter<uk.ac.ebi.subs.data.
         }
     }
 
+    private void parseDataTransformation(ProtocolUse dataTransformation, NMRAssayMap nmrAssayMap) {
+        nmrAssayMap.put(AssaySpreadSheetConstants.DATA_TRANSFORMATION_PROTOCOL_REF, "Data transformation");
+
+        if (dataTransformation.getAttributes().size() > 0) {
+            if (dataTransformation.getAttributes().containsKey("Normalization Name")) {
+                Attribute normalization_name = dataTransformation.getAttributes().get("Normalization Name").iterator().next();
+                if (normalization_name != null && normalization_name.getValue() != null) {
+                    nmrAssayMap.put(AssaySpreadSheetConstants.DATA_TRANSFORMATION_PROTOCOL_NORMALIZATION_NAME, normalization_name.getValue());
+                }
+            }
+            if (dataTransformation.getAttributes().containsKey("Derived Spectral Data File")) {
+                Attribute derived_spectral_data_file = dataTransformation.getAttributes().get("Derived Spectral Data File").iterator().next();
+                if (derived_spectral_data_file != null && derived_spectral_data_file.getValue() != null) {
+                    nmrAssayMap.put(AssaySpreadSheetConstants.DATA_TRANSFORMATION_PROTOCOL_DERIVED_SPECTRAL_FILE, derived_spectral_data_file.getValue());
+                }
+            }
+        }
+    }
+
     private void parseMetaboliteIdentification(ProtocolUse metaboliteIdentification, NMRAssayMap nmrAssayMap) {
         nmrAssayMap.put(AssaySpreadSheetConstants.METABOLITE_IDENTIFICATION_PROTOCOL_TRANSFORMATION_NAME, "Metabolite identification");
 
         if (metaboliteIdentification.getAttributes().size() > 0) {
             if (metaboliteIdentification.getAttributes().containsKey("Data Transformation Name")) {
-                Attribute extraction_method = metaboliteIdentification.getAttributes().get("Data Transformation Name").iterator().next();
-                if (extraction_method != null && extraction_method.getValue() != null) {
+                Attribute data_transformation_name = metaboliteIdentification.getAttributes().get("Data Transformation Name").iterator().next();
+                if (data_transformation_name != null && data_transformation_name.getValue() != null) {
                     nmrAssayMap.put(AssaySpreadSheetConstants.METABOLITE_IDENTIFICATION_PROTOCOL_METABOLITE_ASSIGNMENT_FILE, "");
 
                 }
