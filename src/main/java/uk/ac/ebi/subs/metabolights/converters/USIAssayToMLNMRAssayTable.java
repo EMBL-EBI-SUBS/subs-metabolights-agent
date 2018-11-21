@@ -46,7 +46,7 @@ public class USIAssayToMLNMRAssayTable implements Converter<uk.ac.ebi.subs.data.
                     parseExtraction(protocolUse, nmrAssayMap);
                 }
                 if (protocolUse.getProtocolRef().getAlias().equals("NMR sample")) {
-                    //todo set extraction values
+                    parseNMRSample(protocolUse, nmrAssayMap);
                 }
                 if (protocolUse.getProtocolRef().getAlias().equals("NMR spectroscopy")) {
                     //todo set extraction values
@@ -81,6 +81,59 @@ public class USIAssayToMLNMRAssayTable implements Converter<uk.ac.ebi.subs.data.
                 }
             }
         }
+    }
+
+    private void parseNMRSample(ProtocolUse nmrSample, NMRAssayMap nmrAssayMap) {
+        nmrAssayMap.put(AssaySpreadSheetConstants.NMR_SAMPLE_PROTOCOL_REF, "NMR sample");
+        if (nmrSample.getAttributes().size() > 0) {
+            if (nmrSample.getAttributes().containsKey("NMR tube type")) {
+                Attribute nmr_tube_type = nmrSample.getAttributes().get("Extraction Method").iterator().next();
+                if (nmr_tube_type != null && nmr_tube_type.getValue() != null) {
+                    nmrAssayMap.put(AssaySpreadSheetConstants.NMR_SAMPLE_PROTOCOL_TUBE_TYPE, nmr_tube_type.getValue());
+//                    String NMR_SAMPLE_PROTOCOL_TUBE_TYPE_TSR = "Term Source REF";
+//                    String NMR_SAMPLE_PROTOCOL_TUBE_TYPE_TAN = "Term Accession Number";
+                }
+            }
+            if (nmrSample.getAttributes().containsKey("Solvent")) {
+                Attribute solvent = nmrSample.getAttributes().get("Extract Name").iterator().next();
+                if (solvent != null && solvent.getValue() != null) {
+                    nmrAssayMap.put(AssaySpreadSheetConstants.NMR_SAMPLE_PROTOCOL_SOLVENT, solvent.getValue());
+//                    String NMR_SAMPLE_PROTOCOL_SOLVENT_TSR = "Term Source REF.1";
+//                    String NMR_SAMPLE_PROTOCOL_SOLVENT_TAN = "Term Accession Number.1";
+                }
+            }
+            if (nmrSample.getAttributes().containsKey("Sample pH")) {
+                Attribute samplePH = nmrSample.getAttributes().get("Extract Name").iterator().next();
+                if (samplePH != null && samplePH.getValue() != null) {
+                    nmrAssayMap.put(AssaySpreadSheetConstants.NMR_SAMPLE_PROTOCOL_SAMPLE_PH, samplePH.getValue());
+                }
+            }
+            if (nmrSample.getAttributes().containsKey("Temperature")) {
+                Attribute temperature = nmrSample.getAttributes().get("Extract Name").iterator().next();
+                if (temperature != null && temperature.getValue() != null) {
+                    nmrAssayMap.put(AssaySpreadSheetConstants.NMR_SAMPLE_PROTOCOL_TEMPERATURE, temperature.getValue());
+                    // String NMR_SAMPLE_PROTOCOL_UNIT = "Unit";
+                    // String NMR_SAMPLE_PROTOCOL_TEMPERATURE_UNIT_TSR = "Term Source REF.2";
+                    // String NMR_SAMPLE_PROTOCOL_TEMPERATURE_UNIT_TAN = "Term Accession Number.2";
+                }
+            }
+            if (nmrSample.getAttributes().containsKey("Labeled Extract Name")) {
+                Attribute labeled_extract_name = nmrSample.getAttributes().get("Extract Name").iterator().next();
+                if (labeled_extract_name != null && labeled_extract_name.getValue() != null) {
+                    nmrAssayMap.put(AssaySpreadSheetConstants.NMR_SAMPLE_PROTOCOL_EXTRACT_NAME, labeled_extract_name.getValue());
+                }
+            }
+            if (nmrSample.getAttributes().containsKey("Label")) {
+                Attribute label = nmrSample.getAttributes().get("Extract Name").iterator().next();
+                if (label != null && label.getValue() != null) {
+                    nmrAssayMap.put(AssaySpreadSheetConstants.NMR_SAMPLE_PROTOCOL_LABEL, label.getValue());
+//                    String NMR_SAMPLE_PROTOCOL_EXTRACT_NAME_TSR = "Term Source REF.3";
+//                    String NMR_SAMPLE_PROTOCOL_EXTRACT_NAME_TAN = "Term Accession Number.3";
+
+                }
+            }
+        }
+
     }
 
     private void parseDataTransformation(ProtocolUse dataTransformation, NMRAssayMap nmrAssayMap) {
