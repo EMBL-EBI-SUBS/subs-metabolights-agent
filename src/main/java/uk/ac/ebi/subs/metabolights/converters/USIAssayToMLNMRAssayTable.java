@@ -90,16 +90,26 @@ public class USIAssayToMLNMRAssayTable implements Converter<uk.ac.ebi.subs.data.
                 Attribute nmr_tube_type = nmrSample.getAttributes().get("Extraction Method").iterator().next();
                 if (nmr_tube_type != null && nmr_tube_type.getValue() != null) {
                     nmrAssayMap.put(AssaySpreadSheetConstants.NMR_SAMPLE_PROTOCOL_TUBE_TYPE, nmr_tube_type.getValue());
-//                    String NMR_SAMPLE_PROTOCOL_TUBE_TYPE_TSR = "Term Source REF";
-//                    String NMR_SAMPLE_PROTOCOL_TUBE_TYPE_TAN = "Term Accession Number";
+                    if (nmr_tube_type.getTerms() != null && nmr_tube_type.getTerms().size() == 1) {
+                        if (nmr_tube_type.getTerms().get(0).getUrl() != null || !nmr_tube_type.getTerms().get(0).getUrl().isEmpty()) {
+                            nmrAssayMap.put(AssaySpreadSheetConstants.NMR_SAMPLE_PROTOCOL_TUBE_TYPE_TSR, nmr_tube_type.getTerms().get(0).getUrl());
+                            // String NMR_SAMPLE_PROTOCOL_TUBE_TYPE_TAN = "Term Accession Number";
+                            //todo term accession number not set
+                        }
+                    }
                 }
             }
             if (nmrSample.getAttributes().containsKey("Solvent")) {
                 Attribute solvent = nmrSample.getAttributes().get("Extract Name").iterator().next();
                 if (solvent != null && solvent.getValue() != null) {
                     nmrAssayMap.put(AssaySpreadSheetConstants.NMR_SAMPLE_PROTOCOL_SOLVENT, solvent.getValue());
-//                    String NMR_SAMPLE_PROTOCOL_SOLVENT_TSR = "Term Source REF.1";
-//                    String NMR_SAMPLE_PROTOCOL_SOLVENT_TAN = "Term Accession Number.1";
+                    if (solvent.getTerms() != null && solvent.getTerms().size() == 1) {
+                        if (solvent.getTerms().get(0).getUrl() != null || !solvent.getTerms().get(0).getUrl().isEmpty()) {
+                            nmrAssayMap.put(AssaySpreadSheetConstants.NMR_SAMPLE_PROTOCOL_SOLVENT_TSR, solvent.getTerms().get(0).getUrl());
+                            // String NMR_SAMPLE_PROTOCOL_SOLVENT_TAN = "Term Accession Number.1";
+                            //todo term accession number not set
+                        }
+                    }
                 }
             }
             if (nmrSample.getAttributes().containsKey("Sample pH")) {
@@ -112,9 +122,17 @@ public class USIAssayToMLNMRAssayTable implements Converter<uk.ac.ebi.subs.data.
                 Attribute temperature = nmrSample.getAttributes().get("Extract Name").iterator().next();
                 if (temperature != null && temperature.getValue() != null) {
                     nmrAssayMap.put(AssaySpreadSheetConstants.NMR_SAMPLE_PROTOCOL_TEMPERATURE, temperature.getValue());
-                    // String NMR_SAMPLE_PROTOCOL_UNIT = "Unit";
-                    // String NMR_SAMPLE_PROTOCOL_TEMPERATURE_UNIT_TSR = "Term Source REF.2";
-                    // String NMR_SAMPLE_PROTOCOL_TEMPERATURE_UNIT_TAN = "Term Accession Number.2";
+                    if (temperature.getTerms() != null && temperature.getTerms().size() == 1) {
+                        if (temperature.getTerms().get(0).getUrl() != null || !temperature.getTerms().get(0).getUrl().isEmpty()) {
+                            nmrAssayMap.put(AssaySpreadSheetConstants.NMR_SAMPLE_PROTOCOL_TEMPERATURE_UNIT_TSR, temperature.getTerms().get(0).getUrl());
+                            // String NMR_SAMPLE_PROTOCOL_TEMPERATURE_UNIT_TAN = "Term Accession Number.2";
+                            //todo term accession number not set
+                        }
+                    }
+
+                    if (temperature.getUnits() != null && !temperature.getUnits().isEmpty()) {
+                        nmrAssayMap.put(AssaySpreadSheetConstants.NMR_SAMPLE_PROTOCOL_UNIT, temperature.getUnits());
+                    }
                 }
             }
             if (nmrSample.getAttributes().containsKey("Labeled Extract Name")) {
@@ -127,9 +145,13 @@ public class USIAssayToMLNMRAssayTable implements Converter<uk.ac.ebi.subs.data.
                 Attribute label = nmrSample.getAttributes().get("Extract Name").iterator().next();
                 if (label != null && label.getValue() != null) {
                     nmrAssayMap.put(AssaySpreadSheetConstants.NMR_SAMPLE_PROTOCOL_LABEL, label.getValue());
-//                    String NMR_SAMPLE_PROTOCOL_EXTRACT_NAME_TSR = "Term Source REF.3";
-//                    String NMR_SAMPLE_PROTOCOL_EXTRACT_NAME_TAN = "Term Accession Number.3";
-
+                    if (label.getTerms() != null && label.getTerms().size() == 1) {
+                        if (label.getTerms().get(0).getUrl() != null || !label.getTerms().get(0).getUrl().isEmpty()) {
+                            nmrAssayMap.put(AssaySpreadSheetConstants.NMR_SAMPLE_PROTOCOL_EXTRACT_NAME_TSR, label.getTerms().get(0).getUrl());
+                            // NMR_SAMPLE_PROTOCOL_EXTRACT_NAME_TAN = "Term Accession Number.3";
+                            //todo term accession number not set
+                        }
+                    }
                 }
             }
         }
