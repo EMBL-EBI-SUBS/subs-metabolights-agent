@@ -159,6 +159,7 @@ public class USIAssayToMLNMRAssayTable implements Converter<uk.ac.ebi.subs.data.
     }
 
     private void parseNMRSpectroscopy(ProtocolUse nmrSpectroscopy, NMRAssayMap nmrAssayMap) {
+        
         nmrAssayMap.put(AssaySpreadSheetConstants.NMR_PROTOCOL_REF, "NMR spectroscopy");
         if (nmrSpectroscopy.getAttributes().size() > 0) {
             if (nmrSpectroscopy.getAttributes().containsKey("Instrument")) {
@@ -192,6 +193,33 @@ public class USIAssayToMLNMRAssayTable implements Converter<uk.ac.ebi.subs.data.
                 Attribute transients = nmrSpectroscopy.getAttributes().get("Number of transients").iterator().next();
                 if (transients != null && transients.getValue() != null) {
                     nmrAssayMap.put(AssaySpreadSheetConstants.NMR_PROTOCOL_NO_OF_TRANSIENTS, transients.getValue());
+                }
+            }
+
+            if (nmrSpectroscopy.getAttributes().containsKey("Pulse sequence name")) {
+                Attribute pulse_sequence_name = nmrSpectroscopy.getAttributes().get("Pulse sequence name").iterator().next();
+                if (pulse_sequence_name != null && pulse_sequence_name.getValue() != null) {
+                    nmrAssayMap.put(AssaySpreadSheetConstants.NMR_PROTOCOL_PULSE_SEQ_NAME, pulse_sequence_name.getValue());
+                }
+            }
+
+            if (nmrSpectroscopy.getAttributes().containsKey("Magnetic field strength")) {
+                Attribute magnetic_field_strength = nmrSpectroscopy.getAttributes().get("Magnetic field strength").iterator().next();
+                if (magnetic_field_strength != null && magnetic_field_strength.getValue() != null) {
+                    nmrAssayMap.put(AssaySpreadSheetConstants.NMR_PROTOCOL_MAGNETIC_FIELD_STRENGTH, magnetic_field_strength.getValue());
+
+                    if (magnetic_field_strength.getUnits() != null && !magnetic_field_strength.getUnits().isEmpty()) {
+                        nmrAssayMap.put(AssaySpreadSheetConstants.NMR_PROTOCOL_UNIT, magnetic_field_strength.getUnits());
+                        //todo term accession number and term source not set for unit
+                        //NMR_PROTOCOL_UNIT, NMR_PROTOCOL_UNIT_TSR, NMR_PROTOCOL_UNIT_TAN
+                    }
+                }
+            }
+
+            if (nmrSpectroscopy.getAttributes().containsKey("Acquisition Parameter Data File")) {
+                Attribute acquisition_parameter_data_file = nmrSpectroscopy.getAttributes().get("Acquisition Parameter Data File").iterator().next();
+                if (acquisition_parameter_data_file != null && acquisition_parameter_data_file.getValue() != null) {
+                    nmrAssayMap.put(AssaySpreadSheetConstants.NMR_PROTOCOL_ACQUISITION_PM_DATA_FILE, acquisition_parameter_data_file.getValue());
                 }
             }
         }
