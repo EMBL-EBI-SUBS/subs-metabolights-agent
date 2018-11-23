@@ -87,7 +87,7 @@ public class USIAssayToMLNMRAssayTable implements Converter<uk.ac.ebi.subs.data.
         nmrAssayMap.put(AssaySpreadSheetConstants.NMR_SAMPLE_PROTOCOL_REF, "NMR sample");
         if (nmrSample.getAttributes().size() > 0) {
             if (nmrSample.getAttributes().containsKey("NMR tube type")) {
-                Attribute nmr_tube_type = nmrSample.getAttributes().get("Extraction Method").iterator().next();
+                Attribute nmr_tube_type = nmrSample.getAttributes().get("NMR tube type").iterator().next();
                 if (nmr_tube_type != null && nmr_tube_type.getValue() != null) {
                     nmrAssayMap.put(AssaySpreadSheetConstants.NMR_SAMPLE_PROTOCOL_TUBE_TYPE, nmr_tube_type.getValue());
                     if (nmr_tube_type.getTerms() != null && nmr_tube_type.getTerms().size() == 1) {
@@ -100,7 +100,7 @@ public class USIAssayToMLNMRAssayTable implements Converter<uk.ac.ebi.subs.data.
                 }
             }
             if (nmrSample.getAttributes().containsKey("Solvent")) {
-                Attribute solvent = nmrSample.getAttributes().get("Extract Name").iterator().next();
+                Attribute solvent = nmrSample.getAttributes().get("Solvent").iterator().next();
                 if (solvent != null && solvent.getValue() != null) {
                     nmrAssayMap.put(AssaySpreadSheetConstants.NMR_SAMPLE_PROTOCOL_SOLVENT, solvent.getValue());
                     if (solvent.getTerms() != null && solvent.getTerms().size() == 1) {
@@ -113,13 +113,13 @@ public class USIAssayToMLNMRAssayTable implements Converter<uk.ac.ebi.subs.data.
                 }
             }
             if (nmrSample.getAttributes().containsKey("Sample pH")) {
-                Attribute samplePH = nmrSample.getAttributes().get("Extract Name").iterator().next();
+                Attribute samplePH = nmrSample.getAttributes().get("Sample pH").iterator().next();
                 if (samplePH != null && samplePH.getValue() != null) {
                     nmrAssayMap.put(AssaySpreadSheetConstants.NMR_SAMPLE_PROTOCOL_SAMPLE_PH, samplePH.getValue());
                 }
             }
             if (nmrSample.getAttributes().containsKey("Temperature")) {
-                Attribute temperature = nmrSample.getAttributes().get("Extract Name").iterator().next();
+                Attribute temperature = nmrSample.getAttributes().get("Temperature").iterator().next();
                 if (temperature != null && temperature.getValue() != null) {
                     nmrAssayMap.put(AssaySpreadSheetConstants.NMR_SAMPLE_PROTOCOL_TEMPERATURE, temperature.getValue());
                     if (temperature.getTerms() != null && temperature.getTerms().size() == 1) {
@@ -136,13 +136,13 @@ public class USIAssayToMLNMRAssayTable implements Converter<uk.ac.ebi.subs.data.
                 }
             }
             if (nmrSample.getAttributes().containsKey("Labeled Extract Name")) {
-                Attribute labeled_extract_name = nmrSample.getAttributes().get("Extract Name").iterator().next();
+                Attribute labeled_extract_name = nmrSample.getAttributes().get("Labeled Extract Name").iterator().next();
                 if (labeled_extract_name != null && labeled_extract_name.getValue() != null) {
                     nmrAssayMap.put(AssaySpreadSheetConstants.NMR_SAMPLE_PROTOCOL_EXTRACT_NAME, labeled_extract_name.getValue());
                 }
             }
             if (nmrSample.getAttributes().containsKey("Label")) {
-                Attribute label = nmrSample.getAttributes().get("Extract Name").iterator().next();
+                Attribute label = nmrSample.getAttributes().get("Label").iterator().next();
                 if (label != null && label.getValue() != null) {
                     nmrAssayMap.put(AssaySpreadSheetConstants.NMR_SAMPLE_PROTOCOL_LABEL, label.getValue());
                     if (label.getTerms() != null && label.getTerms().size() == 1) {
@@ -159,6 +159,20 @@ public class USIAssayToMLNMRAssayTable implements Converter<uk.ac.ebi.subs.data.
     }
 
     private void parseNMRSpectroscopy(ProtocolUse nmrSpectroscopy, NMRAssayMap nmrAssayMap) {
+
+        public static final String NMR_PROTOCOL_NMR_PROBE = "Parameter Value[NMR Probe]";
+        public static final String NMR_PROTOCOL_NMR_PROBE_TSR = "Term Source REF.5";
+        public static final String NMR_PROTOCOL_NMR_PROBE_TAN = "Term Accession Number.5";
+        public static final String NMR_PROTOCOL_NO_OF_TRANSIENTS = "Parameter Value[Number of transients]";
+        public static final String NMR_PROTOCOL_PULSE_SEQ_NAME = "Parameter Value[Pulse sequence name]";
+        public static final String NMR_PROTOCOL_MAGNETIC_FIELD_STRENGTH = "Parameter Value[Magnetic field strength]";
+        public static final String NMR_PROTOCOL_UNIT = "Unit.1";
+        public static final String NMR_PROTOCOL_UNIT_TSR = "Term Source REF.6";
+        public static final String NMR_PROTOCOL_UNIT_TAN = "Term Accession Number.6";
+        public static final String NMR_PROTOCOL_ACQUISITION_PM_DATA_FILE = "Acquisition Parameter Data File";
+
+
+
         nmrAssayMap.put(AssaySpreadSheetConstants.NMR_PROTOCOL_REF, "NMR spectroscopy");
         if (nmrSpectroscopy.getAttributes().size() > 0) {
             if (nmrSpectroscopy.getAttributes().containsKey("Instrument")) {
