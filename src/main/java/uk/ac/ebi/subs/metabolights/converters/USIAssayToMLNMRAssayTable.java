@@ -159,20 +159,6 @@ public class USIAssayToMLNMRAssayTable implements Converter<uk.ac.ebi.subs.data.
     }
 
     private void parseNMRSpectroscopy(ProtocolUse nmrSpectroscopy, NMRAssayMap nmrAssayMap) {
-
-        public static final String NMR_PROTOCOL_NMR_PROBE = "Parameter Value[NMR Probe]";
-        public static final String NMR_PROTOCOL_NMR_PROBE_TSR = "Term Source REF.5";
-        public static final String NMR_PROTOCOL_NMR_PROBE_TAN = "Term Accession Number.5";
-        public static final String NMR_PROTOCOL_NO_OF_TRANSIENTS = "Parameter Value[Number of transients]";
-        public static final String NMR_PROTOCOL_PULSE_SEQ_NAME = "Parameter Value[Pulse sequence name]";
-        public static final String NMR_PROTOCOL_MAGNETIC_FIELD_STRENGTH = "Parameter Value[Magnetic field strength]";
-        public static final String NMR_PROTOCOL_UNIT = "Unit.1";
-        public static final String NMR_PROTOCOL_UNIT_TSR = "Term Source REF.6";
-        public static final String NMR_PROTOCOL_UNIT_TAN = "Term Accession Number.6";
-        public static final String NMR_PROTOCOL_ACQUISITION_PM_DATA_FILE = "Acquisition Parameter Data File";
-
-
-
         nmrAssayMap.put(AssaySpreadSheetConstants.NMR_PROTOCOL_REF, "NMR spectroscopy");
         if (nmrSpectroscopy.getAttributes().size() > 0) {
             if (nmrSpectroscopy.getAttributes().containsKey("Instrument")) {
@@ -186,6 +172,26 @@ public class USIAssayToMLNMRAssayTable implements Converter<uk.ac.ebi.subs.data.
                             //todo term accession number not set
                         }
                     }
+                }
+            }
+            if (nmrSpectroscopy.getAttributes().containsKey("NMR Probe")) {
+                Attribute nmr_Probe = nmrSpectroscopy.getAttributes().get("NMR Probe").iterator().next();
+                if (nmr_Probe != null && nmr_Probe.getValue() != null) {
+                    nmrAssayMap.put(AssaySpreadSheetConstants.NMR_PROTOCOL_NMR_PROBE, nmr_Probe.getValue());
+                    if (nmr_Probe.getTerms() != null && nmr_Probe.getTerms().size() == 1) {
+                        if (nmr_Probe.getTerms().get(0).getUrl() != null || !nmr_Probe.getTerms().get(0).getUrl().isEmpty()) {
+                            nmrAssayMap.put(AssaySpreadSheetConstants.NMR_PROTOCOL_NMR_PROBE_TSR, nmr_Probe.getTerms().get(0).getUrl());
+                            // String NMR_PROTOCOL_NMR_PROBE_TAN = "Term Accession Number";
+                            //todo term accession number not set
+                        }
+                    }
+                }
+            }
+
+            if (nmrSpectroscopy.getAttributes().containsKey("Number of transients")) {
+                Attribute transients = nmrSpectroscopy.getAttributes().get("Number of transients").iterator().next();
+                if (transients != null && transients.getValue() != null) {
+                    nmrAssayMap.put(AssaySpreadSheetConstants.NMR_PROTOCOL_NO_OF_TRANSIENTS, transients.getValue());
                 }
             }
         }
