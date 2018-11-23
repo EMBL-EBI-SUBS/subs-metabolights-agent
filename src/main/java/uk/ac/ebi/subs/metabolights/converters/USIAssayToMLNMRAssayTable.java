@@ -158,6 +158,26 @@ public class USIAssayToMLNMRAssayTable implements Converter<uk.ac.ebi.subs.data.
 
     }
 
+    private void parseNMRSpectroscopy(ProtocolUse nmrSpectroscopy, NMRAssayMap nmrAssayMap) {
+        nmrAssayMap.put(AssaySpreadSheetConstants.NMR_PROTOCOL_REF, "NMR spectroscopy");
+        if (nmrSpectroscopy.getAttributes().size() > 0) {
+            if (nmrSpectroscopy.getAttributes().containsKey("Instrument")) {
+                Attribute instrument = nmrSpectroscopy.getAttributes().get("Instrument").iterator().next();
+                if (instrument != null && instrument.getValue() != null) {
+                    nmrAssayMap.put(AssaySpreadSheetConstants.NMR_PROTOCOL_INSTRUMENT, instrument.getValue());
+                    if (instrument.getTerms() != null && instrument.getTerms().size() == 1) {
+                        if (instrument.getTerms().get(0).getUrl() != null || !instrument.getTerms().get(0).getUrl().isEmpty()) {
+                            nmrAssayMap.put(AssaySpreadSheetConstants.NMR_PROTOCOL_INSTRUMENT_TAN, instrument.getTerms().get(0).getUrl());
+                            // String NMR_PROTOCOL_INSTRUMENT_TAN = "Term Accession Number";
+                            //todo term accession number not set
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+
     private void parseDataTransformation(ProtocolUse dataTransformation, NMRAssayMap nmrAssayMap) {
         nmrAssayMap.put(AssaySpreadSheetConstants.DATA_TRANSFORMATION_PROTOCOL_REF, "Data transformation");
 
