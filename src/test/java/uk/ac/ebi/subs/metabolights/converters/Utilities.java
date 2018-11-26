@@ -109,7 +109,7 @@ public class Utilities {
         return mlProtocols;
     }
 
-    public static Protocol generateUSIProtocol(){
+    public static Protocol generateUSIProtocol() {
         Protocol protocol = new Protocol();
         protocol.setTitle("Test chromatography");
 
@@ -155,6 +155,22 @@ public class Utilities {
 
     public static uk.ac.ebi.subs.metabolights.model.Study getMLStudyFromDisc() {
         return loadStudy("MTBLS2_isa.json");
+    }
+
+    public static Assay getUSIAssayFromDisc() {
+        return loadAssay("Test_USI_assay_file.json");
+    }
+
+    public static Assay loadAssay(String name) {
+        Assay usiAssay = null;
+        try {
+            String result = IOUtils.toString(WSUtils.class.getClassLoader().getResourceAsStream("Test_json/" + name));
+            usiAssay = mapper.readValue(result, Assay.class);
+            return usiAssay;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public static Study getSimpleUSIStudyFromDisc() {
@@ -274,9 +290,10 @@ public class Utilities {
             String result = IOUtils.toString(WSUtils.class.getClassLoader().getResourceAsStream("Test_json/MTBLS2_usi_sampleList.json"));
             try {
                 mapper.registerModule(new JavaTimeModule());
-                samples = mapper.readValue(result, new TypeReference<List<Sample>>(){});
-                for(uk.ac.ebi.subs.data.submittable.Sample sample : samples){
-                    submittableSamples.add(new uk.ac.ebi.subs.validator.model.Submittable<>(sample,"1"));
+                samples = mapper.readValue(result, new TypeReference<List<Sample>>() {
+                });
+                for (uk.ac.ebi.subs.data.submittable.Sample sample : samples) {
+                    submittableSamples.add(new uk.ac.ebi.subs.validator.model.Submittable<>(sample, "1"));
                 }
                 return submittableSamples;
             } catch (IOException e) {
@@ -291,10 +308,10 @@ public class Utilities {
     public static uk.ac.ebi.subs.validator.model.Submittable<Study> getUSIStudyFromDisc() {
         SubmissionEnvelope submissionEnvelope = getUSISubmisisonFromDisc();
         List<uk.ac.ebi.subs.data.submittable.Study> studies = submissionEnvelope.getStudies();
-        return new Submittable<>(studies.get(0),submissionEnvelope.getSubmission().getId());
+        return new Submittable<>(studies.get(0), submissionEnvelope.getSubmission().getId());
     }
 
-    public static Attribute generateSingleUSIAttribute(){
+    public static Attribute generateSingleUSIAttribute() {
         Attribute usiAttribute_1 = new Attribute();
         usiAttribute_1.setValue("Test_attribute");
         Term term = new Term();
