@@ -23,14 +23,15 @@ public class USIAssayToMLNMRAssayTable implements Converter<uk.ac.ebi.subs.data.
         NMRAssayMap nmrAssayMap = new NMRAssayMap();
 
         Map<String, Collection<Attribute>> usiAssayAttributes = source.getAttributes();
+        //todo decide what to capture using attributes and how to use it
+        
         List<ProtocolUse> protocolUses = source.getProtocolUses();
         List<SampleUse> sampleUses =
                 source.getSampleUses();
         parseSample(sampleUses, nmrAssayMap);
+        parse(protocolUses,nmrAssayMap);
 
-        //todo parse sample, protocol and attribute values to contruct a single row in NMR assay Table
-
-        return null;
+        return nmrAssayMap;
     }
 
     private void parseSample(List<SampleUse> sampleUses, NMRAssayMap nmrAssayMap) {
@@ -52,7 +53,7 @@ public class USIAssayToMLNMRAssayTable implements Converter<uk.ac.ebi.subs.data.
                     parseNMRSpectroscopy(protocolUse, nmrAssayMap);
                 }
                 if (protocolUse.getProtocolRef().getAlias().equals("NMR assay")) {
-                    //todo set extraction values
+                    parseNMRAssay(protocolUse, nmrAssayMap);
                 }
                 if (protocolUse.getProtocolRef().getAlias().equals("Data transformation")) {
                     parseDataTransformation(protocolUse, nmrAssayMap);
