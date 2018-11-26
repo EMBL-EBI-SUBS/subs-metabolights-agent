@@ -8,8 +8,6 @@ import uk.ac.ebi.subs.metabolights.model.Assay;
 import uk.ac.ebi.subs.metabolights.model.AssaySpreadSheetConstants;
 import uk.ac.ebi.subs.metabolights.model.NMRAssayMap;
 
-
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -29,7 +27,7 @@ public class USIAssayToMLNMRAssayTable implements Converter<uk.ac.ebi.subs.data.
         List<SampleUse> sampleUses =
                 source.getSampleUses();
         parseSample(sampleUses, nmrAssayMap);
-        parse(protocolUses,nmrAssayMap);
+        parseProtocol(protocolUses,nmrAssayMap);
 
         return nmrAssayMap;
     }
@@ -40,7 +38,7 @@ public class USIAssayToMLNMRAssayTable implements Converter<uk.ac.ebi.subs.data.
         }
     }
 
-    private void parse(List<ProtocolUse> protocolUses, NMRAssayMap nmrAssayMap) {
+    private void parseProtocol(List<ProtocolUse> protocolUses, NMRAssayMap nmrAssayMap) {
         if (!protocolUses.isEmpty()) {
             for (ProtocolUse protocolUse : protocolUses) {
                 if (protocolUse.getProtocolRef().getAlias().equals("Extraction")) {
