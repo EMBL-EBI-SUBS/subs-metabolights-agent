@@ -35,7 +35,7 @@ public class USIAssayToMLNMRAssayTable implements Converter<uk.ac.ebi.subs.data.
     }
 
     private void parseSample(List<SampleUse> sampleUses, NMRAssayMap nmrAssayMap) {
-        if (sampleUses.isEmpty() && sampleUses.size() == 1) {
+        if (!sampleUses.isEmpty() && sampleUses.size() == 1) {
             nmrAssayMap.put(AssaySpreadSheetConstants.SAMPLE_NAME, sampleUses.get(0).getSampleRef().getAlias());
         }
     }
