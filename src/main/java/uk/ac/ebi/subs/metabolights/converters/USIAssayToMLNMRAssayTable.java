@@ -160,6 +160,14 @@ public class USIAssayToMLNMRAssayTable implements Converter<uk.ac.ebi.subs.data.
 
     private void parseNMRAssay(ProtocolUse nmrAssay, NMRAssayMap nmrAssayMap) {
         nmrAssayMap.put(AssaySpreadSheetConstants.NMR_ASSAY_PROTOCOL_REF, "NMR assay");
+        if (nmrAssay.getAttributes().size() > 0) {
+            if (nmrAssay.getAttributes().containsKey("NMR Assay Name")) {
+                Attribute nmr_assay_name = nmrAssay.getAttributes().get("NMR Assay Name").iterator().next();
+                if (nmr_assay_name != null && nmr_assay_name.getValue() != null) {
+                    nmrAssayMap.put(AssaySpreadSheetConstants.NMR_ASSAY_PROTOCOL_NAME, nmr_assay_name.getValue());
+                }
+            }
+        }
     }
 
     private void parseNMRSpectroscopy(ProtocolUse nmrSpectroscopy, NMRAssayMap nmrAssayMap) {
