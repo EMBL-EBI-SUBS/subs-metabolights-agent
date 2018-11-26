@@ -167,6 +167,12 @@ public class USIAssayToMLNMRAssayTable implements Converter<uk.ac.ebi.subs.data.
                     nmrAssayMap.put(AssaySpreadSheetConstants.NMR_ASSAY_PROTOCOL_NAME, nmr_assay_name.getValue());
                 }
             }
+            if (nmrAssay.getAttributes().containsKey("Free Induction Decay Data File")) {
+                Attribute free_induction_decay_data_file = nmrAssay.getAttributes().get("Free Induction Decay Data File").iterator().next();
+                if (free_induction_decay_data_file != null && free_induction_decay_data_file.getValue() != null) {
+                    nmrAssayMap.put(AssaySpreadSheetConstants.NMR_ASSAY_FID_FILE, free_induction_decay_data_file.getValue());
+                }
+            }
         }
     }
 
