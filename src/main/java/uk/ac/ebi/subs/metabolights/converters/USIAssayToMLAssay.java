@@ -47,4 +47,9 @@ public class USIAssayToMLAssay implements Converter<uk.ac.ebi.subs.data.submitta
         }
         return assay;
     }
+
+    private void convertToMLAssayAttributes(Map<String, Collection<Attribute>> usiAssayAttributes) {
+      // todo parse list of usi attributes captured via spreadsheet
+        //parse nmr specific parameters etc
+    }
 }

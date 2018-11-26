@@ -147,6 +147,23 @@ public class MetaboLightsStudyProcessor {
 
         update(processingCertificateList, processSamples(study, submissionEnvelope.getSamples(), sampleFileName, isNewSubmission));
 
+        List<uk.ac.ebi.subs.data.submittable.Assay> assays = submissionEnvelope.getAssays();
+        /*
+         from each assay we will get attributes, sample use, protocol use
+         mostly for the purpose of using it as a cell in a row. the sample use. ref. alias should be suffice. If not the referenced ref must be extracted out of protocols and samples.
+
+         for the purpose of updating metabolights
+
+
+         if it is a new submission
+
+         1. using assay attributes, the base assay structure has to be created. This will also create an a_file. File name can be obtained from the response.
+
+         But here each assay is a row. ????
+
+
+         */
+
         //todo process assays
 
         return processingCertificateList;
