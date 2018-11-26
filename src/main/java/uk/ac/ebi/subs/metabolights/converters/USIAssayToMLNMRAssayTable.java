@@ -7,7 +7,7 @@ import uk.ac.ebi.subs.data.component.SampleUse;
 import uk.ac.ebi.subs.metabolights.model.Assay;
 import uk.ac.ebi.subs.metabolights.model.AssaySpreadSheetConstants;
 import uk.ac.ebi.subs.metabolights.model.NMRAssayMap;
-import uk.ac.ebi.subs.metabolights.model.OntologyModel;
+
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -49,7 +49,7 @@ public class USIAssayToMLNMRAssayTable implements Converter<uk.ac.ebi.subs.data.
                     parseNMRSample(protocolUse, nmrAssayMap);
                 }
                 if (protocolUse.getProtocolRef().getAlias().equals("NMR spectroscopy")) {
-                    //todo set extraction values
+                    parseNMRSpectroscopy(protocolUse, nmrAssayMap);
                 }
                 if (protocolUse.getProtocolRef().getAlias().equals("NMR assay")) {
                     //todo set extraction values
@@ -158,8 +158,12 @@ public class USIAssayToMLNMRAssayTable implements Converter<uk.ac.ebi.subs.data.
 
     }
 
+    private void parseNMRAssay(ProtocolUse nmrAssay, NMRAssayMap nmrAssayMap) {
+        nmrAssayMap.put(AssaySpreadSheetConstants.NMR_ASSAY_PROTOCOL_REF, "NMR assay");
+    }
+
     private void parseNMRSpectroscopy(ProtocolUse nmrSpectroscopy, NMRAssayMap nmrAssayMap) {
-        
+
         nmrAssayMap.put(AssaySpreadSheetConstants.NMR_PROTOCOL_REF, "NMR spectroscopy");
         if (nmrSpectroscopy.getAttributes().size() > 0) {
             if (nmrSpectroscopy.getAttributes().containsKey("Instrument")) {
