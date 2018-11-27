@@ -21,10 +21,7 @@ import uk.ac.ebi.subs.data.component.Contact;
 import uk.ac.ebi.subs.data.component.Publication;
 import uk.ac.ebi.subs.data.submittable.Protocol;
 import uk.ac.ebi.subs.metabolights.converters.*;
-import uk.ac.ebi.subs.metabolights.model.MetaboLightsTable;
-import uk.ac.ebi.subs.metabolights.model.Sample;
-import uk.ac.ebi.subs.metabolights.model.SampleMap;
-import uk.ac.ebi.subs.metabolights.model.SampleRows;
+import uk.ac.ebi.subs.metabolights.model.*;
 import uk.ac.ebi.subs.metabolights.validator.schema.custom.JsonAsTextPlainHttpMessageConverter;
 
 import java.util.ArrayList;
@@ -205,6 +202,15 @@ public class PostService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void addNewAssay(NewMetabolightsAssay newMetabolightsAssay, String studyID) {
+        ObjectNode json = ServiceUtils.convertToJSON(newMetabolightsAssay, "assay");
+        String url = mlProperties.getUrl() + studyID + "/assays";
+        HttpEntity<ObjectNode> requestBody = new HttpEntity<>(json, headers);
+        restTemplate.exchange(
+                url, HttpMethod.POST, requestBody, NewAssayResult.class);
+
     }
 
     private void addRows(String studyID, ObjectNode json, String fileName) throws Exception {
