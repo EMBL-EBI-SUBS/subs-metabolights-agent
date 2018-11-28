@@ -22,12 +22,12 @@ public class USIAssayToMLNMRAssayTable implements Converter<uk.ac.ebi.subs.data.
 
         Map<String, Collection<Attribute>> usiAssayAttributes = source.getAttributes();
         //todo decide what to capture using attributes and how to use it
-        
+
         List<ProtocolUse> protocolUses = source.getProtocolUses();
         List<SampleUse> sampleUses =
                 source.getSampleUses();
         parseSample(sampleUses, nmrAssayMap);
-        parseProtocol(protocolUses,nmrAssayMap);
+        parseProtocol(protocolUses, nmrAssayMap);
 
         return nmrAssayMap;
     }
@@ -92,7 +92,7 @@ public class USIAssayToMLNMRAssayTable implements Converter<uk.ac.ebi.subs.data.
                     if (nmr_tube_type.getTerms() != null && nmr_tube_type.getTerms().size() == 1) {
                         if (nmr_tube_type.getTerms().get(0).getUrl() != null || !nmr_tube_type.getTerms().get(0).getUrl().isEmpty()) {
                             nmrAssayMap.put(AssaySpreadSheetConstants.NMR_SAMPLE_PROTOCOL_TUBE_TYPE_TSR, nmr_tube_type.getTerms().get(0).getUrl());
-                            // String NMR_SAMPLE_PROTOCOL_TUBE_TYPE_TAN = "Term Accession Number";
+                            nmrAssayMap.put(AssaySpreadSheetConstants.NMR_SAMPLE_PROTOCOL_TUBE_TYPE_TAN, "");
                             //todo term accession number not set
                         }
                     }
@@ -105,7 +105,7 @@ public class USIAssayToMLNMRAssayTable implements Converter<uk.ac.ebi.subs.data.
                     if (solvent.getTerms() != null && solvent.getTerms().size() == 1) {
                         if (solvent.getTerms().get(0).getUrl() != null || !solvent.getTerms().get(0).getUrl().isEmpty()) {
                             nmrAssayMap.put(AssaySpreadSheetConstants.NMR_SAMPLE_PROTOCOL_SOLVENT_TSR, solvent.getTerms().get(0).getUrl());
-                            // String NMR_SAMPLE_PROTOCOL_SOLVENT_TAN = "Term Accession Number.1";
+                            nmrAssayMap.put(AssaySpreadSheetConstants.NMR_SAMPLE_PROTOCOL_SOLVENT_TAN, "");
                             //todo term accession number not set
                         }
                     }
@@ -124,7 +124,7 @@ public class USIAssayToMLNMRAssayTable implements Converter<uk.ac.ebi.subs.data.
                     if (temperature.getTerms() != null && temperature.getTerms().size() == 1) {
                         if (temperature.getTerms().get(0).getUrl() != null || !temperature.getTerms().get(0).getUrl().isEmpty()) {
                             nmrAssayMap.put(AssaySpreadSheetConstants.NMR_SAMPLE_PROTOCOL_TEMPERATURE_UNIT_TSR, temperature.getTerms().get(0).getUrl());
-                            // String NMR_SAMPLE_PROTOCOL_TEMPERATURE_UNIT_TAN = "Term Accession Number.2";
+                            nmrAssayMap.put(AssaySpreadSheetConstants.NMR_SAMPLE_PROTOCOL_TEMPERATURE_UNIT_TAN, "");
                             //todo term accession number not set
                         }
                     }
@@ -147,7 +147,7 @@ public class USIAssayToMLNMRAssayTable implements Converter<uk.ac.ebi.subs.data.
                     if (label.getTerms() != null && label.getTerms().size() == 1) {
                         if (label.getTerms().get(0).getUrl() != null || !label.getTerms().get(0).getUrl().isEmpty()) {
                             nmrAssayMap.put(AssaySpreadSheetConstants.NMR_SAMPLE_PROTOCOL_EXTRACT_NAME_TSR, label.getTerms().get(0).getUrl());
-                            // NMR_SAMPLE_PROTOCOL_EXTRACT_NAME_TAN = "Term Accession Number.3";
+                            nmrAssayMap.put(AssaySpreadSheetConstants.NMR_SAMPLE_PROTOCOL_EXTRACT_NAME_TAN, "");
                             //todo term accession number not set
                         }
                     }
@@ -185,8 +185,8 @@ public class USIAssayToMLNMRAssayTable implements Converter<uk.ac.ebi.subs.data.
                     nmrAssayMap.put(AssaySpreadSheetConstants.NMR_PROTOCOL_INSTRUMENT, instrument.getValue());
                     if (instrument.getTerms() != null && instrument.getTerms().size() == 1) {
                         if (instrument.getTerms().get(0).getUrl() != null || !instrument.getTerms().get(0).getUrl().isEmpty()) {
-                            nmrAssayMap.put(AssaySpreadSheetConstants.NMR_PROTOCOL_INSTRUMENT_TAN, instrument.getTerms().get(0).getUrl());
-                            // String NMR_PROTOCOL_INSTRUMENT_TAN = "Term Accession Number";
+                            nmrAssayMap.put(AssaySpreadSheetConstants.NMR_PROTOCOL_INSTRUMENT_TSR, instrument.getTerms().get(0).getUrl());
+                            nmrAssayMap.put(AssaySpreadSheetConstants.NMR_PROTOCOL_INSTRUMENT_TAN, "");
                             //todo term accession number not set
                         }
                     }
@@ -199,7 +199,7 @@ public class USIAssayToMLNMRAssayTable implements Converter<uk.ac.ebi.subs.data.
                     if (nmr_Probe.getTerms() != null && nmr_Probe.getTerms().size() == 1) {
                         if (nmr_Probe.getTerms().get(0).getUrl() != null || !nmr_Probe.getTerms().get(0).getUrl().isEmpty()) {
                             nmrAssayMap.put(AssaySpreadSheetConstants.NMR_PROTOCOL_NMR_PROBE_TSR, nmr_Probe.getTerms().get(0).getUrl());
-                            // String NMR_PROTOCOL_NMR_PROBE_TAN = "Term Accession Number";
+                            nmrAssayMap.put(AssaySpreadSheetConstants.NMR_PROTOCOL_NMR_PROBE_TAN, "");
                             //todo term accession number not set
                         }
                     }
@@ -227,8 +227,9 @@ public class USIAssayToMLNMRAssayTable implements Converter<uk.ac.ebi.subs.data.
 
                     if (magnetic_field_strength.getUnits() != null && !magnetic_field_strength.getUnits().isEmpty()) {
                         nmrAssayMap.put(AssaySpreadSheetConstants.NMR_PROTOCOL_UNIT, magnetic_field_strength.getUnits());
+                        nmrAssayMap.put(AssaySpreadSheetConstants.NMR_PROTOCOL_UNIT_TSR, "");
+                        nmrAssayMap.put(AssaySpreadSheetConstants.NMR_PROTOCOL_UNIT_TAN, "");
                         //todo term accession number and term source not set for unit
-                        //NMR_PROTOCOL_UNIT, NMR_PROTOCOL_UNIT_TSR, NMR_PROTOCOL_UNIT_TAN
                     }
                 }
             }
@@ -263,14 +264,18 @@ public class USIAssayToMLNMRAssayTable implements Converter<uk.ac.ebi.subs.data.
     }
 
     private void parseMetaboliteIdentification(ProtocolUse metaboliteIdentification, NMRAssayMap nmrAssayMap) {
-        nmrAssayMap.put(AssaySpreadSheetConstants.METABOLITE_IDENTIFICATION_PROTOCOL_TRANSFORMATION_NAME, "Metabolite identification");
-
+        nmrAssayMap.put(AssaySpreadSheetConstants.METABOLITE_IDENTIFICATION_PROTOCOL_REF, "Metabolite identification");
         if (metaboliteIdentification.getAttributes().size() > 0) {
             if (metaboliteIdentification.getAttributes().containsKey("Data Transformation Name")) {
                 Attribute data_transformation_name = metaboliteIdentification.getAttributes().get("Data Transformation Name").iterator().next();
                 if (data_transformation_name != null && data_transformation_name.getValue() != null) {
-                    nmrAssayMap.put(AssaySpreadSheetConstants.METABOLITE_IDENTIFICATION_PROTOCOL_METABOLITE_ASSIGNMENT_FILE, "");
-
+                    nmrAssayMap.put(AssaySpreadSheetConstants.METABOLITE_IDENTIFICATION_PROTOCOL_TRANSFORMATION_NAME, data_transformation_name.getValue());
+                }
+            }
+            if (metaboliteIdentification.getAttributes().containsKey("Metabolite Assignment File")) {
+                Attribute metabolite_assignment_file = metaboliteIdentification.getAttributes().get("Metabolite Assignment File").iterator().next();
+                if (metabolite_assignment_file != null && metabolite_assignment_file.getValue() != null) {
+                    nmrAssayMap.put(AssaySpreadSheetConstants.METABOLITE_IDENTIFICATION_PROTOCOL_METABOLITE_ASSIGNMENT_FILE, metabolite_assignment_file.getValue());
                 }
             }
         }
