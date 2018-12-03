@@ -20,9 +20,12 @@ import org.springframework.web.client.RestTemplate;
 import uk.ac.ebi.subs.data.component.Attribute;
 import uk.ac.ebi.subs.data.component.Contact;
 import uk.ac.ebi.subs.data.component.Publication;
+import uk.ac.ebi.subs.data.submittable.Assay;
 import uk.ac.ebi.subs.data.submittable.Protocol;
 import uk.ac.ebi.subs.data.submittable.Sample;
 import uk.ac.ebi.subs.metabolights.converters.*;
+import uk.ac.ebi.subs.metabolights.model.AssayRows;
+import uk.ac.ebi.subs.metabolights.model.NMRAssayMap;
 import uk.ac.ebi.subs.metabolights.model.SampleMap;
 import uk.ac.ebi.subs.metabolights.model.SampleRows;
 import uk.ac.ebi.subs.metabolights.validator.schema.custom.JsonAsTextPlainHttpMessageConverter;
@@ -217,6 +220,28 @@ public class UpdateService {
             ObjectNode json = ServiceUtils.convertToJSON(sampleRows, "data");
             updateRows(studyID, json, sampleFileName);
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void updateAssays(List<uk.ac.ebi.subs.data.submittable.Assay> assays, String studyID, String assayFileName, Map<String, String> existingAssayTableHeaders) {
+        if (assays == null || assays.size() == 0) {
+            return;
+        }
+        try {
+            AssayRows assayRows = new AssayRows();
+            for (Assay assay : assays) {
+                NMRAssayMap assayMap = new NMRAssayMap(assay);
+                if (existingAssayTableHeaders != null) {
+                    ServiceUtils.fillEmptyValuesForMissingColumns(assayMap, existingAssayTableHeaders);
+                }
+                assayRows.add(assayMap);
+            }
+            ObjectNode objectNode = ServiceUtils.convertToJSON(assayRows, "data");
+            System.out.println("Assay rows to update: " + objectNode);
+            updateRows(studyID, objectNode, assayFileName);
         } catch (Exception e) {
             e.printStackTrace();
         }
