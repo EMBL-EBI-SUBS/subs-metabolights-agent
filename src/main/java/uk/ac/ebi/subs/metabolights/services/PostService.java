@@ -46,6 +46,8 @@ public class PostService {
 
     private USISampleToMLSample usiSampleToMLSample;
 
+    private USIAssayToMLNMRAssayTable usiAssayToMLNMRAssayTable;
+
 
     private RestTemplate restTemplate;
 
@@ -211,6 +213,27 @@ public class PostService {
         restTemplate.exchange(
                 url, HttpMethod.POST, requestBody, NewAssayResult.class);
 
+    }
+
+    public void addAssayRows(List<uk.ac.ebi.subs.data.submittable.Assay> assays, String studyID, String assayFileName, Map<String, String> existingAssayTableHeaders) {
+        if (assays == null || assays.size() == 0) {
+            return;
+        }
+        try {
+            AssayRows assayRows = new AssayRows();
+            for (uk.ac.ebi.subs.data.submittable.Assay assay : assays) {
+                NMRAssayMap assayMap = new NMRAssayMap(assay);
+                if (existingAssayTableHeaders != null) {
+                    ServiceUtils.fillEmptyValuesForMissingColumns(assayMap, existingAssayTableHeaders);
+                }
+                assayRows.add(assayMap);
+            }
+            ObjectNode objectNode = ServiceUtils.convertToJSON(assayRows, "data");
+            System.out.println("Assay rows to save: " + objectNode);
+            addRows(studyID, objectNode, assayFileName);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void addRows(String studyID, ObjectNode json, String fileName) throws Exception {
