@@ -18,7 +18,7 @@ public class USIAssayToMLNMRAssayTable implements Converter<uk.ac.ebi.subs.data.
         Assay assay = new Assay();
         assay.setFilename(source.getAlias());
 
-        NMRAssayMap nmrAssayMap = new NMRAssayMap();
+        NMRAssayMap nmrAssayMap = new NMRAssayMap(assay);
 
         Map<String, Collection<Attribute>> usiAssayAttributes = source.getAttributes();
         //todo decide what to capture using attributes and how to use it
@@ -28,6 +28,7 @@ public class USIAssayToMLNMRAssayTable implements Converter<uk.ac.ebi.subs.data.
                 source.getSampleUses();
         parseSample(sampleUses, nmrAssayMap);
         parseProtocol(protocolUses, nmrAssayMap);
+        //todo migrate methods
 
         return nmrAssayMap;
     }
