@@ -1,19 +1,22 @@
 package uk.ac.ebi.subs.metabolights.model;
 
+import uk.ac.ebi.subs.data.submittable.Assay;
+
 import java.util.LinkedHashMap;
 
 /**
  * Created by kalai on 22/10/2018.
  */
 
-public class NMRAssayMap extends LinkedHashMap<String, String> {
+public class NMRAssayMap extends AssayMap {
 
-    public NMRAssayMap() {
-//        super();
-//        process(assay);
+    public NMRAssayMap(uk.ac.ebi.subs.data.submittable.Assay assay) {
+        super();
+        process(assay);
     }
 
     private void process(Assay assay) {
+        //todo process
         put(AssaySpreadSheetConstants.SAMPLE_NAME, "");
 
         put(AssaySpreadSheetConstants.EXTRACTION_PROTOCOL_REF,"");
