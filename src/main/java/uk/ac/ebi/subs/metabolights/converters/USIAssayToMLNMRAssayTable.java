@@ -5,6 +5,7 @@ import uk.ac.ebi.subs.data.component.Attribute;
 import uk.ac.ebi.subs.data.component.ProtocolUse;
 import uk.ac.ebi.subs.data.component.SampleUse;
 import uk.ac.ebi.subs.metabolights.model.Assay;
+import uk.ac.ebi.subs.metabolights.model.AssayMap;
 import uk.ac.ebi.subs.metabolights.model.AssaySpreadSheetConstants;
 import uk.ac.ebi.subs.metabolights.model.NMRAssayMap;
 
@@ -18,7 +19,13 @@ public class USIAssayToMLNMRAssayTable implements Converter<uk.ac.ebi.subs.data.
         Assay assay = new Assay();
         assay.setFilename(source.getAlias());
 
-        NMRAssayMap nmrAssayMap = new NMRAssayMap(assay);
+        NMRAssayMap nmrAssayMap = new NMRAssayMap(source);
+
+        AssayMap nmrAssayMap1 =  new NMRAssayMap(source);
+
+        if(nmrAssayMap1 instanceof NMRAssayMap){
+
+        }
 
         Map<String, Collection<Attribute>> usiAssayAttributes = source.getAttributes();
         //todo decide what to capture using attributes and how to use it
