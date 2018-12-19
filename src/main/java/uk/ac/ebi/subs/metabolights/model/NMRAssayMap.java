@@ -281,10 +281,41 @@ public class NMRAssayMap extends AssayMap {
         }
     }
 
-    private void parseDataTransformation(ProtocolUse protocolUse) {
+    private void parseDataTransformation(ProtocolUse dataTransformation) {
+        this.put(AssaySpreadSheetConstants.DATA_TRANSFORMATION_PROTOCOL_REF, "Data transformation");
+
+        if (dataTransformation.getAttributes().size() > 0) {
+            if (dataTransformation.getAttributes().containsKey("Normalization Name")) {
+                Attribute normalization_name = dataTransformation.getAttributes().get("Normalization Name").iterator().next();
+                if (normalization_name != null && normalization_name.getValue() != null) {
+                    this.put(AssaySpreadSheetConstants.DATA_TRANSFORMATION_PROTOCOL_NORMALIZATION_NAME, normalization_name.getValue());
+                }
+            }
+            if (dataTransformation.getAttributes().containsKey("Derived Spectral Data File")) {
+                Attribute derived_spectral_data_file = dataTransformation.getAttributes().get("Derived Spectral Data File").iterator().next();
+                if (derived_spectral_data_file != null && derived_spectral_data_file.getValue() != null) {
+                    this.put(AssaySpreadSheetConstants.DATA_TRANSFORMATION_PROTOCOL_DERIVED_SPECTRAL_FILE, derived_spectral_data_file.getValue());
+                }
+            }
+        }
     }
 
-    private void parseMetaboliteIdentification(ProtocolUse protocolUse) {
+    private void parseMetaboliteIdentification(ProtocolUse metaboliteIdentification) {
+        this.put(AssaySpreadSheetConstants.METABOLITE_IDENTIFICATION_PROTOCOL_REF, "Metabolite identification");
+        if (metaboliteIdentification.getAttributes().size() > 0) {
+            if (metaboliteIdentification.getAttributes().containsKey("Data Transformation Name")) {
+                Attribute data_transformation_name = metaboliteIdentification.getAttributes().get("Data Transformation Name").iterator().next();
+                if (data_transformation_name != null && data_transformation_name.getValue() != null) {
+                    this.put(AssaySpreadSheetConstants.METABOLITE_IDENTIFICATION_PROTOCOL_TRANSFORMATION_NAME, data_transformation_name.getValue());
+                }
+            }
+            if (metaboliteIdentification.getAttributes().containsKey("Metabolite Assignment File")) {
+                Attribute metabolite_assignment_file = metaboliteIdentification.getAttributes().get("Metabolite Assignment File").iterator().next();
+                if (metabolite_assignment_file != null && metabolite_assignment_file.getValue() != null) {
+                    this.put(AssaySpreadSheetConstants.METABOLITE_IDENTIFICATION_PROTOCOL_METABOLITE_ASSIGNMENT_FILE, metabolite_assignment_file.getValue());
+                }
+            }
+        }
     }
 
 
