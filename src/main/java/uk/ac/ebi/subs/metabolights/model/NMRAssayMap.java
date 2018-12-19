@@ -21,7 +21,9 @@ public class NMRAssayMap extends AssayMap {
 
     private void process(Assay assay) {
         //todo process
-//        parseSample(assay.getSampleUses());
+          parseSample(assay.getSampleUses());
+          parseProtocol(assay.getProtocolUses());
+
 //        put(AssaySpreadSheetConstants.SAMPLE_NAME, "");
 //
 //        put(AssaySpreadSheetConstants.EXTRACTION_PROTOCOL_REF,"");
