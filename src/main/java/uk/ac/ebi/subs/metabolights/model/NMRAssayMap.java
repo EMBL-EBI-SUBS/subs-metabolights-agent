@@ -1,5 +1,6 @@
 package uk.ac.ebi.subs.metabolights.model;
 
+import uk.ac.ebi.subs.data.component.Attribute;
 import uk.ac.ebi.subs.data.component.ProtocolUse;
 import uk.ac.ebi.subs.data.component.SampleUse;
 import uk.ac.ebi.subs.data.submittable.Assay;
@@ -101,10 +102,97 @@ public class NMRAssayMap extends AssayMap {
         }
     }
 
-    private void parseExtraction(ProtocolUse protocolUse) {
+    private void parseExtraction(ProtocolUse extraction) {
+        this.put(AssaySpreadSheetConstants.EXTRACTION_PROTOCOL_REF, "Extraction");
+
+        if (extraction.getAttributes().size() > 0) {
+            if (extraction.getAttributes().containsKey("Extraction Method")) {
+                Attribute extraction_method = extraction.getAttributes().get("Extraction Method").iterator().next();
+                if (extraction_method != null && extraction_method.getValue() != null) {
+                    this.put(AssaySpreadSheetConstants.EXTRACTION_PROTOCOL_EXTRACTION_METHOD, extraction_method.getValue());
+                }
+            }
+            if (extraction.getAttributes().containsKey("Extract Name")) {
+                Attribute extract_name = extraction.getAttributes().get("Extract Name").iterator().next();
+                if (extract_name != null && extract_name.getValue() != null) {
+                    this.put(AssaySpreadSheetConstants.EXTRACTION_PROTOCOL_EXTRACT_NAME, extract_name.getValue());
+                }
+            }
+        }
     }
 
-    private void parseNMRSample(ProtocolUse protocolUse) {
+    private void parseNMRSample(ProtocolUse nmrSample) {
+        this.put(AssaySpreadSheetConstants.NMR_SAMPLE_PROTOCOL_REF, "NMR sample");
+        if (nmrSample.getAttributes().size() > 0) {
+            if (nmrSample.getAttributes().containsKey("NMR tube type")) {
+                Attribute nmr_tube_type = nmrSample.getAttributes().get("NMR tube type").iterator().next();
+                if (nmr_tube_type != null && nmr_tube_type.getValue() != null) {
+                    this.put(AssaySpreadSheetConstants.NMR_SAMPLE_PROTOCOL_TUBE_TYPE, nmr_tube_type.getValue());
+                    if (nmr_tube_type.getTerms() != null && nmr_tube_type.getTerms().size() == 1) {
+                        if (nmr_tube_type.getTerms().get(0).getUrl() != null || !nmr_tube_type.getTerms().get(0).getUrl().isEmpty()) {
+                            this.put(AssaySpreadSheetConstants.NMR_SAMPLE_PROTOCOL_TUBE_TYPE_TSR, nmr_tube_type.getTerms().get(0).getUrl());
+                            this.put(AssaySpreadSheetConstants.NMR_SAMPLE_PROTOCOL_TUBE_TYPE_TAN, "");
+                            //todo term accession number not set
+                        }
+                    }
+                }
+            }
+            if (nmrSample.getAttributes().containsKey("Solvent")) {
+                Attribute solvent = nmrSample.getAttributes().get("Solvent").iterator().next();
+                if (solvent != null && solvent.getValue() != null) {
+                    this.put(AssaySpreadSheetConstants.NMR_SAMPLE_PROTOCOL_SOLVENT, solvent.getValue());
+                    if (solvent.getTerms() != null && solvent.getTerms().size() == 1) {
+                        if (solvent.getTerms().get(0).getUrl() != null || !solvent.getTerms().get(0).getUrl().isEmpty()) {
+                            this.put(AssaySpreadSheetConstants.NMR_SAMPLE_PROTOCOL_SOLVENT_TSR, solvent.getTerms().get(0).getUrl());
+                            this.put(AssaySpreadSheetConstants.NMR_SAMPLE_PROTOCOL_SOLVENT_TAN, "");
+                            //todo term accession number not set
+                        }
+                    }
+                }
+            }
+            if (nmrSample.getAttributes().containsKey("Sample pH")) {
+                Attribute samplePH = nmrSample.getAttributes().get("Sample pH").iterator().next();
+                if (samplePH != null && samplePH.getValue() != null) {
+                    this.put(AssaySpreadSheetConstants.NMR_SAMPLE_PROTOCOL_SAMPLE_PH, samplePH.getValue());
+                }
+            }
+            if (nmrSample.getAttributes().containsKey("Temperature")) {
+                Attribute temperature = nmrSample.getAttributes().get("Temperature").iterator().next();
+                if (temperature != null && temperature.getValue() != null) {
+                    this.put(AssaySpreadSheetConstants.NMR_SAMPLE_PROTOCOL_TEMPERATURE, temperature.getValue());
+                    if (temperature.getTerms() != null && temperature.getTerms().size() == 1) {
+                        if (temperature.getTerms().get(0).getUrl() != null || !temperature.getTerms().get(0).getUrl().isEmpty()) {
+                            this.put(AssaySpreadSheetConstants.NMR_SAMPLE_PROTOCOL_TEMPERATURE_UNIT_TSR, temperature.getTerms().get(0).getUrl());
+                            this.put(AssaySpreadSheetConstants.NMR_SAMPLE_PROTOCOL_TEMPERATURE_UNIT_TAN, "");
+                            //todo term accession number not set
+                        }
+                    }
+
+                    if (temperature.getUnits() != null && !temperature.getUnits().isEmpty()) {
+                        this.put(AssaySpreadSheetConstants.NMR_SAMPLE_PROTOCOL_UNIT, temperature.getUnits());
+                    }
+                }
+            }
+            if (nmrSample.getAttributes().containsKey("Labeled Extract Name")) {
+                Attribute labeled_extract_name = nmrSample.getAttributes().get("Labeled Extract Name").iterator().next();
+                if (labeled_extract_name != null && labeled_extract_name.getValue() != null) {
+                    this.put(AssaySpreadSheetConstants.NMR_SAMPLE_PROTOCOL_EXTRACT_NAME, labeled_extract_name.getValue());
+                }
+            }
+            if (nmrSample.getAttributes().containsKey("Label")) {
+                Attribute label = nmrSample.getAttributes().get("Label").iterator().next();
+                if (label != null && label.getValue() != null) {
+                    this.put(AssaySpreadSheetConstants.NMR_SAMPLE_PROTOCOL_LABEL, label.getValue());
+                    if (label.getTerms() != null && label.getTerms().size() == 1) {
+                        if (label.getTerms().get(0).getUrl() != null || !label.getTerms().get(0).getUrl().isEmpty()) {
+                            this.put(AssaySpreadSheetConstants.NMR_SAMPLE_PROTOCOL_EXTRACT_NAME_TSR, label.getTerms().get(0).getUrl());
+                            this.put(AssaySpreadSheetConstants.NMR_SAMPLE_PROTOCOL_EXTRACT_NAME_TAN, "");
+                            //todo term accession number not set
+                        }
+                    }
+                }
+            }
+        }
     }
 
     private void parseNMRSpectroscopy(ProtocolUse protocolUse) {
