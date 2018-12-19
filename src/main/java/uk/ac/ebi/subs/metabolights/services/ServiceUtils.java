@@ -10,6 +10,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import uk.ac.ebi.subs.metabolights.model.SampleMap;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -49,10 +50,10 @@ public class ServiceUtils {
         }
     }
 
-    public static void fillEmptyValuesForMissingColumns(SampleMap sampleMap, Map<String, String> existingSampleTableHeaders) {
+    public static void fillEmptyValuesForMissingColumns(LinkedHashMap<String, String> map, Map<String, String> existingSampleTableHeaders) {
         for (Map.Entry<String, String> entry : existingSampleTableHeaders.entrySet()) {
-            if (!sampleMap.containsKey(entry.getKey())) {
-                sampleMap.put(entry.getKey(), "");
+            if (!map.containsKey(entry.getKey())) {
+                map.put(entry.getKey(), "");
             }
         }
     }

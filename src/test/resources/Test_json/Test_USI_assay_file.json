@@ -318,6 +318,17 @@
               }
             ]
           }
+        ],
+        "Metabolite Assignment File": [
+          {
+            "value": "m_mtbl2_metabolite profiling_mass spectrometry_v2_maf.tsv",
+            "units": null,
+            "terms": [
+              {
+                "url": ""
+              }
+            ]
+          }
         ]
       }
     }

@@ -6,6 +6,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import uk.ac.ebi.subs.data.component.Contact;
 import uk.ac.ebi.subs.data.component.Publication;
@@ -13,6 +14,7 @@ import uk.ac.ebi.subs.data.submittable.Protocol;
 import uk.ac.ebi.subs.data.submittable.Sample;
 import uk.ac.ebi.subs.metabolights.converters.USISampleToMLSample;
 import uk.ac.ebi.subs.metabolights.converters.Utilities;
+import uk.ac.ebi.subs.metabolights.model.NewMetabolightsAssay;
 
 import java.util.UUID;
 
@@ -51,5 +53,12 @@ public class PostServiceTest {
         protocol.setTitle(newTitle);
         uk.ac.ebi.subs.metabolights.model.Protocol addedProtocol = this.postService.add("MTBLS2", protocol);
         assertEquals(addedProtocol.getName(),newTitle);
+    }
+
+    @Test
+    public void addNewAssay(){
+        NewMetabolightsAssay newMetabolightsAssay = Utilities.generateNewNMRAssay();
+        HttpStatus status = this.postService.addNewAssay(newMetabolightsAssay,"MTBLS_DEV2346");
+        assertEquals(status.is2xxSuccessful(), true);
     }
 }

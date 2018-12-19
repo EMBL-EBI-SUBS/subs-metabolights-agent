@@ -115,6 +115,7 @@ public class AssaySpreadSheetConstants {
      Metabolite identification  protocol common for NMR and MS
       */
 
+    public static final String METABOLITE_IDENTIFICATION_PROTOCOL_REF = "Protocol REF.5";
     public static final String METABOLITE_IDENTIFICATION_PROTOCOL_TRANSFORMATION_NAME = "Data Transformation Name";
     public static final String METABOLITE_IDENTIFICATION_PROTOCOL_METABOLITE_ASSIGNMENT_FILE = "Metabolite Assignment File";
 
