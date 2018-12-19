@@ -9,10 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -206,13 +203,14 @@ public class PostService {
         }
     }
 
-    public void addNewAssay(NewMetabolightsAssay newMetabolightsAssay, String studyID) {
+    public HttpStatus addNewAssay(NewMetabolightsAssay newMetabolightsAssay, String studyID) {
         ObjectNode json = ServiceUtils.convertToJSON(newMetabolightsAssay, "assay");
         String url = mlProperties.getUrl() + studyID + "/assays";
+        headers.set("user_token", this.apiKey);
         HttpEntity<ObjectNode> requestBody = new HttpEntity<>(json, headers);
-        restTemplate.exchange(
+        ResponseEntity<NewAssayResult> exchange = restTemplate.exchange(
                 url, HttpMethod.POST, requestBody, NewAssayResult.class);
-
+        return exchange.getStatusCode();
     }
 
     public void addAssayRows(List<uk.ac.ebi.subs.data.submittable.Assay> assays, String studyID, String assayFileName, Map<String, String> existingAssayTableHeaders) {
