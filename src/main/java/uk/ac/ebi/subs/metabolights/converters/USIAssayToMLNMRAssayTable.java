@@ -37,30 +37,6 @@ public class USIAssayToMLNMRAssayTable implements Converter<uk.ac.ebi.subs.data.
         return nmrAssayMap;
     }
 
-    private void parseProtocol(List<ProtocolUse> protocolUses, NMRAssayMap nmrAssayMap) {
-        if (!protocolUses.isEmpty()) {
-            for (ProtocolUse protocolUse : protocolUses) {
-                if (protocolUse.getProtocolRef().getAlias().equals("Extraction")) {
-                    parseExtraction(protocolUse, nmrAssayMap);
-                }
-                if (protocolUse.getProtocolRef().getAlias().equals("NMR sample")) {
-                    parseNMRSample(protocolUse, nmrAssayMap);
-                }
-                if (protocolUse.getProtocolRef().getAlias().equals("NMR spectroscopy")) {
-                    parseNMRSpectroscopy(protocolUse, nmrAssayMap);
-                }
-                if (protocolUse.getProtocolRef().getAlias().equals("NMR assay")) {
-                    parseNMRAssay(protocolUse, nmrAssayMap);
-                }
-                if (protocolUse.getProtocolRef().getAlias().equals("Data transformation")) {
-                    parseDataTransformation(protocolUse, nmrAssayMap);
-                }
-                if (protocolUse.getProtocolRef().getAlias().equals("Metabolite identification")) {
-                    parseMetaboliteIdentification(protocolUse, nmrAssayMap);
-                }
-            }
-        }
-    }
 
     private void parseExtraction(ProtocolUse extraction, NMRAssayMap nmrAssayMap) {
         nmrAssayMap.put(AssaySpreadSheetConstants.EXTRACTION_PROTOCOL_REF, "Extraction");

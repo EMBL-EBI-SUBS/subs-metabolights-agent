@@ -1,5 +1,6 @@
 package uk.ac.ebi.subs.metabolights.model;
 
+import uk.ac.ebi.subs.data.component.ProtocolUse;
 import uk.ac.ebi.subs.data.component.SampleUse;
 import uk.ac.ebi.subs.data.submittable.Assay;
 
@@ -73,6 +74,49 @@ public class NMRAssayMap extends AssayMap {
         if (!sampleUses.isEmpty() && sampleUses.size() == 1) {
             this.put(AssaySpreadSheetConstants.SAMPLE_NAME, sampleUses.get(0).getSampleRef().getAlias());
         }
+    }
+
+    private void parseProtocol(List<ProtocolUse> protocolUses) {
+        if (!protocolUses.isEmpty()) {
+            for (ProtocolUse protocolUse : protocolUses) {
+                if (protocolUse.getProtocolRef().getAlias().equals("Extraction")) {
+                    parseExtraction(protocolUse);
+                }
+                if (protocolUse.getProtocolRef().getAlias().equals("NMR sample")) {
+                    parseNMRSample(protocolUse);
+                }
+                if (protocolUse.getProtocolRef().getAlias().equals("NMR spectroscopy")) {
+                    parseNMRSpectroscopy(protocolUse);
+                }
+                if (protocolUse.getProtocolRef().getAlias().equals("NMR assay")) {
+                    parseNMRAssay(protocolUse);
+                }
+                if (protocolUse.getProtocolRef().getAlias().equals("Data transformation")) {
+                    parseDataTransformation(protocolUse);
+                }
+                if (protocolUse.getProtocolRef().getAlias().equals("Metabolite identification")) {
+                    parseMetaboliteIdentification(protocolUse);
+                }
+            }
+        }
+    }
+
+    private void parseExtraction(ProtocolUse protocolUse) {
+    }
+
+    private void parseNMRSample(ProtocolUse protocolUse) {
+    }
+
+    private void parseNMRSpectroscopy(ProtocolUse protocolUse) {
+    }
+
+    private void parseNMRAssay(ProtocolUse protocolUse) {
+    }
+
+    private void parseDataTransformation(ProtocolUse protocolUse) {
+    }
+
+    private void parseMetaboliteIdentification(ProtocolUse protocolUse) {
     }
 
 
