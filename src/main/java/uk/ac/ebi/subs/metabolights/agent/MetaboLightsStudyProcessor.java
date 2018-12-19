@@ -147,8 +147,7 @@ public class MetaboLightsStudyProcessor {
 
         update(processingCertificateList, processSamples(study, submissionEnvelope.getSamples(), sampleFileName, isNewSubmission));
 
-        List<uk.ac.ebi.subs.data.submittable.Assay> assays = submissionEnvelope.getAssays();
-        /*
+         /*
          from each assay we will get attributes, sample use, protocol use
          mostly for the purpose of using it as a cell in a row. the sample use. ref. alias should be suffice. If not the referenced ref must be extracted out of protocols and samples.
 
@@ -164,7 +163,7 @@ public class MetaboLightsStudyProcessor {
 
          */
 
-        //todo process assays
+       // update(processingCertificateList, processAssays(study, submissionEnvelope.getAssays(), isNewSubmission));
 
         return processingCertificateList;
     }
@@ -434,8 +433,8 @@ public class MetaboLightsStudyProcessor {
             certificate.setMessage("Something went wrong while trying to access the existing metabolights study files. Unable to update samples");
             return certificate;
         }
-      //  this.postService.addSamples(samples, study.getAccession(), sampleFileToUpdate);
-     //   this.updateService.updateSamples(samples, study.getAccession(), sampleFileToUpdate);
+        //  this.postService.addSamples(samples, study.getAccession(), sampleFileToUpdate);
+        //   this.updateService.updateSamples(samples, study.getAccession(), sampleFileToUpdate);
 
         if (isNewSubmission) {
             try {
@@ -461,6 +460,11 @@ public class MetaboLightsStudyProcessor {
                 certificate.setMessage("Error saving samples : " + e.getMessage());
             }
         }
+        return certificate;
+    }
+
+    private ProcessingCertificate processAssays(Study study, List<uk.ac.ebi.subs.data.submittable.Assay> assays, boolean isNewSubmission) {
+        ProcessingCertificate certificate = getNewCertificate();
         return certificate;
     }
 

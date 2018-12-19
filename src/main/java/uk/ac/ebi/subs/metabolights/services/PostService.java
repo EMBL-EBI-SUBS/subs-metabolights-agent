@@ -9,10 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -21,10 +18,7 @@ import uk.ac.ebi.subs.data.component.Contact;
 import uk.ac.ebi.subs.data.component.Publication;
 import uk.ac.ebi.subs.data.submittable.Protocol;
 import uk.ac.ebi.subs.metabolights.converters.*;
-import uk.ac.ebi.subs.metabolights.model.MetaboLightsTable;
-import uk.ac.ebi.subs.metabolights.model.Sample;
-import uk.ac.ebi.subs.metabolights.model.SampleMap;
-import uk.ac.ebi.subs.metabolights.model.SampleRows;
+import uk.ac.ebi.subs.metabolights.model.*;
 import uk.ac.ebi.subs.metabolights.validator.schema.custom.JsonAsTextPlainHttpMessageConverter;
 
 import java.util.ArrayList;
@@ -48,6 +42,8 @@ public class PostService {
     private USIDescriptorToMLDescriptor usiDescriptorToMLDescriptor;
 
     private USISampleToMLSample usiSampleToMLSample;
+
+    private USIAssayToMLNMRAssayTable usiAssayToMLNMRAssayTable;
 
 
     private RestTemplate restTemplate;
@@ -202,6 +198,37 @@ public class PostService {
             addRows(studyID, objectNode, sampleFileName);
 
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public HttpStatus addNewAssay(NewMetabolightsAssay newMetabolightsAssay, String studyID) {
+        ObjectNode json = ServiceUtils.convertToJSON(newMetabolightsAssay, "assay");
+        String url = mlProperties.getUrl() + studyID + "/assays";
+        headers.set("user_token", this.apiKey);
+        HttpEntity<ObjectNode> requestBody = new HttpEntity<>(json, headers);
+        ResponseEntity<NewAssayResult> exchange = restTemplate.exchange(
+                url, HttpMethod.POST, requestBody, NewAssayResult.class);
+        return exchange.getStatusCode();
+    }
+
+    public void addAssayRows(List<uk.ac.ebi.subs.data.submittable.Assay> assays, String studyID, String assayFileName, Map<String, String> existingAssayTableHeaders) {
+        if (assays == null || assays.size() == 0) {
+            return;
+        }
+        try {
+            AssayRows assayRows = new AssayRows();
+            for (uk.ac.ebi.subs.data.submittable.Assay assay : assays) {
+                NMRAssayMap assayMap = new NMRAssayMap(assay);
+                if (existingAssayTableHeaders != null) {
+                    ServiceUtils.fillEmptyValuesForMissingColumns(assayMap, existingAssayTableHeaders);
+                }
+                assayRows.add(assayMap);
+            }
+            ObjectNode objectNode = ServiceUtils.convertToJSON(assayRows, "data");
+            System.out.println("Assay rows to save: " + objectNode);
+            addRows(studyID, objectNode, assayFileName);
         } catch (Exception e) {
             e.printStackTrace();
         }

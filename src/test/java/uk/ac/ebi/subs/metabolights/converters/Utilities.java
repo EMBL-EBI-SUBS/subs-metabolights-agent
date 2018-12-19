@@ -8,6 +8,7 @@ import org.apache.commons.io.IOUtils;
 import uk.ac.ebi.subs.data.component.*;
 import uk.ac.ebi.subs.data.submittable.*;
 import uk.ac.ebi.subs.metabolights.model.Factor;
+import uk.ac.ebi.subs.metabolights.model.NewMetabolightsAssay;
 import uk.ac.ebi.subs.processing.SubmissionEnvelope;
 import uk.ac.ebi.subs.validator.model.Submittable;
 
@@ -319,6 +320,14 @@ public class Utilities {
         usiAttribute_1.setTerms(Arrays.asList(term));
         usiAttribute_1.setUnits("year");
         return usiAttribute_1;
+    }
+
+
+    public static NewMetabolightsAssay generateNewNMRAssay() {
+        NewMetabolightsAssay nmrMetabolightsAssay = new NewMetabolightsAssay();
+        nmrMetabolightsAssay.setType("NMR");
+        nmrMetabolightsAssay.setColumns(new ArrayList<>());
+        return nmrMetabolightsAssay;
     }
 
 
