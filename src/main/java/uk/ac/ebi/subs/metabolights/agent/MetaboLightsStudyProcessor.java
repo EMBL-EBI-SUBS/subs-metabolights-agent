@@ -163,7 +163,7 @@ public class MetaboLightsStudyProcessor {
 
          */
 
-        update(processingCertificateList, processAssays(study, submissionEnvelope.getAssays(), isNewSubmission));
+       // update(processingCertificateList, processAssays(study, submissionEnvelope.getAssays(), isNewSubmission));
 
         return processingCertificateList;
     }
