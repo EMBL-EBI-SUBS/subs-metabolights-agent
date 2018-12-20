@@ -146,17 +146,6 @@ public class AgentProcessorUtils {
         return assayFileNames;
     }
 
-
-    public static String getFileName(StudyFiles studyFiles, String prefix) {
-        for (StudyFile studyFile : studyFiles.getStudyFiles()) {
-            if (studyFile.getFile().toLowerCase().startsWith(prefix)) {
-                return studyFile.getFile();
-            }
-        }
-        return "";
-    }
-
-
     public static Map<String, List<Sample>> getSamplesToAddAndUpdate(List<Sample> samples, MetaboLightsTable sampleTable) throws Exception {
 
         List<Sample> samplesToUpdate = new ArrayList<>();
