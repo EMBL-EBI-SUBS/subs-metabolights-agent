@@ -123,15 +123,6 @@ public class AgentProcessorUtils {
         return object != null && !object.isEmpty();
     }
 
-    public static String getFileName(StudyFiles studyFiles, String prefix) {
-        for (StudyFile studyFile : studyFiles.getStudyFiles()) {
-            if (studyFile.getFile().toLowerCase().startsWith(prefix)) {
-                return studyFile.getFile();
-            }
-        }
-        return "";
-    }
-
     public static String getSampleFileName(StudyFiles studyFiles) {
         for (StudyFile studyFile : studyFiles.getStudyFiles()) {
             if (studyFile.getType().equalsIgnoreCase("metadata_sample")) {
@@ -143,9 +134,26 @@ public class AgentProcessorUtils {
         return "";
     }
 
-    public static String getAssayFileName(StudyFiles studyFiles) {
-        //todo some cases have multiple a_ files
-        return getFileName(studyFiles, "a_");
+    public static List<String> getAssayFileName(StudyFiles studyFiles) {
+        List<String> assayFileNames = new ArrayList<>();
+        for (StudyFile studyFile : studyFiles.getStudyFiles()) {
+            if (studyFile.getType().equalsIgnoreCase("metadata_assay")) {
+                if (studyFile.getStatus().equalsIgnoreCase("active")) {
+                    assayFileNames.add(studyFile.getFile());
+                }
+            }
+        }
+        return assayFileNames;
+    }
+
+
+    public static String getFileName(StudyFiles studyFiles, String prefix) {
+        for (StudyFile studyFile : studyFiles.getStudyFiles()) {
+            if (studyFile.getFile().toLowerCase().startsWith(prefix)) {
+                return studyFile.getFile();
+            }
+        }
+        return "";
     }
 
 
