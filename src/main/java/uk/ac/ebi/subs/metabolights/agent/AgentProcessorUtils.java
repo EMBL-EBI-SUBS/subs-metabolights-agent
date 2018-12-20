@@ -133,7 +133,14 @@ public class AgentProcessorUtils {
     }
 
     public static String getSampleFileName(StudyFiles studyFiles) {
-        return getFileName(studyFiles, "s_");
+        for (StudyFile studyFile : studyFiles.getStudyFiles()) {
+            if (studyFile.getType().equalsIgnoreCase("metadata_sample")) {
+                if (studyFile.getStatus().equalsIgnoreCase("active")) {
+                    return studyFile.getFile();
+                }
+            }
+        }
+        return "";
     }
 
     public static String getAssayFileName(StudyFiles studyFiles) {
