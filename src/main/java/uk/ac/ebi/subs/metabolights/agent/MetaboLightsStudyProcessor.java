@@ -465,6 +465,13 @@ public class MetaboLightsStudyProcessor {
 
     private ProcessingCertificate processAssays(Study study, List<uk.ac.ebi.subs.data.submittable.Assay> assays, boolean isNewSubmission) {
         ProcessingCertificate certificate = getNewCertificate();
+        certificate.setAccession(study.getAccession());
+        if (!AgentProcessorUtils.containsValue(assays)) {
+            certificate.setMessage(getWarningMessage("assays"));
+            return certificate;
+        }
+        //todo if new submission extract attributes from assay to create new template
+        // todo if not new get matching assay file names using attributes that was used to create template and then do row updates
         return certificate;
     }
 
