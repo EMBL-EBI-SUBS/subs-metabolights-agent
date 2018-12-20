@@ -7,5 +7,5 @@ import java.util.Map;
 public class MetaboLightsTable {
 
     private MetaboLightsData data;
-    private Map<String, String> header;
+    private Map<String, Header> header;
 }
