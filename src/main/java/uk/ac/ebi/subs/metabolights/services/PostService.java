@@ -234,14 +234,15 @@ public class PostService {
         }
     }
 
-    private void addRows(String studyID, ObjectNode json, String fileName) throws Exception {
+    private HttpStatus addRows(String studyID, ObjectNode json, String fileName) throws Exception {
         System.out.println("json to update = " + json);
         headers.set("user_token", this.apiKey);
         // headers.set("Content-type", "application/json; charset=utf-8");
         String url = mlProperties.getUrl() + studyID + "/rows/" + fileName;
         HttpEntity<ObjectNode> requestBody = new HttpEntity<>(json, headers);
-        restTemplate.exchange(
-                url, HttpMethod.POST, requestBody, MetaboLightsTable.class);
+        ResponseEntity<MetaboLightsTableResult> exchange = restTemplate.exchange(
+                url, HttpMethod.POST, requestBody, MetaboLightsTableResult.class);
+        return exchange.getStatusCode();
     }
 
 
