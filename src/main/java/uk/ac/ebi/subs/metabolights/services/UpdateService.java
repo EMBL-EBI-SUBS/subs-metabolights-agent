@@ -24,10 +24,7 @@ import uk.ac.ebi.subs.data.submittable.Assay;
 import uk.ac.ebi.subs.data.submittable.Protocol;
 import uk.ac.ebi.subs.data.submittable.Sample;
 import uk.ac.ebi.subs.metabolights.converters.*;
-import uk.ac.ebi.subs.metabolights.model.AssayRows;
-import uk.ac.ebi.subs.metabolights.model.NMRAssayMap;
-import uk.ac.ebi.subs.metabolights.model.SampleMap;
-import uk.ac.ebi.subs.metabolights.model.SampleRows;
+import uk.ac.ebi.subs.metabolights.model.*;
 import uk.ac.ebi.subs.metabolights.validator.schema.custom.JsonAsTextPlainHttpMessageConverter;
 
 import java.util.ArrayList;
@@ -205,7 +202,7 @@ public class UpdateService {
         }
     }
 
-    public void updateSamples(List<Sample> samples, String studyID, String sampleFileName, Map<String, String> existingSampleTableHeaders) {
+    public void updateSamples(List<Sample> samples, String studyID, String sampleFileName, Map<String, Header> existingSampleTableHeaders) {
         if (samples == null || samples.size() == 0) {
             return;
         }
@@ -226,7 +223,7 @@ public class UpdateService {
     }
 
 
-    public void updateAssays(List<uk.ac.ebi.subs.data.submittable.Assay> assays, String studyID, String assayFileName, Map<String, String> existingAssayTableHeaders) {
+    public void updateAssays(List<uk.ac.ebi.subs.data.submittable.Assay> assays, String studyID, String assayFileName, Map<String, Header> existingAssayTableHeaders) {
         if (assays == null || assays.size() == 0) {
             return;
         }
