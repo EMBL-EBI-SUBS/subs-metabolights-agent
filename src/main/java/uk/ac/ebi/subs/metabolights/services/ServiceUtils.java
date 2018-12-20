@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.TextNode;
 import org.json.JSONException;
 import org.json.JSONObject;
+import uk.ac.ebi.subs.metabolights.model.Header;
 import uk.ac.ebi.subs.metabolights.model.SampleMap;
 
 import java.util.LinkedHashMap;
@@ -50,8 +51,8 @@ public class ServiceUtils {
         }
     }
 
-    public static void fillEmptyValuesForMissingColumns(LinkedHashMap<String, String> map, Map<String, String> existingSampleTableHeaders) {
-        for (Map.Entry<String, String> entry : existingSampleTableHeaders.entrySet()) {
+    public static void fillEmptyValuesForMissingColumns(LinkedHashMap<String, String> map, Map<String, Header> existingSampleTableHeaders) {
+        for (Map.Entry<String, Header> entry : existingSampleTableHeaders.entrySet()) {
             if (!map.containsKey(entry.getKey())) {
                 map.put(entry.getKey(), "");
             }

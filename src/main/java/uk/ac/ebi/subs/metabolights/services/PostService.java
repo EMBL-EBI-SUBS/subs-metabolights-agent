@@ -180,7 +180,7 @@ public class PostService {
         return addedDescriptor;
     }
 
-    public void addSamples(List<uk.ac.ebi.subs.data.submittable.Sample> samples, String studyID, String sampleFileName, Map<String, String> existingSampleTableHeaders) {
+    public void addSamples(List<uk.ac.ebi.subs.data.submittable.Sample> samples, String studyID, String sampleFileName, Map<String, Header> existingSampleTableHeaders) {
         if (samples == null || samples.size() == 0) {
             return;
         }
@@ -213,7 +213,7 @@ public class PostService {
         return exchange.getStatusCode();
     }
 
-    public void addAssayRows(List<uk.ac.ebi.subs.data.submittable.Assay> assays, String studyID, String assayFileName, Map<String, String> existingAssayTableHeaders) {
+    public void addAssayRows(List<uk.ac.ebi.subs.data.submittable.Assay> assays, String studyID, String assayFileName, Map<String, Header> existingAssayTableHeaders) {
         if (assays == null || assays.size() == 0) {
             return;
         }
