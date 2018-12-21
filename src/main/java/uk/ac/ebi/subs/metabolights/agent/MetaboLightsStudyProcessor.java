@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitMessagingTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.messaging.converter.MessageConverter;
 import org.springframework.stereotype.Component;
 import uk.ac.ebi.subs.data.Submission;
@@ -121,6 +122,7 @@ public class MetaboLightsStudyProcessor {
         uk.ac.ebi.subs.metabolights.model.Study existingMetaboLightsStudy = getStudyBy(study.getAccession());
         StudyFiles studyFiles = this.fetchService.getStudyFiles(study.getAccession());
         String sampleFileName = AgentProcessorUtils.getSampleFileName(studyFiles);
+        List<String> assayFileNames = AgentProcessorUtils.getAssayFileName(studyFiles);
 
         resetDummyValuesIn(existingMetaboLightsStudy, isNewSubmission, sampleFileName);
 
@@ -463,7 +465,7 @@ public class MetaboLightsStudyProcessor {
         return certificate;
     }
 
-    private ProcessingCertificate processAssays(Study study, List<uk.ac.ebi.subs.data.submittable.Assay> assays, boolean isNewSubmission) {
+    private ProcessingCertificate processAssays(Study study, List<uk.ac.ebi.subs.data.submittable.Assay> assays, boolean isNewSubmission, List<String> assayFileNames) {
         ProcessingCertificate certificate = getNewCertificate();
         certificate.setAccession(study.getAccession());
         if (!AgentProcessorUtils.containsValue(assays)) {
@@ -471,6 +473,16 @@ public class MetaboLightsStudyProcessor {
             return certificate;
         }
         //todo if new submission extract attributes from assay to create new template
+        //todo handle multiple assays and other assay types
+        // this is assuming single NMR assay
+        if(isNewSubmission){
+            for(uk.ac.ebi.subs.data.submittable.Assay assay : assays){
+                if(AgentProcessorUtils.getTechnologyType(assay).equalsIgnoreCase("NMR")){
+                    NewMetabolightsAssay newMetabolightsAssay = AgentProcessorUtils.generateNewNMRAssay();
+                    HttpStatus status = this.postService.addNewAssay(newMetabolightsAssay,study.getAccession());
+                }
+            }
+        }
         // todo if not new get matching assay file names using attributes that was used to create template and then do row updates
         return certificate;
     }
