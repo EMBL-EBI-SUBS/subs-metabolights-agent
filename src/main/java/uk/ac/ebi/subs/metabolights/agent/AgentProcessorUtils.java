@@ -223,5 +223,24 @@ public class AgentProcessorUtils {
         return mappingResult;
     }
 
+    public static String getTechnologyType(uk.ac.ebi.subs.data.submittable.Assay assay) {
+        if (assay.getAttributes() != null && assay.getAttributes().size() > 0) {
+            Map<String, Collection<Attribute>> attributes = assay.getAttributes();
+            if (attributes.containsKey("technologyType")) {
+                Collection<Attribute> technologyType = attributes.get("technologyType");
+                if (!technologyType.isEmpty()) {
+                    return technologyType.iterator().next().getValue();
+                }
+            }
+        }
+        return "";
+    }
 
+
+    public static NewMetabolightsAssay generateNewNMRAssay() {
+        NewMetabolightsAssay nmrMetabolightsAssay = new NewMetabolightsAssay();
+        nmrMetabolightsAssay.setType("NMR");
+        nmrMetabolightsAssay.setColumns(new ArrayList<>());
+        return nmrMetabolightsAssay;
+    }
 }
