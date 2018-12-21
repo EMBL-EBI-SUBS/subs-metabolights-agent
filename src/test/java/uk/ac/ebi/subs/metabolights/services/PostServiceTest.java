@@ -13,6 +13,7 @@ import uk.ac.ebi.subs.data.component.Publication;
 import uk.ac.ebi.subs.data.submittable.Assay;
 import uk.ac.ebi.subs.data.submittable.Protocol;
 import uk.ac.ebi.subs.data.submittable.Sample;
+import uk.ac.ebi.subs.metabolights.agent.AgentProcessorUtils;
 import uk.ac.ebi.subs.metabolights.converters.USISampleToMLSample;
 import uk.ac.ebi.subs.metabolights.converters.Utilities;
 import uk.ac.ebi.subs.metabolights.model.MetaboLightsTable;
@@ -64,7 +65,7 @@ public class PostServiceTest {
 
     @Test
     public void addNewAssay(){
-        NewMetabolightsAssay newMetabolightsAssay = Utilities.generateNewNMRAssay();
+        NewMetabolightsAssay newMetabolightsAssay = AgentProcessorUtils.generateNewNMRAssay();
         HttpStatus status = this.postService.addNewAssay(newMetabolightsAssay,"MTBLS_DEV2346");
         assertEquals(status.is2xxSuccessful(), true);
     }
