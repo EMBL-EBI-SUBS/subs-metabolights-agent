@@ -165,7 +165,7 @@ public class MetaboLightsStudyProcessor {
 
          */
 
-       // update(processingCertificateList, processAssays(study, submissionEnvelope.getAssays(), isNewSubmission));
+        update(processingCertificateList, processAssays(study, submissionEnvelope.getAssays(), isNewSubmission, assayFileNames));
 
         return processingCertificateList;
     }
@@ -475,12 +475,33 @@ public class MetaboLightsStudyProcessor {
         //todo if new submission extract attributes from assay to create new template
         //todo handle multiple assays and other assay types
         // this is assuming single NMR assay
-        if(isNewSubmission){
-            for(uk.ac.ebi.subs.data.submittable.Assay assay : assays){
-                if(AgentProcessorUtils.getTechnologyType(assay).equalsIgnoreCase("NMR")){
-                    NewMetabolightsAssay newMetabolightsAssay = AgentProcessorUtils.generateNewNMRAssay();
-                    HttpStatus status = this.postService.addNewAssay(newMetabolightsAssay,study.getAccession());
+        if (isNewSubmission) {
+            try {
+                for (uk.ac.ebi.subs.data.submittable.Assay assay : assays) {
+                    if (AgentProcessorUtils.getTechnologyType(assay).equalsIgnoreCase("NMR")) {
+                        NewMetabolightsAssay newMetabolightsAssay = AgentProcessorUtils.generateNewNMRAssay();
+                        HttpStatus status = this.postService.addNewAssay(newMetabolightsAssay, study.getAccession());
+                        if (status.is2xxSuccessful()) {
+                            StudyFiles studyFiles = this.fetchService.getStudyFiles(study.getAccession());
+                            List<String> assayFiles = AgentProcessorUtils.getAssayFileName(studyFiles);
+                            if (assayFiles.size() == 1) {
+                                MetaboLightsTable assayTable = this.fetchService.getMetaboLightsDataTable(study.getAccession(), assayFiles.get(0));
+                                this.postService.addAssayRows(assays, study.getAccession(), assayFiles.get(0), assayTable.getHeader());
+                            }
+                        }
+                    }
                 }
+            } catch (Exception e) {
+                certificate.setMessage("Error saving assays : " + e.getMessage());
+            }
+        } else {
+            try {
+                if (assayFileNames.size() == 1) {
+                    MetaboLightsTable assayTable = this.fetchService.getMetaboLightsDataTable(study.getAccession(), assayFileNames.get(0));
+                    this.postService.addAssayRows(assays, study.getAccession(), assayFileNames.get(0), assayTable.getHeader());
+                }
+            } catch (Exception e) {
+                certificate.setMessage("Error saving assays : " + e.getMessage());
             }
         }
         // todo if not new get matching assay file names using attributes that was used to create template and then do row updates
