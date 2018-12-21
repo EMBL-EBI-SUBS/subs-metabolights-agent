@@ -321,14 +321,4 @@ public class Utilities {
         usiAttribute_1.setUnits("year");
         return usiAttribute_1;
     }
-
-
-    public static NewMetabolightsAssay generateNewNMRAssay() {
-        NewMetabolightsAssay nmrMetabolightsAssay = new NewMetabolightsAssay();
-        nmrMetabolightsAssay.setType("NMR");
-        nmrMetabolightsAssay.setColumns(new ArrayList<>());
-        return nmrMetabolightsAssay;
-    }
-
-
 }
