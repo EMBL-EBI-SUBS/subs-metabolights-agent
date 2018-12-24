@@ -21,35 +21,8 @@ public class NMRAssayMap extends AssayMap {
 
     private void process(Assay assay) {
         //todo process
-          parseSample(assay.getSampleUses());
-          parseProtocol(assay.getProtocolUses());
-
-
-//
-//        put(AssaySpreadSheetConstants.NMR_PROTOCOL_REF ,"");
-//        put(AssaySpreadSheetConstants.NMR_PROTOCOL_INSTRUMENT ,"");
-//        put(AssaySpreadSheetConstants.NMR_PROTOCOL_INSTRUMENT_TSR ,"");
-//        put(AssaySpreadSheetConstants.NMR_PROTOCOL_INSTRUMENT_TAN ,"");
-//        put(AssaySpreadSheetConstants.NMR_PROTOCOL_NMR_PROBE ,"");
-//        put(AssaySpreadSheetConstants.NMR_PROTOCOL_NMR_PROBE_TSR ,"");
-//        put(AssaySpreadSheetConstants.NMR_PROTOCOL_NMR_PROBE_TAN ,"");
-//        put(AssaySpreadSheetConstants.NMR_PROTOCOL_NO_OF_TRANSIENTS ,"");
-//        put(AssaySpreadSheetConstants.NMR_PROTOCOL_PULSE_SEQ_NAME ,"");
-//        put(AssaySpreadSheetConstants.NMR_PROTOCOL_MAGNETIC_FIELD_STRENGTH ,"");
-//        put(AssaySpreadSheetConstants.NMR_PROTOCOL_UNIT ,"");
-//        put(AssaySpreadSheetConstants.NMR_PROTOCOL_UNIT_TSR ,"");
-//        put(AssaySpreadSheetConstants.NMR_PROTOCOL_UNIT_TAN ,"");
-//        put(AssaySpreadSheetConstants.NMR_PROTOCOL_ACQUISITION_PM_DATA_FILE ,"");
-//
-//        put(AssaySpreadSheetConstants.DATA_TRANSFORMATION_PROTOCOL_NORMALIZATION_NAME ,"");
-//        put(AssaySpreadSheetConstants.DATA_TRANSFORMATION_PROTOCOL_DERIVED_SPECTRAL_FILE ,"");
-//
-//        put(AssaySpreadSheetConstants.NMR_ASSAY_PROTOCOL_REF ,"");
-//        put(AssaySpreadSheetConstants.NMR_ASSAY_PROTOCOL_NAME ,"");
-//        put(AssaySpreadSheetConstants.NMR_ASSAY_FID_FILE ,"");
-//
-//        put(AssaySpreadSheetConstants.METABOLITE_IDENTIFICATION_PROTOCOL_TRANSFORMATION_NAME ,"");
-//        put(AssaySpreadSheetConstants.METABOLITE_IDENTIFICATION_PROTOCOL_METABOLITE_ASSIGNMENT_FILE ,"");
+        parseSample(assay.getSampleUses());
+        parseProtocol(assay.getProtocolUses());
     }
 
     private void parseSample(List<SampleUse> sampleUses) {
