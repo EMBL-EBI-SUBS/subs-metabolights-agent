@@ -121,7 +121,7 @@ public class UpdateServiceTest {
         String studyID = "MTBLS_DEV2346";
         String assayFileName = "a_MTBLS_DEV2346_NMR___metabolite_profiling.txt";
         MetaboLightsTable assayTable = this.fetchService.getMetaboLightsDataTable(studyID, assayFileName);
-        Assay usiAssay = Utilities.getUSIAssayFromDisc();
+        Assay usiAssay = Utilities.getUSIAssayFromDiscToUpdate();
         List<Assay> assayList = new ArrayList();
         assayList.add(usiAssay);
 
