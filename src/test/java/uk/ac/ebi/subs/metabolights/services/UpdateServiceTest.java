@@ -1,6 +1,7 @@
 package uk.ac.ebi.subs.metabolights.services;
 
 
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -9,17 +10,22 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import uk.ac.ebi.subs.data.component.Attribute;
 import uk.ac.ebi.subs.data.component.Contact;
 import uk.ac.ebi.subs.data.component.Publication;
+import uk.ac.ebi.subs.data.submittable.Assay;
 import uk.ac.ebi.subs.data.submittable.Protocol;
 import uk.ac.ebi.subs.metabolights.converters.*;
 import uk.ac.ebi.subs.metabolights.model.Factor;
+import uk.ac.ebi.subs.metabolights.model.MetaboLightsTable;
 import uk.ac.ebi.subs.metabolights.model.OntologyModel;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import static org.junit.Assert.*;
 
 
 @SpringBootTest(classes = {
-        PostService.class, UpdateService.class} )
+        PostService.class, UpdateService.class, FetchService.class} )
 @EnableAutoConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
 public class UpdateServiceTest {
@@ -28,6 +34,8 @@ public class UpdateServiceTest {
     private UpdateService updateService;
     @Autowired
     private PostService postService;
+    @Autowired
+    private FetchService fetchService;
     
     public void updateContact() {
         Contact contact = Utilities.generateUSIContact();
@@ -106,5 +114,17 @@ public class UpdateServiceTest {
         this.updateService.updateDescription("MTBLS2",title);
         System.out.println(title);
         //TODO assert method
+    }
+
+    @Test
+    public void updateAssay(){
+        String studyID = "MTBLS_DEV2346";
+        String assayFileName = "a_MTBLS_DEV2346_NMR___metabolite_profiling.txt";
+        MetaboLightsTable assayTable = this.fetchService.getMetaboLightsDataTable(studyID, assayFileName);
+        Assay usiAssay = Utilities.getUSIAssayFromDisc();
+        List<Assay> assayList = new ArrayList();
+        assayList.add(usiAssay);
+
+        this.updateService.updateAssays(assayList,studyID,assayFileName,assayTable.getHeader());
     }
 }
