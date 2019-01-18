@@ -38,7 +38,10 @@
         "units": null,
         "terms": []
       }
-    ]
+    ]  ,
+    "index" : [{
+      "value" : 2
+    }]
   },
   "studyRef": {
     "alias": "MTBLS2",
@@ -129,7 +132,7 @@
         ],
         "Temperature": [
           {
-            "value": "500",
+            "value": "1000",
             "units": "kelvin",
             "terms": [
               {
