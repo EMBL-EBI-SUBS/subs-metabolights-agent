@@ -505,6 +505,9 @@ public class MetaboLightsStudyProcessor {
             }
         }
         // todo if not new get matching assay file names using attributes that was used to create template and then do row updates
+        // todo - decide how to store the created assay file name in the USI for futher updates. This might be tricky in case of multiple assay files.
+        // todo - decide on logic how to select unique assay ROWS 
+        // todo - implement logic, to select rows not needed anymore in the ML table, and call delete row method
         return certificate;
     }
 
