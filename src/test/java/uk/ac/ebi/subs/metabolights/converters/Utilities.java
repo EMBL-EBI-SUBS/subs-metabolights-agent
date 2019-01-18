@@ -162,6 +162,10 @@ public class Utilities {
         return loadAssay("Test_USI_assay_file.json");
     }
 
+    public static Assay getUSIAssayFromDiscToUpdate() {
+        return loadAssay("test_usi_assay_file_to_update.json");
+    }
+
     public static Assay loadAssay(String name) {
         Assay usiAssay = null;
         try {

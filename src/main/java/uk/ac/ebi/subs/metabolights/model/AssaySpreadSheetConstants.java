@@ -8,6 +8,8 @@ public class AssaySpreadSheetConstants {
 
     public static final String SAMPLE_NAME = "Sample Name";
 
+    public static final String ROW_INDEX = "index";
+
 
     /*
      Extraction protocol common for NMR and MS
