@@ -28,4 +28,17 @@ public class ConverterUtils {
         }
         return comments;
     }
+
+    public static String extractIndexInfo(Map<String, Collection<Attribute>> usiAttributes) {
+        for (Map.Entry<String, Collection<Attribute>> entry : usiAttributes.entrySet()) {
+            if (entry.getKey().equalsIgnoreCase(SampleSpreadSheetConstants.ROW_INDEX)) {
+                if (entry.getValue().size() > 0) {
+                    Attribute attribute = entry.getValue().iterator().next();
+                    return attribute.getValue();
+                }
+            }
+
+        }
+        return "";
+    }
 }
