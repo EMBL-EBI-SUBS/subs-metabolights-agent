@@ -4,9 +4,12 @@ import uk.ac.ebi.subs.data.component.Attribute;
 import uk.ac.ebi.subs.data.component.ProtocolUse;
 import uk.ac.ebi.subs.data.component.SampleUse;
 import uk.ac.ebi.subs.data.submittable.Assay;
+import uk.ac.ebi.subs.metabolights.converters.ConverterUtils;
 
+import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by kalai on 22/10/2018.
@@ -23,6 +26,7 @@ public class NMRAssayMap extends AssayMap {
         //todo process
         parseSample(assay.getSampleUses());
         parseProtocol(assay.getProtocolUses());
+        parseAttributes(assay.getAttributes());
     }
 
     private void parseSample(List<SampleUse> sampleUses) {
@@ -269,6 +273,16 @@ public class NMRAssayMap extends AssayMap {
                     this.put(AssaySpreadSheetConstants.METABOLITE_IDENTIFICATION_PROTOCOL_METABOLITE_ASSIGNMENT_FILE, metabolite_assignment_file.getValue());
                 }
             }
+        }
+    }
+
+    private void parseAttributes(Map<String, Collection<Attribute>> usiAttributes) {
+        /**
+         * Set row index info. Todo: parsing other attributes
+         */
+        String rowIndex = ConverterUtils.extractIndexInfo(usiAttributes);
+        if (!rowIndex.isEmpty()) {
+            this.put(AssaySpreadSheetConstants.ROW_INDEX, rowIndex);
         }
     }
 
