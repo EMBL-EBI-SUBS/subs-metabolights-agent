@@ -22,6 +22,7 @@ import uk.ac.ebi.subs.metabolights.model.*;
 import uk.ac.ebi.subs.metabolights.validator.schema.custom.JsonAsTextPlainHttpMessageConverter;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -85,7 +86,8 @@ public class PostService {
         if (contact == null) return addedContact;
         headers.set("user_token", this.apiKey);
         try {
-            ObjectNode contactsJSON = ServiceUtils.convertToJSON(usiContactsToMLContacts.convert(contact), "contact");
+            ObjectNode contactsJSON = ServiceUtils.convertToJSON(Arrays.asList(usiContactsToMLContacts.convert(contact)), "contacts");
+            System.out.println("Object node - " + contactsJSON);
             HttpEntity<ObjectNode> requestBody = new HttpEntity<>(contactsJSON, headers);
             String url = mlProperties.getUrl() + studyID + "/contacts";
             ResponseEntity<uk.ac.ebi.subs.metabolights.model.Contact> response = restTemplate.exchange(
