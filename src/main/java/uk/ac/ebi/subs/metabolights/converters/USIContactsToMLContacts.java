@@ -27,7 +27,7 @@ public class USIContactsToMLContacts implements Converter<Contact, uk.ac.ebi.sub
         mlContact.setAffiliation(source.getAffiliation());
         mlContact.setEmail(source.getEmail());
         mlContact.setFax(source.getFax());
-        mlContact.setOrcid(source.getOrcid());
+       // mlContact.setOrcid(source.getOrcid());
         mlContact.setPhone(source.getPhone());
         //todo Should roled be Ontology term within USI
         if (source.getRoles()!=null && source.getRoles().size() > 0) {
@@ -35,7 +35,8 @@ public class USIContactsToMLContacts implements Converter<Contact, uk.ac.ebi.sub
             roleType.setAnnotationValue(source.getRoles().get(0));
             mlContact.setRoles(Arrays.asList(roleType));
         } else{
-            mlContact.setRoles(new ArrayList<>());
+            OntologyModel roleType = new OntologyModel();
+            mlContact.setRoles(Arrays.asList(roleType));
         }
         mlContact.setComments(new ArrayList<>());
         return mlContact;
