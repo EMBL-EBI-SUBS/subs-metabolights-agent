@@ -124,7 +124,8 @@ public class MetaboLightsStudyProcessor {
         String sampleFileName = AgentProcessorUtils.getSampleFileName(studyFiles);
         List<String> assayFileNames = AgentProcessorUtils.getAssayFileName(studyFiles);
 
-        resetDummyValuesIn(existingMetaboLightsStudy, isNewSubmission, sampleFileName);
+        // placeholders are removed in latest version
+        // resetDummyValuesIn(existingMetaboLightsStudy, isNewSubmission, sampleFileName);
 
         if (existingMetaboLightsStudy == null) {
             ProcessingCertificate certificate = getNewCertificate();
@@ -438,15 +439,17 @@ public class MetaboLightsStudyProcessor {
         //  this.postService.addSamples(samples, study.getAccession(), sampleFileToUpdate);
         //   this.updateService.updateSamples(samples, study.getAccession(), sampleFileToUpdate);
 
+        MetaboLightsTable sampleTable = this.fetchService.getMetaboLightsDataTable(study.getAccession(), sampleFileToUpdate);
+
         if (isNewSubmission) {
             try {
-                this.postService.addSamples(samples, study.getAccession(), sampleFileToUpdate, null);
+                this.postService.addSamples(samples, study.getAccession(), sampleFileToUpdate, sampleTable.getHeader());
             } catch (Exception e) {
                 certificate.setMessage("Error saving samples : " + e.getMessage());
             }
         } else {
             try {
-                MetaboLightsTable sampleTable = this.fetchService.getMetaboLightsDataTable(study.getAccession(), sampleFileToUpdate);
+//                MetaboLightsTable sampleTable = this.fetchService.getMetaboLightsDataTable(study.getAccession(), sampleFileToUpdate);
                 Map<String, List<Sample>> samplesToAddAndUpdate = AgentProcessorUtils.getSamplesToAddAndUpdate(samples, sampleTable);
                 this.updateService.updateSamples(samplesToAddAndUpdate.get("update"), study.getAccession(), sampleFileToUpdate, sampleTable.getHeader());
                 this.postService.addSamples(samplesToAddAndUpdate.get("add"), study.getAccession(), sampleFileToUpdate, sampleTable.getHeader());
@@ -505,6 +508,9 @@ public class MetaboLightsStudyProcessor {
             }
         }
         // todo if not new get matching assay file names using attributes that was used to create template and then do row updates
+        // todo - decide how to store the created assay file name in the USI for futher updates. This might be tricky in case of multiple assay files.
+        // todo - decide on logic how to select unique assay ROWS 
+        // todo - implement logic, to select rows not needed anymore in the ML table, and call delete row method
         return certificate;
     }
 
