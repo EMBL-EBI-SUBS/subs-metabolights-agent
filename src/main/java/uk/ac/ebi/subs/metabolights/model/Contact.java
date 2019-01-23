@@ -39,6 +39,6 @@ public class Contact {
     private String lastName;
     private String midInitials;
     private List<OntologyModel> roles;
-    private String orcid;
+   // private String orcid;
     //orcid not in isa_json schema
 }

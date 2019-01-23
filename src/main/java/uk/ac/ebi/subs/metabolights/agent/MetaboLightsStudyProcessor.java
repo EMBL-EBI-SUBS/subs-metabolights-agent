@@ -342,7 +342,7 @@ public class MetaboLightsStudyProcessor {
                         if (AgentProcessorUtils.alreadyHas(mlStudy.getPeople(), contact)) {
                             this.updateService.updateContact(study.getAccession(), contact);
                         } else {
-                            this.postService.add(study.getAccession(), contact);
+                            this.postService.addContacts(study.getAccession(), Arrays.asList(contact));
                         }
                     }
                 }

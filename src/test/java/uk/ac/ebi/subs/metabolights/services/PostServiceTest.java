@@ -20,13 +20,14 @@ import uk.ac.ebi.subs.metabolights.model.MetaboLightsTable;
 import uk.ac.ebi.subs.metabolights.model.NewMetabolightsAssay;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
 import static org.junit.Assert.*;
 
 @SpringBootTest(classes = {
-        PostService.class, FetchService.class} )
+        PostService.class, FetchService.class})
 @EnableAutoConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
 public class PostServiceTest {
@@ -38,40 +39,48 @@ public class PostServiceTest {
     private FetchService fetchService;
 
     @Test
-    public void addContact() {
+    public void addContacts() {
         Contact contact = Utilities.generateUSIContact();
         contact.setEmail(UUID.randomUUID().toString() + "@dummy.com");
-        uk.ac.ebi.subs.metabolights.model.Contact addedContact = this.postService.add("MTBLS2", contact);
-        assertEquals(contact.getEmail(),addedContact.getEmail());
+        System.out.println(contact);
+        List<uk.ac.ebi.subs.metabolights.model.Contact> addedContacts = this.postService.addContacts("MTBLS_DEV2380", Arrays.asList(contact));
+        boolean added = false;
+        for (uk.ac.ebi.subs.metabolights.model.Contact addedContact : addedContacts) {
+            if (addedContact.getEmail().equalsIgnoreCase(contact.getEmail())) {
+                added = true;
+            }
+        }
+//        assertEquals(contact.getEmail(), addedContacts.get(0).getEmail());
+        assertTrue(added);
     }
 
     @Test
     public void addPublication() {
         Publication publication = Utilities.generateUSIPublication();
-        String newTitle =  publication.getArticleTitle() + " - " + UUID.randomUUID().toString();
+        String newTitle = publication.getArticleTitle() + " - " + UUID.randomUUID().toString();
         publication.setArticleTitle(newTitle);
         uk.ac.ebi.subs.metabolights.model.Publication addedPublication = this.postService.add("MTBLS2", publication);
-        assertEquals(addedPublication.getTitle(),newTitle);
+        assertEquals(addedPublication.getTitle(), newTitle);
     }
 
     @Test
     public void addProtocol() {
         Protocol protocol = Utilities.generateUSIProtocol();
-        String newTitle =  protocol.getTitle() + " - " + UUID.randomUUID().toString();
+        String newTitle = protocol.getTitle() + " - " + UUID.randomUUID().toString();
         protocol.setTitle(newTitle);
         uk.ac.ebi.subs.metabolights.model.Protocol addedProtocol = this.postService.add("MTBLS2", protocol);
-        assertEquals(addedProtocol.getName(),newTitle);
+        assertEquals(addedProtocol.getName(), newTitle);
     }
 
     @Test
-    public void addNewAssay(){
+    public void addNewAssay() {
         NewMetabolightsAssay newMetabolightsAssay = AgentProcessorUtils.generateNewNMRAssay();
-        HttpStatus status = this.postService.addNewAssay(newMetabolightsAssay,"MTBLS_DEV2346");
+        HttpStatus status = this.postService.addNewAssay(newMetabolightsAssay, "MTBLS_DEV2346");
         assertEquals(status.is2xxSuccessful(), true);
     }
 
     @Test
-    public void addNewAssayRows(){
+    public void addNewAssayRows() {
 
         String studyID = "MTBLS_DEV2346";
         String assayFileName = "a_MTBLS_DEV2346_NMR___metabolite_profiling.txt";
@@ -80,6 +89,6 @@ public class PostServiceTest {
         List<Assay> assayList = new ArrayList();
         assayList.add(usiAssay);
 
-        this.postService.addAssayRows(assayList,studyID,assayFileName,assayTable.getHeader());
-     }
+        this.postService.addAssayRows(assayList, studyID, assayFileName, assayTable.getHeader());
+    }
 }
