@@ -18,6 +18,7 @@ import uk.ac.ebi.subs.metabolights.model.MetaboLightsTable;
 import uk.ac.ebi.subs.metabolights.model.OntologyModel;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -40,11 +41,11 @@ public class UpdateServiceTest {
     public void updateContact() {
         Contact contact = Utilities.generateUSIContact();
         contact.setEmail(UUID.randomUUID().toString() + "@dummy.com");
-        uk.ac.ebi.subs.metabolights.model.Contact addedContact = this.postService.add("MTBLS2", contact);
+        List<uk.ac.ebi.subs.metabolights.model.Contact> addedContacts = this.postService.addContacts("MTBLS2", Arrays.asList(contact));
 
-        addedContact.setFirstName("Changed");
+        addedContacts.get(0).setFirstName("Changed");
         MLContactsToUSIContacts converter = new MLContactsToUSIContacts();
-        this.updateService.updateContact("MTBLS2", converter.convert(addedContact));
+        this.updateService.updateContact("MTBLS2", converter.convert(addedContacts.get(0)));
         //TODO assert method
     }
 
