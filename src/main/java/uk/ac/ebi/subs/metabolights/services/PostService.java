@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Service;
@@ -81,24 +82,32 @@ public class PostService {
     }
 
 
-    public uk.ac.ebi.subs.metabolights.model.Contact add(String studyID, Contact contact) {
-        uk.ac.ebi.subs.metabolights.model.Contact addedContact = null;
-        if (contact == null) return addedContact;
+    public List<uk.ac.ebi.subs.metabolights.model.Contact> addContacts(String studyID, List<Contact> contacts) {
+        List<uk.ac.ebi.subs.metabolights.model.Contact> addedContacts = new ArrayList<>();
+        if (contacts == null || contacts.isEmpty()) return addedContacts;
         headers.set("user_token", this.apiKey);
         try {
-            ObjectNode contactsJSON = ServiceUtils.convertToJSON(Arrays.asList(usiContactsToMLContacts.convert(contact)), "contacts");
+            ObjectNode contactsJSON = ServiceUtils.convertToJSON(convert(contacts), "contacts");
             System.out.println("Object node - " + contactsJSON);
             HttpEntity<ObjectNode> requestBody = new HttpEntity<>(contactsJSON, headers);
             String url = mlProperties.getUrl() + studyID + "/contacts";
-            ResponseEntity<uk.ac.ebi.subs.metabolights.model.Contact> response = restTemplate.exchange(
-                    url, HttpMethod.POST, requestBody, uk.ac.ebi.subs.metabolights.model.Contact.class);
-            addedContact = response.getBody();
+            ResponseEntity<Contacts> response = restTemplate.exchange(
+                    url, HttpMethod.POST, requestBody, Contacts.class);
+            addedContacts = response.getBody().getContacts();
         } catch (Exception e) {
             e.printStackTrace();
             logger.error(e.getMessage());
             throw e;
         }
-        return addedContact;
+        return addedContacts;
+    }
+
+    private List<uk.ac.ebi.subs.metabolights.model.Contact> convert(List<Contact> contacts) {
+        List<uk.ac.ebi.subs.metabolights.model.Contact> mlContacts = new ArrayList<>();
+        for (Contact contact : contacts) {
+            mlContacts.add(usiContactsToMLContacts.convert(contact));
+        }
+        return mlContacts;
     }
 
     public uk.ac.ebi.subs.metabolights.model.Publication add(String studyID, Publication publication) {
@@ -245,13 +254,6 @@ public class PostService {
         ResponseEntity<MetaboLightsTableResult> exchange = restTemplate.exchange(
                 url, HttpMethod.POST, requestBody, MetaboLightsTableResult.class);
         return exchange.getStatusCode();
-    }
-
-
-    public void addContacts(String studyID, List<Contact> contacts) {
-        for (Contact contact : contacts) {
-            add(studyID, contact);
-        }
     }
 
     public void addPublications(String studyID, List<Publication> publications) {
