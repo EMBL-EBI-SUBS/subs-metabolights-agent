@@ -23,7 +23,7 @@ public class MLContactsToUSIContacts implements Converter<uk.ac.ebi.subs.metabol
         usiContact.setEmail(source.getEmail());
         usiContact.setFax(source.getFax());
         usiContact.setPhone(source.getPhone());
-        usiContact.setOrcid(source.getOrcid());
+      //  usiContact.setOrcid(source.getOrcid());
         //todo conversion of roles - USI role to be ontology model?
         if(source.getRoles() != null && source.getRoles().size()>0){
             usiContact.setRoles(Arrays.asList(source.getRoles().get(0).getAnnotationValue()));

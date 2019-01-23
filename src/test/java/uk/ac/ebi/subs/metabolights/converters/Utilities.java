@@ -38,8 +38,8 @@ public class Utilities {
         Contact contact = new Contact();
         contact.setAddress("Hinxton");
         contact.setAffiliation("EMBL-EBI");
-        contact.setFax("+11123");
-        contact.setPhone("+11125");
+        contact.setFax("11123");
+        contact.setPhone("11125");
         contact.setEmail("testie10@abc.com");
         contact.setFirstName("Alice");
         contact.setLastName("Bob");
