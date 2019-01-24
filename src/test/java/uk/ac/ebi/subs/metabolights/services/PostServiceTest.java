@@ -17,6 +17,7 @@ import uk.ac.ebi.subs.metabolights.agent.AgentProcessorUtils;
 import uk.ac.ebi.subs.metabolights.converters.USISampleToMLSample;
 import uk.ac.ebi.subs.metabolights.converters.Utilities;
 import uk.ac.ebi.subs.metabolights.model.MetaboLightsTable;
+import uk.ac.ebi.subs.metabolights.model.MetaboLightsTableResult;
 import uk.ac.ebi.subs.metabolights.model.NewMetabolightsAssay;
 
 import java.util.ArrayList;
@@ -90,5 +91,18 @@ public class PostServiceTest {
         assayList.add(usiAssay);
 
         this.postService.addAssayRows(assayList, studyID, assayFileName, assayTable.getHeader());
+    }
+
+    @Test
+    public void addNewSampleRows() {
+
+        String studyID = "MTBLS_DEV2380";
+        String sampleFileName = "s_MTBLS_DEV2380.txt";
+        MetaboLightsTableResult sampleTable = this.fetchService.getMetaboLightsSampleDataTable(studyID, sampleFileName);
+        Sample sample = Utilities.getUSISampleFromDisc();
+        List<Sample> sampleList = new ArrayList();
+        sampleList.add(sample);
+
+        this.postService.addSampleRows(sampleList, studyID, sampleFileName, sampleTable.getHeader());
     }
 }
