@@ -214,6 +214,29 @@ public class PostService {
         }
     }
 
+    public void addSampleRows(List<uk.ac.ebi.subs.data.submittable.Sample> samples, String studyID, String sampleFileName, Map<String, String> existingSampleTableHeaders) {
+        if (samples == null || samples.size() == 0) {
+            return;
+        }
+        try {
+            SampleRows sampleRows = new SampleRows();
+            for (uk.ac.ebi.subs.data.submittable.Sample sample : samples) {
+                SampleMap sampleMap = new SampleMap(usiSampleToMLSample.convert(sample));
+                if (existingSampleTableHeaders != null) {
+                    ServiceUtils.fillEmptyValuesForMissingColumnsForSamples(sampleMap, existingSampleTableHeaders);
+                }
+                sampleRows.add(sampleMap);
+            }
+            ObjectNode objectNode = ServiceUtils.convertToJSON(sampleRows, "data");
+            System.out.println("Sample rows to save: " + objectNode);
+            addRows(studyID, objectNode, sampleFileName);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public HttpStatus addNewAssay(NewMetabolightsAssay newMetabolightsAssay, String studyID) {
         ObjectNode json = ServiceUtils.convertToJSON(newMetabolightsAssay, "assay");
         String url = mlProperties.getUrl() + studyID + "/assays";
