@@ -138,6 +138,21 @@ public class FetchService {
         }
     }
 
+    public MetaboLightsTableResult getMetaboLightsSampleDataTable(String accession, String fileName) {
+        try {
+            String localUrl = mlProperties.getUrl() + accession + "/" + fileName;
+
+            ResponseEntity<MetaboLightsTableResult> response = restTemplate.exchange(
+                    localUrl, HttpMethod.GET, getHttpEntity(), MetaboLightsTableResult.class);
+            return response.getBody();
+
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
     private HttpEntity<String> getHttpEntity() {
         HttpHeaders headers = new HttpHeaders();
         headers.set("user_token", this.apiKey);
