@@ -214,6 +214,36 @@ public class PostService {
         }
     }
 
+    public void addSampleRows(List<uk.ac.ebi.subs.data.submittable.Sample> samples, String studyID, String sampleFileName, Map<String, String> existingSampleTableHeaders) {
+        if (samples == null || samples.size() == 0) {
+            return;
+        }
+        try {
+            SampleRows sampleRows = new SampleRows();
+            for (uk.ac.ebi.subs.data.submittable.Sample sample : samples) {
+                SampleMap sampleMap = new SampleMap(usiSampleToMLSample.convert(sample));
+                if (existingSampleTableHeaders != null) {
+                    ServiceUtils.fillEmptyValuesForMissingColumnsForSamples(sampleMap, existingSampleTableHeaders);
+                }
+                sampleRows.add(sampleMap);
+            }
+            //todo get sample columns that are not present in existingSampleTableHeaders
+            //todo add column, but how to keep track of column indexes for TSF and TAN?
+            //todo sampleMap is linkedlist and will return the elements in the order of insertion so use this to insert TSF and TAN, Get last index from headers
+            //todo start index to add, from the size of the existingSampleTableHeaders
+            //todo check only one sampleMap from the SampleRow to add the additional column. 
+
+
+            ObjectNode objectNode = ServiceUtils.convertToJSON(sampleRows, "data");
+            System.out.println("Sample rows to save: " + objectNode);
+            addRows(studyID, objectNode, sampleFileName);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public HttpStatus addNewAssay(NewMetabolightsAssay newMetabolightsAssay, String studyID) {
         ObjectNode json = ServiceUtils.convertToJSON(newMetabolightsAssay, "assay");
         String url = mlProperties.getUrl() + studyID + "/assays";

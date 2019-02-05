@@ -58,4 +58,12 @@ public class ServiceUtils {
             }
         }
     }
+
+    public static void fillEmptyValuesForMissingColumnsForSamples(LinkedHashMap<String, String> map, Map<String, String> existingSampleTableHeaders) {
+        for (Map.Entry<String, String> entry : existingSampleTableHeaders.entrySet()) {
+            if (!map.containsKey(entry.getKey())) {
+                map.put(entry.getKey(), "");
+            }
+        }
+    }
 }
