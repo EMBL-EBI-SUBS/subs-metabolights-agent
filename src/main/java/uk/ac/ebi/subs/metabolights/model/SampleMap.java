@@ -52,6 +52,7 @@ public class SampleMap extends LinkedHashMap<String, String> {
             for (SampleFactorValue sampleFactorValue : sample.getFactorValues()) {
                 OntologyModel model = (OntologyModel) sampleFactorValue.getValue();
                 put("Factor Value[" + sampleFactorValue.getCategory().getFactorName() + "]", model.getAnnotationValue());
+                //todo add term source ref and term accession number
             }
         }
         if (sample.getComments().size() > 0) {

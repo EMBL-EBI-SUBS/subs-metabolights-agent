@@ -227,6 +227,13 @@ public class PostService {
                 }
                 sampleRows.add(sampleMap);
             }
+            //todo get sample columns that are not present in existingSampleTableHeaders
+            //todo add column, but how to keep track of column indexes for TSF and TAN?
+            //todo sampleMap is linkedlist and will return the elements in the order of insertion so use this to insert TSF and TAN, Get last index from headers
+            //todo start index to add, from the size of the existingSampleTableHeaders
+            //todo check only one sampleMap from the SampleRow to add the additional column. 
+
+
             ObjectNode objectNode = ServiceUtils.convertToJSON(sampleRows, "data");
             System.out.println("Sample rows to save: " + objectNode);
             addRows(studyID, objectNode, sampleFileName);
