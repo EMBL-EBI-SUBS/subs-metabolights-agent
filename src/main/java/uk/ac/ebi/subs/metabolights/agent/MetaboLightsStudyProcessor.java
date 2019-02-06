@@ -8,8 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.messaging.converter.MessageConverter;
 import org.springframework.stereotype.Component;
 import uk.ac.ebi.subs.data.Submission;
-import uk.ac.ebi.subs.data.component.Archive;
-import uk.ac.ebi.subs.data.component.Attribute;
+import uk.ac.ebi.subs.data.component.*;
 import uk.ac.ebi.subs.data.component.Contact;
 import uk.ac.ebi.subs.data.component.Publication;
 import uk.ac.ebi.subs.data.status.ProcessingStatusEnum;
@@ -19,16 +18,15 @@ import uk.ac.ebi.subs.data.submittable.Sample;
 import uk.ac.ebi.subs.data.submittable.Study;
 
 import uk.ac.ebi.subs.metabolights.model.*;
-import uk.ac.ebi.subs.metabolights.services.DeletionService;
-import uk.ac.ebi.subs.metabolights.services.FetchService;
-import uk.ac.ebi.subs.metabolights.services.PostService;
-import uk.ac.ebi.subs.metabolights.services.UpdateService;
+import uk.ac.ebi.subs.metabolights.services.*;
 import uk.ac.ebi.subs.processing.ProcessingCertificate;
 import uk.ac.ebi.subs.processing.ProcessingCertificateEnvelope;
 import uk.ac.ebi.subs.processing.SubmissionEnvelope;
+import uk.ac.ebi.subs.processing.fileupload.UploadedFile;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Component
 public class MetaboLightsStudyProcessor {
@@ -50,6 +48,13 @@ public class MetaboLightsStudyProcessor {
 
     @Autowired
     DeletionService deletionService;
+
+    @Autowired
+    FileMoveService fileMoveService;
+
+//    @Value("${spring.profiles.active:dev}")
+//    private String activeProfile;
+
 
     @Autowired
     public MetaboLightsStudyProcessor(RabbitMessagingTemplate rabbitMessagingTemplate, MessageConverter messageConverter) {
@@ -98,6 +103,9 @@ public class MetaboLightsStudyProcessor {
     }
 
     ProcessingCertificateEnvelope createNewMetaboLightsStudy(Study study, SubmissionEnvelope submissionEnvelope) {
+        moveUploadedFilesToArchive(submissionEnvelope);
+        injectPathAndChecksum(submissionEnvelope);
+        
         List<ProcessingCertificate> processingCertificateList = new ArrayList<>();
         ProcessingCertificate processingCertificate = getNewCertificate();
         try {
@@ -337,7 +345,7 @@ public class MetaboLightsStudyProcessor {
             if (!AgentProcessorUtils.containsValue(mlStudy.getPeople())) {
                 this.postService.addContacts(study.getAccession(), project.getContacts());
             } else {
-                for (Contact contact : project.getContacts()) {
+                for (uk.ac.ebi.subs.data.component.Contact contact : project.getContacts()) {
                     if (AgentProcessorUtils.isValid(contact.getEmail())) {
                         if (AgentProcessorUtils.alreadyHas(mlStudy.getPeople(), contact)) {
                             this.updateService.updateContact(study.getAccession(), contact);
@@ -373,7 +381,7 @@ public class MetaboLightsStudyProcessor {
             if (!AgentProcessorUtils.containsValue(mlStudy.getPublications())) {
                 this.postService.addPublications(study.getAccession(), project.getPublications());
             } else {
-                for (Publication publication : project.getPublications()) {
+                for (uk.ac.ebi.subs.data.component.Publication publication : project.getPublications()) {
                     if (AgentProcessorUtils.isValid(publication.getArticleTitle())) {
                         if (AgentProcessorUtils.alreadyHas(mlStudy.getPublications(), publication)) {
                             this.updateService.updatePublication(study.getAccession(), publication);
@@ -551,4 +559,34 @@ public class MetaboLightsStudyProcessor {
     private String getSuccessMessage(String object) {
         return "Study " + object + " submitted successfully";
     }
+
+    private void moveUploadedFilesToArchive(SubmissionEnvelope submissionEnvelope) {
+        submissionEnvelope.getUploadedFiles().forEach(uploadedFile -> {
+            fileMoveService.moveFile(uploadedFile.getPath());
+        });
+    }
+
+    private void injectPathAndChecksum(SubmissionEnvelope submissionEnvelope) {
+        Map<String, UploadedFile> uploadedFileMap = filesByFilename(submissionEnvelope.getUploadedFiles());
+
+        Stream<File> assayDataFileStream = submissionEnvelope.getAssayData().stream().flatMap(ad -> ad.getFiles().stream());
+        Stream<File> analysisFileStream = submissionEnvelope.getAnalyses().stream().flatMap(a -> a.getFiles().stream());
+
+        Stream.concat(assayDataFileStream, analysisFileStream).forEach(file -> {
+            UploadedFile uploadedFile = uploadedFileMap.get(file.getName());
+            file.setChecksum(uploadedFile.getChecksum());
+            //todo configure active Profile equivalent
+            // file.setName(String.join("/", activeProfile, fileMoveService.getRelativeFilePath(uploadedFile.getPath())));
+            file.setName(String.join("/", fileMoveService.getRelativeFilePath(uploadedFile.getPath())));
+        });
+
+    }
+
+    Map<String, UploadedFile> filesByFilename(List<UploadedFile> files) {
+        Map<String, UploadedFile> filesByFilename = new HashMap<>();
+        files.forEach(file -> filesByFilename.put(file.getFilename(), file));
+
+        return filesByFilename;
+    }
+
 }
