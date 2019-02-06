@@ -85,6 +85,9 @@ public class USISubmissionToMLProject implements Converter<uk.ac.ebi.subs.proces
             for (File file : assayData.getFiles()) {
                 if (file != null) {
                     MLFile mlFile = usiFileToMLFile.convert(file);
+                    /*
+                     The traditional ISA assay model links all the sample files to MAF files under "generatedFrom". Hence samples are added for MAF alone.
+                     */
 
                     if (file.getType().toLowerCase().equalsIgnoreCase("Metabolite Assignment File")) {
                         mlFile.setGeneratedFrom(samples);
