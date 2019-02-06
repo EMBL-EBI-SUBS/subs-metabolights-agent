@@ -47,6 +47,13 @@ public class MetaboLightsStudyProcessor {
     DeletionService deletionService;
 
     @Autowired
+    FileMoveService fileMoveService;
+
+//    @Value("${spring.profiles.active:dev}")
+//    private String activeProfile;
+
+
+    @Autowired
     public MetaboLightsStudyProcessor(RabbitMessagingTemplate rabbitMessagingTemplate, MessageConverter messageConverter) {
         this.rabbitMessagingTemplate = rabbitMessagingTemplate;
         this.rabbitMessagingTemplate.setMessageConverter(messageConverter);
@@ -93,6 +100,8 @@ public class MetaboLightsStudyProcessor {
     }
 
     ProcessingCertificateEnvelope createNewMetaboLightsStudy(Study study, SubmissionEnvelope submissionEnvelope) {
+        moveUploadedFilesToArchive(submissionEnvelope);
+        
         List<ProcessingCertificate> processingCertificateList = new ArrayList<>();
         ProcessingCertificate processingCertificate = getNewCertificate();
         try {
@@ -545,5 +554,11 @@ public class MetaboLightsStudyProcessor {
 
     private String getSuccessMessage(String object) {
         return "Study " + object + " submitted successfully";
+    }
+
+    private void moveUploadedFilesToArchive(SubmissionEnvelope submissionEnvelope) {
+        submissionEnvelope.getUploadedFiles().forEach(uploadedFile -> {
+            fileMoveService.moveFile(uploadedFile.getPath());
+        });
     }
 }
