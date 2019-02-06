@@ -22,8 +22,11 @@ import uk.ac.ebi.subs.metabolights.services.*;
 import uk.ac.ebi.subs.processing.ProcessingCertificate;
 import uk.ac.ebi.subs.processing.ProcessingCertificateEnvelope;
 import uk.ac.ebi.subs.processing.SubmissionEnvelope;
+import uk.ac.ebi.subs.processing.fileupload.UploadedFile;
+
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Component
 public class MetaboLightsStudyProcessor {
@@ -101,6 +104,7 @@ public class MetaboLightsStudyProcessor {
 
     ProcessingCertificateEnvelope createNewMetaboLightsStudy(Study study, SubmissionEnvelope submissionEnvelope) {
         moveUploadedFilesToArchive(submissionEnvelope);
+        injectPathAndChecksum(submissionEnvelope);
         
         List<ProcessingCertificate> processingCertificateList = new ArrayList<>();
         ProcessingCertificate processingCertificate = getNewCertificate();
@@ -561,4 +565,28 @@ public class MetaboLightsStudyProcessor {
             fileMoveService.moveFile(uploadedFile.getPath());
         });
     }
+
+    private void injectPathAndChecksum(SubmissionEnvelope submissionEnvelope) {
+        Map<String, UploadedFile> uploadedFileMap = filesByFilename(submissionEnvelope.getUploadedFiles());
+
+        Stream<File> assayDataFileStream = submissionEnvelope.getAssayData().stream().flatMap(ad -> ad.getFiles().stream());
+        Stream<File> analysisFileStream = submissionEnvelope.getAnalyses().stream().flatMap(a -> a.getFiles().stream());
+
+        Stream.concat(assayDataFileStream, analysisFileStream).forEach(file -> {
+            UploadedFile uploadedFile = uploadedFileMap.get(file.getName());
+            file.setChecksum(uploadedFile.getChecksum());
+            //todo configure active Profile equivalent
+            // file.setName(String.join("/", activeProfile, fileMoveService.getRelativeFilePath(uploadedFile.getPath())));
+            file.setName(String.join("/", fileMoveService.getRelativeFilePath(uploadedFile.getPath())));
+        });
+
+    }
+
+    Map<String, UploadedFile> filesByFilename(List<UploadedFile> files) {
+        Map<String, UploadedFile> filesByFilename = new HashMap<>();
+        files.forEach(file -> filesByFilename.put(file.getFilename(), file));
+
+        return filesByFilename;
+    }
+
 }
