@@ -49,10 +49,33 @@ public class SampleMap extends LinkedHashMap<String, String> {
         Set factor information
          */
         if (sample.getFactorValues().size() > 0) {
+            int index = 3;
+            String termAccessionNumber = "Term Accession Number.";
+            String termSourceReference = "Term Source REF.";
+
             for (SampleFactorValue sampleFactorValue : sample.getFactorValues()) {
                 OntologyModel model = (OntologyModel) sampleFactorValue.getValue();
                 put("Factor Value[" + sampleFactorValue.getCategory().getFactorName() + "]", model.getAnnotationValue());
-                //todo add term source ref and term accession number
+                   /*
+                   Sample sheet requires ontology fields underneath for factor values to pass ISA validation.
+                   SampleSpreadSheetConstants has refs to term source ref and term accession number
+                   For any term source ref and term accession number added here, the numbering will start from 3.
+                 */
+
+                put(termSourceReference + index, "");
+                put(termAccessionNumber + index, model.getTermAccession());
+                index++;
+                if (sampleFactorValue.getUnit().getAnnotationValue() != null || !sampleFactorValue.getUnit().getAnnotationValue().isEmpty()) {
+                    /*
+                      Unit entry also gets incremented. Unit.1, Unit.2 etc. This has to be correctly tracked and inserted.
+                     */
+                    /*
+                       Unit ontology value is not captured hence introduce empty term source ref and term accession number to pass validation.
+                     */
+                    put(termSourceReference + index, "");
+                    put(termAccessionNumber + index, "");
+                    index++;
+                }
             }
         }
         if (sample.getComments().size() > 0) {
