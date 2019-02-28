@@ -52,6 +52,8 @@ public class SampleMap extends LinkedHashMap<String, String> {
             int index = 3;
             String termAccessionNumber = "Term Accession Number.";
             String termSourceReference = "Term Source REF.";
+            int unitIndex = 0;
+            String unitEntry = "Unit.";
 
             for (SampleFactorValue sampleFactorValue : sample.getFactorValues()) {
                 OntologyModel model = (OntologyModel) sampleFactorValue.getValue();
@@ -66,6 +68,11 @@ public class SampleMap extends LinkedHashMap<String, String> {
                 put(termAccessionNumber + index, model.getTermAccession());
                 index++;
                 if (sampleFactorValue.getUnit().getAnnotationValue() != null || !sampleFactorValue.getUnit().getAnnotationValue().isEmpty()) {
+                    if (unitIndex == 0) {
+                        put("Unit", sampleFactorValue.getUnit().getAnnotationValue());
+                    } else {
+                        put(unitEntry + unitIndex, sampleFactorValue.getUnit().getAnnotationValue());
+                    }
                     /*
                       Unit entry also gets incremented. Unit.1, Unit.2 etc. This has to be correctly tracked and inserted.
                      */
@@ -75,6 +82,7 @@ public class SampleMap extends LinkedHashMap<String, String> {
                     put(termSourceReference + index, "");
                     put(termAccessionNumber + index, "");
                     index++;
+                    unitIndex++;
                 }
             }
         }
