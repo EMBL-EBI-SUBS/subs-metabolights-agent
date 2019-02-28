@@ -17,9 +17,11 @@ public class SampleMapTest {
 
         uk.ac.ebi.subs.metabolights.model.Sample mlSample = usiSampleToMLSample.convert(usiSample);
         SampleMap mlSampleTableEntry = new SampleMap(mlSample);
-        for(Map.Entry<String,String> entry : mlSampleTableEntry.entrySet()){
-            System.out.println(entry.getKey() + " - " + entry.getValue());
-        }
+//        for(Map.Entry<String,String> entry : mlSampleTableEntry.entrySet()){
+//            System.out.println(entry.getKey() + " - " + entry.getValue());
+//        }
+        assertEquals(mlSampleTableEntry.get("Unit.1"),"percent");
+        assertEquals(mlSampleTableEntry.get("Term Accession Number.5"),"http://purl.obolibrary.org/obo/XCO_0000012");
     }
 
 }
