@@ -71,6 +71,8 @@ public class USISampleToMLSample implements Converter<uk.ac.ebi.subs.data.submit
                         ((OntologyModel) sampleFactorValue.getValue()).setTermAccession(url);
                     }
                     sampleFactorValue.getUnit().setAnnotationValue(attribute.getUnits() == null ? "" : attribute.getUnits());
+                    // by the way USI stores attributes, unit url might be present in the attribute terms list but is tricky to pick the matching one and assign.
+                    // hence assigning urls to unit is ignored for now. Only value is assigned to unit.
                     mlSampleFactorValues.add(sampleFactorValue);
                 }
             }

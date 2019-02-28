@@ -31,7 +31,7 @@
     "CarbonDioxide_Quantity_after_initiation": [
       {
         "value": "10",
-        "units": null,
+        "units": "percent",
         "terms": [{
           "url" : "http://purl.obolibrary.org/obo/XCO_0000012"
         }]
@@ -51,7 +51,7 @@
     "CarbonDioxide_Quantity_after_01d": [
       {
         "value": "20",
-        "units": null,
+        "units": "percent",
         "terms": [{
           "url" : "http://purl.obolibrary.org/obo/XCO_0000012"
           }]
