@@ -177,6 +177,17 @@ public class AgentProcessorUtils {
         return seggregatedSamples;
     }
 
+    public static Map<String, List<uk.ac.ebi.subs.data.submittable.Assay>> getAssayRowsToAddAndUpdate(List<uk.ac.ebi.subs.data.submittable.Assay> assays, MetaboLightsTable assayTable) throws Exception {
+
+        List<uk.ac.ebi.subs.data.submittable.Assay> assayRowsToUpdate = new ArrayList<>();
+        List<uk.ac.ebi.subs.data.submittable.Assay> assayRowsToAdd = new ArrayList<>();
+
+        Map<String, List<uk.ac.ebi.subs.data.submittable.Assay>> seggregatedAssayRows = new HashMap<>();
+        seggregatedAssayRows.put("add", assayRowsToAdd);
+        seggregatedAssayRows.put("update", assayRowsToUpdate);
+        return seggregatedAssayRows;
+    }
+
     public static List<Integer> getSamplesIndexesToDelete(List<Sample> samples, MetaboLightsTable sampleTable) throws Exception {
 
         List<Integer> rowsToDelete = new ArrayList<>();
