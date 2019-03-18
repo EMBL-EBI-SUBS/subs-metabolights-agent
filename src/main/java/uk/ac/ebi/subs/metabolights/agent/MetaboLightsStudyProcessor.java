@@ -513,7 +513,15 @@ public class MetaboLightsStudyProcessor {
                     Map<String, List<uk.ac.ebi.subs.data.submittable.Assay>> assayRowsToAddAndUpdate = AgentProcessorUtils.getAssayRowsToAddAndUpdate(assays, assayTable);
                     this.updateService.updateAssays(assayRowsToAddAndUpdate.get("update"), study.getAccession(), assayFileNames.get(0), assayTable.getHeader());
                     this.postService.addAssayRows(assayRowsToAddAndUpdate.get("add"), study.getAccession(), assayFileNames.get(0), assayTable.getHeader());
-                 }
+                /*
+                Delete assay rows not present in submission's assay list
+                 */
+                    List<Integer> assayRowIndexesToDelete = AgentProcessorUtils.getAssayRowIndexesToDelete(assays, assayTable);
+                    if (assayRowIndexesToDelete.size() > 0) {
+                        this.deletionService.deleteTableRows(study.getAccession(), assayFileNames.get(0), assayRowIndexesToDelete);
+                    }
+
+                }
             } catch (Exception e) {
                 certificate.setMessage("Error saving assays : " + e.getMessage());
             }
