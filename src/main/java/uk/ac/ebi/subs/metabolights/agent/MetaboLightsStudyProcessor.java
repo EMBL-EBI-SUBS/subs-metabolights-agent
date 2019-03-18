@@ -532,9 +532,7 @@ public class MetaboLightsStudyProcessor {
         // todo - implement logic, to select rows not needed anymore in the ML table, and call delete row method
         return certificate;
     }
-
-    private List<uk.ac.ebi.subs.data.submittable.Assay> assays
-
+    
     private void deleteDefaultRow(String accession, String sampleFileToUpdate) {
         /*
          * Sample file have default one row. Remove it using index 0
