@@ -218,6 +218,11 @@ public class AgentProcessorUtils {
         return rowsToDelete;
     }
 
+    public static List<Integer> getAssayRowIndexesToDelete(List<uk.ac.ebi.subs.data.submittable.Assay> assays, MetaboLightsTable assayTable) throws Exception {
+        List<Integer> rowsToDelete = new ArrayList<>();
+        return rowsToDelete;
+    }
+
     private static Map<Boolean, String> findMatch(String sampleName, MetaboLightsTable sampleTable) {
         Map<Boolean, String> mappingResult = new HashMap<>();
         for (Map<String, String> row : sampleTable.getData().getRows()) {
