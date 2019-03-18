@@ -509,8 +509,11 @@ public class MetaboLightsStudyProcessor {
             try {
                 if (assayFileNames.size() == 1) {
                     MetaboLightsTable assayTable = this.fetchService.getMetaboLightsDataTable(study.getAccession(), assayFileNames.get(0));
-                    this.postService.addAssayRows(assays, study.getAccession(), assayFileNames.get(0), assayTable.getHeader());
-                }
+//                    this.postService.addAssayRows(assays, study.getAccession(), assayFileNames.get(0), assayTable.getHeader());
+                    Map<String, List<uk.ac.ebi.subs.data.submittable.Assay>> assayRowsToAddAndUpdate = AgentProcessorUtils.getAssayRowsToAddAndUpdate(assays, assayTable);
+                    this.updateService.updateAssays(assayRowsToAddAndUpdate.get("update"), study.getAccession(), assayFileNames.get(0), assayTable.getHeader());
+                    this.postService.addAssayRows(assayRowsToAddAndUpdate.get("add"), study.getAccession(), assayFileNames.get(0), assayTable.getHeader());
+                 }
             } catch (Exception e) {
                 certificate.setMessage("Error saving assays : " + e.getMessage());
             }
@@ -521,6 +524,8 @@ public class MetaboLightsStudyProcessor {
         // todo - implement logic, to select rows not needed anymore in the ML table, and call delete row method
         return certificate;
     }
+
+    private List<uk.ac.ebi.subs.data.submittable.Assay> assays
 
     private void deleteDefaultRow(String accession, String sampleFileToUpdate) {
         /*
