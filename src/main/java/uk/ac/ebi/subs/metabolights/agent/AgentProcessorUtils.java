@@ -2,6 +2,7 @@ package uk.ac.ebi.subs.metabolights.agent;
 
 import uk.ac.ebi.subs.data.component.Attribute;
 import uk.ac.ebi.subs.data.component.Contact;
+import uk.ac.ebi.subs.data.component.ProtocolUse;
 import uk.ac.ebi.subs.data.component.Publication;
 import uk.ac.ebi.subs.data.submittable.Protocol;
 import uk.ac.ebi.subs.data.submittable.Sample;
@@ -186,7 +187,7 @@ public class AgentProcessorUtils {
             for (uk.ac.ebi.subs.data.submittable.Assay assay : assays) {
                 if (!assay.getAlias().isEmpty()) {
                     //todo extract id and fid info
-                    Map<Boolean, String> mappingResult = hasRowMatch("","", assayTable);
+                    Map<Boolean, String> mappingResult = hasRowMatch("", "", assayTable);
                     for (Map.Entry<Boolean, String> result : mappingResult.entrySet()) {
                         if (result.getKey().booleanValue()) {
                         /*
@@ -208,6 +209,34 @@ public class AgentProcessorUtils {
         seggregatedAssayRows.put("add", assayRowsToAdd);
         seggregatedAssayRows.put("update", assayRowsToUpdate);
         return seggregatedAssayRows;
+    }
+
+    public static Map<String, String> getUniqueValuesToFilterAssays(uk.ac.ebi.subs.data.submittable.Assay assay) {
+        Map<String, String> mappingResult = new HashMap<>();
+        String assayID = "";
+        String fidDataFileName = "";
+        //todo current filtering is for NMR, implement scenarios for other assay types
+        if (assay.getProtocolUses() != null && assay.getProtocolUses().size() > 0) {
+            for (ProtocolUse protocolUse : assay.getProtocolUses()) {
+                if (protocolUse.getProtocolRef().getAlias().equalsIgnoreCase("NMR assay")) {
+                    if (protocolUse.getAttributes() != null && protocolUse.getAttributes().size() > 0) {
+                        if (protocolUse.getAttributes().containsKey("NMR Assay Name")) {
+                            Collection<Attribute> nmr_assay_name = protocolUse.getAttributes().get("NMR Assay Name");
+                            Attribute assay_name = nmr_assay_name.iterator().next();
+                            assayID = assay_name.getValue();
+                        }
+                        if (protocolUse.getAttributes().containsKey("Free Induction Decay Data File")) {
+                            Collection<Attribute> free_induction_decay_data_file = protocolUse.getAttributes().get("Free Induction Decay Data File");
+                            Attribute fid_file_name = free_induction_decay_data_file.iterator().next();
+                            fidDataFileName = fid_file_name.getValue();
+                        }
+                    }
+                }
+            }
+        }
+        //todo handle empty protocolUse cases
+        mappingResult.put(assayID, fidDataFileName);
+        return mappingResult;
     }
 
     public static List<Integer> getSamplesIndexesToDelete(List<Sample> samples, MetaboLightsTable sampleTable) throws Exception {
