@@ -182,6 +182,28 @@ public class AgentProcessorUtils {
         List<uk.ac.ebi.subs.data.submittable.Assay> assayRowsToUpdate = new ArrayList<>();
         List<uk.ac.ebi.subs.data.submittable.Assay> assayRowsToAdd = new ArrayList<>();
 
+        if (assayTable.getData().getRows() != null && assayTable.getData().getRows().size() > 0) {
+            for (uk.ac.ebi.subs.data.submittable.Assay assay : assays) {
+                if (!assay.getAlias().isEmpty()) {
+                    //todo extract id and fid info
+                    Map<Boolean, String> mappingResult = hasRowMatch("","", assayTable);
+                    for (Map.Entry<Boolean, String> result : mappingResult.entrySet()) {
+                        if (result.getKey().booleanValue()) {
+                        /*
+                        index to be updated must be set in the assays
+                         */
+                            Attribute attribute = new Attribute();
+                            attribute.setValue(result.getValue());
+                            assay.getAttributes().put(AssaySpreadSheetConstants.ROW_INDEX, Arrays.asList(attribute));
+                            assayRowsToUpdate.add(assay);
+                        } else {
+                            assayRowsToAdd.add(assay);
+                        }
+                    }
+                }
+            }
+        }
+
         Map<String, List<uk.ac.ebi.subs.data.submittable.Assay>> seggregatedAssayRows = new HashMap<>();
         seggregatedAssayRows.put("add", assayRowsToAdd);
         seggregatedAssayRows.put("update", assayRowsToUpdate);
