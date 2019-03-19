@@ -239,6 +239,28 @@ public class AgentProcessorUtils {
         return mappingResult;
     }
 
+    private static Map<Boolean, String> hasRowMatch(String assayID, String fidDataFile, MetaboLightsTable assayTable) {
+        Map<Boolean, String> mappingResult = new HashMap<>();
+        for (Map<String, String> row : assayTable.getData().getRows()) {
+            boolean assayIdMatch = false;
+            boolean fidFileMatch = false;
+            for (Map.Entry<String, String> cell : row.entrySet()) {
+                if (cell.getKey().equalsIgnoreCase(assayID)) {
+                    assayIdMatch = true;
+                }
+                if (cell.getKey().equalsIgnoreCase(fidDataFile)) {
+                    fidFileMatch = true;
+                }
+            }
+            if (assayIdMatch && fidFileMatch) {
+                mappingResult.put(Boolean.TRUE, row.get(AssaySpreadSheetConstants.ROW_INDEX));
+                return mappingResult;
+            }
+        }
+        mappingResult.put(Boolean.FALSE, "");
+        return mappingResult;
+    }
+
     public static Map<String, List<uk.ac.ebi.subs.data.submittable.Assay>> getAssaysToAddAndUpdate(List<uk.ac.ebi.subs.data.submittable.Assay> assays, MetaboLightsTable assayTable) throws Exception {
 
         List<uk.ac.ebi.subs.data.submittable.Assay> assaysToUpdate = new ArrayList<>();
