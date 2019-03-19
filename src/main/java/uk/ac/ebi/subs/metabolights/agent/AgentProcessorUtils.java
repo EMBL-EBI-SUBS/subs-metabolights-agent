@@ -186,8 +186,8 @@ public class AgentProcessorUtils {
         if (assayTable.getData().getRows() != null && assayTable.getData().getRows().size() > 0) {
             for (uk.ac.ebi.subs.data.submittable.Assay assay : assays) {
                 if (!assay.getAlias().isEmpty()) {
-                    //todo extract id and fid info
-                    Map<Boolean, String> mappingResult = hasRowMatch("", "", assayTable);
+                    Map<String, String> uniqueValuesToFilterAssays = getUniqueValuesToFilterAssays(assay);
+                    Map<Boolean, String> mappingResult = hasRowMatch(uniqueValuesToFilterAssays, assayTable);
                     for (Map.Entry<Boolean, String> result : mappingResult.entrySet()) {
                         if (result.getKey().booleanValue()) {
                         /*
@@ -290,8 +290,11 @@ public class AgentProcessorUtils {
         return mappingResult;
     }
 
-    private static Map<Boolean, String> hasRowMatch(String assayID, String fidDataFile, MetaboLightsTable assayTable) {
+    private static Map<Boolean, String> hasRowMatch(Map<String, String> uniqueValuesToFilterAssays, MetaboLightsTable assayTable) {
         Map<Boolean, String> mappingResult = new HashMap<>();
+        Map.Entry<String, String> filterValue = uniqueValuesToFilterAssays.entrySet().iterator().next();
+        String assayID = filterValue.getKey();
+        String fidDataFile = filterValue.getValue();
         for (Map<String, String> row : assayTable.getData().getRows()) {
             boolean assayIdMatch = false;
             boolean fidFileMatch = false;
