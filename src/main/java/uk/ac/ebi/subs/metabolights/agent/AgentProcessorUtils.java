@@ -187,7 +187,7 @@ public class AgentProcessorUtils {
             for (uk.ac.ebi.subs.data.submittable.Assay assay : assays) {
                 if (!assay.getAlias().isEmpty()) {
                     Map<String, String> uniqueValuesToFilterAssays = getUniqueValuesToFilterAssays(assay);
-                    if(!uniqueValuesToFilterAssays.isEmpty()){
+                    if (!uniqueValuesToFilterAssays.isEmpty()) {
                         Map<Boolean, String> mappingResult = hasRowMatch(uniqueValuesToFilterAssays, assayTable);
                         for (Map.Entry<Boolean, String> result : mappingResult.entrySet()) {
                             if (result.getKey().booleanValue()) {
@@ -272,6 +272,39 @@ public class AgentProcessorUtils {
 
     public static List<Integer> getAssayRowIndexesToDelete(List<uk.ac.ebi.subs.data.submittable.Assay> assays, MetaboLightsTable assayTable) throws Exception {
         List<Integer> rowsToDelete = new ArrayList<>();
+        if (assayTable.getData().getRows() != null && assayTable.getData().getRows().size() > 0) {
+            if (assays != null && assays.size() > 0) {
+                for (Map<String, String> metabolightsAssayRow : assayTable.getData().getRows()) {
+                    boolean assayIDMatch = false;
+                    boolean fidFileMatch = false;
+                    for (uk.ac.ebi.subs.data.submittable.Assay assay : assays) {
+                        Map<String, String> uniqueValuesToFilterAssays = getUniqueValuesToFilterAssays(assay);
+                        if (!uniqueValuesToFilterAssays.isEmpty()) {
+                            Map.Entry<String, String> assayFilter = uniqueValuesToFilterAssays.entrySet().iterator().next();
+                            for (Map.Entry<String, String> cell : metabolightsAssayRow.entrySet()) {
+                                if (cell.getKey().equalsIgnoreCase(AssaySpreadSheetConstants.NMR_ASSAY_PROTOCOL_NAME)) {
+                                    if (cell.getValue().equalsIgnoreCase(assayFilter.getKey())) {
+                                        assayIDMatch = true;
+                                    }
+                                }
+                                if (cell.getKey().equalsIgnoreCase(AssaySpreadSheetConstants.NMR_ASSAY_FID_FILE)) {
+                                    if (cell.getValue().equalsIgnoreCase(assayFilter.getValue())) {
+                                        fidFileMatch = true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if (!assayIDMatch && !fidFileMatch) {
+                        if (metabolightsAssayRow.containsKey(AssaySpreadSheetConstants.ROW_INDEX)) {
+                            if (!metabolightsAssayRow.get(AssaySpreadSheetConstants.ROW_INDEX).isEmpty()) {
+                                rowsToDelete.add(new Integer(metabolightsAssayRow.get(AssaySpreadSheetConstants.ROW_INDEX)));
+                            }
+                        }
+                    }
+                }
+            }
+        }
         return rowsToDelete;
     }
 
