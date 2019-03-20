@@ -187,18 +187,20 @@ public class AgentProcessorUtils {
             for (uk.ac.ebi.subs.data.submittable.Assay assay : assays) {
                 if (!assay.getAlias().isEmpty()) {
                     Map<String, String> uniqueValuesToFilterAssays = getUniqueValuesToFilterAssays(assay);
-                    Map<Boolean, String> mappingResult = hasRowMatch(uniqueValuesToFilterAssays, assayTable);
-                    for (Map.Entry<Boolean, String> result : mappingResult.entrySet()) {
-                        if (result.getKey().booleanValue()) {
+                    if(!uniqueValuesToFilterAssays.isEmpty()){
+                        Map<Boolean, String> mappingResult = hasRowMatch(uniqueValuesToFilterAssays, assayTable);
+                        for (Map.Entry<Boolean, String> result : mappingResult.entrySet()) {
+                            if (result.getKey().booleanValue()) {
                         /*
                         index to be updated must be set in the assays
                          */
-                            Attribute attribute = new Attribute();
-                            attribute.setValue(result.getValue());
-                            assay.getAttributes().put(AssaySpreadSheetConstants.ROW_INDEX, Arrays.asList(attribute));
-                            assayRowsToUpdate.add(assay);
-                        } else {
-                            assayRowsToAdd.add(assay);
+                                Attribute attribute = new Attribute();
+                                attribute.setValue(result.getValue());
+                                assay.getAttributes().put(AssaySpreadSheetConstants.ROW_INDEX, Arrays.asList(attribute));
+                                assayRowsToUpdate.add(assay);
+                            } else {
+                                assayRowsToAdd.add(assay);
+                            }
                         }
                     }
                 }
@@ -234,7 +236,6 @@ public class AgentProcessorUtils {
                 }
             }
         }
-        //todo handle empty protocolUse cases
         mappingResult.put(assayID, fidDataFileName);
         return mappingResult;
     }
