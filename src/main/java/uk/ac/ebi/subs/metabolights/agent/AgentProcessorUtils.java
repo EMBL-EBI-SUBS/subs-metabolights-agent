@@ -222,13 +222,13 @@ public class AgentProcessorUtils {
             for (ProtocolUse protocolUse : assay.getProtocolUses()) {
                 if (protocolUse.getProtocolRef().getAlias().equalsIgnoreCase("NMR assay")) {
                     if (protocolUse.getAttributes() != null && protocolUse.getAttributes().size() > 0) {
-                        if (protocolUse.getAttributes().containsKey("NMR Assay Name")) {
-                            Collection<Attribute> nmr_assay_name = protocolUse.getAttributes().get("NMR Assay Name");
+                        if (protocolUse.getAttributes().containsKey(AssaySpreadSheetConstants.NMR_ASSAY_PROTOCOL_NAME)) {
+                            Collection<Attribute> nmr_assay_name = protocolUse.getAttributes().get(AssaySpreadSheetConstants.NMR_ASSAY_PROTOCOL_NAME);
                             Attribute assay_name = nmr_assay_name.iterator().next();
                             assayID = assay_name.getValue();
                         }
-                        if (protocolUse.getAttributes().containsKey("Free Induction Decay Data File")) {
-                            Collection<Attribute> free_induction_decay_data_file = protocolUse.getAttributes().get("Free Induction Decay Data File");
+                        if (protocolUse.getAttributes().containsKey(AssaySpreadSheetConstants.NMR_ASSAY_FID_FILE)) {
+                            Collection<Attribute> free_induction_decay_data_file = protocolUse.getAttributes().get(AssaySpreadSheetConstants.NMR_ASSAY_PROTOCOL_NAME);
                             Attribute fid_file_name = free_induction_decay_data_file.iterator().next();
                             fidDataFileName = fid_file_name.getValue();
                         }
