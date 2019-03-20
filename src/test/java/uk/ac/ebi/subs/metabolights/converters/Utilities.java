@@ -310,6 +310,24 @@ public class Utilities {
         return null;
     }
 
+    public static List<Assay> getUSIAssayListFromDisc() {
+        List<uk.ac.ebi.subs.data.submittable.Assay> assays;
+        try {
+            String result = IOUtils.toString(WSUtils.class.getClassLoader().getResourceAsStream("Test_json/usi_assay_list.json"));
+            try {
+                mapper.registerModule(new JavaTimeModule());
+                assays = mapper.readValue(result, new TypeReference<List<Assay>>() {
+                });
+                return assays;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public static uk.ac.ebi.subs.validator.model.Submittable<Study> getUSIStudyFromDisc() {
         SubmissionEnvelope submissionEnvelope = getUSISubmisisonFromDisc();
         List<uk.ac.ebi.subs.data.submittable.Study> studies = submissionEnvelope.getStudies();
