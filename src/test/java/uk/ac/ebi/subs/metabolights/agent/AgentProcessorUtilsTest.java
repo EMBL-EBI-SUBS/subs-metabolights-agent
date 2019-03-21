@@ -12,6 +12,8 @@ import uk.ac.ebi.subs.metabolights.converters.Utilities;
 import java.util.List;
 import java.util.Map;
 
+import static org.junit.Assert.*;
+
 
 @SpringBootTest(classes = {
         MetaboLightsAgentApplication.class})
@@ -27,6 +29,8 @@ public class AgentProcessorUtilsTest {
            for(Map.Entry<String, List<Assay>> entry : assayRowsToAddAndUpdate.entrySet()){
                System.out.println(entry.getKey() + "-" + + entry.getValue().size());
            }
+           assertEquals(assayRowsToAddAndUpdate.get("add").size(), 1);
+            assertEquals(assayRowsToAddAndUpdate.get("update").size(), 2);
         } catch (Exception e) {
             e.printStackTrace();
         }
