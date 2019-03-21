@@ -79,9 +79,9 @@ public class MetaboLightsStudyProcessorTest {
         submissionEnvelope.getStudies().add(study);
         submissionEnvelope.getProjects().add(project);
         submissionEnvelope.getProtocols().addAll(ValidationTestUtils.generateUSIProtocols());
-        submissionEnvelope.getAssays().add(Utilities.getUSIAssayFromDisc());
+        submissionEnvelope.getAssays().addAll(Utilities.getUSIAssayListFromDisc());
         ProcessingCertificateEnvelope processingCertificateEnvelope = metaboLightsStudyProcessor.processStudy(submissionEnvelope);
-        assertEquals(7, processingCertificateEnvelope.getProcessingCertificates().size());
+        assertEquals(9, processingCertificateEnvelope.getProcessingCertificates().size());
     }
 
     @Test
