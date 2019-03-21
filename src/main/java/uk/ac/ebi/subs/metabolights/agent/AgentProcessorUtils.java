@@ -352,38 +352,7 @@ public class AgentProcessorUtils {
         mappingResult.put(Boolean.FALSE, "");
         return mappingResult;
     }
-
-    public static Map<String, List<uk.ac.ebi.subs.data.submittable.Assay>> getAssaysToAddAndUpdate(List<uk.ac.ebi.subs.data.submittable.Assay> assays, MetaboLightsTable assayTable) throws Exception {
-
-        List<uk.ac.ebi.subs.data.submittable.Assay> assaysToUpdate = new ArrayList<>();
-        List<uk.ac.ebi.subs.data.submittable.Assay> assaysToAdd = new ArrayList<>();
-
-        if (assayTable.getData().getRows() != null && assayTable.getData().getRows().size() > 0) {
-            for (uk.ac.ebi.subs.data.submittable.Assay assay : assays) {
-                if (!assay.getAlias().isEmpty()) {
-                    Map<Boolean, String> mappingResult = findMatch(assay.getAlias(), assayTable);
-                    for (Map.Entry<Boolean, String> result : mappingResult.entrySet()) {
-                        if (result.getKey().booleanValue()) {
-                        /*
-                        index to be updated must be set in the samples
-                         */
-                            Attribute attribute = new Attribute();
-                            attribute.setValue(result.getValue());
-                            assay.getAttributes().put("index", Arrays.asList(attribute));
-                            assaysToUpdate.add(assay);
-                        } else {
-                            assaysToAdd.add(assay);
-                        }
-                    }
-                }
-            }
-        }
-        Map<String, List<uk.ac.ebi.subs.data.submittable.Assay>> seggregatedSamples = new HashMap<>();
-        seggregatedSamples.put("add", assaysToAdd);
-        seggregatedSamples.put("update", assaysToUpdate);
-        return seggregatedSamples;
-    }
-
+    
     public static String getTechnologyType(uk.ac.ebi.subs.data.submittable.Assay assay) {
         if (assay.getAttributes() != null && assay.getAttributes().size() > 0) {
             Map<String, Collection<Attribute>> attributes = assay.getAttributes();
