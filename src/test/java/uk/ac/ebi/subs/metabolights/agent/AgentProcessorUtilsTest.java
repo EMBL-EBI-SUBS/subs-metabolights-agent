@@ -26,11 +26,22 @@ public class AgentProcessorUtilsTest {
     public void getAssayRowsToAddAndUpdate() {
         try {
             Map<String, List<Assay>> assayRowsToAddAndUpdate = AgentProcessorUtils.getAssayRowsToAddAndUpdate(Utilities.getUSIAssayListFromDisc(), Utilities.getTestNmrMetabolightsTableFromDisc());
-           for(Map.Entry<String, List<Assay>> entry : assayRowsToAddAndUpdate.entrySet()){
-               System.out.println(entry.getKey() + "-" + + entry.getValue().size());
-           }
-           assertEquals(assayRowsToAddAndUpdate.get("add").size(), 1);
+            for (Map.Entry<String, List<Assay>> entry : assayRowsToAddAndUpdate.entrySet()) {
+                System.out.println(entry.getKey() + "-" + +entry.getValue().size());
+            }
+            assertEquals(assayRowsToAddAndUpdate.get("add").size(), 1);
             assertEquals(assayRowsToAddAndUpdate.get("update").size(), 2);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void getAssayRowIndexesToDelete() {
+        try {
+            List<Integer> assayRowIndexesToDelete = AgentProcessorUtils.getAssayRowIndexesToDelete(Utilities.getUSIAssayListFromDisc(), Utilities.getTestNmrMetabolightsTableFromDisc());
+            assertEquals(assayRowIndexesToDelete.size(), 1);
+            assertEquals(assayRowIndexesToDelete.get(0).intValue(), 3);
         } catch (Exception e) {
             e.printStackTrace();
         }
