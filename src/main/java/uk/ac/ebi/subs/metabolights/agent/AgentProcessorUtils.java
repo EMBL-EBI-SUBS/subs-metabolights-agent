@@ -228,7 +228,7 @@ public class AgentProcessorUtils {
                             assayID = assay_name.getValue();
                         }
                         if (protocolUse.getAttributes().containsKey(AssaySpreadSheetConstants.NMR_ASSAY_FID_FILE)) {
-                            Collection<Attribute> free_induction_decay_data_file = protocolUse.getAttributes().get(AssaySpreadSheetConstants.NMR_ASSAY_PROTOCOL_NAME);
+                            Collection<Attribute> free_induction_decay_data_file = protocolUse.getAttributes().get(AssaySpreadSheetConstants.NMR_ASSAY_FID_FILE);
                             Attribute fid_file_name = free_induction_decay_data_file.iterator().next();
                             fidDataFileName = fid_file_name.getValue();
                         }
@@ -333,11 +333,15 @@ public class AgentProcessorUtils {
             boolean assayIdMatch = false;
             boolean fidFileMatch = false;
             for (Map.Entry<String, String> cell : row.entrySet()) {
-                if (cell.getKey().equalsIgnoreCase(assayID)) {
-                    assayIdMatch = true;
+                if (cell.getKey().equalsIgnoreCase(AssaySpreadSheetConstants.NMR_ASSAY_PROTOCOL_NAME)) {
+                    if(cell.getValue().equalsIgnoreCase(assayID)){
+                        assayIdMatch = true;
+                    }
                 }
-                if (cell.getKey().equalsIgnoreCase(fidDataFile)) {
-                    fidFileMatch = true;
+                if (cell.getKey().equalsIgnoreCase((AssaySpreadSheetConstants.NMR_ASSAY_FID_FILE))) {
+                    if(cell.getValue().equalsIgnoreCase(fidDataFile)){
+                        fidFileMatch = true;
+                    }
                 }
             }
             if (assayIdMatch && fidFileMatch) {
