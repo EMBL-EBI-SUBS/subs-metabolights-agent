@@ -1,0 +1,1019 @@
+[
+  {
+    "id": null,
+    "accession": null,
+    "alias": "a_mtbl2_metabolite profiling_mass spectrometry.txt",
+    "team": {
+      "name": "ML_test_team",
+      "description": null,
+      "profile": {}
+    },
+    "title": null,
+    "description": null,
+    "attributes": {
+      "technologyType": [
+        {
+          "value": "NMR",
+          "units": null,
+          "terms": [
+            {
+              "url": "http://purl.obolibrary.org/obo/OBI_0001478"
+            }
+          ]
+        }
+      ],
+      "measurementType": [
+        {
+          "value": "metabolite profiling",
+          "units": null,
+          "terms": [
+            {
+              "url": "http://purl.obolibrary.org/obo/OBI_0000366"
+            }
+          ]
+        }
+      ],
+      "technologyPlatform": [
+        {
+          "value": "micrOTOF-Q II ESI TOF (Bruker)",
+          "units": null,
+          "terms": []
+        }
+      ]  ,
+      "index" : [{
+        "value" : 2
+      }]
+    },
+    "studyRef": {
+      "alias": "MTBLS2",
+      "accession": "MTBLS2",
+      "team": "ML_test_team"
+    },
+    "sampleUses": [
+      {
+        "sampleRef": {
+          "alias": "Ex1-Col0-48h-Ag-10",
+          "accession": null,
+          "team": "ML_test_team"
+        },
+        "attributes": {}
+      }
+    ],
+    "protocolUses": [
+      {
+        "protocolRef": {
+          "alias": "Extraction",
+          "accession": null,
+          "team": "ML_test_team"
+        },
+        "attributes": {
+          "Extraction Method": [
+            {
+              "value": "N/A",
+              "units": null,
+              "terms": [
+                {
+                  "url": ""
+                }
+              ]
+            }
+          ],
+          "Extract Name": [
+            {
+              "value": "N/A",
+              "units": null,
+              "terms": [
+                {
+                  "url": ""
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "protocolRef": {
+          "alias": "NMR sample",
+          "accession": null,
+          "team": "ML_test_team"
+        },
+        "attributes": {
+          "NMR tube type": [
+            {
+              "value": "5 mm standard",
+              "units": null,
+              "terms": [
+                {
+                  "url": ""
+                }
+              ]
+            }
+          ],
+          "Solvent": [
+            {
+              "value": "0.2 M phosphate buffered D2O",
+              "units": null,
+              "terms": [
+                {
+                  "url": ""
+                }
+              ]
+            }
+          ],
+          "Sample pH": [
+            {
+              "value": "7.4",
+              "units": null,
+              "terms": [
+                {
+                  "url": ""
+                }
+              ]
+            }
+          ],
+          "Temperature": [
+            {
+              "value": "1000",
+              "units": "kelvin",
+              "terms": [
+                {
+                  "url": ""
+                }
+              ]
+            }
+          ],
+          "Labeled Extract Name": [
+            {
+              "value": "N/A",
+              "units": null,
+              "terms": [
+                {
+                  "url": ""
+                }
+              ]
+            }
+          ],
+          "Label": [
+            {
+              "value": "N/A",
+              "units": null,
+              "terms": [
+                {
+                  "url": ""
+                }
+              ]
+            }
+          ]
+
+        }
+      },
+      {
+        "protocolRef": {
+          "alias": "NMR spectroscopy",
+          "accession": null,
+          "team": "ML_test_team"
+        },
+        "attributes": {
+          "Instrument": [
+            {
+              "value": "Bruker AVANCE DRX 700 MHz spectrometer",
+              "units": null,
+              "terms": [
+                {
+                  "url": ""
+                }
+              ]
+            }
+          ],
+          "NMR Probe": [
+            {
+              "value": "5 mm PATXI 1H-13C/15N XYZ-GRD",
+              "units": null,
+              "terms": [
+                {
+                  "url": ""
+                }
+              ]
+            }
+          ],
+          "Number of transients": [
+            {
+              "value": "128",
+              "units": null,
+              "terms": [
+                {
+                  "url": ""
+                }
+              ]
+            }
+          ],
+          "Pulse sequence name": [
+            {
+              "value": "1D NOESY with presaturation (noesypr1d)",
+              "units": null,
+              "terms": [
+                {
+                  "url": ""
+                }
+              ]
+            }
+          ],
+          "Magnetic field strength": [
+            {
+              "value": "16.4",
+              "units": "tesla",
+              "terms": [
+                {
+                  "url": ""
+                }
+              ]
+            }
+          ],
+          "Acquisition Parameter Data File": [
+            {
+              "value": "acqus.txt",
+              "units": null,
+              "terms": [
+                {
+                  "url": ""
+                }
+              ]
+            }
+          ]
+
+        }
+      },
+      {
+        "protocolRef": {
+          "alias": "NMR assay",
+          "accession": null,
+          "team": "ML_test_team"
+        },
+        "attributes": {
+          "NMR Assay Name": [
+            {
+              "value": "ADG10003u_008",
+              "units": null,
+              "terms": [
+                {
+                  "url": ""
+                }
+              ]
+            }
+          ],
+          "Free Induction Decay Data File": [
+            {
+              "value": "ADG10003u_008.zip",
+              "units": null,
+              "terms": [
+                {
+                  "url": ""
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "protocolRef": {
+          "alias": "Data transformation",
+          "accession": null,
+          "team": "ML_test_team"
+        },
+        "attributes": {
+          "Normalization Name": [
+            {
+              "value": "ADG_normalized_data.xlsx",
+              "units": null,
+              "terms": [
+                {
+                  "url": ""
+                }
+              ]
+            }
+          ],
+          "Derived Spectral Data File": [
+            {
+              "value": "ADG10003u_008.nmrML",
+              "units": null,
+              "terms": [
+                {
+                  "url": ""
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "protocolRef": {
+          "alias": "Metabolite identification",
+          "accession": null,
+          "team": "ML_test_team"
+        },
+        "attributes": {
+          "Data Transformation Name": [
+            {
+              "value": "ADG_transformed_data.xlsx",
+              "units": null,
+              "terms": [
+                {
+                  "url": ""
+                }
+              ]
+            }
+          ],
+          "Metabolite Assignment File": [
+            {
+              "value": "m_mtbl2_metabolite profiling_mass spectrometry_v2_maf.tsv",
+              "units": null,
+              "terms": [
+                {
+                  "url": ""
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": null,
+    "accession": null,
+    "alias": "a_mtbl2_metabolite profiling_mass spectrometry.txt",
+    "team": {
+      "name": "ML_test_team",
+      "description": null,
+      "profile": {}
+    },
+    "title": null,
+    "description": null,
+    "attributes": {
+      "technologyType": [
+        {
+          "value": "NMR",
+          "units": null,
+          "terms": [
+            {
+              "url": "http://purl.obolibrary.org/obo/OBI_0001478"
+            }
+          ]
+        }
+      ],
+      "measurementType": [
+        {
+          "value": "metabolite profiling",
+          "units": null,
+          "terms": [
+            {
+              "url": "http://purl.obolibrary.org/obo/OBI_0000366"
+            }
+          ]
+        }
+      ],
+      "technologyPlatform": [
+        {
+          "value": "micrOTOF-Q II ESI TOF (Bruker)",
+          "units": null,
+          "terms": []
+        }
+      ]  ,
+      "index" : [{
+        "value" : 2
+      }]
+    },
+    "studyRef": {
+      "alias": "MTBLS2",
+      "accession": "MTBLS2",
+      "team": "ML_test_team"
+    },
+    "sampleUses": [
+      {
+        "sampleRef": {
+          "alias": "Ex1-Col0-48h-Ag-2",
+          "accession": null,
+          "team": "ML_test_team"
+        },
+        "attributes": {}
+      }
+    ],
+    "protocolUses": [
+      {
+        "protocolRef": {
+          "alias": "Extraction",
+          "accession": null,
+          "team": "ML_test_team"
+        },
+        "attributes": {
+          "Extraction Method": [
+            {
+              "value": "N/A",
+              "units": null,
+              "terms": [
+                {
+                  "url": ""
+                }
+              ]
+            }
+          ],
+          "Extract Name": [
+            {
+              "value": "N/A",
+              "units": null,
+              "terms": [
+                {
+                  "url": ""
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "protocolRef": {
+          "alias": "NMR sample",
+          "accession": null,
+          "team": "ML_test_team"
+        },
+        "attributes": {
+          "NMR tube type": [
+            {
+              "value": "5 mm standard",
+              "units": null,
+              "terms": [
+                {
+                  "url": ""
+                }
+              ]
+            }
+          ],
+          "Solvent": [
+            {
+              "value": "0.2 M phosphate buffered D2O",
+              "units": null,
+              "terms": [
+                {
+                  "url": ""
+                }
+              ]
+            }
+          ],
+          "Sample pH": [
+            {
+              "value": "7.4",
+              "units": null,
+              "terms": [
+                {
+                  "url": ""
+                }
+              ]
+            }
+          ],
+          "Temperature": [
+            {
+              "value": "1000",
+              "units": "kelvin",
+              "terms": [
+                {
+                  "url": ""
+                }
+              ]
+            }
+          ],
+          "Labeled Extract Name": [
+            {
+              "value": "N/A",
+              "units": null,
+              "terms": [
+                {
+                  "url": ""
+                }
+              ]
+            }
+          ],
+          "Label": [
+            {
+              "value": "N/A",
+              "units": null,
+              "terms": [
+                {
+                  "url": ""
+                }
+              ]
+            }
+          ]
+
+        }
+      },
+      {
+        "protocolRef": {
+          "alias": "NMR spectroscopy",
+          "accession": null,
+          "team": "ML_test_team"
+        },
+        "attributes": {
+          "Instrument": [
+            {
+              "value": "Bruker AVANCE DRX 700 MHz spectrometer",
+              "units": null,
+              "terms": [
+                {
+                  "url": ""
+                }
+              ]
+            }
+          ],
+          "NMR Probe": [
+            {
+              "value": "5 mm PATXI 1H-13C/15N XYZ-GRD",
+              "units": null,
+              "terms": [
+                {
+                  "url": ""
+                }
+              ]
+            }
+          ],
+          "Number of transients": [
+            {
+              "value": "128",
+              "units": null,
+              "terms": [
+                {
+                  "url": ""
+                }
+              ]
+            }
+          ],
+          "Pulse sequence name": [
+            {
+              "value": "1D NOESY with presaturation (noesypr1d)",
+              "units": null,
+              "terms": [
+                {
+                  "url": ""
+                }
+              ]
+            }
+          ],
+          "Magnetic field strength": [
+            {
+              "value": "16.4",
+              "units": "tesla",
+              "terms": [
+                {
+                  "url": ""
+                }
+              ]
+            }
+          ],
+          "Acquisition Parameter Data File": [
+            {
+              "value": "acqus.txt",
+              "units": null,
+              "terms": [
+                {
+                  "url": ""
+                }
+              ]
+            }
+          ]
+
+        }
+      },
+      {
+        "protocolRef": {
+          "alias": "NMR assay",
+          "accession": null,
+          "team": "ML_test_team"
+        },
+        "attributes": {
+          "NMR Assay Name": [
+            {
+              "value": "ADG10003u_007",
+              "units": null,
+              "terms": [
+                {
+                  "url": ""
+                }
+              ]
+            }
+          ],
+          "Free Induction Decay Data File": [
+            {
+              "value": "ADG10003u_007.zip",
+              "units": null,
+              "terms": [
+                {
+                  "url": ""
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "protocolRef": {
+          "alias": "Data transformation",
+          "accession": null,
+          "team": "ML_test_team"
+        },
+        "attributes": {
+          "Normalization Name": [
+            {
+              "value": "ADG_normalized_data.xlsx",
+              "units": null,
+              "terms": [
+                {
+                  "url": ""
+                }
+              ]
+            }
+          ],
+          "Derived Spectral Data File": [
+            {
+              "value": "ADG10003u_007.nmrML",
+              "units": null,
+              "terms": [
+                {
+                  "url": ""
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "protocolRef": {
+          "alias": "Metabolite identification",
+          "accession": null,
+          "team": "ML_test_team"
+        },
+        "attributes": {
+          "Data Transformation Name": [
+            {
+              "value": "ADG_transformed_data.xlsx",
+              "units": null,
+              "terms": [
+                {
+                  "url": ""
+                }
+              ]
+            }
+          ],
+          "Metabolite Assignment File": [
+            {
+              "value": "m_mtbl2_metabolite profiling_mass spectrometry_v2_maf.tsv",
+              "units": null,
+              "terms": [
+                {
+                  "url": ""
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": null,
+    "accession": null,
+    "alias": "a_mtbl2_metabolite profiling_mass spectrometry.txt",
+    "team": {
+      "name": "ML_test_team",
+      "description": null,
+      "profile": {}
+    },
+    "title": null,
+    "description": null,
+    "attributes": {
+      "technologyType": [
+        {
+          "value": "NMR",
+          "units": null,
+          "terms": [
+            {
+              "url": "http://purl.obolibrary.org/obo/OBI_0001478"
+            }
+          ]
+        }
+      ],
+      "measurementType": [
+        {
+          "value": "metabolite profiling",
+          "units": null,
+          "terms": [
+            {
+              "url": "http://purl.obolibrary.org/obo/OBI_0000366"
+            }
+          ]
+        }
+      ],
+      "technologyPlatform": [
+        {
+          "value": "micrOTOF-Q II ESI TOF (Bruker)",
+          "units": null,
+          "terms": []
+        }
+      ]  ,
+      "index" : [{
+        "value" : 2
+      }]
+    },
+    "studyRef": {
+      "alias": "MTBLS2",
+      "accession": "MTBLS2",
+      "team": "ML_test_team"
+    },
+    "sampleUses": [
+      {
+        "sampleRef": {
+          "alias": "Ex1-Col0-48h-Ag-2",
+          "accession": null,
+          "team": "ML_test_team"
+        },
+        "attributes": {}
+      }
+    ],
+    "protocolUses": [
+      {
+        "protocolRef": {
+          "alias": "Extraction",
+          "accession": null,
+          "team": "ML_test_team"
+        },
+        "attributes": {
+          "Extraction Method": [
+            {
+              "value": "N/A",
+              "units": null,
+              "terms": [
+                {
+                  "url": ""
+                }
+              ]
+            }
+          ],
+          "Extract Name": [
+            {
+              "value": "N/A",
+              "units": null,
+              "terms": [
+                {
+                  "url": ""
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "protocolRef": {
+          "alias": "NMR sample",
+          "accession": null,
+          "team": "ML_test_team"
+        },
+        "attributes": {
+          "NMR tube type": [
+            {
+              "value": "5 mm standard",
+              "units": null,
+              "terms": [
+                {
+                  "url": ""
+                }
+              ]
+            }
+          ],
+          "Solvent": [
+            {
+              "value": "0.2 M phosphate buffered D2O",
+              "units": null,
+              "terms": [
+                {
+                  "url": ""
+                }
+              ]
+            }
+          ],
+          "Sample pH": [
+            {
+              "value": "7.4",
+              "units": null,
+              "terms": [
+                {
+                  "url": ""
+                }
+              ]
+            }
+          ],
+          "Temperature": [
+            {
+              "value": "1000",
+              "units": "kelvin",
+              "terms": [
+                {
+                  "url": ""
+                }
+              ]
+            }
+          ],
+          "Labeled Extract Name": [
+            {
+              "value": "N/A",
+              "units": null,
+              "terms": [
+                {
+                  "url": ""
+                }
+              ]
+            }
+          ],
+          "Label": [
+            {
+              "value": "N/A",
+              "units": null,
+              "terms": [
+                {
+                  "url": ""
+                }
+              ]
+            }
+          ]
+
+        }
+      },
+      {
+        "protocolRef": {
+          "alias": "NMR spectroscopy",
+          "accession": null,
+          "team": "ML_test_team"
+        },
+        "attributes": {
+          "Instrument": [
+            {
+              "value": "Bruker AVANCE DRX 700 MHz spectrometer",
+              "units": null,
+              "terms": [
+                {
+                  "url": ""
+                }
+              ]
+            }
+          ],
+          "NMR Probe": [
+            {
+              "value": "5 mm PATXI 1H-13C/15N XYZ-GRD",
+              "units": null,
+              "terms": [
+                {
+                  "url": ""
+                }
+              ]
+            }
+          ],
+          "Number of transients": [
+            {
+              "value": "128",
+              "units": null,
+              "terms": [
+                {
+                  "url": ""
+                }
+              ]
+            }
+          ],
+          "Pulse sequence name": [
+            {
+              "value": "1D NOESY with presaturation (noesypr1d)",
+              "units": null,
+              "terms": [
+                {
+                  "url": ""
+                }
+              ]
+            }
+          ],
+          "Magnetic field strength": [
+            {
+              "value": "16.4",
+              "units": "tesla",
+              "terms": [
+                {
+                  "url": ""
+                }
+              ]
+            }
+          ],
+          "Acquisition Parameter Data File": [
+            {
+              "value": "acqus.txt",
+              "units": null,
+              "terms": [
+                {
+                  "url": ""
+                }
+              ]
+            }
+          ]
+
+        }
+      },
+      {
+        "protocolRef": {
+          "alias": "NMR assay",
+          "accession": null,
+          "team": "ML_test_team"
+        },
+        "attributes": {
+          "NMR Assay Name": [
+            {
+              "value": "ADG10003u_009",
+              "units": null,
+              "terms": [
+                {
+                  "url": ""
+                }
+              ]
+            }
+          ],
+          "Free Induction Decay Data File": [
+            {
+              "value": "ADG10003u_009.zip",
+              "units": null,
+              "terms": [
+                {
+                  "url": ""
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "protocolRef": {
+          "alias": "Data transformation",
+          "accession": null,
+          "team": "ML_test_team"
+        },
+        "attributes": {
+          "Normalization Name": [
+            {
+              "value": "ADG_normalized_data.xlsx",
+              "units": null,
+              "terms": [
+                {
+                  "url": ""
+                }
+              ]
+            }
+          ],
+          "Derived Spectral Data File": [
+            {
+              "value": "ADG10003u_009.nmrML",
+              "units": null,
+              "terms": [
+                {
+                  "url": ""
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "protocolRef": {
+          "alias": "Metabolite identification",
+          "accession": null,
+          "team": "ML_test_team"
+        },
+        "attributes": {
+          "Data Transformation Name": [
+            {
+              "value": "ADG_transformed_data.xlsx",
+              "units": null,
+              "terms": [
+                {
+                  "url": ""
+                }
+              ]
+            }
+          ],
+          "Metabolite Assignment File": [
+            {
+              "value": "m_mtbl2_metabolite profiling_mass spectrometry_v2_maf.tsv",
+              "units": null,
+              "terms": [
+                {
+                  "url": ""
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

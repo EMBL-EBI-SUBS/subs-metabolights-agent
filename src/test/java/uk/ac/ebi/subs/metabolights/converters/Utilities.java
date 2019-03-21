@@ -8,6 +8,7 @@ import org.apache.commons.io.IOUtils;
 import uk.ac.ebi.subs.data.component.*;
 import uk.ac.ebi.subs.data.submittable.*;
 import uk.ac.ebi.subs.metabolights.model.Factor;
+import uk.ac.ebi.subs.metabolights.model.MetaboLightsTable;
 import uk.ac.ebi.subs.metabolights.model.NewMetabolightsAssay;
 import uk.ac.ebi.subs.processing.SubmissionEnvelope;
 import uk.ac.ebi.subs.validator.model.Submittable;
@@ -301,6 +302,41 @@ public class Utilities {
                     submittableSamples.add(new uk.ac.ebi.subs.validator.model.Submittable<>(sample, "1"));
                 }
                 return submittableSamples;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static MetaboLightsTable getTestNmrMetabolightsTableFromDisc() {
+        MetaboLightsTable nmrTable;
+        try {
+            String result = IOUtils.toString(WSUtils.class.getClassLoader().getResourceAsStream("Test_json/test_ml_assay_table.json"));
+            try {
+                mapper.registerModule(new JavaTimeModule());
+                nmrTable = mapper.readValue(result, MetaboLightsTable.class);
+                return nmrTable;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static List<Assay> getUSIAssayListFromDisc() {
+        List<uk.ac.ebi.subs.data.submittable.Assay> assays;
+        try {
+            String result = IOUtils.toString(WSUtils.class.getClassLoader().getResourceAsStream("Test_json/usi_assay_list.json"));
+            try {
+                mapper.registerModule(new JavaTimeModule());
+                assays = mapper.readValue(result, new TypeReference<List<Assay>>() {
+                });
+                return assays;
             } catch (IOException e) {
                 e.printStackTrace();
             }
