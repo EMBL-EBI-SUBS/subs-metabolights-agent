@@ -1,7 +1,7 @@
 {
   "id": null,
   "accession": null,
-  "alias": "a_mtbl2_metabolite profiling_mass spectrometry.txt",
+  "alias": "a_mtbl2_metabolite profiling_mass spectrometry",
   "team": {
     "name": "ML_test_team",
     "description": null,
@@ -160,7 +160,6 @@
             ]
           }
         ]
-
       }
     },
     {
@@ -224,19 +223,7 @@
               }
             ]
           }
-        ],
-        "Acquisition Parameter Data File": [
-          {
-            "value": "acqus.txt",
-            "units": null,
-            "terms": [
-              {
-                "url": ""
-              }
-            ]
-          }
         ]
-
       }
     },
     {
@@ -249,17 +236,6 @@
         "NMR Assay Name": [
           {
             "value": "ADG10003u_007",
-            "units": null,
-            "terms": [
-              {
-                "url": ""
-              }
-            ]
-          }
-        ],
-        "Free Induction Decay Data File": [
-          {
-            "value": "ADG10003u_007.zip",
             "units": null,
             "terms": [
               {
@@ -287,17 +263,6 @@
               }
             ]
           }
-        ],
-        "Derived Spectral Data File": [
-          {
-            "value": "ADG10003u_007.nmrML",
-            "units": null,
-            "terms": [
-              {
-                "url": ""
-              }
-            ]
-          }
         ]
       }
     },
@@ -311,17 +276,6 @@
         "Data Transformation Name": [
           {
             "value": "ADG_transformed_data.xlsx",
-            "units": null,
-            "terms": [
-              {
-                "url": ""
-              }
-            ]
-          }
-        ],
-        "Metabolite Assignment File": [
-          {
-            "value": "m_mtbl2_metabolite profiling_mass spectrometry_v2_maf.tsv",
             "units": null,
             "terms": [
               {
