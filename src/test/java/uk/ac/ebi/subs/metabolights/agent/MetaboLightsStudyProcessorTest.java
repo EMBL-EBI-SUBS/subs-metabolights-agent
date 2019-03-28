@@ -57,6 +57,7 @@ public class MetaboLightsStudyProcessorTest {
 
         submissionEnvelope.getSamples().add(Utilities.getUSISampleFromDisc());
         submissionEnvelope.getAssays().add(Utilities.getUSIAssayFromDisc());
+        submissionEnvelope.getAssayData().addAll(Utilities.generateUSIAssayDataForSingleAssay());
         submissionEnvelope.getStudies().get(0).getAttributes().remove(StudyAttributes.STUDY_FACTORS);
         submissionEnvelope.getStudies().get(0).getAttributes().put(StudyAttributes.STUDY_FACTORS, ValidationTestUtils.getStudyFactorsMatchingSampleTestFile());
 
