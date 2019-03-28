@@ -8,8 +8,7 @@ import uk.ac.ebi.subs.data.submittable.Protocol;
 import uk.ac.ebi.subs.data.submittable.Sample;
 import uk.ac.ebi.subs.data.submittable.Study;
 import uk.ac.ebi.subs.metabolights.model.*;
-import uk.ac.ebi.subs.metabolights.model.Contact;
-import uk.ac.ebi.subs.metabolights.model.Publication;
+
 
 import java.util.*;
 
@@ -63,7 +62,7 @@ public class AgentProcessorUtils {
         return false;
     }
 
-    public static boolean alreadyHas(List<uk.ac.ebi.subs.metabolights.model.Contact> mlContacts, Contact usiContact) {
+    public static boolean alreadyHas(List<uk.ac.ebi.subs.metabolights.model.Contact> mlContacts, uk.ac.ebi.subs.data.component.Contact usiContact) {
         for (uk.ac.ebi.subs.metabolights.model.Contact mlContact : mlContacts) {
             if (isValid(mlContact.getEmail())) {
                 if (mlContact.getEmail().equalsIgnoreCase(usiContact.getEmail())) {
@@ -74,8 +73,8 @@ public class AgentProcessorUtils {
         return false;
     }
 
-    public static boolean alreadyHas(List<Contact> usiContacts, uk.ac.ebi.subs.metabolights.model.Contact mlContact) {
-        for (Contact usiContact : usiContacts) {
+    public static boolean alreadyHas(List<uk.ac.ebi.subs.data.component.Contact> usiContacts, uk.ac.ebi.subs.metabolights.model.Contact mlContact) {
+        for (uk.ac.ebi.subs.data.component.Contact usiContact : usiContacts) {
             if (isValid(usiContact.getEmail())) {
                 if (usiContact.getEmail().equalsIgnoreCase(mlContact.getEmail())) {
                     return true;
@@ -85,7 +84,7 @@ public class AgentProcessorUtils {
         return false;
     }
 
-    public static boolean alreadyHas(List<uk.ac.ebi.subs.metabolights.model.Publication> mlPublications, Publication usiPublication) {
+    public static boolean alreadyHas(List<uk.ac.ebi.subs.metabolights.model.Publication> mlPublications, uk.ac.ebi.subs.data.component.Publication usiPublication) {
         for (uk.ac.ebi.subs.metabolights.model.Publication mlPublication : mlPublications) {
             if (isValid(mlPublication.getTitle())) {
                 if (mlPublication.getTitle().equalsIgnoreCase(usiPublication.getArticleTitle())) {
@@ -96,8 +95,8 @@ public class AgentProcessorUtils {
         return false;
     }
 
-    public static boolean alreadyHas(List<Publication> usiPublications, uk.ac.ebi.subs.metabolights.model.Publication mlPublication) {
-        for (Publication publication : usiPublications) {
+    public static boolean alreadyHas(List<uk.ac.ebi.subs.data.component.Publication> usiPublications, uk.ac.ebi.subs.metabolights.model.Publication mlPublication) {
+        for (uk.ac.ebi.subs.data.component.Publication publication : usiPublications) {
             if (isValid(publication.getArticleTitle())) {
                 if (publication.getArticleTitle().equalsIgnoreCase(mlPublication.getTitle())) {
                     return true;
