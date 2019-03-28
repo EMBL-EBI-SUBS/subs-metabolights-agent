@@ -80,6 +80,7 @@ public class MetaboLightsStudyProcessorTest {
         submissionEnvelope.getProjects().add(project);
         submissionEnvelope.getProtocols().addAll(ValidationTestUtils.generateUSIProtocols());
         submissionEnvelope.getAssays().addAll(Utilities.getUSIAssayListFromDisc());
+        submissionEnvelope.getAssayData().addAll(Utilities.generateUSIAssayData());
         ProcessingCertificateEnvelope processingCertificateEnvelope = metaboLightsStudyProcessor.processStudy(submissionEnvelope);
         assertEquals(9, processingCertificateEnvelope.getProcessingCertificates().size());
     }
