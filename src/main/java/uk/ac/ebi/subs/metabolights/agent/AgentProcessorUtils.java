@@ -1,13 +1,15 @@
 package uk.ac.ebi.subs.metabolights.agent;
 
-import uk.ac.ebi.subs.data.component.Attribute;
+import uk.ac.ebi.subs.data.component.*;
 import uk.ac.ebi.subs.data.component.Contact;
-import uk.ac.ebi.subs.data.component.ProtocolUse;
 import uk.ac.ebi.subs.data.component.Publication;
+import uk.ac.ebi.subs.data.submittable.AssayData;
 import uk.ac.ebi.subs.data.submittable.Protocol;
 import uk.ac.ebi.subs.data.submittable.Sample;
 import uk.ac.ebi.subs.data.submittable.Study;
 import uk.ac.ebi.subs.metabolights.model.*;
+import uk.ac.ebi.subs.metabolights.model.Contact;
+import uk.ac.ebi.subs.metabolights.model.Publication;
 
 import java.util.*;
 
@@ -334,12 +336,12 @@ public class AgentProcessorUtils {
             boolean fidFileMatch = false;
             for (Map.Entry<String, String> cell : row.entrySet()) {
                 if (cell.getKey().equalsIgnoreCase(AssaySpreadSheetConstants.NMR_ASSAY_PROTOCOL_NAME)) {
-                    if(cell.getValue().equalsIgnoreCase(assayID)){
+                    if (cell.getValue().equalsIgnoreCase(assayID)) {
                         assayIdMatch = true;
                     }
                 }
                 if (cell.getKey().equalsIgnoreCase((AssaySpreadSheetConstants.NMR_ASSAY_FID_FILE))) {
-                    if(cell.getValue().equalsIgnoreCase(fidDataFile)){
+                    if (cell.getValue().equalsIgnoreCase(fidDataFile)) {
                         fidFileMatch = true;
                     }
                 }
@@ -352,7 +354,7 @@ public class AgentProcessorUtils {
         mappingResult.put(Boolean.FALSE, "");
         return mappingResult;
     }
-    
+
     public static String getTechnologyType(uk.ac.ebi.subs.data.submittable.Assay assay) {
         if (assay.getAttributes() != null && assay.getAttributes().size() > 0) {
             Map<String, Collection<Attribute>> attributes = assay.getAttributes();
@@ -372,5 +374,44 @@ public class AgentProcessorUtils {
         nmrMetabolightsAssay.setType("NMR");
         nmrMetabolightsAssay.setColumns(new ArrayList<>());
         return nmrMetabolightsAssay;
+    }
+
+    public static void addCorrespondingDataFiles(uk.ac.ebi.subs.data.submittable.Assay assay, List<AssayData> assayData) {
+        /*
+         Todo for all other assay types. This is for NMR.
+         */
+        if (assay.getAlias() != null || assay.getAlias().isEmpty()) {
+            for (AssayData assayDatafiles : assayData) {
+                for (AssayRef assayRef : assayDatafiles.getAssayRefs()) {
+                    if (assayRef.getAlias().equalsIgnoreCase(assay.getAlias())) {
+                        for (File assayFile : assayDatafiles.getFiles()) {
+                            if (assayFile.getLabel() != null) {
+                                if (assayFile.getLabel().equalsIgnoreCase(AssaySpreadSheetConstants.NMR_ASSAY_FID_FILE)) {
+                                    Attribute assayFileAttribute = new Attribute();
+                                    assayFileAttribute.setValue(assayFile.getName());
+                                    assay.getAttributes().put(AssaySpreadSheetConstants.NMR_ASSAY_FID_FILE, Arrays.asList(assayFileAttribute));
+                                }
+                                if (assayFile.getLabel().equalsIgnoreCase(AssaySpreadSheetConstants.NMR_PROTOCOL_ACQUISITION_PM_DATA_FILE)) {
+                                    Attribute assayFileAttribute = new Attribute();
+                                    assayFileAttribute.setValue(assayFile.getName());
+                                    assay.getAttributes().put(AssaySpreadSheetConstants.NMR_PROTOCOL_ACQUISITION_PM_DATA_FILE, Arrays.asList(assayFileAttribute));
+                                }
+                                if (assayFile.getLabel().equalsIgnoreCase(AssaySpreadSheetConstants.DATA_TRANSFORMATION_PROTOCOL_DERIVED_SPECTRAL_FILE)) {
+                                    Attribute assayFileAttribute = new Attribute();
+                                    assayFileAttribute.setValue(assayFile.getName());
+                                    assay.getAttributes().put(AssaySpreadSheetConstants.DATA_TRANSFORMATION_PROTOCOL_DERIVED_SPECTRAL_FILE, Arrays.asList(assayFileAttribute));
+                                }
+                                if (assayFile.getLabel().equalsIgnoreCase(AssaySpreadSheetConstants.METABOLITE_IDENTIFICATION_PROTOCOL_METABOLITE_ASSIGNMENT_FILE)) {
+                                    Attribute assayFileAttribute = new Attribute();
+                                    assayFileAttribute.setValue(assayFile.getName());
+                                    assay.getAttributes().put(AssaySpreadSheetConstants.METABOLITE_IDENTIFICATION_PROTOCOL_METABOLITE_ASSIGNMENT_FILE, Arrays.asList(assayFileAttribute));
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
     }
 }
