@@ -9,14 +9,13 @@ import org.springframework.messaging.converter.MessageConverter;
 import org.springframework.stereotype.Component;
 import uk.ac.ebi.subs.data.Submission;
 import uk.ac.ebi.subs.data.component.*;
-import uk.ac.ebi.subs.data.component.Contact;
-import uk.ac.ebi.subs.data.component.Publication;
 import uk.ac.ebi.subs.data.status.ProcessingStatusEnum;
+import uk.ac.ebi.subs.data.submittable.*;
+
 import uk.ac.ebi.subs.data.submittable.Project;
 import uk.ac.ebi.subs.data.submittable.Protocol;
 import uk.ac.ebi.subs.data.submittable.Sample;
 import uk.ac.ebi.subs.data.submittable.Study;
-
 import uk.ac.ebi.subs.metabolights.model.*;
 import uk.ac.ebi.subs.metabolights.services.*;
 import uk.ac.ebi.subs.processing.ProcessingCertificate;
@@ -530,6 +529,64 @@ public class MetaboLightsStudyProcessor {
         // todo - decide how to store the created assay file name in the USI for futher updates. This might be tricky in case of multiple assay files.
         return certificate;
     }
+
+    private ProcessingCertificate processAssaysAndAssayData(Study study, List<uk.ac.ebi.subs.data.submittable.Assay> assays, List<AssayData> assayData, boolean isNewSubmission, List<String> assayFileNames) {
+        ProcessingCertificate certificate = getNewCertificate();
+        certificate.setAccession(study.getAccession());
+        if (!AgentProcessorUtils.containsValue(assays)) {
+            certificate.setMessage(getWarningMessage("assays"));
+            return certificate;
+        }
+        AgentProcessorUtils.combine(assays,assayData);
+        //todo if new submission extract attributes from assay to create new template
+        //todo handle multiple assays and other assay types
+        // this is assuming single NMR assay
+        if (isNewSubmission) {
+            try {
+                for (uk.ac.ebi.subs.data.submittable.Assay assay : assays) {
+                    if (AgentProcessorUtils.getTechnologyType(assay).equalsIgnoreCase("NMR")) {
+                        NewMetabolightsAssay newMetabolightsAssay = AgentProcessorUtils.generateNewNMRAssay();
+                        HttpStatus status = this.postService.addNewAssay(newMetabolightsAssay, study.getAccession());
+                        if (status.is2xxSuccessful()) {
+                            StudyFiles studyFiles = this.fetchService.getStudyFiles(study.getAccession());
+                            List<String> assayFiles = AgentProcessorUtils.getAssayFileName(studyFiles);
+                            if (assayFiles.size() == 1) {
+                                MetaboLightsTable assayTable = this.fetchService.getMetaboLightsDataTable(study.getAccession(), assayFiles.get(0));
+                                this.postService.addAssayRows(assays, study.getAccession(), assayFiles.get(0), assayTable.getHeader());
+                            }
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                certificate.setMessage("Error saving assays : " + e.getMessage());
+            }
+        } else {
+            try {
+                if (assayFileNames.size() == 1) {
+                    MetaboLightsTable assayTable = this.fetchService.getMetaboLightsDataTable(study.getAccession(), assayFileNames.get(0));
+//                    this.postService.addAssayRows(assays, study.getAccession(), assayFileNames.get(0), assayTable.getHeader());
+                    Map<String, List<uk.ac.ebi.subs.data.submittable.Assay>> assayRowsToAddAndUpdate = AgentProcessorUtils.getAssayRowsToAddAndUpdate(assays, assayTable);
+                    this.updateService.updateAssays(assayRowsToAddAndUpdate.get("update"), study.getAccession(), assayFileNames.get(0), assayTable.getHeader());
+                    this.postService.addAssayRows(assayRowsToAddAndUpdate.get("add"), study.getAccession(), assayFileNames.get(0), assayTable.getHeader());
+                /*
+                Delete assay rows not present in submission's assay list
+                 */
+                    List<Integer> assayRowIndexesToDelete = AgentProcessorUtils.getAssayRowIndexesToDelete(assays, assayTable);
+                    if (assayRowIndexesToDelete.size() > 0) {
+                        this.deletionService.deleteTableRows(study.getAccession(), assayFileNames.get(0), assayRowIndexesToDelete);
+                    }
+
+                }
+            } catch (Exception e) {
+                certificate.setMessage("Error saving assays : " + e.getMessage());
+            }
+        }
+        // todo if not new get matching assay file names using attributes that was used to create template and then do row updates
+        // todo - decide how to store the created assay file name in the USI for futher updates. This might be tricky in case of multiple assay files.
+        return certificate;
+    }
+
+
 
     private void deleteDefaultRow(String accession, String sampleFileToUpdate) {
         /*
