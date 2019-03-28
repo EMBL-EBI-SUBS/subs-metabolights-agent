@@ -7,6 +7,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.apache.commons.io.IOUtils;
 import uk.ac.ebi.subs.data.component.*;
 import uk.ac.ebi.subs.data.submittable.*;
+import uk.ac.ebi.subs.metabolights.model.AssaySpreadSheetConstants;
 import uk.ac.ebi.subs.metabolights.model.Factor;
 import uk.ac.ebi.subs.metabolights.model.MetaboLightsTable;
 import uk.ac.ebi.subs.metabolights.model.NewMetabolightsAssay;
@@ -152,6 +153,113 @@ public class Utilities {
         usiRelationship.setRelationshipNature("Child of");
         usiRelationship.setAccession("SAM990");
         return usiRelationship;
+    }
+
+    public static List<AssayData> generateUSIAssayDataForSingleAssay() {
+        List<AssayData> assayData = new ArrayList<>();
+        // this id's are mapping to alias in Test_USI_Assay_file.json file
+        AssayData assayData1 = new AssayData();
+        assayData1.setAlias("a_mtbl2_metabolite profiling_mass spectrometry");
+        File file = new File();
+        file.setLabel("Acquisition Parameter Data File");
+        file.setName("acqus.txt");
+        assayData1.getFiles().add(file);
+
+        file = new File();
+        file.setLabel("Free Induction Decay Data File");
+        file.setName("ADG10003u_007.zip");
+        assayData1.getFiles().add(file);
+
+        file = new File();
+        file.setLabel("Derived Spectral Data File");
+        file.setName("ADG10003u_007.nmrML");
+        assayData1.getFiles().add(file);
+
+        file = new File();
+        file.setLabel("Metabolite Assignment File");
+        file.setName("m_mtbl2_metabolite profiling_mass spectrometry_v2_maf.tsv");
+        assayData1.getFiles().add(file);
+        return assayData;
+    }
+
+    public static List<AssayData> generateUSIAssayData() {
+        List<AssayData> assayData = new ArrayList<>();
+
+        // this id's are mapping to alias in usi_assay_list.json file
+        AssayData assayData1 = new AssayData();
+        assayData1.setAlias("a_mtbl2_metabolite profiling_mass spectrometry_1");
+        File file = new File();
+        file.setLabel("Acquisition Parameter Data File");
+        file.setName("acqus.txt");
+        assayData1.getFiles().add(file);
+
+        file = new File();
+        file.setLabel("Free Induction Decay Data File");
+        file.setName("ADG10003u_007.zip");
+        assayData1.getFiles().add(file);
+
+        file = new File();
+        file.setLabel("Derived Spectral Data File");
+        file.setName("ADG10003u_007.nmrML");
+        assayData1.getFiles().add(file);
+
+        file = new File();
+        file.setLabel("Metabolite Assignment File");
+        file.setName("m_mtbl2_metabolite profiling_mass spectrometry_v2_maf.tsv");
+        assayData1.getFiles().add(file);
+
+        /*
+        data 2
+         */
+
+        assayData1 = new AssayData();
+        assayData1.setAlias("a_mtbl2_metabolite profiling_mass spectrometry_2");
+        file = new File();
+        file.setLabel("Acquisition Parameter Data File");
+        file.setName("acqus2.txt");
+        assayData1.getFiles().add(file);
+
+        file = new File();
+        file.setLabel("Free Induction Decay Data File");
+        file.setName("ADG10003u_007_2.zip");
+        assayData1.getFiles().add(file);
+
+        file = new File();
+        file.setLabel("Derived Spectral Data File");
+        file.setName("ADG10003u_007_2.nmrML");
+        assayData1.getFiles().add(file);
+
+        file = new File();
+        file.setLabel("Metabolite Assignment File");
+        file.setName("m_mtbl2_metabolite profiling_mass spectrometry_v2_maf_2.tsv");
+        assayData1.getFiles().add(file);
+
+         /*
+        data 3
+         */
+
+        assayData1 = new AssayData();
+        assayData1.setAlias("a_mtbl2_metabolite profiling_mass spectrometry_3");
+        file = new File();
+        file.setLabel("Acquisition Parameter Data File");
+        file.setName("acqus3.txt");
+        assayData1.getFiles().add(file);
+
+        file = new File();
+        file.setLabel("Free Induction Decay Data File");
+        file.setName("ADG10003u_007_3.zip");
+        assayData1.getFiles().add(file);
+
+        file = new File();
+        file.setLabel("Derived Spectral Data File");
+        file.setName("ADG10003u_007_3.nmrML");
+        assayData1.getFiles().add(file);
+
+        file = new File();
+        file.setLabel("Metabolite Assignment File");
+        file.setName("m_mtbl2_metabolite profiling_mass spectrometry_v2_maf_3.tsv");
+        assayData1.getFiles().add(file);
+        return assayData;
     }
 
 
