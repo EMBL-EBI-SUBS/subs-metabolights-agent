@@ -9,14 +9,13 @@ import org.springframework.messaging.converter.MessageConverter;
 import org.springframework.stereotype.Component;
 import uk.ac.ebi.subs.data.Submission;
 import uk.ac.ebi.subs.data.component.*;
-import uk.ac.ebi.subs.data.component.Contact;
-import uk.ac.ebi.subs.data.component.Publication;
 import uk.ac.ebi.subs.data.status.ProcessingStatusEnum;
+import uk.ac.ebi.subs.data.submittable.*;
+
 import uk.ac.ebi.subs.data.submittable.Project;
 import uk.ac.ebi.subs.data.submittable.Protocol;
 import uk.ac.ebi.subs.data.submittable.Sample;
 import uk.ac.ebi.subs.data.submittable.Study;
-
 import uk.ac.ebi.subs.metabolights.model.*;
 import uk.ac.ebi.subs.metabolights.services.*;
 import uk.ac.ebi.subs.processing.ProcessingCertificate;
@@ -174,7 +173,7 @@ public class MetaboLightsStudyProcessor {
 
          */
 
-        update(processingCertificateList, processAssays(study, submissionEnvelope.getAssays(), isNewSubmission, assayFileNames));
+        update(processingCertificateList, processAssaysAndAssayData(study, submissionEnvelope.getAssays(), submissionEnvelope.getAssayData(), isNewSubmission, assayFileNames));
 
         return processingCertificateList;
     }
@@ -476,13 +475,14 @@ public class MetaboLightsStudyProcessor {
         return certificate;
     }
 
-    private ProcessingCertificate processAssays(Study study, List<uk.ac.ebi.subs.data.submittable.Assay> assays, boolean isNewSubmission, List<String> assayFileNames) {
+    private ProcessingCertificate processAssaysAndAssayData(Study study, List<uk.ac.ebi.subs.data.submittable.Assay> assays, List<AssayData> assayData, boolean isNewSubmission, List<String> assayFileNames) {
         ProcessingCertificate certificate = getNewCertificate();
         certificate.setAccession(study.getAccession());
         if (!AgentProcessorUtils.containsValue(assays)) {
             certificate.setMessage(getWarningMessage("assays"));
             return certificate;
         }
+        AgentProcessorUtils.combine(assays,assayData);
         //todo if new submission extract attributes from assay to create new template
         //todo handle multiple assays and other assay types
         // this is assuming single NMR assay
@@ -530,6 +530,8 @@ public class MetaboLightsStudyProcessor {
         // todo - decide how to store the created assay file name in the USI for futher updates. This might be tricky in case of multiple assay files.
         return certificate;
     }
+
+
 
     private void deleteDefaultRow(String accession, String sampleFileToUpdate) {
         /*

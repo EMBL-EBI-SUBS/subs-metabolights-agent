@@ -1,13 +1,14 @@
 package uk.ac.ebi.subs.metabolights.agent;
 
-import uk.ac.ebi.subs.data.component.Attribute;
+import uk.ac.ebi.subs.data.component.*;
 import uk.ac.ebi.subs.data.component.Contact;
-import uk.ac.ebi.subs.data.component.ProtocolUse;
 import uk.ac.ebi.subs.data.component.Publication;
+import uk.ac.ebi.subs.data.submittable.AssayData;
 import uk.ac.ebi.subs.data.submittable.Protocol;
 import uk.ac.ebi.subs.data.submittable.Sample;
 import uk.ac.ebi.subs.data.submittable.Study;
 import uk.ac.ebi.subs.metabolights.model.*;
+
 
 import java.util.*;
 
@@ -61,7 +62,7 @@ public class AgentProcessorUtils {
         return false;
     }
 
-    public static boolean alreadyHas(List<uk.ac.ebi.subs.metabolights.model.Contact> mlContacts, Contact usiContact) {
+    public static boolean alreadyHas(List<uk.ac.ebi.subs.metabolights.model.Contact> mlContacts, uk.ac.ebi.subs.data.component.Contact usiContact) {
         for (uk.ac.ebi.subs.metabolights.model.Contact mlContact : mlContacts) {
             if (isValid(mlContact.getEmail())) {
                 if (mlContact.getEmail().equalsIgnoreCase(usiContact.getEmail())) {
@@ -72,8 +73,8 @@ public class AgentProcessorUtils {
         return false;
     }
 
-    public static boolean alreadyHas(List<Contact> usiContacts, uk.ac.ebi.subs.metabolights.model.Contact mlContact) {
-        for (Contact usiContact : usiContacts) {
+    public static boolean alreadyHas(List<uk.ac.ebi.subs.data.component.Contact> usiContacts, uk.ac.ebi.subs.metabolights.model.Contact mlContact) {
+        for (uk.ac.ebi.subs.data.component.Contact usiContact : usiContacts) {
             if (isValid(usiContact.getEmail())) {
                 if (usiContact.getEmail().equalsIgnoreCase(mlContact.getEmail())) {
                     return true;
@@ -83,7 +84,7 @@ public class AgentProcessorUtils {
         return false;
     }
 
-    public static boolean alreadyHas(List<uk.ac.ebi.subs.metabolights.model.Publication> mlPublications, Publication usiPublication) {
+    public static boolean alreadyHas(List<uk.ac.ebi.subs.metabolights.model.Publication> mlPublications, uk.ac.ebi.subs.data.component.Publication usiPublication) {
         for (uk.ac.ebi.subs.metabolights.model.Publication mlPublication : mlPublications) {
             if (isValid(mlPublication.getTitle())) {
                 if (mlPublication.getTitle().equalsIgnoreCase(usiPublication.getArticleTitle())) {
@@ -94,8 +95,8 @@ public class AgentProcessorUtils {
         return false;
     }
 
-    public static boolean alreadyHas(List<Publication> usiPublications, uk.ac.ebi.subs.metabolights.model.Publication mlPublication) {
-        for (Publication publication : usiPublications) {
+    public static boolean alreadyHas(List<uk.ac.ebi.subs.data.component.Publication> usiPublications, uk.ac.ebi.subs.metabolights.model.Publication mlPublication) {
+        for (uk.ac.ebi.subs.data.component.Publication publication : usiPublications) {
             if (isValid(publication.getArticleTitle())) {
                 if (publication.getArticleTitle().equalsIgnoreCase(mlPublication.getTitle())) {
                     return true;
@@ -334,12 +335,12 @@ public class AgentProcessorUtils {
             boolean fidFileMatch = false;
             for (Map.Entry<String, String> cell : row.entrySet()) {
                 if (cell.getKey().equalsIgnoreCase(AssaySpreadSheetConstants.NMR_ASSAY_PROTOCOL_NAME)) {
-                    if(cell.getValue().equalsIgnoreCase(assayID)){
+                    if (cell.getValue().equalsIgnoreCase(assayID)) {
                         assayIdMatch = true;
                     }
                 }
                 if (cell.getKey().equalsIgnoreCase((AssaySpreadSheetConstants.NMR_ASSAY_FID_FILE))) {
-                    if(cell.getValue().equalsIgnoreCase(fidDataFile)){
+                    if (cell.getValue().equalsIgnoreCase(fidDataFile)) {
                         fidFileMatch = true;
                     }
                 }
@@ -352,7 +353,7 @@ public class AgentProcessorUtils {
         mappingResult.put(Boolean.FALSE, "");
         return mappingResult;
     }
-    
+
     public static String getTechnologyType(uk.ac.ebi.subs.data.submittable.Assay assay) {
         if (assay.getAttributes() != null && assay.getAttributes().size() > 0) {
             Map<String, Collection<Attribute>> attributes = assay.getAttributes();
@@ -372,5 +373,50 @@ public class AgentProcessorUtils {
         nmrMetabolightsAssay.setType("NMR");
         nmrMetabolightsAssay.setColumns(new ArrayList<>());
         return nmrMetabolightsAssay;
+    }
+
+    public static void combine(List<uk.ac.ebi.subs.data.submittable.Assay> assays, List<AssayData> assayData) {
+        for (uk.ac.ebi.subs.data.submittable.Assay assay : assays) {
+            addCorrespondingDataFiles(assay, assayData);
+        }
+    }
+
+    public static void addCorrespondingDataFiles(uk.ac.ebi.subs.data.submittable.Assay assay, List<AssayData> assayData) {
+        /*
+         Todo for all other assay types. This is for NMR.
+         */
+        if (assay.getAlias() != null || assay.getAlias().isEmpty()) {
+            for (AssayData assayDatafiles : assayData) {
+                for (AssayRef assayRef : assayDatafiles.getAssayRefs()) {
+                    if (assayRef.getAlias().equalsIgnoreCase(assay.getAlias())) {
+                        for (File assayFile : assayDatafiles.getFiles()) {
+                            if (assayFile.getLabel() != null) {
+                                if (assayFile.getLabel().equalsIgnoreCase(AssaySpreadSheetConstants.NMR_ASSAY_FID_FILE)) {
+                                    Attribute assayFileAttribute = new Attribute();
+                                    assayFileAttribute.setValue(assayFile.getName());
+                                    assay.getAttributes().put(AssaySpreadSheetConstants.NMR_ASSAY_FID_FILE, Arrays.asList(assayFileAttribute));
+                                }
+                                if (assayFile.getLabel().equalsIgnoreCase(AssaySpreadSheetConstants.NMR_PROTOCOL_ACQUISITION_PM_DATA_FILE)) {
+                                    Attribute assayFileAttribute = new Attribute();
+                                    assayFileAttribute.setValue(assayFile.getName());
+                                    assay.getAttributes().put(AssaySpreadSheetConstants.NMR_PROTOCOL_ACQUISITION_PM_DATA_FILE, Arrays.asList(assayFileAttribute));
+                                }
+                                if (assayFile.getLabel().equalsIgnoreCase(AssaySpreadSheetConstants.DATA_TRANSFORMATION_PROTOCOL_DERIVED_SPECTRAL_FILE)) {
+                                    Attribute assayFileAttribute = new Attribute();
+                                    assayFileAttribute.setValue(assayFile.getName());
+                                    assay.getAttributes().put(AssaySpreadSheetConstants.DATA_TRANSFORMATION_PROTOCOL_DERIVED_SPECTRAL_FILE, Arrays.asList(assayFileAttribute));
+                                }
+                                if (assayFile.getLabel().equalsIgnoreCase(AssaySpreadSheetConstants.METABOLITE_IDENTIFICATION_PROTOCOL_METABOLITE_ASSIGNMENT_FILE)) {
+                                    Attribute assayFileAttribute = new Attribute();
+                                    assayFileAttribute.setValue(assayFile.getName());
+                                    assay.getAttributes().put(AssaySpreadSheetConstants.METABOLITE_IDENTIFICATION_PROTOCOL_METABOLITE_ASSIGNMENT_FILE, Arrays.asList(assayFileAttribute));
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
     }
 }
