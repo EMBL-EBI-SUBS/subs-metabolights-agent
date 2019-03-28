@@ -376,6 +376,12 @@ public class AgentProcessorUtils {
         return nmrMetabolightsAssay;
     }
 
+    public static void combine(List<uk.ac.ebi.subs.data.submittable.Assay> assays, List<AssayData> assayData) {
+        for (uk.ac.ebi.subs.data.submittable.Assay assay : assays) {
+            addCorrespondingDataFiles(assay, assayData);
+        }
+    }
+
     public static void addCorrespondingDataFiles(uk.ac.ebi.subs.data.submittable.Assay assay, List<AssayData> assayData) {
         /*
          Todo for all other assay types. This is for NMR.
