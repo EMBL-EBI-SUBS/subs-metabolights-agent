@@ -155,6 +155,33 @@ public class Utilities {
         return usiRelationship;
     }
 
+    public static List<AssayData> generateUSIAssayDataForSingleAssay() {
+        List<AssayData> assayData = new ArrayList<>();
+        // this id's are mapping to alias in Test_USI_Assay_file.json file
+        AssayData assayData1 = new AssayData();
+        assayData1.setAlias("a_mtbl2_metabolite profiling_mass spectrometry");
+        File file = new File();
+        file.setLabel("Acquisition Parameter Data File");
+        file.setName("acqus.txt");
+        assayData1.getFiles().add(file);
+
+        file = new File();
+        file.setLabel("Free Induction Decay Data File");
+        file.setName("ADG10003u_007.zip");
+        assayData1.getFiles().add(file);
+
+        file = new File();
+        file.setLabel("Derived Spectral Data File");
+        file.setName("ADG10003u_007.nmrML");
+        assayData1.getFiles().add(file);
+
+        file = new File();
+        file.setLabel("Metabolite Assignment File");
+        file.setName("m_mtbl2_metabolite profiling_mass spectrometry_v2_maf.tsv");
+        assayData1.getFiles().add(file);
+        return assayData;
+    }
+
     public static List<AssayData> generateUSIAssayData() {
         List<AssayData> assayData = new ArrayList<>();
 
