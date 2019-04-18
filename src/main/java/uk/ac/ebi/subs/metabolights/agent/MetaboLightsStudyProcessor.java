@@ -88,17 +88,44 @@ public class MetaboLightsStudyProcessor {
         return certificates;
     }
 
+//    ProcessingCertificateEnvelope processStudy(SubmissionEnvelope submissionEnvelope) {
+//        List<ProcessingCertificate> processingCertificateList = new ArrayList<>();
+//        for (Study study : submissionEnvelope.getStudies()) {
+//            //todo handle many studies in one project
+//            if (!study.isAccessioned()) {
+//                return createNewMetaboLightsStudy(study, submissionEnvelope);
+//            } else {
+//                processingCertificateList.addAll(processMetaData(study, submissionEnvelope, false));
+//            }
+//        }
+//        return new ProcessingCertificateEnvelope(submissionEnvelope.getSubmission().getId(), processingCertificateList);
+//    }
+
     ProcessingCertificateEnvelope processStudy(SubmissionEnvelope submissionEnvelope) {
         List<ProcessingCertificate> processingCertificateList = new ArrayList<>();
         for (Study study : submissionEnvelope.getStudies()) {
             //todo handle many studies in one project
             if (!study.isAccessioned()) {
-                return createNewMetaboLightsStudy(study, submissionEnvelope);
+                ProcessingCertificate processingCertificate = new ProcessingCertificate();
+                processingCertificate.setProcessingStatus(ProcessingStatusEnum.Error);
+                processingCertificate.setMessage(submissionEnvelope.getSubmission().getId() + " has no biostudies accession. This will prevent sending " +
+                        "updates to metabolights. Please provide biostudies accession with this submission.");
+                processingCertificateList.add(processingCertificate);
+                return new ProcessingCertificateEnvelope(submissionEnvelope.getSubmission().getId(), processingCertificateList);
             } else {
-                processingCertificateList.addAll(processMetaData(study, submissionEnvelope, false));
+                String mlStudyID = this.fetchService.getMLStudyID(study.getAccession());
+                if(biostudiesIsAlreadyLinkedWith(mlStudyID)){
+                    processingCertificateList.addAll(processMetaData(study, submissionEnvelope, false));
+                } else{
+                    return createNewMetaboLightsStudy(study, submissionEnvelope);
+                }
             }
         }
         return new ProcessingCertificateEnvelope(submissionEnvelope.getSubmission().getId(), processingCertificateList);
+    }
+
+    private boolean biostudiesIsAlreadyLinkedWith(String mlStudyID) {
+        return mlStudyID != null && !mlStudyID.isEmpty();
     }
 
     ProcessingCertificateEnvelope createNewMetaboLightsStudy(Study study, SubmissionEnvelope submissionEnvelope) {
@@ -112,9 +139,9 @@ public class MetaboLightsStudyProcessor {
             processingCertificate.setAccession(metabolightsStudyID);
             processingCertificate.setMessage("Study successfully accessioned in metabolights");
 
-            if(study.getAccession() !=null && !study.getAccession().isEmpty()){
-                this.postService.addBioStudiesAccession(metabolightsStudyID,study.getAccession());
-            }  else{
+            if (study.getAccession() != null && !study.getAccession().isEmpty()) {
+                this.postService.addBioStudiesAccession(metabolightsStudyID, study.getAccession());
+            } else {
                 ProcessingCertificate warningCertificate = getNewCertificate();
                 warningCertificate.setProcessingStatus(ProcessingStatusEnum.Error);
                 warningCertificate.setMessage("Biostudies Accession is not available. Updating studies is not possible");
@@ -490,7 +517,7 @@ public class MetaboLightsStudyProcessor {
             certificate.setMessage(getWarningMessage("assays"));
             return certificate;
         }
-        AgentProcessorUtils.combine(assays,assayData);
+        AgentProcessorUtils.combine(assays, assayData);
         //todo if new submission extract attributes from assay to create new template
         //todo handle multiple assays and other assay types
         // this is assuming single NMR assay
@@ -538,7 +565,6 @@ public class MetaboLightsStudyProcessor {
         // todo - decide how to store the created assay file name in the USI for futher updates. This might be tricky in case of multiple assay files.
         return certificate;
     }
-
 
 
     private void deleteDefaultRow(String accession, String sampleFileToUpdate) {
