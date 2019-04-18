@@ -114,18 +114,15 @@ public class MetaboLightsStudyProcessor {
                 return new ProcessingCertificateEnvelope(submissionEnvelope.getSubmission().getId(), processingCertificateList);
             } else {
                 String mlStudyID = this.fetchService.getMLStudyID(study.getAccession());
-                if(biostudiesIsAlreadyLinkedWith(mlStudyID)){
+                AgentProcessorUtils.addMLStudyForRuntimeUse(mlStudyID, study);
+                if (AgentProcessorUtils.biostudiesIsAlreadyLinkedWith(mlStudyID)) {
                     processingCertificateList.addAll(processMetaData(study, submissionEnvelope, false));
-                } else{
+                } else {
                     return createNewMetaboLightsStudy(study, submissionEnvelope);
                 }
             }
         }
         return new ProcessingCertificateEnvelope(submissionEnvelope.getSubmission().getId(), processingCertificateList);
-    }
-
-    private boolean biostudiesIsAlreadyLinkedWith(String mlStudyID) {
-        return mlStudyID != null && !mlStudyID.isEmpty();
     }
 
     ProcessingCertificateEnvelope createNewMetaboLightsStudy(Study study, SubmissionEnvelope submissionEnvelope) {
@@ -138,7 +135,6 @@ public class MetaboLightsStudyProcessor {
             String metabolightsStudyID = this.fetchService.createNewStudyAndGetAccession();
             processingCertificate.setAccession(metabolightsStudyID);
             processingCertificate.setMessage("Study successfully accessioned in metabolights");
-
             if (study.getAccession() != null && !study.getAccession().isEmpty()) {
                 this.postService.addBioStudiesAccession(metabolightsStudyID, study.getAccession());
             } else {
