@@ -22,10 +22,7 @@ import uk.ac.ebi.subs.metabolights.converters.*;
 import uk.ac.ebi.subs.metabolights.model.*;
 import uk.ac.ebi.subs.metabolights.validator.schema.custom.JsonAsTextPlainHttpMessageConverter;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class PostService {
@@ -308,5 +305,20 @@ public class PostService {
         for (Protocol protocol : protocols) {
             add(studyID, protocol);
         }
+    }
+
+    public String addBioStudiesAccession(String studyID, String bioAccession) {
+        String url = mlProperties.getUrl() + studyID + "/biostudies";
+        ObjectNode bioJson = ServiceUtils.convertToJSON(bioAccession, "biostudies_acc");
+        System.out.println("json to update = " + bioJson);
+        headers.set("user_token", this.apiKey);
+        // headers.set("Content-type", "application/json; charset=utf-8");
+        HttpEntity<ObjectNode> requestBody = new HttpEntity<>(bioJson, headers);
+        ResponseEntity<LinkedHashMap> exchange = restTemplate.exchange(
+                url, HttpMethod.POST, requestBody, LinkedHashMap.class);
+        if(exchange.getStatusCode().is2xxSuccessful()){
+           return (String) exchange.getBody().get("BioStudies");
+        }
+        return "";
     }
 }
