@@ -308,12 +308,9 @@ public class PostService {
     }
 
     public String addBioStudiesAccession(String studyID, String bioAccession) {
-        String url = mlProperties.getUrl() + studyID + "/biostudies";
-        ObjectNode bioJson = ServiceUtils.convertToJSON(bioAccession, "biostudies_acc");
-        System.out.println("json to update = " + bioJson);
+        String url = mlProperties.getUrl() + studyID + "/biostudies?biostudies_acc=" + bioAccession;
         headers.set("user_token", this.apiKey);
-        // headers.set("Content-type", "application/json; charset=utf-8");
-        HttpEntity<ObjectNode> requestBody = new HttpEntity<>(bioJson, headers);
+        HttpEntity<String> requestBody = new HttpEntity<>("", headers);
         ResponseEntity<LinkedHashMap> exchange = restTemplate.exchange(
                 url, HttpMethod.POST, requestBody, LinkedHashMap.class);
         if(exchange.getStatusCode().is2xxSuccessful()){
