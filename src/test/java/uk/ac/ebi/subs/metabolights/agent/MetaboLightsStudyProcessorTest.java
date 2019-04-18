@@ -23,6 +23,8 @@ import uk.ac.ebi.subs.metabolights.validator.ValidationTestUtils;
 import uk.ac.ebi.subs.processing.ProcessingCertificateEnvelope;
 import uk.ac.ebi.subs.processing.SubmissionEnvelope;
 
+import java.util.UUID;
+
 import static org.junit.Assert.*;
 
 
@@ -49,6 +51,7 @@ public class MetaboLightsStudyProcessorTest {
         Study study = new Study();
         study.setTitle("This is test title");
         study.setDescription("This is test description");
+        study.setAccession(UUID.randomUUID().toString());
         study.setAttributes(ValidationTestUtils.getStudyAttributes());
         Project project = ValidationTestUtils.getProjectWithContactsAndPublications().getBaseSubmittable();
         submissionEnvelope.getStudies().add(study);
@@ -74,7 +77,7 @@ public class MetaboLightsStudyProcessorTest {
         Study study = new Study();
         study.setTitle("This is test title");
         study.setDescription("This is test description");
-        study.setAccession("MTBLS_DEV2346");
+        study.setAccession("subs-42d9-5");  //corresponds to MTBLS_DEV2348
         study.setAttributes(ValidationTestUtils.getStudyAttributes());
         Project project = ValidationTestUtils.getProjectWithContactsAndPublications().getBaseSubmittable();
         submissionEnvelope.getStudies().add(study);
