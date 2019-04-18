@@ -152,4 +152,17 @@ public class DeletionService {
             throw e;
         }
     }
+
+    public void deleteBioStudiesID(String studyID) {
+        try {
+            String url = mlProperties.getUrl() + studyID + "/biostudies";
+            headers.set("user_token", this.apiKey);
+            HttpEntity<?> request = new HttpEntity<Object>(headers);
+            restTemplate.exchange(url, HttpMethod.DELETE, request, Void.class, 1);
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.error(e.getMessage());
+            throw e;
+        }
+    }
 }

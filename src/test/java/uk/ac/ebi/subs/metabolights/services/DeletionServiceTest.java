@@ -94,4 +94,11 @@ public class DeletionServiceTest {
         rowsToDelete.add(2);
         this.deletionService.deleteTableRows(studyID, filename, rowsToDelete);
     }
+    
+    public void deleteBioStudiesID() {
+        String studyID = "MTBLS_DEV2344";
+        String biostudiesAcc = UUID.randomUUID().toString();
+        String addedAccession = this.postService.addBioStudiesAccession(studyID, biostudiesAcc);
+        this.deletionService.deleteBioStudiesID(studyID);
+    }
 }
