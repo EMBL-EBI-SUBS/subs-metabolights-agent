@@ -333,7 +333,7 @@ public class MetaboLightsStudyProcessor {
                      Delete study descriptors not present in USI attributes
                      */
                     if (!AgentProcessorUtils.alreadyPresent((List) study.getAttributes().get(StudyAttributes.STUDY_DESCRIPTORS), descriptor)) {
-                        this.deletionService.deleteDescriptor(study.getId(), descriptor.getAnnotationValue());
+                        this.deletionService.deleteDescriptor(ServiceUtils.getMLstudyId(study), descriptor.getAnnotationValue());
                     }
                 }
             }
@@ -368,7 +368,7 @@ public class MetaboLightsStudyProcessor {
 
                 for (uk.ac.ebi.subs.metabolights.model.Contact contact : mlStudy.getPeople()) {
                     if (!AgentProcessorUtils.alreadyHas(project.getContacts(), contact)) {
-                        this.deletionService.deleteDescriptor(study.getId(), contact.getEmail());
+                        this.deletionService.deleteContact(ServiceUtils.getMLstudyId(study), contact.getEmail());
                     }
                 }
 
@@ -403,7 +403,7 @@ public class MetaboLightsStudyProcessor {
                 }
                 for (uk.ac.ebi.subs.metabolights.model.Publication publication : mlStudy.getPublications()) {
                     if (!AgentProcessorUtils.alreadyHas(project.getPublications(), publication)) {
-                        this.deletionService.deletePublication(study.getId(), publication.getTitle());
+                        this.deletionService.deletePublication(ServiceUtils.getMLstudyId(study), publication.getTitle());
                     }
                 }
             }
