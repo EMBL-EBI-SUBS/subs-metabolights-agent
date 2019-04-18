@@ -135,14 +135,8 @@ public class MetaboLightsStudyProcessor {
             String metabolightsStudyID = this.fetchService.createNewStudyAndGetAccession();
             processingCertificate.setAccession(metabolightsStudyID);
             processingCertificate.setMessage("Study successfully accessioned in metabolights");
-            if (study.getAccession() != null && !study.getAccession().isEmpty()) {
-                this.postService.addBioStudiesAccession(metabolightsStudyID, study.getAccession());
-            } else {
-                ProcessingCertificate warningCertificate = getNewCertificate();
-                warningCertificate.setProcessingStatus(ProcessingStatusEnum.Error);
-                warningCertificate.setMessage("Biostudies Accession is not available. Updating studies is not possible");
-                processingCertificateList.add(warningCertificate);
-            }
+            AgentProcessorUtils.addMLStudyForRuntimeUse(metabolightsStudyID, study);
+            this.postService.addBioStudiesAccession(metabolightsStudyID, study.getAccession());
         } catch (Exception e) {
             processingCertificate.setMessage("Error creating new study : " + e.getMessage());
             processingCertificateList.add(processingCertificate);
