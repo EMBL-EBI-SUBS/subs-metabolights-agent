@@ -87,20 +87,7 @@ public class MetaboLightsStudyProcessor {
 
         return certificates;
     }
-
-//    ProcessingCertificateEnvelope processStudy(SubmissionEnvelope submissionEnvelope) {
-//        List<ProcessingCertificate> processingCertificateList = new ArrayList<>();
-//        for (Study study : submissionEnvelope.getStudies()) {
-//            //todo handle many studies in one project
-//            if (!study.isAccessioned()) {
-//                return createNewMetaboLightsStudy(study, submissionEnvelope);
-//            } else {
-//                processingCertificateList.addAll(processMetaData(study, submissionEnvelope, false));
-//            }
-//        }
-//        return new ProcessingCertificateEnvelope(submissionEnvelope.getSubmission().getId(), processingCertificateList);
-//    }
-
+    
     ProcessingCertificateEnvelope processStudy(SubmissionEnvelope submissionEnvelope) {
         List<ProcessingCertificate> processingCertificateList = new ArrayList<>();
         for (Study study : submissionEnvelope.getStudies()) {
