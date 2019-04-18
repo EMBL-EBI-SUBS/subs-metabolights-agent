@@ -108,6 +108,15 @@ public class FetchService {
         }
     }
 
+    public String getMLStudyID(String biostudiesAccession) {
+        String endpoint = mlProperties.getUrl() + "biostudies?biostudies_acc=" + biostudiesAccession;
+        ResponseEntity<ObjectNode> response = restTemplate.exchange(
+                endpoint, HttpMethod.GET, getHttpEntity(), ObjectNode.class);
+        ObjectNode result = response.getBody();
+        String accession = result.path("BioStudies").asText();
+        return accession;
+    }
+
     public StudyFiles getStudyFiles(String accession) {
         try {
             String localUrl = mlProperties.getUrl() + accession + "/files";
