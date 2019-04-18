@@ -49,4 +49,10 @@ public class FetchServiceTest {
         this.fetchService.cloneNMRTemplates(accession);
         assertTrue(accession.contains("MTBLS"));
     }
+
+    @Test
+    public void getMLStudyID() {
+        String mlStudyID = this.fetchService.getMLStudyID("subs-42d9-5");
+        assertEquals(mlStudyID,"MTBLS_DEV2348");
+    }
 }
