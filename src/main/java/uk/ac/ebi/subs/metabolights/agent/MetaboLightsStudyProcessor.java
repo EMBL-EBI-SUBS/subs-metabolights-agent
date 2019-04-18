@@ -101,8 +101,8 @@ public class MetaboLightsStudyProcessor {
                 return new ProcessingCertificateEnvelope(submissionEnvelope.getSubmission().getId(), processingCertificateList);
             } else {
                 String mlStudyID = this.fetchService.getMLStudyID(study.getAccession());
-                AgentProcessorUtils.addMLStudyForRuntimeUse(mlStudyID, study);
                 if (AgentProcessorUtils.biostudiesIsAlreadyLinkedWith(mlStudyID)) {
+                    AgentProcessorUtils.addMLStudyForRuntimeUse(mlStudyID, study);
                     processingCertificateList.addAll(processMetaData(study, submissionEnvelope, false));
                 } else {
                     return createNewMetaboLightsStudy(study, submissionEnvelope);
