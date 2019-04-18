@@ -12,7 +12,7 @@ public class MLProperties {
     @Value("${metabolights.apiKey}")
     private String apiKey;
 
-    private String url = "https://wwwdev.ebi.ac.uk:443/metabolights/ws/studies/";
+    private String url = "http://wwwdev.ebi.ac.uk:80/metabolights/ws/studies/";
 
 
 }

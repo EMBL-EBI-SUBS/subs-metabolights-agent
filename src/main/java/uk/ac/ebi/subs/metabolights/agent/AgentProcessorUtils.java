@@ -419,4 +419,14 @@ public class AgentProcessorUtils {
         }
 
     }
+
+    public static boolean biostudiesIsAlreadyLinkedWith(String mlStudyID) {
+        return mlStudyID != null && !mlStudyID.isEmpty();
+    }
+
+    public static void addMLStudyForRuntimeUse(String mlStudyID, Study usiStudy) {
+        Attribute attribute = new Attribute();
+        attribute.setValue(mlStudyID);
+        usiStudy.getAttributes().put("mlStudyID", Arrays.asList(attribute));
+    }
 }

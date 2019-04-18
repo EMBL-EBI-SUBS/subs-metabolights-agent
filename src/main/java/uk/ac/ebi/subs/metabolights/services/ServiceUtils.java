@@ -8,9 +8,12 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.TextNode;
 import org.json.JSONException;
 import org.json.JSONObject;
+import uk.ac.ebi.subs.data.component.Attribute;
+import uk.ac.ebi.subs.data.submittable.Study;
 import uk.ac.ebi.subs.metabolights.model.Header;
 import uk.ac.ebi.subs.metabolights.model.SampleMap;
 
+import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -65,5 +68,10 @@ public class ServiceUtils {
                 map.put(entry.getKey(), "");
             }
         }
+    }
+
+    public static String getMLstudyId(Study usiStudy) {
+        Collection<Attribute> mlStudyIDs = usiStudy.getAttributes().get("mlStudyID");
+        return mlStudyIDs.iterator().next().getValue();
     }
 }
