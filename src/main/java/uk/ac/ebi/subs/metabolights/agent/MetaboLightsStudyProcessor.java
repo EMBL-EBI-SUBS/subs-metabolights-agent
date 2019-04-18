@@ -135,7 +135,7 @@ public class MetaboLightsStudyProcessor {
             String metabolightsStudyID = this.fetchService.createNewStudyAndGetAccession();
             processingCertificate.setAccession(metabolightsStudyID);
             processingCertificate.setMessage("Study successfully accessioned in metabolights");
-            AgentProcessorUtils.addMLStudyForRuntimeUse(metabolightsStudyID, study);
+            AgentProcessorUtils.addMLStudyForRuntimeUse(metabolightsStudyID, study);             
             this.postService.addBioStudiesAccession(metabolightsStudyID, study.getAccession());
         } catch (Exception e) {
             processingCertificate.setMessage("Error creating new study : " + e.getMessage());
@@ -151,8 +151,8 @@ public class MetaboLightsStudyProcessor {
     List<ProcessingCertificate> processMetaData(Study study, SubmissionEnvelope submissionEnvelope, boolean isNewSubmission) {
         List<ProcessingCertificate> processingCertificateList = new ArrayList<>();
 
-        uk.ac.ebi.subs.metabolights.model.Study existingMetaboLightsStudy = getStudyBy(study.getAccession());
-        StudyFiles studyFiles = this.fetchService.getStudyFiles(study.getAccession());
+        uk.ac.ebi.subs.metabolights.model.Study existingMetaboLightsStudy = getStudyBy(ServiceUtils.getMLstudyId(study));
+        StudyFiles studyFiles = this.fetchService.getStudyFiles(ServiceUtils.getMLstudyId(study));
         String sampleFileName = AgentProcessorUtils.getSampleFileName(studyFiles);
         List<String> assayFileNames = AgentProcessorUtils.getAssayFileName(studyFiles);
 
@@ -254,7 +254,7 @@ public class MetaboLightsStudyProcessor {
         certificate.setAccession(study.getAccession());
         if (study.getTitle() != null && !study.getTitle().isEmpty()) {
             try {
-                this.updateService.updateTitle(study.getAccession(), study.getTitle());
+                this.updateService.updateTitle(ServiceUtils.getMLstudyId(study), study.getTitle());
                 certificate.setMessage(getSuccessMessage("title"));
                 certificate.setProcessingStatus(ProcessingStatusEnum.Submitted);
             } catch (Exception e) {
@@ -271,7 +271,7 @@ public class MetaboLightsStudyProcessor {
         certificate.setAccession(study.getAccession());
         if (study.getDescription() != null && !study.getDescription().isEmpty()) {
             try {
-                this.updateService.updateDescription(study.getAccession(), study.getDescription());
+                this.updateService.updateDescription(ServiceUtils.getMLstudyId(study), study.getDescription());
                 certificate.setMessage(getSuccessMessage("description"));
                 certificate.setProcessingStatus(ProcessingStatusEnum.Submitted);
             } catch (Exception e) {
@@ -293,14 +293,14 @@ public class MetaboLightsStudyProcessor {
         }
         try {
             if (!AgentProcessorUtils.containsValue(mlStudy.getFactors())) {
-                this.postService.addStudyFactors(study.getAccession(), (List<Attribute>) study.getAttributes().get(StudyAttributes.STUDY_FACTORS));
+                this.postService.addStudyFactors(ServiceUtils.getMLstudyId(study), (List<Attribute>) study.getAttributes().get(StudyAttributes.STUDY_FACTORS));
             } else {
                 for (Attribute factorAttribute : study.getAttributes().get(StudyAttributes.STUDY_FACTORS)) {
                     if (AgentProcessorUtils.isValid(factorAttribute.getValue())) {
                         if (AgentProcessorUtils.alreadyPresent(mlStudy.getFactors(), factorAttribute.getValue())) {
-                            this.updateService.updateFactor(study.getAccession(), factorAttribute);
+                            this.updateService.updateFactor(ServiceUtils.getMLstudyId(study), factorAttribute);
                         } else {
-                            this.postService.addFactor(study.getAccession(), factorAttribute);
+                            this.postService.addFactor(ServiceUtils.getMLstudyId(study), factorAttribute);
                         }
                     }
                 }
@@ -309,7 +309,7 @@ public class MetaboLightsStudyProcessor {
                      Delete factors not present in USI attributes
                      */
                     if (!AgentProcessorUtils.alreadyPresent((List) study.getAttributes().get(StudyAttributes.STUDY_FACTORS), factor)) {
-                        this.deletionService.deleteFactor(study.getAccession(), factor.getFactorName());
+                        this.deletionService.deleteFactor(ServiceUtils.getMLstudyId(study), factor.getFactorName());
                     }
                 }
             }
@@ -330,14 +330,14 @@ public class MetaboLightsStudyProcessor {
         }
         try {
             if (!AgentProcessorUtils.containsValue(mlStudy.getStudyDesignDescriptors())) {
-                this.postService.addStudyDesignDescriptors(study.getAccession(), (List<Attribute>) study.getAttributes().get(StudyAttributes.STUDY_DESCRIPTORS));
+                this.postService.addStudyDesignDescriptors(ServiceUtils.getMLstudyId(study), (List<Attribute>) study.getAttributes().get(StudyAttributes.STUDY_DESCRIPTORS));
             } else {
                 for (Attribute descriptorAttribute : study.getAttributes().get(StudyAttributes.STUDY_DESCRIPTORS)) {
                     if (AgentProcessorUtils.isValid(descriptorAttribute.getValue())) {
                         if (AgentProcessorUtils.alreadyHas(mlStudy.getStudyDesignDescriptors(), descriptorAttribute.getValue())) {
-                            this.updateService.updateDescriptor(study.getAccession(), descriptorAttribute);
+                            this.updateService.updateDescriptor(ServiceUtils.getMLstudyId(study), descriptorAttribute);
                         } else {
-                            this.postService.addDescriptor(study.getAccession(), descriptorAttribute);
+                            this.postService.addDescriptor(ServiceUtils.getMLstudyId(study), descriptorAttribute);
                         }
                     }
                 }
@@ -367,14 +367,14 @@ public class MetaboLightsStudyProcessor {
         }
         try {
             if (!AgentProcessorUtils.containsValue(mlStudy.getPeople())) {
-                this.postService.addContacts(study.getAccession(), project.getContacts());
+                this.postService.addContacts(ServiceUtils.getMLstudyId(study), project.getContacts());
             } else {
                 for (uk.ac.ebi.subs.data.component.Contact contact : project.getContacts()) {
                     if (AgentProcessorUtils.isValid(contact.getEmail())) {
                         if (AgentProcessorUtils.alreadyHas(mlStudy.getPeople(), contact)) {
-                            this.updateService.updateContact(study.getAccession(), contact);
+                            this.updateService.updateContact(ServiceUtils.getMLstudyId(study), contact);
                         } else {
-                            this.postService.addContacts(study.getAccession(), Arrays.asList(contact));
+                            this.postService.addContacts(ServiceUtils.getMLstudyId(study), Arrays.asList(contact));
                         }
                     }
                 }
@@ -403,14 +403,14 @@ public class MetaboLightsStudyProcessor {
         }
         try {
             if (!AgentProcessorUtils.containsValue(mlStudy.getPublications())) {
-                this.postService.addPublications(study.getAccession(), project.getPublications());
+                this.postService.addPublications(ServiceUtils.getMLstudyId(study), project.getPublications());
             } else {
                 for (uk.ac.ebi.subs.data.component.Publication publication : project.getPublications()) {
                     if (AgentProcessorUtils.isValid(publication.getArticleTitle())) {
                         if (AgentProcessorUtils.alreadyHas(mlStudy.getPublications(), publication)) {
-                            this.updateService.updatePublication(study.getAccession(), publication);
+                            this.updateService.updatePublication(ServiceUtils.getMLstudyId(study), publication);
                         } else {
-                            this.postService.add(study.getAccession(), publication);
+                            this.postService.add(ServiceUtils.getMLstudyId(study), publication);
                         }
                     }
                 }
@@ -437,14 +437,14 @@ public class MetaboLightsStudyProcessor {
         }
         try {
             if (!AgentProcessorUtils.containsValue(mlStudy.getProtocols())) {
-                this.postService.addStudyProtocols(study.getAccession(), protocols);
+                this.postService.addStudyProtocols(ServiceUtils.getMLstudyId(study), protocols);
             } else {
                 for (Protocol protocol : protocols) {
                     if (AgentProcessorUtils.isValid(protocol.getTitle())) {
                         if (AgentProcessorUtils.alreadyHas(mlStudy.getProtocols(), protocol)) {
-                            this.updateService.updateProtocol(study.getAccession(), protocol);
+                            this.updateService.updateProtocol(ServiceUtils.getMLstudyId(study), protocol);
                         } else {
-                            this.postService.add(study.getAccession(), protocol);
+                            this.postService.add(ServiceUtils.getMLstudyId(study), protocol);
                         }
                     }
                 }
@@ -468,29 +468,29 @@ public class MetaboLightsStudyProcessor {
             certificate.setMessage("Something went wrong while trying to access the existing metabolights study files. Unable to update samples");
             return certificate;
         }
-        //  this.postService.addSamples(samples, study.getAccession(), sampleFileToUpdate);
-        //   this.updateService.updateSamples(samples, study.getAccession(), sampleFileToUpdate);
+        //  this.postService.addSamples(samples, ServiceUtils.getMLstudyId(study), sampleFileToUpdate);
+        //   this.updateService.updateSamples(samples, ServiceUtils.getMLstudyId(study), sampleFileToUpdate);
 
-        MetaboLightsTable sampleTable = this.fetchService.getMetaboLightsDataTable(study.getAccession(), sampleFileToUpdate);
+        MetaboLightsTable sampleTable = this.fetchService.getMetaboLightsDataTable(ServiceUtils.getMLstudyId(study), sampleFileToUpdate);
 
         if (isNewSubmission) {
             try {
-                this.postService.addSamples(samples, study.getAccession(), sampleFileToUpdate, sampleTable.getHeader());
+                this.postService.addSamples(samples, ServiceUtils.getMLstudyId(study), sampleFileToUpdate, sampleTable.getHeader());
             } catch (Exception e) {
                 certificate.setMessage("Error saving samples : " + e.getMessage());
             }
         } else {
             try {
-//                MetaboLightsTable sampleTable = this.fetchService.getMetaboLightsDataTable(study.getAccession(), sampleFileToUpdate);
+//                MetaboLightsTable sampleTable = this.fetchService.getMetaboLightsDataTable(ServiceUtils.getMLstudyId(study), sampleFileToUpdate);
                 Map<String, List<Sample>> samplesToAddAndUpdate = AgentProcessorUtils.getSamplesToAddAndUpdate(samples, sampleTable);
-                this.updateService.updateSamples(samplesToAddAndUpdate.get("update"), study.getAccession(), sampleFileToUpdate, sampleTable.getHeader());
-                this.postService.addSamples(samplesToAddAndUpdate.get("add"), study.getAccession(), sampleFileToUpdate, sampleTable.getHeader());
+                this.updateService.updateSamples(samplesToAddAndUpdate.get("update"), ServiceUtils.getMLstudyId(study), sampleFileToUpdate, sampleTable.getHeader());
+                this.postService.addSamples(samplesToAddAndUpdate.get("add"), ServiceUtils.getMLstudyId(study), sampleFileToUpdate, sampleTable.getHeader());
                 /*
                 Delete sample rows not present in submission's sample list
                  */
                 List<Integer> sampleIndexesToDelete = AgentProcessorUtils.getSamplesIndexesToDelete(samples, sampleTable);
                 if (sampleIndexesToDelete.size() > 0) {
-                    this.deletionService.deleteTableRows(study.getAccession(), sampleFileToUpdate, sampleIndexesToDelete);
+                    this.deletionService.deleteTableRows(ServiceUtils.getMLstudyId(study), sampleFileToUpdate, sampleIndexesToDelete);
                 }
 
             } catch (Exception e) {
@@ -516,13 +516,13 @@ public class MetaboLightsStudyProcessor {
                 for (uk.ac.ebi.subs.data.submittable.Assay assay : assays) {
                     if (AgentProcessorUtils.getTechnologyType(assay).equalsIgnoreCase("NMR")) {
                         NewMetabolightsAssay newMetabolightsAssay = AgentProcessorUtils.generateNewNMRAssay();
-                        HttpStatus status = this.postService.addNewAssay(newMetabolightsAssay, study.getAccession());
+                        HttpStatus status = this.postService.addNewAssay(newMetabolightsAssay, ServiceUtils.getMLstudyId(study));
                         if (status.is2xxSuccessful()) {
-                            StudyFiles studyFiles = this.fetchService.getStudyFiles(study.getAccession());
+                            StudyFiles studyFiles = this.fetchService.getStudyFiles(ServiceUtils.getMLstudyId(study));
                             List<String> assayFiles = AgentProcessorUtils.getAssayFileName(studyFiles);
                             if (assayFiles.size() == 1) {
-                                MetaboLightsTable assayTable = this.fetchService.getMetaboLightsDataTable(study.getAccession(), assayFiles.get(0));
-                                this.postService.addAssayRows(assays, study.getAccession(), assayFiles.get(0), assayTable.getHeader());
+                                MetaboLightsTable assayTable = this.fetchService.getMetaboLightsDataTable(ServiceUtils.getMLstudyId(study), assayFiles.get(0));
+                                this.postService.addAssayRows(assays, ServiceUtils.getMLstudyId(study), assayFiles.get(0), assayTable.getHeader());
                             }
                         }
                     }
@@ -533,17 +533,17 @@ public class MetaboLightsStudyProcessor {
         } else {
             try {
                 if (assayFileNames.size() == 1) {
-                    MetaboLightsTable assayTable = this.fetchService.getMetaboLightsDataTable(study.getAccession(), assayFileNames.get(0));
-//                    this.postService.addAssayRows(assays, study.getAccession(), assayFileNames.get(0), assayTable.getHeader());
+                    MetaboLightsTable assayTable = this.fetchService.getMetaboLightsDataTable(ServiceUtils.getMLstudyId(study), assayFileNames.get(0));
+//                    this.postService.addAssayRows(assays, ServiceUtils.getMLstudyId(study), assayFileNames.get(0), assayTable.getHeader());
                     Map<String, List<uk.ac.ebi.subs.data.submittable.Assay>> assayRowsToAddAndUpdate = AgentProcessorUtils.getAssayRowsToAddAndUpdate(assays, assayTable);
-                    this.updateService.updateAssays(assayRowsToAddAndUpdate.get("update"), study.getAccession(), assayFileNames.get(0), assayTable.getHeader());
-                    this.postService.addAssayRows(assayRowsToAddAndUpdate.get("add"), study.getAccession(), assayFileNames.get(0), assayTable.getHeader());
+                    this.updateService.updateAssays(assayRowsToAddAndUpdate.get("update"), ServiceUtils.getMLstudyId(study), assayFileNames.get(0), assayTable.getHeader());
+                    this.postService.addAssayRows(assayRowsToAddAndUpdate.get("add"), ServiceUtils.getMLstudyId(study), assayFileNames.get(0), assayTable.getHeader());
                 /*
                 Delete assay rows not present in submission's assay list
                  */
                     List<Integer> assayRowIndexesToDelete = AgentProcessorUtils.getAssayRowIndexesToDelete(assays, assayTable);
                     if (assayRowIndexesToDelete.size() > 0) {
-                        this.deletionService.deleteTableRows(study.getAccession(), assayFileNames.get(0), assayRowIndexesToDelete);
+                        this.deletionService.deleteTableRows(ServiceUtils.getMLstudyId(study), assayFileNames.get(0), assayRowIndexesToDelete);
                     }
 
                 }
