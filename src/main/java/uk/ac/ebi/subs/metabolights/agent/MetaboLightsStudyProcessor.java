@@ -108,10 +108,18 @@ public class MetaboLightsStudyProcessor {
         List<ProcessingCertificate> processingCertificateList = new ArrayList<>();
         ProcessingCertificate processingCertificate = getNewCertificate();
         try {
-            String accession = this.fetchService.createNewStudyAndGetAccession();
-            study.setAccession(accession);
-            processingCertificate.setAccession(accession);
-            processingCertificate.setMessage("Study successfully accessioned");
+            String metabolightsStudyID = this.fetchService.createNewStudyAndGetAccession();
+            processingCertificate.setAccession(metabolightsStudyID);
+            processingCertificate.setMessage("Study successfully accessioned in metabolights");
+
+            if(study.getAccession() !=null && !study.getAccession().isEmpty()){
+                this.postService.addBioStudiesAccession(metabolightsStudyID,study.getAccession());
+            }  else{
+                ProcessingCertificate warningCertificate = getNewCertificate();
+                warningCertificate.setProcessingStatus(ProcessingStatusEnum.Error);
+                warningCertificate.setMessage("Biostudies Accession is not available. Updating studies is not possible");
+                processingCertificateList.add(warningCertificate);
+            }
         } catch (Exception e) {
             processingCertificate.setMessage("Error creating new study : " + e.getMessage());
             processingCertificateList.add(processingCertificate);
