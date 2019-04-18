@@ -105,4 +105,12 @@ public class PostServiceTest {
 
         this.postService.addSampleRows(sampleList, studyID, sampleFileName, sampleTable.getHeader());
     }
+
+    @Test
+    public void addNewBiostudiesAccession() {
+        String studyID = "MTBLS_DEV2346";
+        String biostudiesAcc = UUID.randomUUID().toString();
+        String addedAccession = this.postService.addBioStudiesAccession(studyID, biostudiesAcc);
+        assertEquals(addedAccession, biostudiesAcc);
+    }
 }
