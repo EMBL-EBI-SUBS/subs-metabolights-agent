@@ -10,6 +10,8 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import uk.ac.ebi.subs.metabolights.model.MetaboLightsTable;
+import uk.ac.ebi.subs.metabolights.model.MetaboLightsTableResult;
 import uk.ac.ebi.subs.metabolights.model.Study;
 
 import static org.junit.Assert.*;
@@ -55,4 +57,19 @@ public class FetchServiceTest {
         String mlStudyID = this.fetchService.getMLStudyID("subs-42d9-5");
         assertEquals(mlStudyID,"MTBLS_DEV2348");
     }
+
+    @Test
+    public void getMLSampleTable() {
+        MetaboLightsTable mtbls_dev2565 =
+                this.fetchService.getMetaboLightsDataTable("MTBLS_DEV2565", "s_MTBLS_DEV2565.txt");
+        System.out.println(mtbls_dev2565.getHeader());
+    }
+
+    @Test
+    public void getMLAssayTable() {
+
+        MetaboLightsTableResult mtbls_dev2565 = this.fetchService.getMetaboLightsSampleDataTable("MTBLS2", "a_mtbl2_metabolite profiling_mass spectrometry.txt");
+        System.out.println(mtbls_dev2565.getHeader());
+    }
+
 }
