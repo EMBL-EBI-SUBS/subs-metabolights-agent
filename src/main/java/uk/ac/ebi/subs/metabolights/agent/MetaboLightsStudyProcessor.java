@@ -120,8 +120,8 @@ public class MetaboLightsStudyProcessor {
         ProcessingCertificate processingCertificate = getNewCertificate();
         try {
             String metabolightsStudyID = this.fetchService.createNewStudyAndGetAccession();
-            processingCertificate.setAccession(metabolightsStudyID);
-            processingCertificate.setMessage("Study successfully accessioned in metabolights");
+            processingCertificate.setAccession(study.getAccession());
+            processingCertificate.setMessage("Study successfully accessioned in metabolights - " + metabolightsStudyID);
             AgentProcessorUtils.addMLStudyForRuntimeUse(metabolightsStudyID, study);             
             this.postService.addBioStudiesAccession(metabolightsStudyID, study.getAccession());
         } catch (Exception e) {
@@ -154,17 +154,17 @@ public class MetaboLightsStudyProcessor {
             return processingCertificateList;
         }
 
-        update(processingCertificateList, processTitle(study));
-        update(processingCertificateList, processDescription(study));
-        update(processingCertificateList, processStudyFactors(study, existingMetaboLightsStudy));
-        update(processingCertificateList, processStudyDescriptors(study, existingMetaboLightsStudy));
-        update(processingCertificateList, processProtocols(study, submissionEnvelope.getProtocols(), existingMetaboLightsStudy));
-
-        if (submissionEnvelope.getProjects() != null && submissionEnvelope.getProjects().size() > 0) {
+//        update(processingCertificateList, processTitle(study));
+//        update(processingCertificateList, processDescription(study));
+//        update(processingCertificateList, processStudyFactors(study, existingMetaboLightsStudy));
+//        update(processingCertificateList, processStudyDescriptors(study, existingMetaboLightsStudy));
+//        update(processingCertificateList, processProtocols(study, submissionEnvelope.getProtocols(), existingMetaboLightsStudy));
+//
+//        if (submissionEnvelope.getProjects() != null && submissionEnvelope.getProjects().size() > 0) {
 //            //todo handle multiple projects
-            update(processingCertificateList, processContacts(study, submissionEnvelope.getProjects().get(0), existingMetaboLightsStudy));
-            update(processingCertificateList, processPublications(study, submissionEnvelope.getProjects().get(0), existingMetaboLightsStudy));
-        }
+//            update(processingCertificateList, processContacts(study, submissionEnvelope.getProjects().get(0), existingMetaboLightsStudy));
+//            update(processingCertificateList, processPublications(study, submissionEnvelope.getProjects().get(0), existingMetaboLightsStudy));
+//        }
 
 
         update(processingCertificateList, processSamples(study, submissionEnvelope.getSamples(), sampleFileName, isNewSubmission));
@@ -185,7 +185,7 @@ public class MetaboLightsStudyProcessor {
 
          */
 
-        update(processingCertificateList, processAssaysAndAssayData(study, submissionEnvelope.getAssays(), submissionEnvelope.getAssayData(), isNewSubmission, assayFileNames));
+//        update(processingCertificateList, processAssaysAndAssayData(study, submissionEnvelope.getAssays(), submissionEnvelope.getAssayData(), isNewSubmission, assayFileNames));
 
         return processingCertificateList;
     }
@@ -458,11 +458,11 @@ public class MetaboLightsStudyProcessor {
         //  this.postService.addSamples(samples, ServiceUtils.getMLstudyId(study), sampleFileToUpdate);
         //   this.updateService.updateSamples(samples, ServiceUtils.getMLstudyId(study), sampleFileToUpdate);
 
-        MetaboLightsTable sampleTable = this.fetchService.getMetaboLightsDataTable(ServiceUtils.getMLstudyId(study), sampleFileToUpdate);
+        MetaboLightsTableResult sampleTable = this.fetchService.getMetaboLightsSampleDataTable(ServiceUtils.getMLstudyId(study), sampleFileToUpdate);
 
         if (isNewSubmission) {
             try {
-                this.postService.addSamples(samples, ServiceUtils.getMLstudyId(study), sampleFileToUpdate, sampleTable.getHeader());
+                this.postService.addSampleRows(samples, ServiceUtils.getMLstudyId(study), sampleFileToUpdate, sampleTable.getHeader());
             } catch (Exception e) {
                 certificate.setMessage("Error saving samples : " + e.getMessage());
             }
@@ -471,7 +471,7 @@ public class MetaboLightsStudyProcessor {
 //                MetaboLightsTable sampleTable = this.fetchService.getMetaboLightsDataTable(ServiceUtils.getMLstudyId(study), sampleFileToUpdate);
                 Map<String, List<Sample>> samplesToAddAndUpdate = AgentProcessorUtils.getSamplesToAddAndUpdate(samples, sampleTable);
                 this.updateService.updateSamples(samplesToAddAndUpdate.get("update"), ServiceUtils.getMLstudyId(study), sampleFileToUpdate, sampleTable.getHeader());
-                this.postService.addSamples(samplesToAddAndUpdate.get("add"), ServiceUtils.getMLstudyId(study), sampleFileToUpdate, sampleTable.getHeader());
+                this.postService.addSampleRows(samplesToAddAndUpdate.get("add"), ServiceUtils.getMLstudyId(study), sampleFileToUpdate, sampleTable.getHeader());
                 /*
                 Delete sample rows not present in submission's sample list
                  */
