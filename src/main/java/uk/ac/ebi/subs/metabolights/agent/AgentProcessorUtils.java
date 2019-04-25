@@ -153,24 +153,29 @@ public class AgentProcessorUtils {
         List<Sample> samplesToUpdate = new ArrayList<>();
         List<Sample> samplesToAdd = new ArrayList<>();
 
-        if (sampleTable.getData().getRows() != null && sampleTable.getData().getRows().size() > 0) {
-            for (Sample sample : samples) {
-                if (!sample.getAlias().isEmpty()) {
-                    Map<Boolean, String> mappingResult = findMatch(sample.getAlias(), sampleTable);
-                    for (Map.Entry<Boolean, String> result : mappingResult.entrySet()) {
-                        if (result.getKey().booleanValue()) {
+        if (sampleTable.getData().getRows() != null) {
+            if(sampleTable.getData().getRows().size() > 0){
+                for (Sample sample : samples) {
+                    if (!sample.getAlias().isEmpty()) {
+                        Map<Boolean, String> mappingResult = findMatch(sample.getAlias(), sampleTable);
+                        for (Map.Entry<Boolean, String> result : mappingResult.entrySet()) {
+                            if (result.getKey().booleanValue()) {
                         /*
                         index to be updated must be set in the samples
                          */
-                            Attribute attribute = new Attribute();
-                            attribute.setValue(result.getValue());
-                            sample.getAttributes().put(SampleSpreadSheetConstants.ROW_INDEX, Arrays.asList(attribute));
-                            samplesToUpdate.add(sample);
-                        } else {
-                            samplesToAdd.add(sample);
+                                Attribute attribute = new Attribute();
+                                attribute.setValue(result.getValue());
+                                sample.getAttributes().put(SampleSpreadSheetConstants.ROW_INDEX, Arrays.asList(attribute));
+                                samplesToUpdate.add(sample);
+                            } else {
+                                samplesToAdd.add(sample);
+                            }
                         }
                     }
                 }
+            }
+            else {
+                samplesToAdd.addAll(samples);
             }
         }
         Map<String, List<Sample>> seggregatedSamples = new HashMap<>();
