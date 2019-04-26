@@ -77,16 +77,18 @@ public class MetaboLightsStudyProcessorTest {
         Study study = new Study();
         study.setTitle("This is test title");
         study.setDescription("This is test description");
-        study.setAccession("subs-42d9-5");  //corresponds to MTBLS_DEV2348
+        //study.setAccession("subs-42d9-5");  //corresponds to MTBLS_DEV2348
+        study.setAccession("08350345-18a9-43c8-ae97-c6d942d00f80");
         study.setAttributes(ValidationTestUtils.getStudyAttributes());
         Project project = ValidationTestUtils.getProjectWithContactsAndPublications().getBaseSubmittable();
         submissionEnvelope.getStudies().add(study);
         submissionEnvelope.getProjects().add(project);
         submissionEnvelope.getProtocols().addAll(ValidationTestUtils.generateUSIProtocols());
+        submissionEnvelope.getSamples().add(Utilities.getUSISimpleSampleFromDisc());
         submissionEnvelope.getAssays().addAll(Utilities.getUSIAssayListFromDisc());
         submissionEnvelope.getAssayData().addAll(Utilities.generateUSIAssayData());
         ProcessingCertificateEnvelope processingCertificateEnvelope = metaboLightsStudyProcessor.processStudy(submissionEnvelope);
-        assertEquals(9, processingCertificateEnvelope.getProcessingCertificates().size());
+        assertEquals(1, processingCertificateEnvelope.getProcessingCertificates().size());
     }
 
     @Test
