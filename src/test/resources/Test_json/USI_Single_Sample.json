@@ -17,13 +17,6 @@
         ]
       }
     ],
-    "Peturbation": [
-      {
-        "value": "chemo",
-        "units": null,
-        "terms": []
-      }
-    ],
     "Organism part": [
       {
         "value": "ovarian serous adenocarcinoma cell line",
@@ -33,20 +26,6 @@
             "url": "http://purl.obolibrary.org/obo/BTO_0003804"
           }
         ]
-      }
-    ],
-    "Time Point": [
-      {
-        "value": "24",
-        "units": "hour",
-        "terms": []
-      }
-    ],
-    "Cell Type": [
-      {
-        "value": "cancer cell",
-        "units": null,
-        "terms": []
       }
     ]
   },
