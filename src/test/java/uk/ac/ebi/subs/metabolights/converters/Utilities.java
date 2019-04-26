@@ -381,9 +381,18 @@ public class Utilities {
     }
 
     public static uk.ac.ebi.subs.data.submittable.Sample getUSISampleFromDisc() {
+       return readSampleFromDisc("Test_json/USI_Single_Sample_MTBLS5.json");
+    }
+
+    public static uk.ac.ebi.subs.data.submittable.Sample getUSISimpleSampleFromDisc() {
+
+       return readSampleFromDisc("Test_json/USI_Single_Sample.json");
+    }
+
+    public static uk.ac.ebi.subs.data.submittable.Sample readSampleFromDisc(String filename){
         uk.ac.ebi.subs.data.submittable.Sample sample;
         try {
-            String result = IOUtils.toString(WSUtils.class.getClassLoader().getResourceAsStream("Test_json/USI_Single_Sample_MTBLS5.json"));
+            String result = IOUtils.toString(WSUtils.class.getClassLoader().getResourceAsStream(filename));
             try {
                 mapper.registerModule(new JavaTimeModule());
                 sample = mapper.readValue(result, uk.ac.ebi.subs.data.submittable.Sample.class);
