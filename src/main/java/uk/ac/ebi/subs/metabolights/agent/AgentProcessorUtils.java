@@ -148,29 +148,34 @@ public class AgentProcessorUtils {
         return assayFileNames;
     }
 
-    public static Map<String, List<Sample>> getSamplesToAddAndUpdate(List<Sample> samples, MetaboLightsTable sampleTable) throws Exception {
+    public static Map<String, List<Sample>> getSamplesToAddAndUpdate(List<Sample> samples, MetaboLightsTableResult sampleTable) throws Exception {
 
         List<Sample> samplesToUpdate = new ArrayList<>();
         List<Sample> samplesToAdd = new ArrayList<>();
 
-        if (sampleTable.getData().getRows() != null && sampleTable.getData().getRows().size() > 0) {
-            for (Sample sample : samples) {
-                if (!sample.getAlias().isEmpty()) {
-                    Map<Boolean, String> mappingResult = findMatch(sample.getAlias(), sampleTable);
-                    for (Map.Entry<Boolean, String> result : mappingResult.entrySet()) {
-                        if (result.getKey().booleanValue()) {
+        if (sampleTable.getData().getRows() != null) {
+            if(sampleTable.getData().getRows().size() > 0){
+                for (Sample sample : samples) {
+                    if (!sample.getAlias().isEmpty()) {
+                        Map<Boolean, String> mappingResult = findMatch(sample.getAlias(), sampleTable);
+                        for (Map.Entry<Boolean, String> result : mappingResult.entrySet()) {
+                            if (result.getKey().booleanValue()) {
                         /*
                         index to be updated must be set in the samples
                          */
-                            Attribute attribute = new Attribute();
-                            attribute.setValue(result.getValue());
-                            sample.getAttributes().put(SampleSpreadSheetConstants.ROW_INDEX, Arrays.asList(attribute));
-                            samplesToUpdate.add(sample);
-                        } else {
-                            samplesToAdd.add(sample);
+                                Attribute attribute = new Attribute();
+                                attribute.setValue(result.getValue());
+                                sample.getAttributes().put(SampleSpreadSheetConstants.ROW_INDEX, Arrays.asList(attribute));
+                                samplesToUpdate.add(sample);
+                            } else {
+                                samplesToAdd.add(sample);
+                            }
                         }
                     }
                 }
+            }
+            else {
+                samplesToAdd.addAll(samples);
             }
         }
         Map<String, List<Sample>> seggregatedSamples = new HashMap<>();
@@ -241,7 +246,7 @@ public class AgentProcessorUtils {
         return mappingResult;
     }
 
-    public static List<Integer> getSamplesIndexesToDelete(List<Sample> samples, MetaboLightsTable sampleTable) throws Exception {
+    public static List<Integer> getSamplesIndexesToDelete(List<Sample> samples, MetaboLightsTableResult sampleTable) throws Exception {
 
         List<Integer> rowsToDelete = new ArrayList<>();
 
@@ -309,7 +314,7 @@ public class AgentProcessorUtils {
         return rowsToDelete;
     }
 
-    private static Map<Boolean, String> findMatch(String sampleName, MetaboLightsTable sampleTable) {
+    private static Map<Boolean, String> findMatch(String sampleName, MetaboLightsTableResult sampleTable) {
         Map<Boolean, String> mappingResult = new HashMap<>();
         for (Map<String, String> row : sampleTable.getData().getRows()) {
             for (Map.Entry<String, String> cell : row.entrySet()) {

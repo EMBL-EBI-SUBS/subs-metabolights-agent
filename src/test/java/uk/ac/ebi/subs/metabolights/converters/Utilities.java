@@ -156,7 +156,7 @@ public class Utilities {
     }
 
     public static List<AssayData> generateUSIAssayDataForSingleAssay() {
-        List<AssayData> assayData = new ArrayList<>();
+        List<AssayData> assayDataList = new ArrayList<>();
         // this id's are mapping to alias in Test_USI_Assay_file.json file
         AssayData assayData1 = new AssayData();
         assayData1.setAlias("a_mtbl2_metabolite profiling_mass spectrometry");
@@ -179,15 +179,19 @@ public class Utilities {
         file.setLabel("Metabolite Assignment File");
         file.setName("m_mtbl2_metabolite profiling_mass spectrometry_v2_maf.tsv");
         assayData1.getFiles().add(file);
-        return assayData;
+        assayDataList.add(assayData1);
+        return assayDataList;
     }
 
     public static List<AssayData> generateUSIAssayData() {
-        List<AssayData> assayData = new ArrayList<>();
+        List<AssayData> assayDataList = new ArrayList<>();
 
         // this id's are mapping to alias in usi_assay_list.json file
         AssayData assayData1 = new AssayData();
-        assayData1.setAlias("a_mtbl2_metabolite profiling_mass spectrometry_1");
+        AssayRef assayRef = new AssayRef();
+        assayRef.setAlias("nmr_assay_1");
+        assayData1.setAssayRefs(Arrays.asList(assayRef));
+        assayData1.setAlias("nmr_assay_1_ad");
         File file = new File();
         file.setLabel("Acquisition Parameter Data File");
         file.setName("acqus.txt");
@@ -208,12 +212,17 @@ public class Utilities {
         file.setName("m_mtbl2_metabolite profiling_mass spectrometry_v2_maf.tsv");
         assayData1.getFiles().add(file);
 
+        assayDataList.add(assayData1);
+
         /*
         data 2
          */
 
         assayData1 = new AssayData();
-        assayData1.setAlias("a_mtbl2_metabolite profiling_mass spectrometry_2");
+        assayRef = new AssayRef();
+        assayRef.setAlias("nmr_assay_2");
+        assayData1.setAssayRefs(Arrays.asList(assayRef));
+        assayData1.setAlias("nmr_assay_2_ad");
         file = new File();
         file.setLabel("Acquisition Parameter Data File");
         file.setName("acqus2.txt");
@@ -234,12 +243,17 @@ public class Utilities {
         file.setName("m_mtbl2_metabolite profiling_mass spectrometry_v2_maf_2.tsv");
         assayData1.getFiles().add(file);
 
+        assayDataList.add(assayData1);
+
          /*
         data 3
          */
 
         assayData1 = new AssayData();
-        assayData1.setAlias("a_mtbl2_metabolite profiling_mass spectrometry_3");
+        assayRef = new AssayRef();
+        assayRef.setAlias("nmr_assay_3");
+        assayData1.setAssayRefs(Arrays.asList(assayRef));
+        assayData1.setAlias("nmr_assay_3_ad");
         file = new File();
         file.setLabel("Acquisition Parameter Data File");
         file.setName("acqus3.txt");
@@ -259,7 +273,10 @@ public class Utilities {
         file.setLabel("Metabolite Assignment File");
         file.setName("m_mtbl2_metabolite profiling_mass spectrometry_v2_maf_3.tsv");
         assayData1.getFiles().add(file);
-        return assayData;
+
+        assayDataList.add(assayData1);
+        
+        return assayDataList;
     }
 
 
@@ -381,9 +398,18 @@ public class Utilities {
     }
 
     public static uk.ac.ebi.subs.data.submittable.Sample getUSISampleFromDisc() {
+       return readSampleFromDisc("Test_json/USI_Single_Sample_MTBLS5.json");
+    }
+
+    public static uk.ac.ebi.subs.data.submittable.Sample getUSISimpleSampleFromDisc() {
+
+       return readSampleFromDisc("Test_json/USI_Single_Sample.json");
+    }
+
+    public static uk.ac.ebi.subs.data.submittable.Sample readSampleFromDisc(String filename){
         uk.ac.ebi.subs.data.submittable.Sample sample;
         try {
-            String result = IOUtils.toString(WSUtils.class.getClassLoader().getResourceAsStream("Test_json/USI_Single_Sample_MTBLS5.json"));
+            String result = IOUtils.toString(WSUtils.class.getClassLoader().getResourceAsStream(filename));
             try {
                 mapper.registerModule(new JavaTimeModule());
                 sample = mapper.readValue(result, uk.ac.ebi.subs.data.submittable.Sample.class);

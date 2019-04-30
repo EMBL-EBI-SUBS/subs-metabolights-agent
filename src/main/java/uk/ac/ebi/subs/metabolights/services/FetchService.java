@@ -17,7 +17,9 @@ import uk.ac.ebi.subs.metabolights.model.*;
 import uk.ac.ebi.subs.metabolights.validator.schema.custom.JsonAsTextPlainHttpMessageConverter;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class FetchService {
@@ -173,6 +175,26 @@ public class FetchService {
 
         HttpEntity<String> entity = new HttpEntity<>("parameters", headers);
         return entity;
+    }
+
+    public Map<String, MetaboLightsTable> getAssayAccessionAndFileNames(String accession, List<String> assayFileNames) {
+        Map<String, MetaboLightsTable> alias_filename_map = new HashMap<>();
+        for (String assayFile : assayFileNames) {
+            try {
+                String localUrl = mlProperties.getUrl() + accession + "/" + assayFile;
+
+                ResponseEntity<MetaboLightsTable> response = restTemplate.exchange(
+                        localUrl, HttpMethod.GET, getHttpEntity(), MetaboLightsTable.class);
+                if (response.getStatusCode().is2xxSuccessful()) {
+                    MetaboLightsTable table = response.getBody();
+                    alias_filename_map.put(assayFile, table);
+                }
+            } catch (Exception e) {
+                logger.error(e.getMessage());
+                continue;
+            }
+        }
+        return alias_filename_map;
     }
 
 }

@@ -2,7 +2,7 @@
   {
     "id": null,
     "accession": null,
-    "alias": "a_mtbl2_metabolite profiling_mass spectrometry_1",
+    "alias": "nmr_assay_1",
     "team": {
       "name": "ML_test_team",
       "description": null,
@@ -241,7 +241,7 @@
         "attributes": {
           "NMR Assay Name": [
             {
-              "value": "ADG10003u_008",
+              "value": "nmr_assay_1",
               "units": null,
               "terms": [
                 {
@@ -297,7 +297,7 @@
   {
     "id": null,
     "accession": null,
-    "alias": "a_mtbl2_metabolite profiling_mass spectrometry_2",
+    "alias": "nmr_assay_2",
     "team": {
       "name": "ML_test_team",
       "description": null,
@@ -536,7 +536,7 @@
         "attributes": {
           "NMR Assay Name": [
             {
-              "value": "ADG10003u_007",
+              "value": "nmr_assay_2",
               "units": null,
               "terms": [
                 {
@@ -592,7 +592,7 @@
   {
     "id": null,
     "accession": null,
-    "alias": "a_mtbl2_metabolite profiling_mass spectrometry_3",
+    "alias": "nmr_assay_3",
     "team": {
       "name": "ML_test_team",
       "description": null,
@@ -831,7 +831,7 @@
         "attributes": {
           "NMR Assay Name": [
             {
-              "value": "ADG10003u_009",
+              "value": "nmr_assay_3",
               "units": null,
               "terms": [
                 {

@@ -235,7 +235,6 @@ public class PostService {
             System.out.println("Sample rows to save: " + objectNode);
             addRows(studyID, objectNode, sampleFileName);
 
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -246,8 +245,8 @@ public class PostService {
         String url = mlProperties.getUrl() + studyID + "/assays";
         headers.set("user_token", this.apiKey);
         HttpEntity<ObjectNode> requestBody = new HttpEntity<>(json, headers);
-        ResponseEntity<NewAssayResult> exchange = restTemplate.exchange(
-                url, HttpMethod.POST, requestBody, NewAssayResult.class);
+        ResponseEntity<ObjectNode> exchange = restTemplate.exchange(
+                url, HttpMethod.POST, requestBody, ObjectNode.class);
         return exchange.getStatusCode();
     }
 

@@ -202,7 +202,7 @@ public class UpdateService {
         }
     }
 
-    public void updateSamples(List<Sample> samples, String studyID, String sampleFileName, Map<String, Header> existingSampleTableHeaders) {
+    public void updateSamples(List<Sample> samples, String studyID, String sampleFileName, Map<String, String> existingSampleTableHeaders) {
         if (samples == null || samples.size() == 0) {
             return;
         }
@@ -210,7 +210,7 @@ public class UpdateService {
             SampleRows sampleRows = new SampleRows();
             for (Sample sample : samples) {
                 SampleMap sampleMap = new SampleMap(usiSampleToMLSample.convert(sample));
-                ServiceUtils.fillEmptyValuesForMissingColumns(sampleMap, existingSampleTableHeaders);
+                ServiceUtils.fillEmptyValuesForMissingColumnsForSamples(sampleMap, existingSampleTableHeaders);
                 sampleRows.add(sampleMap);
             }
 
