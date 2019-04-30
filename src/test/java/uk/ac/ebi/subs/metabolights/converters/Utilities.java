@@ -190,6 +190,7 @@ public class Utilities {
         AssayData assayData1 = new AssayData();
         AssayRef assayRef = new AssayRef();
         assayRef.setAlias("nmr_assay_1");
+        assayData1.setAssayRefs(Arrays.asList(assayRef));
         assayData1.setAlias("nmr_assay_1_ad");
         File file = new File();
         file.setLabel("Acquisition Parameter Data File");
@@ -220,6 +221,7 @@ public class Utilities {
         assayData1 = new AssayData();
         assayRef = new AssayRef();
         assayRef.setAlias("nmr_assay_2");
+        assayData1.setAssayRefs(Arrays.asList(assayRef));
         assayData1.setAlias("nmr_assay_2_ad");
         file = new File();
         file.setLabel("Acquisition Parameter Data File");
@@ -250,6 +252,7 @@ public class Utilities {
         assayData1 = new AssayData();
         assayRef = new AssayRef();
         assayRef.setAlias("nmr_assay_3");
+        assayData1.setAssayRefs(Arrays.asList(assayRef));
         assayData1.setAlias("nmr_assay_3_ad");
         file = new File();
         file.setLabel("Acquisition Parameter Data File");
