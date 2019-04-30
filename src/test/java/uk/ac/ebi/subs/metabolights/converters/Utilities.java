@@ -187,7 +187,9 @@ public class Utilities {
 
         // this id's are mapping to alias in usi_assay_list.json file
         AssayData assayData1 = new AssayData();
-        assayData1.setAlias("a_mtbl2_metabolite profiling_mass spectrometry_1");
+        AssayRef assayRef = new AssayRef();
+        assayRef.setAlias("nmr_assay_1");
+        assayData1.setAlias("nmr_assay_1_ad");
         File file = new File();
         file.setLabel("Acquisition Parameter Data File");
         file.setName("acqus.txt");
@@ -213,7 +215,9 @@ public class Utilities {
          */
 
         assayData1 = new AssayData();
-        assayData1.setAlias("a_mtbl2_metabolite profiling_mass spectrometry_2");
+        assayRef = new AssayRef();
+        assayRef.setAlias("nmr_assay_2");
+        assayData1.setAlias("nmr_assay_2_ad");
         file = new File();
         file.setLabel("Acquisition Parameter Data File");
         file.setName("acqus2.txt");
@@ -239,7 +243,9 @@ public class Utilities {
          */
 
         assayData1 = new AssayData();
-        assayData1.setAlias("a_mtbl2_metabolite profiling_mass spectrometry_3");
+        assayRef = new AssayRef();
+        assayRef.setAlias("nmr_assay_3");
+        assayData1.setAlias("nmr_assay_3_ad");
         file = new File();
         file.setLabel("Acquisition Parameter Data File");
         file.setName("acqus3.txt");
