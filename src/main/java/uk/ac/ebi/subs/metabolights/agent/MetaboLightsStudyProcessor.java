@@ -12,6 +12,7 @@ import uk.ac.ebi.subs.data.component.*;
 import uk.ac.ebi.subs.data.status.ProcessingStatusEnum;
 import uk.ac.ebi.subs.data.submittable.*;
 
+import uk.ac.ebi.subs.data.submittable.Assay;
 import uk.ac.ebi.subs.data.submittable.Project;
 import uk.ac.ebi.subs.data.submittable.Protocol;
 import uk.ac.ebi.subs.data.submittable.Sample;
@@ -87,7 +88,7 @@ public class MetaboLightsStudyProcessor {
 
         return certificates;
     }
-    
+
     ProcessingCertificateEnvelope processStudy(SubmissionEnvelope submissionEnvelope) {
         List<ProcessingCertificate> processingCertificateList = new ArrayList<>();
         for (Study study : submissionEnvelope.getStudies()) {
@@ -122,7 +123,7 @@ public class MetaboLightsStudyProcessor {
             String metabolightsStudyID = this.fetchService.createNewStudyAndGetAccession();
             processingCertificate.setAccession(study.getAccession());
             processingCertificate.setMessage("Study successfully accessioned in metabolights - " + metabolightsStudyID);
-            AgentProcessorUtils.addMLStudyForRuntimeUse(metabolightsStudyID, study);             
+            AgentProcessorUtils.addMLStudyForRuntimeUse(metabolightsStudyID, study);
             this.postService.addBioStudiesAccession(metabolightsStudyID, study.getAccession());
         } catch (Exception e) {
             processingCertificate.setMessage("Error creating new study : " + e.getMessage());
@@ -154,20 +155,20 @@ public class MetaboLightsStudyProcessor {
             return processingCertificateList;
         }
 
-//        update(processingCertificateList, processTitle(study));
-//        update(processingCertificateList, processDescription(study));
-//        update(processingCertificateList, processStudyFactors(study, existingMetaboLightsStudy));
-//        update(processingCertificateList, processStudyDescriptors(study, existingMetaboLightsStudy));
-//        update(processingCertificateList, processProtocols(study, submissionEnvelope.getProtocols(), existingMetaboLightsStudy));
-//
-//        if (submissionEnvelope.getProjects() != null && submissionEnvelope.getProjects().size() > 0) {
-//            //todo handle multiple projects
-//            update(processingCertificateList, processContacts(study, submissionEnvelope.getProjects().get(0), existingMetaboLightsStudy));
-//            update(processingCertificateList, processPublications(study, submissionEnvelope.getProjects().get(0), existingMetaboLightsStudy));
-//        }
+        update(processingCertificateList, processTitle(study));
+        update(processingCertificateList, processDescription(study));
+        update(processingCertificateList, processStudyFactors(study, existingMetaboLightsStudy));
+        update(processingCertificateList, processStudyDescriptors(study, existingMetaboLightsStudy));
+        update(processingCertificateList, processProtocols(study, submissionEnvelope.getProtocols(), existingMetaboLightsStudy));
+
+        if (submissionEnvelope.getProjects() != null && submissionEnvelope.getProjects().size() > 0) {
+            //todo handle multiple projects
+            update(processingCertificateList, processContacts(study, submissionEnvelope.getProjects().get(0), existingMetaboLightsStudy));
+            update(processingCertificateList, processPublications(study, submissionEnvelope.getProjects().get(0), existingMetaboLightsStudy));
+        }
 
 
-        update(processingCertificateList, processSamples(study, submissionEnvelope.getSamples(), sampleFileName, isNewSubmission));
+         update(processingCertificateList, processSamples(study, submissionEnvelope.getSamples(), sampleFileName, isNewSubmission));
 
          /*
          from each assay we will get attributes, sample use, protocol use
@@ -185,7 +186,7 @@ public class MetaboLightsStudyProcessor {
 
          */
 
-//        update(processingCertificateList, processAssaysAndAssayData(study, submissionEnvelope.getAssays(), submissionEnvelope.getAssayData(), isNewSubmission, assayFileNames));
+        update(processingCertificateList, processAssaysAndAssayData(study, submissionEnvelope.getAssays(), submissionEnvelope.getAssayData(), isNewSubmission, assayFileNames));
 
         return processingCertificateList;
     }
@@ -470,8 +471,12 @@ public class MetaboLightsStudyProcessor {
             try {
 //                MetaboLightsTable sampleTable = this.fetchService.getMetaboLightsDataTable(ServiceUtils.getMLstudyId(study), sampleFileToUpdate);
                 Map<String, List<Sample>> samplesToAddAndUpdate = AgentProcessorUtils.getSamplesToAddAndUpdate(samples, sampleTable);
-                this.updateService.updateSamples(samplesToAddAndUpdate.get("update"), ServiceUtils.getMLstudyId(study), sampleFileToUpdate, sampleTable.getHeader());
-                this.postService.addSampleRows(samplesToAddAndUpdate.get("add"), ServiceUtils.getMLstudyId(study), sampleFileToUpdate, sampleTable.getHeader());
+                if (samplesToAddAndUpdate.get("update").size() > 0) {
+                    this.updateService.updateSamples(samplesToAddAndUpdate.get("update"), ServiceUtils.getMLstudyId(study), sampleFileToUpdate, sampleTable.getHeader());
+                }
+                if (samplesToAddAndUpdate.get("add").size() > 0) {
+                    this.postService.addSampleRows(samplesToAddAndUpdate.get("add"), ServiceUtils.getMLstudyId(study), sampleFileToUpdate, sampleTable.getHeader());
+                }
                 /*
                 Delete sample rows not present in submission's sample list
                  */
@@ -498,33 +503,25 @@ public class MetaboLightsStudyProcessor {
         //todo if new submission extract attributes from assay to create new template
         //todo handle multiple assays and other assay types
         // this is assuming single NMR assay
+
         if (isNewSubmission) {
             try {
-                for (uk.ac.ebi.subs.data.submittable.Assay assay : assays) {
-                    if (AgentProcessorUtils.getTechnologyType(assay).equalsIgnoreCase("NMR")) {
-                        NewMetabolightsAssay newMetabolightsAssay = AgentProcessorUtils.generateNewNMRAssay();
-                        HttpStatus status = this.postService.addNewAssay(newMetabolightsAssay, ServiceUtils.getMLstudyId(study));
-                        if (status.is2xxSuccessful()) {
-                            StudyFiles studyFiles = this.fetchService.getStudyFiles(ServiceUtils.getMLstudyId(study));
-                            List<String> assayFiles = AgentProcessorUtils.getAssayFileName(studyFiles);
-                            if (assayFiles.size() == 1) {
-                                MetaboLightsTable assayTable = this.fetchService.getMetaboLightsDataTable(ServiceUtils.getMLstudyId(study), assayFiles.get(0));
-                                this.postService.addAssayRows(assays, ServiceUtils.getMLstudyId(study), assayFiles.get(0), assayTable.getHeader());
-                            }
-                        }
-                    }
-                }
+                createNewAssayAndPostAllAssayRows(study, assays);
             } catch (Exception e) {
                 certificate.setMessage("Error saving assays : " + e.getMessage());
             }
         } else {
             try {
-                if (assayFileNames.size() == 1) {
+                if (assayFileNames.size() > 0) {
+                    //todo pick assayfile by crosschecking the alias. At the moment only one assay is considered.
                     MetaboLightsTable assayTable = this.fetchService.getMetaboLightsDataTable(ServiceUtils.getMLstudyId(study), assayFileNames.get(0));
-//                    this.postService.addAssayRows(assays, ServiceUtils.getMLstudyId(study), assayFileNames.get(0), assayTable.getHeader());
                     Map<String, List<uk.ac.ebi.subs.data.submittable.Assay>> assayRowsToAddAndUpdate = AgentProcessorUtils.getAssayRowsToAddAndUpdate(assays, assayTable);
-                    this.updateService.updateAssays(assayRowsToAddAndUpdate.get("update"), ServiceUtils.getMLstudyId(study), assayFileNames.get(0), assayTable.getHeader());
-                    this.postService.addAssayRows(assayRowsToAddAndUpdate.get("add"), ServiceUtils.getMLstudyId(study), assayFileNames.get(0), assayTable.getHeader());
+                    if (assayRowsToAddAndUpdate.get("update").size() > 0) {
+                        this.updateService.updateAssays(assayRowsToAddAndUpdate.get("update"), ServiceUtils.getMLstudyId(study), assayFileNames.get(0), assayTable.getHeader());
+                    }
+                    if (assayRowsToAddAndUpdate.get("add").size() > 0) {
+                        this.postService.addAssayRows(assayRowsToAddAndUpdate.get("add"), ServiceUtils.getMLstudyId(study), assayFileNames.get(0), assayTable.getHeader());
+                    }
                 /*
                 Delete assay rows not present in submission's assay list
                  */
@@ -532,7 +529,9 @@ public class MetaboLightsStudyProcessor {
                     if (assayRowIndexesToDelete.size() > 0) {
                         this.deletionService.deleteTableRows(ServiceUtils.getMLstudyId(study), assayFileNames.get(0), assayRowIndexesToDelete);
                     }
-
+                } else {
+                    //create new assay when assay data comes in resubmission
+                    createNewAssayAndPostAllAssayRows(study, assays);
                 }
             } catch (Exception e) {
                 certificate.setMessage("Error saving assays : " + e.getMessage());
@@ -541,6 +540,21 @@ public class MetaboLightsStudyProcessor {
         // todo if not new get matching assay file names using attributes that was used to create template and then do row updates
         // todo - decide how to store the created assay file name in the USI for futher updates. This might be tricky in case of multiple assay files.
         return certificate;
+    }
+
+    private void createNewAssayAndPostAllAssayRows(Study study, List<uk.ac.ebi.subs.data.submittable.Assay> assays) {
+        //todo make sure we have a parameter that distinguishes rows from different assay spreadsheets. We have to create multiple assay files based on that info.
+        // todo this is assuming NMR assay. Sort for other assay types
+        NewMetabolightsAssay newMetabolightsAssay = AgentProcessorUtils.generateNewNMRAssay();
+        HttpStatus status = this.postService.addNewAssay(newMetabolightsAssay, ServiceUtils.getMLstudyId(study));
+        if (status.is2xxSuccessful()) {
+            StudyFiles studyFiles = this.fetchService.getStudyFiles(ServiceUtils.getMLstudyId(study));
+            List<String> assayFiles = AgentProcessorUtils.getAssayFileName(studyFiles);
+            if (assayFiles.size() == 1) {
+                MetaboLightsTable assayTable = this.fetchService.getMetaboLightsDataTable(ServiceUtils.getMLstudyId(study), assayFiles.get(0));
+                this.postService.addAssayRows(assays, ServiceUtils.getMLstudyId(study), assayFiles.get(0), assayTable.getHeader());
+            }
+        }
     }
 
 
