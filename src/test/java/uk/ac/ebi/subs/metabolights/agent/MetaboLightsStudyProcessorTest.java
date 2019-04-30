@@ -58,14 +58,14 @@ public class MetaboLightsStudyProcessorTest {
         submissionEnvelope.getProjects().add(project);
         submissionEnvelope.getProtocols().addAll(ValidationTestUtils.generateUSIProtocols());
 
-        submissionEnvelope.getSamples().add(Utilities.getUSISampleFromDisc());
-        submissionEnvelope.getAssays().add(Utilities.getUSIAssayFromDisc());
-        submissionEnvelope.getAssayData().addAll(Utilities.generateUSIAssayDataForSingleAssay());
+        submissionEnvelope.getSamples().add(Utilities.getUSISimpleSampleFromDisc());
+        submissionEnvelope.getAssays().addAll(Utilities.getUSIAssayListFromDisc());
+        submissionEnvelope.getAssayData().addAll(Utilities.generateUSIAssayData());
         submissionEnvelope.getStudies().get(0).getAttributes().remove(StudyAttributes.STUDY_FACTORS);
         submissionEnvelope.getStudies().get(0).getAttributes().put(StudyAttributes.STUDY_FACTORS, ValidationTestUtils.getStudyFactorsMatchingSampleTestFile());
 
         ProcessingCertificateEnvelope processingCertificateEnvelope = metaboLightsStudyProcessor.processStudy(submissionEnvelope);
-        assertEquals(9, processingCertificateEnvelope.getProcessingCertificates().size());
+        assertEquals(10, processingCertificateEnvelope.getProcessingCertificates().size());
     }
 
     @Test
@@ -78,7 +78,7 @@ public class MetaboLightsStudyProcessorTest {
         study.setTitle("This is test title");
         study.setDescription("This is test description");
         //study.setAccession("subs-42d9-5");  //corresponds to MTBLS_DEV2348
-        study.setAccession("08350345-18a9-43c8-ae97-c6d942d00f80");
+        study.setAccession("bb33c2af-d51a-45b8-97e7-2ee53e8adec4");   //corresponds to MTBLS_DEV2576
         study.setAttributes(ValidationTestUtils.getStudyAttributes());
         Project project = ValidationTestUtils.getProjectWithContactsAndPublications().getBaseSubmittable();
         submissionEnvelope.getStudies().add(study);
@@ -88,7 +88,7 @@ public class MetaboLightsStudyProcessorTest {
         submissionEnvelope.getAssays().addAll(Utilities.getUSIAssayListFromDisc());
         submissionEnvelope.getAssayData().addAll(Utilities.generateUSIAssayData());
         ProcessingCertificateEnvelope processingCertificateEnvelope = metaboLightsStudyProcessor.processStudy(submissionEnvelope);
-        assertEquals(1, processingCertificateEnvelope.getProcessingCertificates().size());
+        assertEquals(9, processingCertificateEnvelope.getProcessingCertificates().size());
     }
 
     @Test
