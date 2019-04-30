@@ -241,7 +241,7 @@
         "attributes": {
           "NMR Assay Name": [
             {
-              "value": "ADG10003u_008",
+              "value": "nmr_assay_1",
               "units": null,
               "terms": [
                 {
@@ -536,7 +536,7 @@
         "attributes": {
           "NMR Assay Name": [
             {
-              "value": "ADG10003u_007",
+              "value": "nmr_assay_2",
               "units": null,
               "terms": [
                 {
@@ -831,7 +831,7 @@
         "attributes": {
           "NMR Assay Name": [
             {
-              "value": "ADG10003u_009",
+              "value": "nmr_assay_3",
               "units": null,
               "terms": [
                 {
