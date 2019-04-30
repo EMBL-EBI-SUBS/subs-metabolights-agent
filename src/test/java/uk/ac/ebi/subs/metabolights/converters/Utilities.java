@@ -156,7 +156,7 @@ public class Utilities {
     }
 
     public static List<AssayData> generateUSIAssayDataForSingleAssay() {
-        List<AssayData> assayData = new ArrayList<>();
+        List<AssayData> assayDataList = new ArrayList<>();
         // this id's are mapping to alias in Test_USI_Assay_file.json file
         AssayData assayData1 = new AssayData();
         assayData1.setAlias("a_mtbl2_metabolite profiling_mass spectrometry");
@@ -179,11 +179,12 @@ public class Utilities {
         file.setLabel("Metabolite Assignment File");
         file.setName("m_mtbl2_metabolite profiling_mass spectrometry_v2_maf.tsv");
         assayData1.getFiles().add(file);
-        return assayData;
+        assayDataList.add(assayData1);
+        return assayDataList;
     }
 
     public static List<AssayData> generateUSIAssayData() {
-        List<AssayData> assayData = new ArrayList<>();
+        List<AssayData> assayDataList = new ArrayList<>();
 
         // this id's are mapping to alias in usi_assay_list.json file
         AssayData assayData1 = new AssayData();
@@ -209,6 +210,8 @@ public class Utilities {
         file.setLabel("Metabolite Assignment File");
         file.setName("m_mtbl2_metabolite profiling_mass spectrometry_v2_maf.tsv");
         assayData1.getFiles().add(file);
+
+        assayDataList.add(assayData1);
 
         /*
         data 2
@@ -238,6 +241,8 @@ public class Utilities {
         file.setName("m_mtbl2_metabolite profiling_mass spectrometry_v2_maf_2.tsv");
         assayData1.getFiles().add(file);
 
+        assayDataList.add(assayData1);
+
          /*
         data 3
          */
@@ -265,7 +270,10 @@ public class Utilities {
         file.setLabel("Metabolite Assignment File");
         file.setName("m_mtbl2_metabolite profiling_mass spectrometry_v2_maf_3.tsv");
         assayData1.getFiles().add(file);
-        return assayData;
+
+        assayDataList.add(assayData1);
+        
+        return assayDataList;
     }
 
 
