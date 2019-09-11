@@ -101,13 +101,21 @@ public class MetaboLightsStudyProcessor {
                 processingCertificateList.add(processingCertificate);
                 return new ProcessingCertificateEnvelope(submissionEnvelope.getSubmission().getId(), processingCertificateList);
             } else {
-                String mlStudyID = this.fetchService.getMLStudyID(study.getAccession());
-                if (AgentProcessorUtils.biostudiesIsAlreadyLinkedWith(mlStudyID)) {
-                    AgentProcessorUtils.addMLStudyForRuntimeUse(mlStudyID, study);
-                    processingCertificateList.addAll(processMetaData(study, submissionEnvelope, false));
-                } else {
-                    return createNewMetaboLightsStudy(study, submissionEnvelope);
-                }
+               if(this.fetchService.getStudyStatus(study.getAccession()).equalsIgnoreCase("Submitted")){
+                   String mlStudyID = this.fetchService.getMLStudyID(study.getAccession());
+                   if (AgentProcessorUtils.biostudiesIsAlreadyLinkedWith(mlStudyID)) {
+                       AgentProcessorUtils.addMLStudyForRuntimeUse(mlStudyID, study);
+                       processingCertificateList.addAll(processMetaData(study, submissionEnvelope, false));
+                   } else {
+                       return createNewMetaboLightsStudy(study, submissionEnvelope);
+                   }
+               } else{
+                   ProcessingCertificate processingCertificate = new ProcessingCertificate();
+                   processingCertificate.setProcessingStatus(ProcessingStatusEnum.Error);
+                   processingCertificate.setMessage(submissionEnvelope.getSubmission().getId() + " changes cannot be accepted because study is not in Submitted Status. Please contact metabolights team to make changes.");
+                   processingCertificateList.add(processingCertificate);
+                   return new ProcessingCertificateEnvelope(submissionEnvelope.getSubmission().getId(), processingCertificateList);
+               }
             }
         }
         return new ProcessingCertificateEnvelope(submissionEnvelope.getSubmission().getId(), processingCertificateList);
