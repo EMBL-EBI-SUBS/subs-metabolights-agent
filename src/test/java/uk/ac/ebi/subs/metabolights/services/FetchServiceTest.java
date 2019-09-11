@@ -72,4 +72,11 @@ public class FetchServiceTest {
         System.out.println(mtbls_dev2565.getHeader());
     }
 
+    @Test
+    public void getStudyStatus() {
+
+        String result = this.fetchService.getStudyStatus("MTBLS_DEV2577");
+        System.out.println(result);
+    }
+
 }

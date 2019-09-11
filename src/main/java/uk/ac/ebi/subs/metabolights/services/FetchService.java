@@ -197,4 +197,27 @@ public class FetchService {
         return alias_filename_map;
     }
 
+    public String getStudyStatus(String accession){
+        //fetch accession using meta-info endpoint
+        String status = "";
+        try {
+            String localUrl = mlProperties.getUrl() + accession + "/meta-info";
+            System.out.println("URL -- " + localUrl);
+            ResponseEntity<ObjectNode> response = restTemplate.exchange(
+                    localUrl, HttpMethod.GET, getHttpEntity(), ObjectNode.class);
+            if (response.getStatusCode().is2xxSuccessful()) {
+                ObjectNode result = response.getBody();
+                JsonNode dataList = result.path("data");
+                JsonNode next = dataList.elements().next();
+                String[] statusResult = next.asText().split(":");
+                status = statusResult[1];
+                System.out.println("Status = " + status);
+
+            }
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+        }
+        return status;
+    }
+
 }
