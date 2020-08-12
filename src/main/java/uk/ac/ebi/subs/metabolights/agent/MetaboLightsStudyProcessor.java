@@ -99,7 +99,8 @@ public class MetaboLightsStudyProcessor {
                 processingCertificate.setMessage(submissionEnvelope.getSubmission().getId() + " has no biostudies accession. This will prevent sending " +
                         "updates to metabolights. Please provide biostudies accession with this submission.");
                 processingCertificateList.add(processingCertificate);
-                return new ProcessingCertificateEnvelope(submissionEnvelope.getSubmission().getId(), processingCertificateList);
+                return new ProcessingCertificateEnvelope(
+                        submissionEnvelope.getSubmission().getId(), processingCertificateList, submissionEnvelope.getJWTToken());
             } else {
                if(this.fetchService.getStudyStatus(study.getAccession()).equalsIgnoreCase("Submitted")){
                    String mlStudyID = this.fetchService.getMLStudyID(study.getAccession());
@@ -118,7 +119,8 @@ public class MetaboLightsStudyProcessor {
                }
             }
         }
-        return new ProcessingCertificateEnvelope(submissionEnvelope.getSubmission().getId(), processingCertificateList);
+        return new ProcessingCertificateEnvelope(
+                submissionEnvelope.getSubmission().getId(), processingCertificateList, submissionEnvelope.getJWTToken());
     }
 
     ProcessingCertificateEnvelope createNewMetaboLightsStudy(Study study, SubmissionEnvelope submissionEnvelope) {
@@ -136,12 +138,14 @@ public class MetaboLightsStudyProcessor {
         } catch (Exception e) {
             processingCertificate.setMessage("Error creating new study : " + e.getMessage());
             processingCertificateList.add(processingCertificate);
-            return new ProcessingCertificateEnvelope(submissionEnvelope.getSubmission().getId(), processingCertificateList);
+            return new ProcessingCertificateEnvelope(
+                    submissionEnvelope.getSubmission().getId(), processingCertificateList, submissionEnvelope.getJWTToken());
         }
         processingCertificateList.addAll(processMetaData(study, submissionEnvelope, true));
         processingCertificate.setProcessingStatus(ProcessingStatusEnum.Submitted);
         processingCertificateList.add(processingCertificate);
-        return new ProcessingCertificateEnvelope(submissionEnvelope.getSubmission().getId(), processingCertificateList);
+        return new ProcessingCertificateEnvelope(
+                submissionEnvelope.getSubmission().getId(), processingCertificateList, submissionEnvelope.getJWTToken());
     }
 
     List<ProcessingCertificate> processMetaData(Study study, SubmissionEnvelope submissionEnvelope, boolean isNewSubmission) {
